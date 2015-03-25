@@ -1,0 +1,88 @@
+﻿2014-09-25 20:46:16
+----------------------------------------------------------
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 stone.core.utility.EntityExpressions.Data.EntityOperations.ReadEntity[E](GenericWhereEntity`1 whereEntity, Database db) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\EntityExpressions\Data\EntityOperations.cs:行号 563
+   在 stone.core.utility.EntityExpressions.Data.EntityOperations.ReadEntity2[E](Expression`1 conditionExpression, Database db) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\EntityExpressions\Data\EntityOperations.cs:行号 530
+   在 stone.core.utility.EntityExpressions.EntityExecution.ReadEntity2[E](Expression`1 conditionExpression) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\EntityExpressions\EntityExecution.cs:行号 243
+   在 stone.basic.biz.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.biz\BcUserInfoBiz.cs:行号 98
+   在 stone.basic.utility.BasePage.get_CurrentUserInfo() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.utility\BasePage.cs:行号 29
+   在 stone.basic.utility.BasePage.CheckPermission() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.utility\BasePage.cs:行号 128
+   在 stone.basic.utility.BasePage.OnPreInit(EventArgs e) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.utility\BasePage.cs:行号 89
+   在 System.Web.UI.Page.PerformPreInit()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+----------------------------------------------------------
+
+2014-09-25 20:46:16
+----------------------------------------------------------
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 stone.core.utility.DbConnectionWrapper.Dispose() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\Database.cs:行号 732
+   在 stone.core.utility.Database.ExecuteDataTable(DbCommand dm) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\Database.cs:行号 380
+   在 stone.core.utility.Database.ExecuteDataTable(String commandText) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\Database.cs:行号 361
+   在 stone.basic.dao.SysSettingDao.GetSysSettingEntity() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.dao\SysSettingDao.cs:行号 31
+   在 stone.basic.biz.SysSettingBiz.GetSysSettingEntity() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.biz\SysSettingBiz.cs:行号 32
+   在 stone.basic.utility.BaseGlobal.Application_Error(Object sender, EventArgs e) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.utility\BaseGlobal.cs:行号 45
+----------------------------------------------------------
+
+2014-09-25 20:46:19
+----------------------------------------------------------
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 stone.core.utility.EntityExpressions.Data.EntityOperations.ReadEntity[E](GenericWhereEntity`1 whereEntity, Database db) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\EntityExpressions\Data\EntityOperations.cs:行号 563
+   在 stone.core.utility.EntityExpressions.Data.EntityOperations.ReadEntity2[E](Expression`1 conditionExpression, Database db) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\EntityExpressions\Data\EntityOperations.cs:行号 530
+   在 stone.core.utility.EntityExpressions.EntityExecution.ReadEntity2[E](Expression`1 conditionExpression) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\EntityExpressions\EntityExecution.cs:行号 243
+   在 stone.basic.biz.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.biz\BcUserInfoBiz.cs:行号 98
+   在 stone.basic.utility.BasePage.get_CurrentUserInfo() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.utility\BasePage.cs:行号 29
+   在 stone.basic.utility.BasePage.CheckPermission() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.utility\BasePage.cs:行号 128
+   在 stone.basic.utility.BasePage.OnPreInit(EventArgs e) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.utility\BasePage.cs:行号 89
+   在 System.Web.UI.Page.PerformPreInit()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+----------------------------------------------------------
+
+2014-09-25 20:46:19
+----------------------------------------------------------
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 stone.core.utility.DbConnectionWrapper.Dispose() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\Database.cs:行号 732
+   在 stone.core.utility.Database.ExecuteDataTable(DbCommand dm) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\Database.cs:行号 380
+   在 stone.core.utility.Database.ExecuteDataTable(String commandText) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\Database.cs:行号 361
+   在 stone.basic.dao.SysSettingDao.GetSysSettingEntity() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.dao\SysSettingDao.cs:行号 31
+   在 stone.basic.biz.SysSettingBiz.GetSysSettingEntity() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.biz\SysSettingBiz.cs:行号 32
+   在 stone.basic.utility.BaseGlobal.Application_Error(Object sender, EventArgs e) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.utility\BaseGlobal.cs:行号 45
+----------------------------------------------------------
+
+2014-09-25 20:46:30
+----------------------------------------------------------
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 stone.core.utility.DbConnectionWrapper.Dispose() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\Database.cs:行号 732
+   在 stone.core.utility.Database.ExecuteDataTable(DbCommand dm) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\Database.cs:行号 380
+   在 stone.core.utility.Database.ExecuteDataTable(String commandText) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\Database.cs:行号 361
+   在 stone.basic.dao.SysSettingDao.GetSysSettingEntity() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.dao\SysSettingDao.cs:行号 31
+   在 stone.basic.biz.SysSettingBiz.GetSysSettingEntity() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.biz\SysSettingBiz.cs:行号 32
+   在 stone.basic.utility.BasePage.get_SysSetting() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.utility\BasePage.cs:行号 49
+   在 ASP.login_aspx.__Renderform1(HtmlTextWriter __w, Control parameterContainer) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.web\Login.aspx:行号 73
+   在 System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)
+   在 System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)
+   在 System.Web.UI.HtmlControls.HtmlForm.RenderChildren(HtmlTextWriter writer)
+   在 System.Web.UI.HtmlControls.HtmlContainerControl.Render(HtmlTextWriter writer)
+   在 System.Web.UI.HtmlControls.HtmlForm.Render(HtmlTextWriter output)
+   在 System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)
+   在 System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)
+   在 System.Web.UI.HtmlControls.HtmlForm.RenderControl(HtmlTextWriter writer)
+   在 System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)
+   在 System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)
+   在 System.Web.UI.Page.Render(HtmlTextWriter writer)
+   在 System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)
+   在 System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)
+   在 System.Web.UI.Control.RenderControl(HtmlTextWriter writer)
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+----------------------------------------------------------
+
+2014-09-25 20:46:30
+----------------------------------------------------------
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 stone.core.utility.DbConnectionWrapper.Dispose() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\Database.cs:行号 732
+   在 stone.core.utility.Database.ExecuteDataTable(DbCommand dm) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\Database.cs:行号 380
+   在 stone.core.utility.Database.ExecuteDataTable(String commandText) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.core\stone.core.utility\Database.cs:行号 361
+   在 stone.basic.dao.SysSettingDao.GetSysSettingEntity() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.dao\SysSettingDao.cs:行号 31
+   在 stone.basic.biz.SysSettingBiz.GetSysSettingEntity() 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.biz\SysSettingBiz.cs:行号 32
+   在 stone.basic.utility.BaseGlobal.Application_Error(Object sender, EventArgs e) 位置 d:\Work\code\git\stone0090\donet-web-fw\stone.basic\stone.basic.utility\BaseGlobal.cs:行号 45
+----------------------------------------------------------
+

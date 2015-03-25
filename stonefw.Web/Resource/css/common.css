@@ -1,0 +1,100 @@
+﻿html body {
+    font-size: 12px;
+    /*font-family: Tahoma, Verdana, Geneva, Arial, Helvetica, sans-serif, SimSun, SimHei;*/
+}
+
+a:link, .headerMenu a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.form {
+    padding: 10px 10px 10px 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #95B8E7;
+    min-height: 282px;
+    margin-bottom: -4px;
+}
+
+    .form input[type="text"] {
+        width: 138px;
+    }
+
+    .form select {
+        width: 142px;
+        padding: 1px;
+    }
+
+.query {
+    padding: 5px;
+    margin-bottom: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #95B8E7;
+}
+
+    .query input[type="text"] {
+        width: 138px;
+    }
+
+    .query select {
+        width: 142px;
+        padding: 1px;
+    }
+
+.error {
+    padding: 5px;
+    margin-top: 5px;
+    color: dodgerblue;
+}
+
+/* 所有 gridview 通用样式 */
+.gridview tbody {
+    border-color: #95B8E7;
+    border-width: 1px;
+    border-style: solid;
+}
+
+    .gridview tbody tr td table tbody {
+        border-width: 0;
+    }
+
+.gridview td {
+    height: 30px;
+    border-color: #ccc;
+    border-style: dotted;
+    border-width: 1px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.gridview th {
+    height: 28px;
+    border-color: #ccc;
+    border-style: dotted;
+    border-width: 1px;
+}
+
+.gridview th {
+    border-bottom-color: #dddddd;
+    border-bottom-style: solid;
+}
+
+.gridview th {
+    background-color: #efefef;
+    background: -webkit-linear-gradient(top,#F9F9F9 0,#efefef 100%);
+    background: -moz-linear-gradient(top,#F9F9F9 0,#efefef 100%);
+    background: -o-linear-gradient(top,#F9F9F9 0,#efefef 100%);
+    background: linear-gradient(to bottom,#F9F9F9 0,#efefef 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#F9F9F9,endColorstr=#efefef,GradientType=0);
+}
+
+
+.width80 {
+    width: 80px;
+}

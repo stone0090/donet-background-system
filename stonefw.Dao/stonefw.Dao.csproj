@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{53AB83A9-26EA-461A-AE2C-CF99C7EF1D45}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>stonefw.Dao</RootNamespace>
+    <AssemblyName>stonefw.Dao</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Maticsoft.DBUtility, Version=3.5.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\stone.mainsite.ui\Bin\Maticsoft.DBUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseModule\BcAutoCodeDao.cs" />
+    <Compile Include="BaseModule\BcLogErrorDao.cs" />
+    <Compile Include="BaseModule\BcPermissionDao.cs" />
+    <Compile Include="BaseModule\BcUserRoleDao.cs" />
+    <Compile Include="CustomerModule\CuContactPersonDao.cs" />
+    <Compile Include="CustomerModule\CuCustomerDao.cs" />
+    <Compile Include="SystemModule\SysPageFuncPointDao.cs" />
+    <Compile Include="SystemModule\SysFuncPointDao.cs" />
+    <Compile Include="SystemModule\SysMfpRelationDao.cs" />
+    <Compile Include="SystemModule\SysModuleDao.cs" />
+    <Compile Include="SystemModule\SysEnumNameDao.cs" />
+    <Compile Include="SystemModule\SysPermsPointDao.cs" />
+    <Compile Include="SystemModule\SysGlobalSettingDao.cs" />
+    <Compile Include="BaseModule\BcUserInfoDao.cs" />
+    <Compile Include="SystemModule\SysMenuDao.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BaseModule\BcRoleDao.cs" />
+    <Compile Include="SystemModule\SysErrorInfoDao.cs" />
+    <Compile Include="BaseModule\BcGroupDao.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Jialisi.Erp.Entity\stonefw.Entity.csproj">
+      <Project>{fa43e73b-a3f4-4a80-a662-0307cf3f7941}</Project>
+      <Name>stonefw.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Jialisi.Erp.Utility\stonefw.Utility.csproj">
+      <Project>{4F097047-9CD3-4876-9D18-8AE0856CD1C1}</Project>
+      <Name>stonefw.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4F097047-9CD3-4876-9D18-8AE0856CD1C1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>stonefw.Utility</RootNamespace>
+    <AssemblyName>stonefw.Utility</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ChinaDate.cs" />
+    <Compile Include="ConfigHelper.cs" />
+    <Compile Include="DataCache.cs" />
+    <Compile Include="Encryption.cs" />
+    <Compile Include="Database.cs" />
+    <Compile Include="EntityExpressions\Entitys\EntityPairs.cs" />
+    <Compile Include="EntityExpressions\Attribute\Field.cs" />
+    <Compile Include="EntityExpressions\EntityExecution.cs" />
+    <Compile Include="EntityExpressions\Data\EntityInstanceTool.cs" />
+    <Compile Include="EntityExpressions\Data\EntityOperations.cs" />
+    <Compile Include="EntityExpressions\Data\LambdaDelegates.cs" />
+    <Compile Include="EntityExpressions\Data\SqlCreator.cs" />
+    <Compile Include="EntityExpressions\Entitys\EntityExpressionsException.cs" />
+    <Compile Include="EntityExpressions\Entitys\GenericJoinEntity.cs" />
+    <Compile Include="EntityExpressions\Entitys\GenericWhereEntity.cs" />
+    <Compile Include="EntityExpressions\Entitys\JoinModeEnums.cs" />
+    <Compile Include="EntityExpressions\Utilitys\BuildDBColumnSelect.cs" />
+    <Compile Include="EntityExpressions\Utilitys\BuildDBQuerysGeneric.cs" />
+    <Compile Include="EntityExpressions\Utilitys\DiagnoseUtilitys\PreGenerateSQL.cs" />
+    <Compile Include="EntityExpressions\Utilitys\EntityUtilitys.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionToSQL\BaseVisitor.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionToSQL\ConditionBuilder.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionToSQL\ExpressionPreTreatment.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionToSQL\SQLConvertor\BaseVisitorForWhereExpression.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionToSQL\SQLConvertor\BinaryExpressionTreeNode.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionToSQL\SQLConvertor\IWhereExpressionConvertor.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionToSQL\SQLConvertor\MSSQL\MethodCalls\MSSQLStringMethodCallVisitor.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionToSQL\SQLConvertor\MSSQL\MSSQLJoinConditionBuilder.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionToSQL\SQLConvertor\MSSQL\VisitorForMSSQLWhereExpression.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionToSQL\SQLConvertor\MSSQL\WhereExpressionConvertor.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionToSQL\SQLConvertor\MySQL\WhereExpressionConvertor.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionToSQL\SQLConvertor\Oracle\WhereExpressionConvertor.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionVisitors\ExpressionVisitor.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionVisitors\ExpressionVisitorForEntity.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionVisitors\JoinConditionBuilderGeneric.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionVisitors\MethodCalls\StringMethodCallVisitor.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionVisitors\MethodCallVisitor.cs" />
+    <Compile Include="EntityExpressions\Utilitys\ExpressionVisitors\PartialEvaluator.cs" />
+    <Compile Include="EntityExpressions\Utilitys\InternalEntityUtilitys\EntityDefinitionBufferItem.cs" />
+    <Compile Include="EntityExpressions\Utilitys\InternalEntityUtilitys\EntityDefinitions.cs" />
+    <Compile Include="EntityExpressions\Utilitys\InternalEntityUtilitys\EntityMemberIterateUtilitys.cs" />
+    <Compile Include="DataTableHepler.cs" />
+    <Compile Include="JsonHelper.cs" />
+    <Compile Include="EnumHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EntityExpressions\Attribute\Table.cs" />
+    <Compile Include="ValidationHelper.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

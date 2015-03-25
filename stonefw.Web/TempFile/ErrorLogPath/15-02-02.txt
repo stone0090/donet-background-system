@@ -1,0 +1,438 @@
+﻿2015-02-02 12:00:01
+----------------------------------------------------------
+System.Data.SqlClient.SqlException: 列名 'ActivityFlag' 无效。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at Jialisi.Erp.Utility.Database.ExecuteDataTable(DbCommand dm) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\Database.cs:line 201
+   at Jialisi.Erp.Dao.SystemModule.SysMfpRelationDao.GetSysMfpRelationListByModule(String moduleId) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Dao\SystemModule\SysMfpRelationDao.cs:line 26
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetSysMfpRelationList(String moduleId) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 22
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetEnabledSysMfpRelationList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 65
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 137
+   at Jialisi.Erp.Web.Utility.BaseClass.BasePage.get_CurrentUserInfo() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BasePage.cs:line 28
+   at ASP.mainpage_header_aspx.__Renderform1(HtmlTextWriter __w, Control parameterContainer) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Header.aspx:line 31
+   at System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)
+   at System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)
+   at System.Web.UI.HtmlControls.HtmlForm.RenderChildren(HtmlTextWriter writer)
+   at System.Web.UI.HtmlControls.HtmlContainerControl.Render(HtmlTextWriter writer)
+   at System.Web.UI.HtmlControls.HtmlForm.Render(HtmlTextWriter output)
+   at System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.HtmlControls.HtmlForm.RenderControl(HtmlTextWriter writer)
+   at System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)
+   at System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)
+   at System.Web.UI.Page.Render(HtmlTextWriter writer)
+   at System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+----------------------------------------------------------
+
+2015-02-02 12:00:01
+----------------------------------------------------------
+System.Data.SqlClient.SqlException: 列名 'ActivityFlag' 无效。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at Jialisi.Erp.Utility.Database.ExecuteDataTable(DbCommand dm) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\Database.cs:line 201
+   at Jialisi.Erp.Dao.SystemModule.SysMfpRelationDao.GetSysMfpRelationListByModule(String moduleId) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Dao\SystemModule\SysMfpRelationDao.cs:line 26
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetSysMfpRelationList(String moduleId) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 22
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetEnabledSysMfpRelationList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 65
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 137
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+
+2015-02-02 12:10:44
+----------------------------------------------------------
+System.Web.HttpCompileException: d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Header.aspx(31): error CS1061: 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' does not contain a definition for 'User_Name' and no extension method 'User_Name' accepting a first argument of type 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' could be found (are you missing a using directive or an assembly reference?)
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultFromCacheInternal(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+----------------------------------------------------------
+
+2015-02-02 12:10:44
+----------------------------------------------------------
+System.Data.SqlClient.SqlException: 列名 'User_Id' 无效。
+列名 'User_Id' 无效。
+列名 'Role_Id' 无效。
+列名 'Role_Id' 无效。
+列名 'Delete_Flag' 无效。
+列名 'User_Id' 无效。
+列名 'User_Name' 无效。
+列名 'Role_Name' 无效。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at Jialisi.Erp.Utility.Database.ExecuteDataTable(DbCommand dm) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\Database.cs:line 201
+   at Jialisi.Erp.Dao.BaseModule.BcUserRoleDao.GetBcUserRoleList(Nullable`1 userId, Nullable`1 roleId) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Dao\BaseModule\BcUserRoleDao.cs:line 28
+   at Jialisi.Erp.Biz.BaseModule.BcUserRoleBiz.GetBcUserRoleList(Nullable`1 userId, Nullable`1 roleId) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserRoleBiz.cs:line 25
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 122
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+
+2015-02-02 12:12:16
+----------------------------------------------------------
+System.Web.HttpCompileException: d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Header.aspx(31): error CS1061: 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' does not contain a definition for 'User_Name' and no extension method 'User_Name' accepting a first argument of type 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' could be found (are you missing a using directive or an assembly reference?)
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+----------------------------------------------------------
+
+2015-02-02 12:12:16
+----------------------------------------------------------
+System.Data.SqlClient.SqlException: 列名 'User_Id' 无效。
+列名 'User_Id' 无效。
+列名 'Role_Id' 无效。
+列名 'Role_Id' 无效。
+列名 'Delete_Flag' 无效。
+列名 'User_Id' 无效。
+列名 'User_Name' 无效。
+列名 'Role_Name' 无效。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at Jialisi.Erp.Utility.Database.ExecuteDataTable(DbCommand dm) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\Database.cs:line 201
+   at Jialisi.Erp.Dao.BaseModule.BcUserRoleDao.GetBcUserRoleList(Nullable`1 userId, Nullable`1 roleId) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Dao\BaseModule\BcUserRoleDao.cs:line 28
+   at Jialisi.Erp.Biz.BaseModule.BcUserRoleBiz.GetBcUserRoleList(Nullable`1 userId, Nullable`1 roleId) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserRoleBiz.cs:line 25
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 122
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+
+2015-02-02 12:17:54
+----------------------------------------------------------
+System.Web.HttpCompileException: d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Header.aspx(31): error CS1061: 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' does not contain a definition for 'User_Name' and no extension method 'User_Name' accepting a first argument of type 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' could be found (are you missing a using directive or an assembly reference?)
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode)
+   at System.Web.Compilation.WebDirectoryBatchCompiler.AddBuildProviders(Boolean retryIfDeletionHappens)
+----------------------------------------------------------
+
+2015-02-02 12:17:55
+----------------------------------------------------------
+System.Data.SqlClient.SqlException: 列名 'ActivityFlag' 无效。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at Jialisi.Erp.Utility.Database.ExecuteDataTable(DbCommand dm) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\Database.cs:line 201
+   at Jialisi.Erp.Dao.SystemModule.SysMfpRelationDao.GetSysMfpRelationListByModule(String moduleId) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Dao\SystemModule\SysMfpRelationDao.cs:line 26
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetSysMfpRelationList(String moduleId) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 22
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetEnabledSysMfpRelationList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 65
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 137
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+
+2015-02-02 12:18:28
+----------------------------------------------------------
+System.Web.HttpCompileException: d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Header.aspx(31): error CS1061: 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' does not contain a definition for 'User_Name' and no extension method 'User_Name' accepting a first argument of type 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' could be found (are you missing a using directive or an assembly reference?)
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+----------------------------------------------------------
+
+2015-02-02 12:18:28
+----------------------------------------------------------
+System.Data.SqlClient.SqlException: 列名 'ActivityFlag' 无效。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at Jialisi.Erp.Utility.Database.ExecuteDataTable(DbCommand dm) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\Database.cs:line 201
+   at Jialisi.Erp.Dao.SystemModule.SysMfpRelationDao.GetSysMfpRelationListByModule(String moduleId) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Dao\SystemModule\SysMfpRelationDao.cs:line 26
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetSysMfpRelationList(String moduleId) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 22
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetEnabledSysMfpRelationList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 65
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 137
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+
+2015-02-02 12:20:43
+----------------------------------------------------------
+System.Web.HttpCompileException: d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Header.aspx(31): error CS1061: 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' does not contain a definition for 'User_Name' and no extension method 'User_Name' accepting a first argument of type 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' could be found (are you missing a using directive or an assembly reference?)
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode)
+   at System.Web.Compilation.WebDirectoryBatchCompiler.AddBuildProviders(Boolean retryIfDeletionHappens)
+----------------------------------------------------------
+
+2015-02-02 12:20:43
+----------------------------------------------------------
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetEnabledSysMfpRelationList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 73
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 137
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+
+2015-02-02 12:22:26
+----------------------------------------------------------
+System.Web.HttpCompileException: d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Header.aspx(31): error CS1061: 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' does not contain a definition for 'User_Name' and no extension method 'User_Name' accepting a first argument of type 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' could be found (are you missing a using directive or an assembly reference?)
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+----------------------------------------------------------
+
+2015-02-02 12:22:26
+----------------------------------------------------------
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetEnabledSysMfpRelationList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 73
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 137
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+
+2015-02-02 12:24:17
+----------------------------------------------------------
+System.Web.HttpCompileException: d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Header.aspx(31): error CS1061: 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' does not contain a definition for 'User_Name' and no extension method 'User_Name' accepting a first argument of type 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' could be found (are you missing a using directive or an assembly reference?)
+   at System.Web.Compilation.BuildManager.PostProcessFoundBuildResult(BuildResult result, Boolean keyFromVPP, VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetBuildResultFromCacheInternal(String cacheKey, Boolean keyFromVPP, VirtualPath virtualPath, Int64 hashCode)
+   at System.Web.Compilation.WebDirectoryBatchCompiler.AddBuildProviders(Boolean retryIfDeletionHappens)
+----------------------------------------------------------
+
+2015-02-02 12:24:17
+----------------------------------------------------------
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetEnabledSysMfpRelationList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 73
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 137
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+
+2015-02-02 12:24:50
+----------------------------------------------------------
+System.Web.HttpCompileException: d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Header.aspx(31): error CS1061: 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' does not contain a definition for 'User_Name' and no extension method 'User_Name' accepting a first argument of type 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' could be found (are you missing a using directive or an assembly reference?)
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+----------------------------------------------------------
+
+2015-02-02 12:24:50
+----------------------------------------------------------
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetEnabledSysMfpRelationList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 73
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 137
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+
+2015-02-02 12:25:13
+----------------------------------------------------------
+System.Web.HttpCompileException: d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Header.aspx(31): error CS1061: 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' does not contain a definition for 'User_Name' and no extension method 'User_Name' accepting a first argument of type 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' could be found (are you missing a using directive or an assembly reference?)
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+----------------------------------------------------------
+
+2015-02-02 12:25:13
+----------------------------------------------------------
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetEnabledSysMfpRelationList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 73
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 137
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+
+2015-02-02 12:25:22
+----------------------------------------------------------
+System.Web.HttpCompileException: d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Header.aspx(31): error CS1061: 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' does not contain a definition for 'User_Name' and no extension method 'User_Name' accepting a first argument of type 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' could be found (are you missing a using directive or an assembly reference?)
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+----------------------------------------------------------
+
+2015-02-02 12:25:22
+----------------------------------------------------------
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetEnabledSysMfpRelationList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 73
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 137
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+
+2015-02-02 12:25:51
+----------------------------------------------------------
+System.Web.HttpCompileException: d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Header.aspx(31): error CS1061: 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' does not contain a definition for 'User_Name' and no extension method 'User_Name' accepting a first argument of type 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' could be found (are you missing a using directive or an assembly reference?)
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+----------------------------------------------------------
+
+2015-02-02 12:25:51
+----------------------------------------------------------
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetEnabledSysMfpRelationList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 73
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 137
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+
+2015-02-02 12:26:14
+----------------------------------------------------------
+System.Web.HttpCompileException: d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Header.aspx(31): error CS1061: 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' does not contain a definition for 'User_Name' and no extension method 'User_Name' accepting a first argument of type 'Jialisi.Erp.Entity.BaseModule.BcUserInfoEntity' could be found (are you missing a using directive or an assembly reference?)
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.GetHandler(HttpContext context, String requestType, String virtualPath, String path)
+   at System.Web.HttpApplication.MaterializeHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+----------------------------------------------------------
+
+2015-02-02 12:26:14
+----------------------------------------------------------
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException()
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetEnabledSysMfpRelationList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 73
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 137
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+

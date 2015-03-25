@@ -1,0 +1,181 @@
+﻿2015-01-30 09:26:14
+----------------------------------------------------------
+System.Web.HttpCompileException: d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Login.aspx(73): error CS0117: 'Jialisi.Erp.Web.Login' does not contain a definition for 'SysSetting'
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.System.Web.IHttpHandlerFactory2.GetHandler(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.HttpApplication.MapHttpHandler(HttpContext context, String requestType, VirtualPath path, String pathTranslated, Boolean useAppConfig)
+   at System.Web.HttpApplication.MapHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+----------------------------------------------------------
+
+2015-01-30 09:26:14
+----------------------------------------------------------
+System.Data.SqlClient.SqlException: 对象名 'Sys_Setting' 无效。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at Jialisi.Erp.Utility.Database.ExecuteDataTable(DbCommand dm) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\Database.cs:line 201
+   at Jialisi.Erp.Utility.Database.ExecuteDataTable(String commandText) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\Database.cs:line 187
+   at Jialisi.Erp.Dao.SystemModule.SysGlobalSettingDao.GetSysSettingEntity() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Dao\SystemModule\SysGlobalSettingDao.cs:line 30
+   at Jialisi.Erp.Biz.SystemModule.SysGlobalSettingBiz.GetSysSettingEntity() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysGlobalSettingBiz.cs:line 26
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 45
+----------------------------------------------------------
+
+2015-01-30 09:27:07
+----------------------------------------------------------
+System.Web.HttpCompileException: d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Login.aspx(73): error CS0117: 'Jialisi.Erp.Web.Login' does not contain a definition for 'SysSetting'
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.System.Web.IHttpHandlerFactory2.GetHandler(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.HttpApplication.MapHttpHandler(HttpContext context, String requestType, VirtualPath path, String pathTranslated, Boolean useAppConfig)
+   at System.Web.HttpApplication.MapHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+----------------------------------------------------------
+
+2015-01-30 09:27:07
+----------------------------------------------------------
+System.Data.SqlClient.SqlException: 对象名 'Sys_Setting' 无效。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at Jialisi.Erp.Utility.Database.ExecuteDataTable(DbCommand dm) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\Database.cs:line 201
+   at Jialisi.Erp.Utility.Database.ExecuteDataTable(String commandText) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\Database.cs:line 187
+   at Jialisi.Erp.Dao.SystemModule.SysGlobalSettingDao.GetSysSettingEntity() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Dao\SystemModule\SysGlobalSettingDao.cs:line 30
+   at Jialisi.Erp.Biz.SystemModule.SysGlobalSettingBiz.GetSysSettingEntity() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysGlobalSettingBiz.cs:line 26
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 45
+----------------------------------------------------------
+
+2015-01-30 09:28:29
+----------------------------------------------------------
+System.Data.SqlClient.SqlException: 对象名 'Sys_Setting' 无效。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at Jialisi.Erp.Utility.Database.ExecuteDataTable(DbCommand dm) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\Database.cs:line 201
+   at Jialisi.Erp.Utility.Database.ExecuteDataTable(String commandText) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\Database.cs:line 187
+   at Jialisi.Erp.Dao.SystemModule.SysGlobalSettingDao.GetSysSettingEntity() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Dao\SystemModule\SysGlobalSettingDao.cs:line 30
+   at Jialisi.Erp.Biz.SystemModule.SysGlobalSettingBiz.GetSysSettingEntity() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysGlobalSettingBiz.cs:line 26
+   at Jialisi.Erp.Web.Utility.BaseClass.BasePage.get_SysGlobalSetting() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BasePage.cs:line 48
+   at ASP.login_aspx.__Renderform1(HtmlTextWriter __w, Control parameterContainer) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Login.aspx:line 73
+   at System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)
+   at System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)
+   at System.Web.UI.HtmlControls.HtmlForm.RenderChildren(HtmlTextWriter writer)
+   at System.Web.UI.HtmlControls.HtmlContainerControl.Render(HtmlTextWriter writer)
+   at System.Web.UI.HtmlControls.HtmlForm.Render(HtmlTextWriter output)
+   at System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.HtmlControls.HtmlForm.RenderControl(HtmlTextWriter writer)
+   at System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)
+   at System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)
+   at System.Web.UI.Page.Render(HtmlTextWriter writer)
+   at System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+----------------------------------------------------------
+
+2015-01-30 09:28:29
+----------------------------------------------------------
+System.Data.SqlClient.SqlException: 对象名 'Sys_Setting' 无效。
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   at System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at Jialisi.Erp.Utility.Database.ExecuteDataTable(DbCommand dm) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\Database.cs:line 201
+   at Jialisi.Erp.Utility.Database.ExecuteDataTable(String commandText) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\Database.cs:line 187
+   at Jialisi.Erp.Dao.SystemModule.SysGlobalSettingDao.GetSysSettingEntity() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Dao\SystemModule\SysGlobalSettingDao.cs:line 30
+   at Jialisi.Erp.Biz.SystemModule.SysGlobalSettingBiz.GetSysSettingEntity() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysGlobalSettingBiz.cs:line 26
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 45
+----------------------------------------------------------
+
+2015-01-30 09:29:20
+----------------------------------------------------------
+System.Web.HttpCompileException: d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Index.aspx(7): error CS0117: 'Jialisi.Erp.Web.MainPage.Index' does not contain a definition for 'SysSetting'
+   at System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile)
+   at System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.Compilation.BuildManager.CreateInstanceFromVirtualPath(VirtualPath virtualPath, Type requiredBaseType, HttpContext context, Boolean allowCrossApp, Boolean noAssert)
+   at System.Web.UI.PageHandlerFactory.GetHandlerHelper(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.UI.PageHandlerFactory.System.Web.IHttpHandlerFactory2.GetHandler(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath)
+   at System.Web.HttpApplication.MapHttpHandler(HttpContext context, String requestType, VirtualPath path, String pathTranslated, Boolean useAppConfig)
+   at System.Web.HttpApplication.MapHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+----------------------------------------------------------
+
+2015-01-30 09:29:20
+----------------------------------------------------------
+System.Data.SqlClient.SqlException: 对象名 'Sys_Permission' 无效。
+   at Jialisi.Erp.Utility.EntityExpressions.Data.EntityOperations.ReadEntityList[E](GenericWhereEntity`1 whereEntity, Database db, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Data\EntityOperations.cs:line 658
+   at Jialisi.Erp.Utility.EntityExpressions.Data.EntityOperations.ReadEntityList2[E](Expression`1 conditionExpression, Database db, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Data\EntityOperations.cs:line 622
+   at Jialisi.Erp.Utility.EntityExpressions.EntityExecution.ReadEntityList2[E](Expression`1 conditionExpression, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\EntityExecution.cs:line 266
+   at Jialisi.Erp.Biz.SystemModule.SysPermsPointBiz.SetSysPermsPointListCache() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysPermsPointBiz.cs:line 77
+   at Jialisi.Erp.Biz.SystemModule.SysPermsPointBiz.GetSysPermsPointList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysPermsPointBiz.cs:line 25
+   at Jialisi.Erp.Biz.SystemModule.SysPermsPointBiz.GetSingleSysPermsPoint(String permissionId) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysPermsPointBiz.cs:line 56
+   at Jialisi.Erp.Biz.SystemModule.SysPermsPointBiz.GetName(String permissionId) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysPermsPointBiz.cs:line 62
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetSysMfpRelationList(String moduleId) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 36
+   at Jialisi.Erp.Biz.SystemModule.SysMfpRelationBiz.GetEnabledSysMfpRelationList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMfpRelationBiz.cs:line 65
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 137
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+

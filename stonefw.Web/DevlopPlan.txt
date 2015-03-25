@@ -1,0 +1,34 @@
+﻿待办：
+1.消灭所有表中的下划线
+2.设置SysMfpRelation的缓存
+3.添加统一的操作失败提示页面，和信息。（添加删除时，占用提醒功能）
+4.添加统一的异常处理提示
+
+1、用户管理模块有bug。需要检查，新增，删除时失败。
+
+1.检查所有系统模块代码，多用缓存。
+
+***公共组件，数据库查询部分，加入事物支持。
+
+1、LogError属于后台功能，优化代码。
+2.新增操作日志功能。
+
+3.权限有很严重的漏洞，需要重新设计并整改。
+4.如果停用了一个模块，对应的菜单和功能点都应该隐藏掉，加载用户权限时也应该判断。
+
+3.优化语法树架构
+Select c.name as cname,c.prec AS Prec,c.isnullable AS isnullable,[defaultval]=isnull(e.text,''),t.name as tname , 
+[IsPk]=case when exists(SELECT 1 FROM sysobjects where xtype='PK' and parent_obj=c.id and name in (SELECT name FROM sysindexes WHERE indid in(SELECT indid FROM sysindexkeys WHERE id = c.id AND colid=c.colid))) then '1' else '0' end,
+[IsFk]=(case when c.name in (select col.name from syscolumns col,sysforeignkeys f where f.fkeyid=col.id and f.fkey=col.colid and f.constid in ( select distinct(id) from sysobjects where OBJECT_NAME(parent_obj)=ta.name and xtype='F')) then 1 else 0 end),   
+notes=(select value from sys.extended_properties as ex where ex.major_id = c.id and ex.minor_id = c.colid),
+IsSelIncre=case when exists(select 1 from sys.identity_columns ic where ic.object_id = ta.id and ic.name=c.name and is_identity=1) then '1' else '0' end 
+From syscolumns as c inner join sysobjects as ta on c.id=ta.id and ta.type in ('U','V') 
+inner join  (select name,system_type_id from sys.types where name<>'sysname') as t on c.xtype=t.system_type_id 
+left join syscomments e on c.cdefault=e.id
+Where ta.name='App_WF_CSAIRWindows' order by c.colid
+
+
+1.优化菜单模块，先选择功能点，然后再选择功能点对应的，链接。
+1.合并GetSysMenuTree和GetSysMenuList方法。
+3.优化用户角色权限管理模块。1.列表中加入“全部”，2.权限的排序，按菜单的顺序排列。
+4.SysPageFuncPoint页面做缓存，需要重新生成对应页面，单主键模式。

@@ -1,0 +1,162 @@
+﻿2015-02-01 00:08:09
+----------------------------------------------------------
+System.Exception: Jialisi.Erp.Entity.SystemModule.SysMenuEntity中的字段ModuleId未设置数据库相关的信息！
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.InternalEntityUtilitys.EntityDefinitions.GetDBColumnName(MemberExpression m, Type theEntityType) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\InternalEntityUtilitys\EntityDefinitions.cs:line 148
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.VisitBinary(BinaryExpression b) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 211
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ExpressionVisitorForEntity.Visit(Expression exp) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ExpressionVisitorForEntity.cs:line 64
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.VisitBinary(BinaryExpression b) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 243
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ExpressionVisitorForEntity.Visit(Expression exp) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ExpressionVisitorForEntity.cs:line 64
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.Build(Expression expression) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 85
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.BuildDBQuerysGeneric.BuildCondition[WA](GenericWhereEntity`1 theWhereEntity) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\BuildDBQuerysGeneric.cs:line 49
+   at Jialisi.Erp.Utility.EntityExpressions.Data.EntityOperations.ReadEntityList[E](GenericWhereEntity`1 whereEntity, Database db, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Data\EntityOperations.cs:line 637
+   at Jialisi.Erp.Utility.EntityExpressions.Data.EntityOperations.ReadEntityList2[E](Expression`1 conditionExpression, Database db, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Data\EntityOperations.cs:line 622
+   at Jialisi.Erp.Utility.EntityExpressions.EntityExecution.ReadEntityList2[E](Expression`1 conditionExpression, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\EntityExecution.cs:line 266
+   at Jialisi.Erp.Biz.SystemModule.SysMenuBiz.GetEnabledSysMenuList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMenuBiz.cs:line 124
+   at Jialisi.Erp.Biz.SystemModule.SysMenuBiz.GetEnabledSysMenuListByPermission(List`1 permissionList) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMenuBiz.cs:line 136
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 197
+   at Jialisi.Erp.Web.Utility.BaseClass.BasePage.get_CurrentUserInfo() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BasePage.cs:line 28
+   at ASP.mainpage_header_aspx.__Renderform1(HtmlTextWriter __w, Control parameterContainer) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Header.aspx:line 31
+   at System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)
+   at System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)
+   at System.Web.UI.HtmlControls.HtmlForm.RenderChildren(HtmlTextWriter writer)
+   at System.Web.UI.HtmlControls.HtmlContainerControl.Render(HtmlTextWriter writer)
+   at System.Web.UI.HtmlControls.HtmlForm.Render(HtmlTextWriter output)
+   at System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.HtmlControls.HtmlForm.RenderControl(HtmlTextWriter writer)
+   at System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)
+   at System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)
+   at System.Web.UI.Page.Render(HtmlTextWriter writer)
+   at System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+----------------------------------------------------------
+
+2015-02-01 00:08:09
+----------------------------------------------------------
+System.Exception: Jialisi.Erp.Entity.SystemModule.SysMenuEntity中的字段ModuleId未设置数据库相关的信息！
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.InternalEntityUtilitys.EntityDefinitions.GetDBColumnName(MemberExpression m, Type theEntityType) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\InternalEntityUtilitys\EntityDefinitions.cs:line 148
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.VisitBinary(BinaryExpression b) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 211
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ExpressionVisitorForEntity.Visit(Expression exp) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ExpressionVisitorForEntity.cs:line 64
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.VisitBinary(BinaryExpression b) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 243
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ExpressionVisitorForEntity.Visit(Expression exp) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ExpressionVisitorForEntity.cs:line 64
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.Build(Expression expression) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 85
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.BuildDBQuerysGeneric.BuildCondition[WA](GenericWhereEntity`1 theWhereEntity) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\BuildDBQuerysGeneric.cs:line 49
+   at Jialisi.Erp.Utility.EntityExpressions.Data.EntityOperations.ReadEntityList[E](GenericWhereEntity`1 whereEntity, Database db, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Data\EntityOperations.cs:line 637
+   at Jialisi.Erp.Utility.EntityExpressions.Data.EntityOperations.ReadEntityList2[E](Expression`1 conditionExpression, Database db, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Data\EntityOperations.cs:line 622
+   at Jialisi.Erp.Utility.EntityExpressions.EntityExecution.ReadEntityList2[E](Expression`1 conditionExpression, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\EntityExecution.cs:line 266
+   at Jialisi.Erp.Biz.SystemModule.SysMenuBiz.GetEnabledSysMenuList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMenuBiz.cs:line 124
+   at Jialisi.Erp.Biz.SystemModule.SysMenuBiz.GetEnabledSysMenuListByPermission(List`1 permissionList) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMenuBiz.cs:line 136
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 197
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+
+2015-02-01 00:09:24
+----------------------------------------------------------
+System.Exception: Jialisi.Erp.Entity.SystemModule.SysMenuEntity中的字段ModuleId未设置数据库相关的信息！
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.InternalEntityUtilitys.EntityDefinitions.GetDBColumnName(MemberExpression m, Type theEntityType) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\InternalEntityUtilitys\EntityDefinitions.cs:line 148
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.VisitBinary(BinaryExpression b) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 211
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ExpressionVisitorForEntity.Visit(Expression exp) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ExpressionVisitorForEntity.cs:line 64
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.VisitBinary(BinaryExpression b) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 243
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ExpressionVisitorForEntity.Visit(Expression exp) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ExpressionVisitorForEntity.cs:line 64
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.Build(Expression expression) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 85
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.BuildDBQuerysGeneric.BuildCondition[WA](GenericWhereEntity`1 theWhereEntity) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\BuildDBQuerysGeneric.cs:line 49
+   at Jialisi.Erp.Utility.EntityExpressions.Data.EntityOperations.ReadEntityList[E](GenericWhereEntity`1 whereEntity, Database db, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Data\EntityOperations.cs:line 637
+   at Jialisi.Erp.Utility.EntityExpressions.Data.EntityOperations.ReadEntityList2[E](Expression`1 conditionExpression, Database db, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Data\EntityOperations.cs:line 622
+   at Jialisi.Erp.Utility.EntityExpressions.EntityExecution.ReadEntityList2[E](Expression`1 conditionExpression, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\EntityExecution.cs:line 266
+   at Jialisi.Erp.Biz.SystemModule.SysMenuBiz.GetEnabledSysMenuList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMenuBiz.cs:line 124
+   at Jialisi.Erp.Biz.SystemModule.SysMenuBiz.GetEnabledSysMenuListByPermission(List`1 permissionList) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMenuBiz.cs:line 136
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 197
+   at Jialisi.Erp.Web.Utility.BaseClass.BasePage.get_CurrentUserInfo() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BasePage.cs:line 28
+   at ASP.mainpage_header_aspx.__Renderform1(HtmlTextWriter __w, Control parameterContainer) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Header.aspx:line 31
+   at System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)
+   at System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)
+   at System.Web.UI.HtmlControls.HtmlForm.RenderChildren(HtmlTextWriter writer)
+   at System.Web.UI.HtmlControls.HtmlContainerControl.Render(HtmlTextWriter writer)
+   at System.Web.UI.HtmlControls.HtmlForm.Render(HtmlTextWriter output)
+   at System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.HtmlControls.HtmlForm.RenderControl(HtmlTextWriter writer)
+   at System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)
+   at System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)
+   at System.Web.UI.Page.Render(HtmlTextWriter writer)
+   at System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+----------------------------------------------------------
+
+2015-02-01 00:09:24
+----------------------------------------------------------
+System.Exception: Jialisi.Erp.Entity.SystemModule.SysMenuEntity中的字段ModuleId未设置数据库相关的信息！
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.InternalEntityUtilitys.EntityDefinitions.GetDBColumnName(MemberExpression m, Type theEntityType) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\InternalEntityUtilitys\EntityDefinitions.cs:line 148
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.VisitBinary(BinaryExpression b) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 211
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ExpressionVisitorForEntity.Visit(Expression exp) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ExpressionVisitorForEntity.cs:line 64
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.VisitBinary(BinaryExpression b) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 243
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ExpressionVisitorForEntity.Visit(Expression exp) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ExpressionVisitorForEntity.cs:line 64
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.Build(Expression expression) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 85
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.BuildDBQuerysGeneric.BuildCondition[WA](GenericWhereEntity`1 theWhereEntity) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\BuildDBQuerysGeneric.cs:line 49
+   at Jialisi.Erp.Utility.EntityExpressions.Data.EntityOperations.ReadEntityList[E](GenericWhereEntity`1 whereEntity, Database db, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Data\EntityOperations.cs:line 637
+   at Jialisi.Erp.Utility.EntityExpressions.Data.EntityOperations.ReadEntityList2[E](Expression`1 conditionExpression, Database db, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Data\EntityOperations.cs:line 622
+   at Jialisi.Erp.Utility.EntityExpressions.EntityExecution.ReadEntityList2[E](Expression`1 conditionExpression, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\EntityExecution.cs:line 266
+   at Jialisi.Erp.Biz.SystemModule.SysMenuBiz.GetEnabledSysMenuList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMenuBiz.cs:line 124
+   at Jialisi.Erp.Biz.SystemModule.SysMenuBiz.GetEnabledSysMenuListByPermission(List`1 permissionList) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMenuBiz.cs:line 136
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 197
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+
+2015-02-01 00:11:35
+----------------------------------------------------------
+System.Exception: Jialisi.Erp.Entity.SystemModule.SysMenuEntity中的字段ModuleId未设置数据库相关的信息！
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.InternalEntityUtilitys.EntityDefinitions.GetDBColumnName(MemberExpression m, Type theEntityType) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\InternalEntityUtilitys\EntityDefinitions.cs:line 148
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.VisitBinary(BinaryExpression b) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 211
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ExpressionVisitorForEntity.Visit(Expression exp) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ExpressionVisitorForEntity.cs:line 64
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.VisitBinary(BinaryExpression b) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 243
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ExpressionVisitorForEntity.Visit(Expression exp) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ExpressionVisitorForEntity.cs:line 64
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.Build(Expression expression) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 85
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.BuildDBQuerysGeneric.BuildCondition[WA](GenericWhereEntity`1 theWhereEntity) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\BuildDBQuerysGeneric.cs:line 49
+   at Jialisi.Erp.Utility.EntityExpressions.Data.EntityOperations.ReadEntityList[E](GenericWhereEntity`1 whereEntity, Database db, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Data\EntityOperations.cs:line 637
+   at Jialisi.Erp.Utility.EntityExpressions.Data.EntityOperations.ReadEntityList2[E](Expression`1 conditionExpression, Database db, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Data\EntityOperations.cs:line 622
+   at Jialisi.Erp.Utility.EntityExpressions.EntityExecution.ReadEntityList2[E](Expression`1 conditionExpression, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\EntityExecution.cs:line 266
+   at Jialisi.Erp.Biz.SystemModule.SysMenuBiz.GetEnabledSysMenuList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMenuBiz.cs:line 124
+   at Jialisi.Erp.Biz.SystemModule.SysMenuBiz.GetEnabledSysMenuListByPermission(List`1 permissionList) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMenuBiz.cs:line 136
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 197
+   at Jialisi.Erp.Web.Utility.BaseClass.BasePage.get_CurrentUserInfo() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BasePage.cs:line 28
+   at ASP.mainpage_header_aspx.__Renderform1(HtmlTextWriter __w, Control parameterContainer) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\MainPage\Header.aspx:line 31
+   at System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)
+   at System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)
+   at System.Web.UI.HtmlControls.HtmlForm.RenderChildren(HtmlTextWriter writer)
+   at System.Web.UI.HtmlControls.HtmlContainerControl.Render(HtmlTextWriter writer)
+   at System.Web.UI.HtmlControls.HtmlForm.Render(HtmlTextWriter output)
+   at System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.HtmlControls.HtmlForm.RenderControl(HtmlTextWriter writer)
+   at System.Web.UI.Control.RenderChildrenInternal(HtmlTextWriter writer, ICollection children)
+   at System.Web.UI.Control.RenderChildren(HtmlTextWriter writer)
+   at System.Web.UI.Page.Render(HtmlTextWriter writer)
+   at System.Web.UI.Control.RenderControlInternal(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer, ControlAdapter adapter)
+   at System.Web.UI.Control.RenderControl(HtmlTextWriter writer)
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+----------------------------------------------------------
+
+2015-02-01 00:11:35
+----------------------------------------------------------
+System.Exception: Jialisi.Erp.Entity.SystemModule.SysMenuEntity中的字段ModuleId未设置数据库相关的信息！
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.InternalEntityUtilitys.EntityDefinitions.GetDBColumnName(MemberExpression m, Type theEntityType) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\InternalEntityUtilitys\EntityDefinitions.cs:line 148
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.VisitBinary(BinaryExpression b) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 211
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ExpressionVisitorForEntity.Visit(Expression exp) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ExpressionVisitorForEntity.cs:line 64
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.VisitBinary(BinaryExpression b) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 243
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ExpressionVisitorForEntity.Visit(Expression exp) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ExpressionVisitorForEntity.cs:line 64
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.ExpressionVisitors.ConditionBuilderGeneric`1.Build(Expression expression) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\ExpressionVisitors\ConditionBuilderGeneric.cs:line 85
+   at Jialisi.Erp.Utility.EntityExpressions.Utilitys.BuildDBQuerysGeneric.BuildCondition[WA](GenericWhereEntity`1 theWhereEntity) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Utilitys\BuildDBQuerysGeneric.cs:line 49
+   at Jialisi.Erp.Utility.EntityExpressions.Data.EntityOperations.ReadEntityList[E](GenericWhereEntity`1 whereEntity, Database db, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Data\EntityOperations.cs:line 637
+   at Jialisi.Erp.Utility.EntityExpressions.Data.EntityOperations.ReadEntityList2[E](Expression`1 conditionExpression, Database db, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\Data\EntityOperations.cs:line 622
+   at Jialisi.Erp.Utility.EntityExpressions.EntityExecution.ReadEntityList2[E](Expression`1 conditionExpression, Int32[] maxRowCounts) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Utility\EntityExpressions\EntityExecution.cs:line 266
+   at Jialisi.Erp.Biz.SystemModule.SysMenuBiz.GetEnabledSysMenuList() in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMenuBiz.cs:line 124
+   at Jialisi.Erp.Biz.SystemModule.SysMenuBiz.GetEnabledSysMenuListByPermission(List`1 permissionList) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\SystemModule\SysMenuBiz.cs:line 136
+   at Jialisi.Erp.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Biz\BaseModule\BcUserInfoBiz.cs:line 197
+   at Jialisi.Erp.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) in d:\Documents\Code\git\stone0090\jialisi-erp\Jialisi.Erp.Web\Utility\BaseClass\BaseGlobal.cs:line 51
+----------------------------------------------------------
+
