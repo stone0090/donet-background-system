@@ -1,2 +1,2 @@
-# jialisi-erp
-jialisi's erp.
+#### 项目说明
+stonefw 是基于 jquery easy ui 开发的。集成了代码生成工具和常用一些方法。实现了基本的权限管理、菜单管理等功能。后续会以此为基础开发一套小型erp系统。 
