@@ -64,11 +64,11 @@
     <Compile Include="BaseModule\BcGroupDao.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Jialisi.Erp.Entity\stonefw.Entity.csproj">
+    <ProjectReference Include="..\stonefw.Entity\stonefw.Entity.csproj">
       <Project>{fa43e73b-a3f4-4a80-a662-0307cf3f7941}</Project>
       <Name>stonefw.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Jialisi.Erp.Utility\stonefw.Utility.csproj">
+    <ProjectReference Include="..\stonefw.Utility\stonefw.Utility.csproj">
       <Project>{4F097047-9CD3-4876-9D18-8AE0856CD1C1}</Project>
       <Name>stonefw.Utility</Name>
     </ProjectReference>

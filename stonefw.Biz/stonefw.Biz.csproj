@@ -60,15 +60,15 @@
     <Compile Include="BaseModule\BcUserInfoBiz.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Jialisi.Erp.Dao\stonefw.Dao.csproj">
+    <ProjectReference Include="..\stonefw.Dao\stonefw.Dao.csproj">
       <Project>{53ab83a9-26ea-461a-ae2c-cf99c7ef1d45}</Project>
       <Name>stonefw.Dao</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Jialisi.Erp.Entity\stonefw.Entity.csproj">
+    <ProjectReference Include="..\stonefw.Entity\stonefw.Entity.csproj">
       <Project>{fa43e73b-a3f4-4a80-a662-0307cf3f7941}</Project>
       <Name>stonefw.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Jialisi.Erp.Utility\stonefw.Utility.csproj">
+    <ProjectReference Include="..\stonefw.Utility\stonefw.Utility.csproj">
       <Project>{4F097047-9CD3-4876-9D18-8AE0856CD1C1}</Project>
       <Name>stonefw.Utility</Name>
     </ProjectReference>
