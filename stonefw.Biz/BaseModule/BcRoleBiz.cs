@@ -24,14 +24,14 @@ namespace stonefw.Biz.BaseModule
         {
             return EntityExecution.ReadEntityList2<BcRoleEntity>(null);
         }
-        public ExcuteResult DeleteBcRole(int roleId)
+        public ExcuteResultEnum DeleteBcRole(int roleId)
         {
             if (EntityExecution.GetEntityCount2<BcUserRoleEntity>(n => n.RoleId == roleId) > 0)
-                return ExcuteResult.IsOccupied;
+                return ExcuteResultEnum.IsOccupied;
 
             BcRoleEntity entity = new BcRoleEntity() { RoleId = roleId };
             EntityExecution.DeleteEntity(entity);
-            return ExcuteResult.Success;
+            return ExcuteResultEnum.Success;
         }
         public void AddNewBcRole(BcRoleEntity entity)
         {

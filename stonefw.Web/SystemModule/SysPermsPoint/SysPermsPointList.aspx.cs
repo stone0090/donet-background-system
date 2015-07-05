@@ -21,8 +21,8 @@ namespace stonefw.Web.SystemModule.SysPermsPoint
             {
                 string[] arg = e.CommandArgument.ToString().Split('|');
                 var er = Biz.DeleteSysPermsPoint(arg[0]);
-                this.lMessage.Text = er.GetName();
-                if (er != ExcuteResult.Success) return;
+                this.lMessage.Text = er.GetDescription();
+                if (er != ExcuteResultEnum.Success) return;
                 BindData();
             }
         }

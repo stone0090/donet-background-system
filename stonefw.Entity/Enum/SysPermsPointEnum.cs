@@ -1,6 +1,6 @@
 ﻿namespace stonefw.Entity.Enum
 {
-    public enum PermsPointEnum
+    public enum SysPermsPointEnum
     {
         Add,
         Delete,

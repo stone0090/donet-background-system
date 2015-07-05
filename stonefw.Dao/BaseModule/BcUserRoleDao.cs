@@ -25,7 +25,7 @@ namespace stonefw.Dao.BaseModule
             var dm = Db.GetSqlStringCommand(sql);
             if (userId != 0) Db.AddInParameter(dm, "@UserId", DbType.Int32, userId);
             if (roleId != 0) Db.AddInParameter(dm, "@RoleId", DbType.Int32, roleId);
-            return DataTableHepler.ConvertToEntityList<BcUserRoleEntity>(Db.ExecuteDataTable(dm));
+            return DataTableHepler.DataTableToList<BcUserRoleEntity>(Db.ExecuteDataTable(dm));
         }
     }
 }

@@ -30,22 +30,22 @@ namespace stonefw.Biz.BaseModule
         {
             return Dao.GetBcUserInfoList(roleId, groupId, userName);
         }
-        public ExcuteResult DeleteBcUserInfo(int userId)
+        public ExcuteResultEnum DeleteBcUserInfo(int userId)
         {
             if (EntityExecution.GetEntityCount2<BcUserRoleEntity>(n => n.UserId == userId) > 0)
-                return ExcuteResult.IsOccupied;
+                return ExcuteResultEnum.IsOccupied;
 
             var entity = GetSingleBcUserInfo(userId);
             if (new SysGlobalSettingBiz().IsSuperAdmin(entity.UserAccount))
-                return ExcuteResult.IsSuperAdmin;
+                return ExcuteResultEnum.IsSuperAdmin;
 
             entity.DeleteFlag = true;
             return UpdateBcUserInfo(entity);
         }
-        public ExcuteResult AddNewBcUserInfo(BcUserInfoEntity entity, string roleIds = null)
+        public ExcuteResultEnum AddNewBcUserInfo(BcUserInfoEntity entity, string roleIds = null)
         {
             if (EntityExecution.GetEntityCount2<BcUserInfoEntity>(n => n.UserAccount == entity.UserAccount && n.DeleteFlag == false) > 0)
-                return ExcuteResult.IsExist;
+                return ExcuteResultEnum.IsExist;
 
             using (TransactionScope ts = new TransactionScope())
             {
@@ -63,9 +63,9 @@ namespace stonefw.Biz.BaseModule
                 }
                 ts.Complete();
             }
-            return ExcuteResult.Success;
+            return ExcuteResultEnum.Success;
         }
-        public ExcuteResult UpdateBcUserInfo(BcUserInfoEntity entity, string roleIds = null)
+        public ExcuteResultEnum UpdateBcUserInfo(BcUserInfoEntity entity, string roleIds = null)
         {
             entity.Password = Encryption.Encrypt(entity.Password);
             using (TransactionScope ts = new TransactionScope())
@@ -86,7 +86,7 @@ namespace stonefw.Biz.BaseModule
                 }
                 ts.Complete();
             }
-            return ExcuteResult.Success;
+            return ExcuteResultEnum.Success;
         }
         public BcUserInfoEntity GetSingleBcUserInfo(int userId)
         {
@@ -99,20 +99,20 @@ namespace stonefw.Biz.BaseModule
         {
             return EntityExecution.ReadEntityList2<BcUserInfoEntity>(n => n.DeleteFlag == false && n.ActivityFlag == true);
         }
-        public LoginStatus DoLogin(string userAccount, string password)
+        public LoginStatusEnum DoLogin(string userAccount, string password)
         {
             var entity = EntityExecution.ReadEntity2<BcUserInfoEntity>(n => n.UserAccount == userAccount && n.DeleteFlag == false);
 
             if (entity == null)
-                return LoginStatus.UserNotExist;
+                return LoginStatusEnum.UserNotExist;
 
             if (entity.Password != Encryption.Encrypt(password))
-                return LoginStatus.PasswordError;
+                return LoginStatusEnum.PasswordError;
 
             if ((bool)!entity.ActivityFlag)
-                return LoginStatus.UserDisabled;
+                return LoginStatusEnum.UserDisabled;
 
-            return LoginStatus.Success;
+            return LoginStatusEnum.Success;
         }
         public BcUserInfoEntity GetBcUserInfoWithPermission(string userAccount)
         {

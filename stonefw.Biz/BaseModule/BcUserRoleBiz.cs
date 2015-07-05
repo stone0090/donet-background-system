@@ -29,12 +29,12 @@ namespace stonefw.Biz.BaseModule
             BcUserRoleEntity entity = new BcUserRoleEntity() { UserId = userId, RoleId = roleId };
             EntityExecution.DeleteEntity(entity);
         }
-        public ExcuteResult AddNewBcUserRole(BcUserRoleEntity entity)
+        public ExcuteResultEnum AddNewBcUserRole(BcUserRoleEntity entity)
         {
             if (EntityExecution.GetEntityCount2<BcUserRoleEntity>(n => n.RoleId == entity.RoleId && n.UserId == entity.UserId) > 0)
-                return ExcuteResult.IsExist;
+                return ExcuteResultEnum.IsExist;
             EntityExecution.InsertEntity(entity);
-            return ExcuteResult.Success;
+            return ExcuteResultEnum.Success;
         }
         public void UpdateBcUserRole(BcUserRoleEntity entity) { EntityExecution.UpdateEntity(entity); }
         public BcUserRoleEntity GetSingleBcUserRole(int userId, int roleId) { return EntityExecution.ReadEntity2<BcUserRoleEntity>(n => n.UserId == userId && n.RoleId == roleId); }

@@ -20,7 +20,7 @@ namespace stonefw.Dao.SystemModule
             const string sql = @"SELECT a.*,b.ModuleName,c.FuncPointName FROM Sys_MfpRelation a
                             LEFT JOIN Sys_Module b ON a.ModuleId = b.ModuleId
                             LEFT JOIN Sys_FuncPoint c ON a.FuncPointId = c.FuncPointId";
-            return DataTableHepler.ConvertToEntityList<SysMfpRelationEntity>(Db.ExecuteDataTable(sql));
+            return DataTableHepler.DataTableToList<SysMfpRelationEntity>(Db.ExecuteDataTable(sql));
         }
     }
 }

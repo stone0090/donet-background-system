@@ -1,6 +1,6 @@
 ﻿namespace stonefw.Entity.Enum
 {
-    public enum ModuleEnum
+    public enum SysModuleEnum
     {
         Trade,
         Account,

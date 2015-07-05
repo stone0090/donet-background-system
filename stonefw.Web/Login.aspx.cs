@@ -69,7 +69,7 @@ namespace stonefw.Web
             var result = uiBiz.DoLogin(usId, pswd);
             switch (result)
             {
-                case LoginStatus.Success:
+                case LoginStatusEnum.Success:
                     FormsAuthentication.SetAuthCookie(usId, false);
                     //登陆成功，把用户编号保存到票据中    
                     var ticket = new FormsAuthenticationTicket(1, usId, DateTime.Now, DateTime.Now.AddMonths(2), false, usId, FormsAuthentication.FormsCookiePath);
@@ -79,13 +79,13 @@ namespace stonefw.Web
                     //登陆成功，跳转到首页
                     Response.Redirect(ReturnUrl);
                     break;
-                case LoginStatus.PasswordError:
+                case LoginStatusEnum.PasswordError:
                     ShowErrorMsg("登录失败，密码错误！");
                     break;
-                case LoginStatus.UserNotExist:
+                case LoginStatusEnum.UserNotExist:
                     ShowErrorMsg("登录失败，用户名不存在！");
                     break;
-                case LoginStatus.UserDisabled:
+                case LoginStatusEnum.UserDisabled:
                     ShowErrorMsg("登录失败，用户被禁用！");
                     break;
                 default:

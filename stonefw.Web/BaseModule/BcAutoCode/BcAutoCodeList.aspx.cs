@@ -14,10 +14,10 @@ namespace stonefw.Web.BaseModule.BcAutoCode
 
         public override bool InitPermission()
         {
-            this.btnAddNew.Visible = LoadPermission(PermsPointEnum.Add);
-            this.gvAutoCode.Columns[0].Visible = LoadPermission(PermsPointEnum.Delete);
-            this.gvAutoCode.Columns[1].Visible = LoadPermission(PermsPointEnum.Edit);
-            return LoadPermission(PermsPointEnum.View);
+            this.btnAddNew.Visible = LoadPermission(SysPermsPointEnum.Add);
+            this.gvAutoCode.Columns[0].Visible = LoadPermission(SysPermsPointEnum.Delete);
+            this.gvAutoCode.Columns[1].Visible = LoadPermission(SysPermsPointEnum.Edit);
+            return LoadPermission(SysPermsPointEnum.View);
         }
 
         protected void Page_Load(object sender, EventArgs e)

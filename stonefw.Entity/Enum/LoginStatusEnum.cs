@@ -1,6 +1,6 @@
 ﻿namespace stonefw.Entity.Enum
 {
-    public enum LoginStatus
+    public enum LoginStatusEnum
     {
         Success,
         PasswordError,

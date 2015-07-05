@@ -87,14 +87,14 @@ namespace stonefw.Biz.SystemModule
                 Dao.SeqRecal();
             }
         }
-        public ExcuteResult DeleteSysMenu(int menuId)
+        public ExcuteResultEnum DeleteSysMenu(int menuId)
         {
             if (GetCountByFatherNode(menuId) > 0)
-                return ExcuteResult.IsOccupied;
+                return ExcuteResultEnum.IsOccupied;
 
             SysMenuEntity entity = new SysMenuEntity() { MenuId = menuId, DeleteFlag = true };
             EntityExecution.UpdateEntity(entity);
-            return ExcuteResult.Success;
+            return ExcuteResultEnum.Success;
         }
         public int GetCountByFatherNode(int? fatherNode)
         {
@@ -138,7 +138,7 @@ namespace stonefw.Biz.SystemModule
                     }
                     else
                     {
-                        if (!list[0].PermissionList.Contains(EnumHelper.Enum2Str(PermsPointEnum.View)))
+                        if (!list[0].PermissionList.Contains(SysPermsPointEnum.View.ToString()))
                         {
                             sysMenuList.Remove(sysMenuEntity);
                         }

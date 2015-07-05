@@ -11,21 +11,21 @@ namespace stonefw.Utility
 {
     public class EnumHelper
     {
-        public delegate string GetNameDelegate<in T>(T name);
+        // 注意：Enum 的 GetName() 方法等同于枚举本身的 ToString() 方法，非特殊情况尽量用枚举本身的 ToString()
+
+        public delegate string GetDescriptionDelegate<in T>(T enumValue);
 
         /// <summary>
         /// 把枚举转换成字典
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<string, string> EnumToDictionary<T>()
+        public static Dictionary<int, string> ToDictionary<T>()
         {
             var enumType = typeof(T);
-            var dic = new Dictionary<string, string>();
+            var dic = new Dictionary<int, string>();
             foreach (int value in Enum.GetValues(enumType))
             {
-                string val = value.ToString();
-                string text = Enum.GetName(enumType, value);
-                dic.Add(val, text);
+                dic.Add(value, Enum.GetName(enumType, value));
             }
             return dic;
         }
@@ -34,84 +34,43 @@ namespace stonefw.Utility
         /// 把枚举转换成表格
         /// </summary>
         /// <returns></returns>
-        public static DataTable EnumToDataTable<T>()
+        public static DataTable ToDataTable<T>()
         {
             var enumType = typeof(T);
             var dt = new DataTable();
             dt.Columns.Add(new DataColumn("value"));
-            dt.Columns.Add(new DataColumn("text"));
+            dt.Columns.Add(new DataColumn("name"));
             foreach (int value in Enum.GetValues(enumType))
             {
-                string val = value.ToString(CultureInfo.InvariantCulture);
-                string text = Enum.GetName(enumType, value);
                 var dr = dt.NewRow();
-                dr["value"] = val;
-                dr["text"] = text;
+                dr["value"] = value;
+                dr["name"] = Enum.GetName(enumType, value);
                 dt.Rows.Add(dr);
             }
             return dt;
-        }
+        }  
 
         /// <summary>
         /// 把枚举转换成表格
         /// </summary>
         /// <returns></returns>
-        public static DataTable EnumToDataTable<T>(GetNameDelegate<T> getNameDelegate)
+        public static DataTable ToDataTable<T>(GetDescriptionDelegate<T> getDescription)
         {
             var enumType = typeof(T);
             var dt = new DataTable();
             dt.Columns.Add(new DataColumn("value"));
-            dt.Columns.Add(new DataColumn("text"));
             dt.Columns.Add(new DataColumn("name"));
+            dt.Columns.Add(new DataColumn("description"));
             foreach (int value in Enum.GetValues(enumType))
             {
-                string val = value.ToString(CultureInfo.InvariantCulture);
-                string text = Enum.GetName(enumType, value);
-                string name = getNameDelegate(Str2Enum<T>(val));
                 var dr = dt.NewRow();
-                dr["value"] = val;
-                dr["text"] = text;
-                dr["name"] = name;
+                dr["value"] = value;
+                dr["name"] = Enum.GetName(enumType, value);
+                dr["description"] = getDescription((T)Enum.Parse(enumType, value.ToString()));
                 dt.Rows.Add(dr);
             }
             return dt;
         }
-
-        /// <summary>
-        /// 把枚举转换成表格
-        /// </summary>
-        /// <returns></returns>
-        public static DataTable EnumToDataTable<T>(GetNameDelegate<T> getNameDelegate, string[] enumValues)
-        {
-            var enumType = typeof(T);
-            var dt = new DataTable();
-            dt.Columns.Add(new DataColumn("value"));
-            dt.Columns.Add(new DataColumn("text"));
-            dt.Columns.Add(new DataColumn("name"));
-            foreach (int value in Enum.GetValues(enumType))
-            {
-                string val = value.ToString(CultureInfo.InvariantCulture);
-                if (!enumValues.ToList().Contains(val)) continue;
-                string text = Enum.GetName(enumType, value);
-                string name = getNameDelegate(Str2Enum<T>(val));
-                var dr = dt.NewRow();
-                dr["value"] = val;
-                dr["text"] = text;
-                dr["name"] = name;
-                dt.Rows.Add(dr);
-            }
-            return dt;
-        }
-
-        public static T Str2Enum<T>(string str)
-        {
-            return (T)Enum.Parse(typeof(T), str);
-        }
-
-        public static string Enum2Str<T>(T t)
-        {
-            return Enum.GetName(typeof(T), t);
-        }
-
+       
     }
 }

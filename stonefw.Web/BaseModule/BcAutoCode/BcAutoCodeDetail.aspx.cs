@@ -15,7 +15,7 @@ namespace stonefw.Web.BaseModule.BcAutoCode
 
         public override bool InitPermission()
         {
-            return LoadPermission(PermsPointEnum.Add) || LoadPermission(PermsPointEnum.Edit);
+            return LoadPermission(SysPermsPointEnum.Add) || LoadPermission(SysPermsPointEnum.Edit);
         }
 
         protected void Page_Load(object sender, EventArgs e)

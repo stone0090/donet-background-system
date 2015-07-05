@@ -16,7 +16,7 @@ namespace stonefw.Web.BaseModule.BcUserInfo
 
         public override bool InitPermission()
         {
-            return LoadPermission(PermsPointEnum.Add) || LoadPermission(PermsPointEnum.Edit);
+            return LoadPermission(SysPermsPointEnum.Add) || LoadPermission(SysPermsPointEnum.Edit);
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -32,12 +32,12 @@ namespace stonefw.Web.BaseModule.BcUserInfo
             try
             {
                 BcUserInfoEntity entity = PrepareFormData();
-                ExcuteResult er = this.hdUserId.Value == "-1"
+                ExcuteResultEnum er = this.hdUserId.Value == "-1"
                     ? Biz.AddNewBcUserInfo(entity, this.hdRoleIds.Value)
                     : Biz.UpdateBcUserInfo(entity, this.hdRoleIds.Value);
-                if (er != ExcuteResult.Success)
+                if (er != ExcuteResultEnum.Success)
                 {
-                    this.lMessage.Text = er.GetName();
+                    this.lMessage.Text = er.GetDescription();
                     return;
                 }
                 base.FatherQuery();

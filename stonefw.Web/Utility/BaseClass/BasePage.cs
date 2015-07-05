@@ -210,14 +210,14 @@ namespace stonefw.Web.Utility.BaseClass
             }
             return null;
         }
-        public bool LoadPermission(PermsPointEnum permsPoint)
+        public bool LoadPermission(SysPermsPointEnum permsPoint)
         {
             var permissionEntity = LoadPermission();
             if (permissionEntity != null)
-                return permissionEntity.PermissionList.Any(n => n == EnumHelper.Enum2Str(permsPoint));
+                return permissionEntity.PermissionList.Any(n => n == permsPoint.ToString());
             return false;
         }
-        public bool LoadPermission(FuncPointEnum funcPoint, PermsPointEnum permsPoint)
+        public bool LoadPermission(SysFuncPointEnum funcPoint, SysPermsPointEnum permsPoint)
         {
             return false;
         }

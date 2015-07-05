@@ -25,24 +25,24 @@ namespace stonefw.Biz.SystemModule
             object list = DataCache.GetCache(CacheKey) ?? SetSysFuncPointListCache();
             return (List<SysFuncPointEntity>) list;
         }
-        public ExcuteResult DeleteSysFuncPoint(string funcPointId)
+        public ExcuteResultEnum DeleteSysFuncPoint(string funcPointId)
         {
             if (EntityExecution.GetEntityCount2<SysMfpRelationEntity>(n => n.FuncPointId == funcPointId) > 0)
-                return ExcuteResult.IsOccupied;
+                return ExcuteResultEnum.IsOccupied;
 
             if (EntityExecution.GetEntityCount2<SysMenuEntity>(n => n.FuncPointId == funcPointId && n.DeleteFlag == false) > 0)
-                return ExcuteResult.IsOccupied;
+                return ExcuteResultEnum.IsOccupied;
 
             if (EntityExecution.GetEntityCount2<BcPermissionEntity>(n => n.FuncPointId == funcPointId) > 0)
-                return ExcuteResult.IsOccupied;
+                return ExcuteResultEnum.IsOccupied;
 
             if (EntityExecution.GetEntityCount2<BcAutoCodeEntity>(n => n.FuncPointId == funcPointId) > 0)
-                return ExcuteResult.IsOccupied;
+                return ExcuteResultEnum.IsOccupied;
 
             SysFuncPointEntity entity = new SysFuncPointEntity() { FuncPointId = funcPointId };
             EntityExecution.DeleteEntity(entity);
             SetSysFuncPointListCache();
-            return ExcuteResult.Success;
+            return ExcuteResultEnum.Success;
         }
         public void AddNewSysFuncPoint(SysFuncPointEntity entity)
         {

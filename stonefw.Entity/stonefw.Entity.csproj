@@ -52,12 +52,14 @@
     <Compile Include="CustomerModule\CuContactPersonEntity.cs" />
     <Compile Include="CustomerModule\CuCustomerEntity.AutoCode.cs" />
     <Compile Include="CustomerModule\CuCustomerEntity.cs" />
-    <Compile Include="Enum\FuncPointEnum.cs" />
-    <Compile Include="Enum\PermsPointEnum.cs" />
-    <Compile Include="Enum\ModuleEnum.cs" />
+    <Compile Include="Enum\SysFuncPointEnum.cs" />
+    <Compile Include="Enum\SysPermsPointEnum.cs" />
+    <Compile Include="Enum\SysModuleEnum.cs" />
     <Compile Include="Extension\PermissionEntity.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="SystemModule\SysModuleEnumEntity.cs" />
+    <Compile Include="SystemModule\SysPermsPointEnumEntity.cs" />
     <Compile Include="SystemModule\SysPageFuncPointEntity.AutoCode.cs" />
     <Compile Include="SystemModule\SysPageFuncPointEntity.cs" />
     <Compile Include="SystemModule\SysFuncPointEntity.AutoCode.cs" />
@@ -68,8 +70,8 @@
     <Compile Include="SystemModule\SysMenuEntity.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Enum\ExcuteResult.cs" />
-    <Compile Include="Enum\LoginStatus.cs" />
+    <Compile Include="Enum\ExcuteResultEnum.cs" />
+    <Compile Include="Enum\LoginStatusEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseModule\BcRoleEntity.AutoCode.cs" />
     <Compile Include="BaseModule\BcRoleEntity.cs" />
@@ -89,7 +91,7 @@
     <Compile Include="SystemModule\SysMfpRelationEntity.AutoCode.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Jialisi.Erp.Utility\stonefw.Utility.csproj">
+    <ProjectReference Include="..\stonefw.Utility\stonefw.Utility.csproj">
       <Project>{4F097047-9CD3-4876-9D18-8AE0856CD1C1}</Project>
       <Name>stonefw.Utility</Name>
     </ProjectReference>

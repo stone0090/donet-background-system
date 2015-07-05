@@ -14,9 +14,9 @@ namespace stonefw.Web.BaseModule.BcPermission
 
         public override bool InitPermission()
         {
-            this.btnAddNew.Visible = LoadPermission(PermsPointEnum.Add);
-            this.gvBcPermission.Columns[0].Visible = LoadPermission(PermsPointEnum.Delete);
-            return LoadPermission(PermsPointEnum.View);
+            this.btnAddNew.Visible = LoadPermission(SysPermsPointEnum.Add);
+            this.gvBcPermission.Columns[0].Visible = LoadPermission(SysPermsPointEnum.Delete);
+            return LoadPermission(SysPermsPointEnum.View);
         }
 
         protected void Page_Load(object sender, EventArgs e)

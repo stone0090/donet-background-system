@@ -25,21 +25,21 @@ namespace stonefw.Biz.SystemModule
             object list = DataCache.GetCache(CacheKey) ?? SetSysModuleListCache();
             return list != null ? (List<SysModuleEntity>)list : null;
         }
-        public ExcuteResult DeleteSysModule(string moduleId)
+        public ExcuteResultEnum DeleteSysModule(string moduleId)
         {
             if (EntityExecution.GetEntityCount2<SysMfpRelationEntity>(n => n.ModuleId == moduleId) > 0)
-                return ExcuteResult.IsOccupied;
+                return ExcuteResultEnum.IsOccupied;
 
             if (EntityExecution.GetEntityCount2<SysMenuEntity>(n => n.ModuleId == moduleId && n.DeleteFlag == false) > 0)
-                return ExcuteResult.IsOccupied;
+                return ExcuteResultEnum.IsOccupied;
 
             if (EntityExecution.GetEntityCount2<BcPermissionEntity>(n => n.ModuleId == moduleId) > 0)
-                return ExcuteResult.IsOccupied;
+                return ExcuteResultEnum.IsOccupied;
 
             SysModuleEntity entity = new SysModuleEntity() { ModuleId = moduleId };
             EntityExecution.DeleteEntity(entity);
             SetSysModuleListCache();
-            return ExcuteResult.Success;
+            return ExcuteResultEnum.Success;
         }
         public void AddNewSysModule(SysModuleEntity entity)
         {

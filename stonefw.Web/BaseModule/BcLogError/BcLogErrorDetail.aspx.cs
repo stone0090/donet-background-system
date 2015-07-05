@@ -13,7 +13,7 @@ namespace stonefw.Web.BaseModule.BcLogError
 
         public override bool InitPermission()
         {
-            return LoadPermission(PermsPointEnum.View);
+            return LoadPermission(SysPermsPointEnum.View);
         }
 
         protected void Page_Load(object sender, EventArgs e)

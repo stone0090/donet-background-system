@@ -16,10 +16,10 @@ namespace stonefw.Web.CustomerModule.CuCustomer
 
         public override bool InitPermission()
         {
-            this.btnAddNew.Visible = LoadPermission(PermsPointEnum.Add);
-            this.gvCuCustomer.Columns[0].Visible = LoadPermission(PermsPointEnum.Delete);
-            this.gvCuCustomer.Columns[1].Visible = LoadPermission(PermsPointEnum.Edit);
-            return LoadPermission(PermsPointEnum.View);
+            this.btnAddNew.Visible = LoadPermission(SysPermsPointEnum.Add);
+            this.gvCuCustomer.Columns[0].Visible = LoadPermission(SysPermsPointEnum.Delete);
+            this.gvCuCustomer.Columns[1].Visible = LoadPermission(SysPermsPointEnum.Edit);
+            return LoadPermission(SysPermsPointEnum.View);
         }
 
         protected void Page_Load(object sender, EventArgs e)

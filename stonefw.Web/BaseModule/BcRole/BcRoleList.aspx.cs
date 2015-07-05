@@ -15,10 +15,10 @@ namespace stonefw.Web.BaseModule.BcRole
 
         public override bool InitPermission()
         {
-            this.btnAddNew.Visible = LoadPermission(PermsPointEnum.Add);
-            this.gvRole.Columns[0].Visible = LoadPermission(PermsPointEnum.Delete);
-            this.gvRole.Columns[1].Visible = LoadPermission(PermsPointEnum.Edit);
-            return LoadPermission(PermsPointEnum.View);
+            this.btnAddNew.Visible = LoadPermission(SysPermsPointEnum.Add);
+            this.gvRole.Columns[0].Visible = LoadPermission(SysPermsPointEnum.Delete);
+            this.gvRole.Columns[1].Visible = LoadPermission(SysPermsPointEnum.Edit);
+            return LoadPermission(SysPermsPointEnum.View);
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -30,8 +30,8 @@ namespace stonefw.Web.BaseModule.BcRole
             {
                 string[] arg = e.CommandArgument.ToString().Split('|');
                 var er = Biz.DeleteBcRole(int.Parse(arg[0]));
-                this.lMessage.Text = er.GetName();
-                if (er != ExcuteResult.Success) return;
+                this.lMessage.Text = er.GetDescription();
+                if (er != ExcuteResultEnum.Success) return;
                 BindData();
             }
         }

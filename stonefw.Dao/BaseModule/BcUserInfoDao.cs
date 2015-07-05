@@ -30,7 +30,7 @@ namespace stonefw.Dao.BaseModule
                 if (roleId != 0) Db.AddInParameter(dm, "@RoleId", DbType.Int32, roleId);
                 if (groupId != 0) Db.AddInParameter(dm, "@GroupId", DbType.Int32, groupId);
                 if (!string.IsNullOrEmpty(userName)) Db.AddInParameter(dm, "@UserName", DbType.AnsiString, "%" + userName + "%");
-                return DataTableHepler.ConvertToEntityList<BcUserInfoEntity>(Db.ExecuteDataTable(dm));
+                return DataTableHepler.DataTableToList<BcUserInfoEntity>(Db.ExecuteDataTable(dm));
             }
         }
 

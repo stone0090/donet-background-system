@@ -31,11 +31,11 @@ namespace stonefw.Biz.SystemModule
             }
             return objModel != null ? (SysGlobalSettingEntity)objModel : null;
         }
-        public ExcuteResult UpdateSysSettingEntity(SysGlobalSettingEntity entity)
+        public ExcuteResultEnum UpdateSysSettingEntity(SysGlobalSettingEntity entity)
         {
             Dao.SaveSysSettingEntity(entity);
             DataCache.SetCache(CacheKey, entity);
-            return ExcuteResult.Success;
+            return ExcuteResultEnum.Success;
         }
 
         public bool IsSuperAdmin(string userAccount)

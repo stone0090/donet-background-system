@@ -32,8 +32,8 @@ namespace stonefw.Web.SystemModule.SysMenu
             {
                 int menuId = int.Parse(e.CommandArgument.ToString());
                 var er = Biz.DeleteSysMenu(menuId);
-                this.lMessage.Text = er.GetName();
-                if (er != ExcuteResult.Success) return;
+                this.lMessage.Text = er.GetDescription();
+                if (er != ExcuteResultEnum.Success) return;
                 BindData();
             }
         }

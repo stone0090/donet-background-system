@@ -29,8 +29,8 @@ namespace stonefw.Web.SystemModule.SysGlobalSetting
             try
             {
                 var entity = PrepareFormData();
-                ExcuteResult er = Biz.UpdateSysSettingEntity(entity);
-                this.lMessage.Text = er.GetName();
+                ExcuteResultEnum er = Biz.UpdateSysSettingEntity(entity);
+                this.lMessage.Text = er.GetDescription();
             }
             catch (Exception ex) { this.lMessage.Text = string.Format("保存失败，原因：{0}", ex.Message); }
         }

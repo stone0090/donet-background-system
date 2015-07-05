@@ -20,14 +20,14 @@ namespace stonefw.Biz.BaseModule
         }
         public List<BcGroupEntity> GetBcGroupList()
         { return EntityExecution.ReadEntityList2<BcGroupEntity>(null); }
-        public ExcuteResult DeleteBcGroup(int groupId)
+        public ExcuteResultEnum DeleteBcGroup(int groupId)
         {
             if (EntityExecution.GetEntityCount2<BcUserInfoEntity>(n => n.GroupId == groupId && n.DeleteFlag == false) > 0)
-                return ExcuteResult.IsOccupied;
+                return ExcuteResultEnum.IsOccupied;
 
             BcGroupEntity entity = new BcGroupEntity() { GroupId = groupId };
             EntityExecution.DeleteEntity(entity);
-            return ExcuteResult.Success;
+            return ExcuteResultEnum.Success;
         }
         public void AddNewBcGroup(BcGroupEntity entity)
         {

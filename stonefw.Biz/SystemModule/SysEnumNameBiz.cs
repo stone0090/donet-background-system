@@ -28,17 +28,19 @@ namespace stonefw.Biz.SystemModule
             EntityExecution.InsertEntity(entity);
         }
         public void UpdateSysEnumName(SysEnumNameEntity entity) { EntityExecution.UpdateEntity(entity); }
-        public SysEnumNameEntity GetSingleSysEnumName(string type, string value) { return EntityExecution.ReadEntity2<SysEnumNameEntity>(n => n.Type == type && n.Value == value); }
+        public SysEnumNameEntity GetSingleSysEnumName(string type, string value) { return EntityExecution.ReadEntity2<SysEnumNameEntity>(n => n.Type == type && n.Value == value); }       
     }
 
-    public static class NameManager
+    public static class SysEnumNameExtensionBiz
     {
-        public static string GetName<T>(this T str)
+        public static string GetDescription<T>(this T enumValue)
         {
             var enumType = typeof(T);
-            var value = Enum.GetName(enumType, str);
-            var entity = new SysEnumNameBiz().GetSingleSysEnumName(enumType.Name, value);
-            return entity != null ? entity.Name : value;
+            var enumName = enumValue.ToString();
+            var entity = new SysEnumNameBiz().GetSingleSysEnumName(enumType.Name, enumName);
+            if (entity != null && !string.IsNullOrEmpty(entity.Name))
+                return entity.Name;
+            return enumName;
         }
     }
 }

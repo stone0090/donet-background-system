@@ -27,7 +27,7 @@ namespace stonefw.Dao.SystemModule
             sql += " Order by MenuLevel,Seq ";
             DbCommand dm = Db.GetSqlStringCommand(sql);
             if (menuId != null) Db.AddInParameter(dm, "@MenuId", DbType.Int32, menuId);
-            return DataTableHepler.ConvertToEntityList<SysMenuEntity>(Db.ExecuteDataTable(dm));
+            return DataTableHepler.DataTableToList<SysMenuEntity>(Db.ExecuteDataTable(dm));
         }
 
         public DataTable GetMenuData()

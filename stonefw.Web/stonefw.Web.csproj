@@ -67,6 +67,7 @@
     <Content Include="CustomerModule\CuCustomer\CuCustomerList.aspx" />
     <Content Include="SystemModule\SysPageFuncPoint\SysPageFuncPointDetail.aspx" />
     <Content Include="SystemModule\SysPageFuncPoint\SysPageFuncPointList.aspx" />
+    <Content Include="SystemModule\SysPermsPointEnum\SysPermsPointEnumList.aspx" />
     <Content Include="Utility\UserControl\SelectListBox.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -526,6 +527,13 @@
     <Compile Include="SystemModule\SysPageFuncPoint\SysPageFuncPointList.aspx.designer.cs">
       <DependentUpon>SysPageFuncPointList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SystemModule\SysPermsPointEnum\SysPermsPointEnumList.aspx.cs">
+      <DependentUpon>SysPermsPointEnumList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemModule\SysPermsPointEnum\SysPermsPointEnumList.aspx.designer.cs">
+      <DependentUpon>SysPermsPointEnumList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Utility\UserControl\Column.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -779,6 +787,20 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\stonefw.Biz\stonefw.Biz.csproj">
+      <Project>{3dec0ad6-30df-43c6-b8a3-d0376dca88df}</Project>
+      <Name>stonefw.Biz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\stonefw.Entity\stonefw.Entity.csproj">
+      <Project>{fa43e73b-a3f4-4a80-a662-0307cf3f7941}</Project>
+      <Name>stonefw.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\stonefw.Utility\stonefw.Utility.csproj">
+      <Project>{4f097047-9cd3-4876-9d18-8ae0856cd1c1}</Project>
+      <Name>stonefw.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

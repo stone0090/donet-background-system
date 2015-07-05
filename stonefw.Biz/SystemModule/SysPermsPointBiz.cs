@@ -25,18 +25,18 @@ namespace stonefw.Biz.SystemModule
             object list = DataCache.GetCache(CacheKey) ?? SetSysPermsPointListCache();
             return (List<SysPermsPointEntity>) list;
         }
-        public ExcuteResult DeleteSysPermsPoint(string permsPointId)
+        public ExcuteResultEnum DeleteSysPermsPoint(string permsPointId)
         {
             if (EntityExecution.GetEntityCount2<SysMfpRelationEntity>(n => n.Permissions.Contains(permsPointId)) > 0)
-                return ExcuteResult.IsOccupied;
+                return ExcuteResultEnum.IsOccupied;
 
             if (EntityExecution.GetEntityCount2<BcPermissionEntity>(n => n.Permissions.Contains(permsPointId)) > 0)
-                return ExcuteResult.IsOccupied;
+                return ExcuteResultEnum.IsOccupied;
 
             SysPermsPointEntity entity = new SysPermsPointEntity() { PermsPointId = permsPointId };
             EntityExecution.DeleteEntity(entity);
             SetSysPermsPointListCache();
-            return ExcuteResult.Success;
+            return ExcuteResultEnum.Success;
         }
         public void AddNewSysPermsPoint(SysPermsPointEntity entity)
         {

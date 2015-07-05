@@ -1,6 +1,6 @@
 ﻿namespace stonefw.Entity.Enum
 {
-    public enum FuncPointEnum
+    public enum SysFuncPointEnum
     {
         Acc_Test,
 

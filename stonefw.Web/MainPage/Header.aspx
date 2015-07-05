@@ -45,6 +45,7 @@
             <div class="menu-sep"></div>
             <div onclick="addNewTab('模块管理','/SystemModule/SysModule/SysModuleList.aspx');">模块管理</div>
             <div onclick="addNewTab('功能点管理','/SystemModule/SysFuncPoint/SysFuncPointList.aspx');">功能点管理</div>
+            <div onclick="addNewTab('功能点枚举','/SystemModule/SysPermsPointEnum/SysPermsPointEnumList.aspx');">功能点枚举</div>
             <div onclick="addNewTab('权限点管理','/SystemModule/SysPermsPoint/SysPermsPointList.aspx');">权限点管理</div>
             <div onclick="addNewTab('权限关系管理','/SystemModule/SysMfpRelation/SysMfpRelationList.aspx');">权限关系管理</div>
             <div onclick="addNewTab('页面功能管理','/SystemModule/SysPageFuncPoint/SysPageFuncPointList.aspx');">页面功能管理</div>

@@ -15,10 +15,10 @@ namespace stonefw.Web.BaseModule.BcGroup
 
         public override bool InitPermission()
         {
-            this.btnAddNew.Visible = LoadPermission(PermsPointEnum.Add);
-            this.gvUserGroup.Columns[0].Visible = LoadPermission(PermsPointEnum.Delete);
-            this.gvUserGroup.Columns[1].Visible = LoadPermission(PermsPointEnum.Edit);
-            return LoadPermission(PermsPointEnum.View);
+            this.btnAddNew.Visible = LoadPermission(SysPermsPointEnum.Add);
+            this.gvUserGroup.Columns[0].Visible = LoadPermission(SysPermsPointEnum.Delete);
+            this.gvUserGroup.Columns[1].Visible = LoadPermission(SysPermsPointEnum.Edit);
+            return LoadPermission(SysPermsPointEnum.View);
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -30,8 +30,8 @@ namespace stonefw.Web.BaseModule.BcGroup
             {
                 string[] arg = e.CommandArgument.ToString().Split('|');
                 var er = Biz.DeleteBcGroup(int.Parse(arg[0]));
-                this.lMessage.Text = er.GetName();
-                if (er != ExcuteResult.Success) return;
+                this.lMessage.Text = er.GetDescription();
+                if (er != ExcuteResultEnum.Success) return;
                 BindData();
             }
         }

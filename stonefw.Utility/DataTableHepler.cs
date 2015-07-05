@@ -8,7 +8,7 @@ namespace stonefw.Utility
 {
     public static class DataTableHepler
     {
-        public static T ConvertToEntity<T>(DataRow tableRow) where T : new()
+        public static T DataRowToEntity<T>(DataRow tableRow) where T : new()
         {
             // Create a new type of the entity I want
             Type t = typeof(T);
@@ -69,7 +69,7 @@ namespace stonefw.Utility
             // return the entity object with values
             return returnObject;
         }
-        public static List<T> ConvertToEntityList<T>(DataTable table) where T : new()
+        public static List<T> DataTableToList<T>(DataTable table) where T : new()
         {
             // Create a new type of the entity I want
             List<T> result = new List<T>();
@@ -136,7 +136,7 @@ namespace stonefw.Utility
             }
             return table;
         }
-        public static DataTable ConvertToDataTable<T>(List<T> data)
+        public static DataTable ListToDataTable<T>(List<T> data)
         {
             PropertyDescriptorCollection props =
                            TypeDescriptor.GetProperties(typeof(T));
@@ -173,7 +173,6 @@ namespace stonefw.Utility
                 }
             }
         }
-
         /// <summary>
         /// 比较新旧customRow的内容，新customRow中为dbnull的字段，用旧customRow中的字段来填充
         /// </summary>
@@ -200,7 +199,6 @@ namespace stonefw.Utility
                 }
             }
         }
-
         /// <summary>
         /// 供RemoveDbNullColumn方法使用，返回每种类型的默认值
         /// </summary>
@@ -250,7 +248,5 @@ namespace stonefw.Utility
 
             return defaultValue;
         }
-
-
     }
 }

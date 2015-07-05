@@ -19,7 +19,7 @@ namespace stonefw.Dao.SystemModule
             var sql = @"select * FROM [Sys_PageFuncPoint] a
                         left join [dbo].[Sys_FuncPoint] b ON a.FuncPointId = b.FuncPointId
                         ORDER BY a.PageUrl";
-            return DataTableHepler.ConvertToEntityList<SysPageFuncPointEntity>(Db.ExecuteDataTable(sql));
+            return DataTableHepler.DataTableToList<SysPageFuncPointEntity>(Db.ExecuteDataTable(sql));
         }
     }
 }

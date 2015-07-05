@@ -18,7 +18,7 @@ namespace stonefw.Dao.SystemModule
         {
             string sql = @"SELECT * FROM Sys_FuncPoint WHERE FuncPointId NOT IN (SELECT FuncPointId FROM Sys_MfpRelation) ";
             DbCommand dm = Db.GetSqlStringCommand(sql);
-            return DataTableHepler.ConvertToEntityList<SysFuncPointEntity>(Db.ExecuteDataTable(dm));
+            return DataTableHepler.DataTableToList<SysFuncPointEntity>(Db.ExecuteDataTable(dm));
         }
     }
 }
