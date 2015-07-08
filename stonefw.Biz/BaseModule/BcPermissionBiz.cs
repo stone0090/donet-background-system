@@ -85,8 +85,8 @@ namespace stonefw.Biz.BaseModule
 
             foreach (BcPermissionEntity bcPermissionEntity in enabledBcPermissionList)
             {
-                bcPermissionEntity.ModuleName = new SysModuleBiz().GetName(bcPermissionEntity.ModuleId);
-                bcPermissionEntity.FuncPointName = new SysFuncPointBiz().GetName(bcPermissionEntity.FuncPointId);
+                bcPermissionEntity.ModuleName = new SysModuleEnumBiz().GetDescription(bcPermissionEntity.ModuleId);
+                bcPermissionEntity.FuncPointName = new SysFuncPointEnumBiz().GetDescription(bcPermissionEntity.FuncPointId);
                 if (permissionType == 1)
                 {
                     var list = allBcRoleList.Where(n => n.RoleId == bcPermissionEntity.UserRoleId).ToList();
@@ -100,7 +100,6 @@ namespace stonefw.Biz.BaseModule
 
                 if (!string.IsNullOrEmpty(bcPermissionEntity.Permissions))
                 {
-                    var sysPermsPointBiz = new SysPermsPointBiz();
                     bcPermissionEntity.PermissionList = new List<string>();
                     bcPermissionEntity.PermissionNameList = new List<string>();
                     var list = bcPermissionEntity.Permissions.Split(',').ToList();
@@ -109,7 +108,7 @@ namespace stonefw.Biz.BaseModule
                         if (!string.IsNullOrEmpty(s))
                         {
                             bcPermissionEntity.PermissionList.Add(s);
-                            bcPermissionEntity.PermissionNameList.Add(sysPermsPointBiz.GetName(s));
+                            bcPermissionEntity.PermissionNameList.Add(new SysPermsPointEnumBiz().GetDescription(s));
                         }
                     }
                     if (bcPermissionEntity.PermissionNameList.Count > 0)

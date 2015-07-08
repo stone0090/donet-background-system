@@ -19,10 +19,10 @@ namespace stonefw.Dao.SystemModule
         {
             string sql = @"select * from Sys_Menu a
                             left join Sys_PageFuncPoint b on a.PageUrl = b.PageUrl
-                            left join Sys_FuncPoint c ON b.FuncPointId = c.FuncPointId
                             left join Sys_MfpRelation d ON c.FuncPointId = d.FuncPointId
-                            left join Sys_Module e ON d.ModuleId = e.ModuleId
                             where a.DeleteFlag = 0 ";
+            //left join Sys_FuncPoint c ON b.FuncPointId = c.FuncPointId
+            //left join Sys_Module e ON d.ModuleId = e.ModuleId
             if (menuId != null) sql += " and a.MenuId = @MenuId ";
             sql += " Order by MenuLevel,Seq ";
             DbCommand dm = Db.GetSqlStringCommand(sql);
@@ -30,16 +30,16 @@ namespace stonefw.Dao.SystemModule
             return DataTableHepler.DataTableToList<SysMenuEntity>(Db.ExecuteDataTable(dm));
         }
 
-        public DataTable GetMenuData()
-        {
-            var sql = @"select * from Sys_Menu a
-                        left join Sys_PageFuncPoint b on a.PageUrl = b.PageUrl
-                        left join Sys_FuncPoint c ON b.FuncPointId = c.FuncPointId
-                        left join Sys_MfpRelation d ON c.FuncPoint_Id = d.FuncPointId
-                        left join Sys_Module e ON d.ModuleId = e.ModuleId
-                        where a.DeleteFlag = 0 Order by Seq";
-            return Db.ExecuteDataTable("select * from Sys_Menu where DeleteFlag = 0 Order by Seq");
-        }
+        //        public DataTable GetMenuData()
+        //        {
+        //            var sql = @"select * from Sys_Menu a
+        //                        left join Sys_PageFuncPoint b on a.PageUrl = b.PageUrl
+        //                        left join Sys_MfpRelation d ON c.FuncPoint_Id = d.FuncPointId
+        //                        where a.DeleteFlag = 0 Order by Seq";
+        //            //left join Sys_FuncPoint c ON b.FuncPointId = c.FuncPointId
+        //            //left join Sys_Module e ON d.ModuleId = e.ModuleId
+        //            return Db.ExecuteDataTable("select * from Sys_Menu where DeleteFlag = 0 Order by Seq");
+        //        }
 
         public void UpdateSeq(int menuId, int seq)
         {

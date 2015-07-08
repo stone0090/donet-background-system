@@ -47,17 +47,15 @@
     <Compile Include="CustomerModule\CuContactPersonBiz.cs" />
     <Compile Include="CustomerModule\CuCustomerBiz.cs" />
     <Compile Include="SystemModule\SysModuleEnumBiz.cs" />
+    <Compile Include="SystemModule\SysFuncPointEnumBiz.cs" />
     <Compile Include="SystemModule\SysPermsPointEnumBiz.cs" />
     <Compile Include="SystemModule\SysPageFuncPointBiz.cs" />
-    <Compile Include="SystemModule\SysFuncPointBiz.cs" />
     <Compile Include="SystemModule\SysMenuBiz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseModule\BcRoleBiz.cs" />
     <Compile Include="BaseModule\BcGroupBiz.cs" />
     <Compile Include="SystemModule\SysMfpRelationBiz.cs" />
-    <Compile Include="SystemModule\SysModuleBiz.cs" />
     <Compile Include="SystemModule\SysEnumNameBiz.cs" />
-    <Compile Include="SystemModule\SysPermsPointBiz.cs" />
     <Compile Include="SystemModule\SysGlobalSettingBiz.cs" />
     <Compile Include="BaseModule\BcUserInfoBiz.cs" />
   </ItemGroup>

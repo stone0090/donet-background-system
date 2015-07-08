@@ -39,9 +39,9 @@ namespace stonefw.Web.SystemModule.SysMfpRelation
 
         private void BindControlData()
         {
-            this.ddlModule.DataSource = new SysModuleBiz().GetSysModuleList();
-            this.ddlModule.DataValueField = "ModuleId";
-            this.ddlModule.DataTextField = "ModuleName";
+            this.ddlModule.DataSource = new SysModuleEnumBiz().GetSysModuleEnumList();
+            this.ddlModule.DataValueField = "Name";
+            this.ddlModule.DataTextField = "Description";
             this.ddlModule.DataBind();
             this.ddlModule.Items.Insert(0, new ListItem("全部", ""));
         }

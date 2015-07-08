@@ -2,12 +2,13 @@
 {
     public enum SysModuleEnum
     {
+        Base,
         Trade,
         Account,
         Customer,
         Inventory,
         Production,
         Manufacture,
-        BaseSetting,
+        Task,
     }
 }

@@ -39,22 +39,23 @@ namespace stonefw.Web.SystemModule.SysMfpRelation
 
         private void BindControlData()
         {
-            this.ddlModule.DataSource = new SysModuleBiz().GetSysModuleList();
-            this.ddlModule.DataValueField = "ModuleId";
-            this.ddlModule.DataTextField = "ModuleName";
+            this.ddlModule.DataSource = new SysModuleEnumBiz().GetSysModuleEnumList();
+            this.ddlModule.DataValueField = "Name";
+            this.ddlModule.DataTextField = "Description";
             this.ddlModule.DataBind();
 
-            if (Request["moduleid"] == "-1" && Request["funcpointid"] == "-1")
-                this.ddlFuncPoint.DataSource = new SysFuncPointBiz().GetNotUsedSysFuncPointList();
-            else
-                this.ddlFuncPoint.DataSource = new SysFuncPointBiz().GetSysFuncPointList();
-            this.ddlFuncPoint.DataValueField = "FuncPointId";
-            this.ddlFuncPoint.DataTextField = "FuncPointName";
+            //TODO
+            //if (Request["moduleid"] == "-1" && Request["funcpointid"] == "-1")
+            //    this.ddlFuncPoint.DataSource = new SysFuncPointBiz().GetNotUsedSysFuncPointList();
+            //else
+            this.ddlFuncPoint.DataSource = new SysFuncPointEnumBiz().GetSysFuncPointEnumList();
+            this.ddlFuncPoint.DataValueField = "Name";
+            this.ddlFuncPoint.DataTextField = "Description";
             this.ddlFuncPoint.DataBind();
 
-            this.cblPermission.DataSource = new SysPermsPointBiz().GetSysPermsPointList();
-            this.cblPermission.DataValueField = "PermsPointId";
-            this.cblPermission.DataTextField = "PermsPointName";
+            this.cblPermission.DataSource = new SysPermsPointEnumBiz().GetSysPermsPointEnumList();
+            this.cblPermission.DataValueField = "Name";
+            this.cblPermission.DataTextField = "Description";
             this.cblPermission.DataBind();
         }
         private void FillFormData()

@@ -59,11 +59,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="SystemModule\SysModuleEnumEntity.cs" />
+    <Compile Include="SystemModule\SysFuncPointEnumEntity.cs" />
     <Compile Include="SystemModule\SysPermsPointEnumEntity.cs" />
     <Compile Include="SystemModule\SysPageFuncPointEntity.AutoCode.cs" />
     <Compile Include="SystemModule\SysPageFuncPointEntity.cs" />
-    <Compile Include="SystemModule\SysFuncPointEntity.AutoCode.cs" />
-    <Compile Include="SystemModule\SysFuncPointEntity.cs" />
     <Compile Include="SystemModule\SysMenuEntity.AutoCode.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -78,12 +77,8 @@
     <Compile Include="BaseModule\BcGroupEntity.AutoCode.cs" />
     <Compile Include="BaseModule\BcGroupEntity.cs" />
     <Compile Include="SystemModule\SysMfpRelationEntity.cs" />
-    <Compile Include="SystemModule\SysModuleEntity.AutoCode.cs" />
-    <Compile Include="SystemModule\SysModuleEntity.cs" />
     <Compile Include="SystemModule\SysEnumNameEntity.AutoCode.cs" />
     <Compile Include="SystemModule\SysEnumNameEntity.cs" />
-    <Compile Include="SystemModule\SysPermsPointEntity.AutoCode.cs" />
-    <Compile Include="SystemModule\SysPermsPointEntity.cs" />
     <Compile Include="SystemModule\SysGlobalSettingEntity.AutoCode.cs" />
     <Compile Include="SystemModule\SysGlobalSettingEntity.cs" />
     <Compile Include="BaseModule\BcUserInfoEntity.AutoCode.cs" />

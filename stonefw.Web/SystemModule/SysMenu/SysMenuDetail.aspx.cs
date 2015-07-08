@@ -53,9 +53,9 @@ namespace stonefw.Web.SystemModule.SysMenu
 
         private void BindControlData()
         {
-            this.ddlFuncPoint.DataSource = new SysFuncPointBiz().GetSysFuncPointList();
-            this.ddlFuncPoint.DataValueField = "FuncPointId";
-            this.ddlFuncPoint.DataTextField = "FuncPointName";
+            this.ddlFuncPoint.DataSource = new SysFuncPointEnumBiz().GetSysFuncPointEnumList();
+            this.ddlFuncPoint.DataValueField = "Name";
+            this.ddlFuncPoint.DataTextField = "Description";
             this.ddlFuncPoint.DataBind();
             this.ddlFuncPoint.Items.Insert(0, new ListItem("*请选择功能点*", "0"));
 

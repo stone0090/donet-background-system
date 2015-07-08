@@ -65,6 +65,8 @@
     <Content Include="CustomerModule\CuCustomer\CuContactPersonDetail.aspx" />
     <Content Include="CustomerModule\CuCustomer\CuCustomerDetail.aspx" />
     <Content Include="CustomerModule\CuCustomer\CuCustomerList.aspx" />
+    <Content Include="SystemModule\SysFuncPointEnum\SysFuncPointEnumList.aspx" />
+    <Content Include="SystemModule\SysModuleEnum\SysModuleEnumList.aspx" />
     <Content Include="SystemModule\SysPageFuncPoint\SysPageFuncPointDetail.aspx" />
     <Content Include="SystemModule\SysPageFuncPoint\SysPageFuncPointList.aspx" />
     <Content Include="SystemModule\SysPermsPointEnum\SysPermsPointEnumList.aspx" />
@@ -432,16 +434,10 @@
     <Content Include="Resource\easyui\themes\metro\validatebox.css" />
     <Content Include="Resource\easyui\themes\metro\window.css" />
     <Content Include="Resource\login\images\header_short.png" />
-    <Content Include="SystemModule\SysFuncPoint\SysFuncPointDetail.aspx" />
-    <Content Include="SystemModule\SysFuncPoint\SysFuncPointList.aspx" />
-    <Content Include="SystemModule\SysModule\SysModuleDetail.aspx" />
-    <Content Include="SystemModule\SysModule\SysModuleList.aspx" />
     <Content Include="SystemModule\SysMfpRelation\SysMfpRelationDetail.aspx" />
     <Content Include="SystemModule\SysMfpRelation\SysMfpRelationList.aspx" />
     <Content Include="SystemModule\SysEnumName\SysEnumNameDetail.aspx" />
     <Content Include="SystemModule\SysEnumName\SysEnumNameList.aspx" />
-    <Content Include="SystemModule\SysPermsPoint\SysPermsPointDetail.aspx" />
-    <Content Include="SystemModule\SysPermsPoint\SysPermsPointList.aspx" />
     <Content Include="Resource\js\json2.js" />
     <Content Include="BaseModule\BcLogError\BcLogErrorDetail.aspx" />
     <Content Include="BaseModule\BcLogError\BcLogErrorList.aspx" />
@@ -512,6 +508,20 @@
     </Compile>
     <Compile Include="CustomerModule\CuCustomer\CuCustomerList.aspx.designer.cs">
       <DependentUpon>CuCustomerList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemModule\SysFuncPointEnum\SysFuncPointEnumList.aspx.cs">
+      <DependentUpon>SysFuncPointEnumList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemModule\SysFuncPointEnum\SysFuncPointEnumList.aspx.designer.cs">
+      <DependentUpon>SysFuncPointEnumList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemModule\SysModuleEnum\SysModuleEnumList.aspx.cs">
+      <DependentUpon>SysModuleEnumList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemModule\SysModuleEnum\SysModuleEnumList.aspx.designer.cs">
+      <DependentUpon>SysModuleEnumList.aspx</DependentUpon>
     </Compile>
     <Compile Include="SystemModule\SysPageFuncPoint\SysPageFuncPointDetail.aspx.cs">
       <DependentUpon>SysPageFuncPointDetail.aspx</DependentUpon>
@@ -635,20 +645,6 @@
     <Compile Include="MainPage\Menu.aspx.designer.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SystemModule\SysFuncPoint\SysFuncPointDetail.aspx.cs">
-      <DependentUpon>SysFuncPointDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SystemModule\SysFuncPoint\SysFuncPointDetail.aspx.designer.cs">
-      <DependentUpon>SysFuncPointDetail.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SystemModule\SysFuncPoint\SysFuncPointList.aspx.cs">
-      <DependentUpon>SysFuncPointList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SystemModule\SysFuncPoint\SysFuncPointList.aspx.designer.cs">
-      <DependentUpon>SysFuncPointList.aspx</DependentUpon>
-    </Compile>
     <Compile Include="SystemModule\SysMenu\SysMenuList.aspx.cs">
       <DependentUpon>SysMenuList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -699,20 +695,6 @@
     <Compile Include="BaseModule\BcGroup\BcGroupList.aspx.designer.cs">
       <DependentUpon>BcGroupList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SystemModule\SysModule\SysModuleDetail.aspx.cs">
-      <DependentUpon>SysModuleDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SystemModule\SysModule\SysModuleDetail.aspx.designer.cs">
-      <DependentUpon>SysModuleDetail.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SystemModule\SysModule\SysModuleList.aspx.cs">
-      <DependentUpon>SysModuleList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SystemModule\SysModule\SysModuleList.aspx.designer.cs">
-      <DependentUpon>SysModuleList.aspx</DependentUpon>
-    </Compile>
     <Compile Include="SystemModule\SysEnumName\SysEnumNameDetail.aspx.cs">
       <DependentUpon>SysEnumNameDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -726,20 +708,6 @@
     </Compile>
     <Compile Include="SystemModule\SysEnumName\SysEnumNameList.aspx.designer.cs">
       <DependentUpon>SysEnumNameList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SystemModule\SysPermsPoint\SysPermsPointDetail.aspx.cs">
-      <DependentUpon>SysPermsPointDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SystemModule\SysPermsPoint\SysPermsPointDetail.aspx.designer.cs">
-      <DependentUpon>SysPermsPointDetail.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SystemModule\SysPermsPoint\SysPermsPointList.aspx.cs">
-      <DependentUpon>SysPermsPointList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SystemModule\SysPermsPoint\SysPermsPointList.aspx.designer.cs">
-      <DependentUpon>SysPermsPointList.aspx</DependentUpon>
     </Compile>
     <Compile Include="SystemModule\SysGlobalSetting\SysGlobalSettingDetail.aspx.cs">
       <DependentUpon>SysGlobalSettingDetail.aspx</DependentUpon>

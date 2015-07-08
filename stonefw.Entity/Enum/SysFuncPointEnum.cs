@@ -4,13 +4,13 @@
     {
         Acc_Test,
 
-        Bc_AutoCode,
-        Bc_ErrorLog,
-        Bc_Group,
-        Bc_Permission,
-        Bc_Role,
-        Bc_User,
-        Bc_UserRole,
+        Bs_AutoCode,
+        Bs_ErrorLog,
+        Bs_Group,
+        Bs_Permission,
+        Bs_Role,
+        Bs_User,
+        Bs_UserRole,
 
         Cu_Customer,
 
@@ -21,5 +21,7 @@
         Pd_Test,
 
         Td_Test,
+
+        Tk_Test,
     }
 }

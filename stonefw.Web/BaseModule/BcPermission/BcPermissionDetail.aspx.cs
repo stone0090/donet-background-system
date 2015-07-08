@@ -49,9 +49,9 @@ namespace stonefw.Web.BaseModule.BcPermission
                 var hdPermissions = (HiddenField)row.Cells[2].FindControl("hdPermissions");
                 var cblPermissions = (CheckBoxList)row.Cells[2].FindControl("cblPermissions");
                 string[] permissionList = hdPermissions.Value.Split(',');
-                cblPermissions.DataSource = new SysPermsPointBiz().GetEnabledSysPermsPointList(permissionList);
-                cblPermissions.DataValueField = "PermsPointId";
-                cblPermissions.DataTextField = "PermsPointName";
+                cblPermissions.DataSource = new SysPermsPointEnumBiz().GetEnabledSysPermsPointEnumList(permissionList);
+                cblPermissions.DataValueField = "Name";
+                cblPermissions.DataTextField = "Description";
                 cblPermissions.DataBind();
             }
         }

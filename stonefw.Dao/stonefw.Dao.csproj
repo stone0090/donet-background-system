@@ -50,11 +50,8 @@
     <Compile Include="CustomerModule\CuContactPersonDao.cs" />
     <Compile Include="CustomerModule\CuCustomerDao.cs" />
     <Compile Include="SystemModule\SysPageFuncPointDao.cs" />
-    <Compile Include="SystemModule\SysFuncPointDao.cs" />
     <Compile Include="SystemModule\SysMfpRelationDao.cs" />
-    <Compile Include="SystemModule\SysModuleDao.cs" />
     <Compile Include="SystemModule\SysEnumNameDao.cs" />
-    <Compile Include="SystemModule\SysPermsPointDao.cs" />
     <Compile Include="SystemModule\SysGlobalSettingDao.cs" />
     <Compile Include="BaseModule\BcUserInfoDao.cs" />
     <Compile Include="SystemModule\SysMenuDao.cs" />

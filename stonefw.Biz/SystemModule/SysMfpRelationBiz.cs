@@ -76,7 +76,6 @@ namespace stonefw.Biz.SystemModule
             {
                 if (!string.IsNullOrEmpty(sysMfpRelationEntity.Permissions))
                 {
-                    var sysPermsPointBiz = new SysPermsPointBiz();
                     sysMfpRelationEntity.PermissionList = new List<string>();
                     sysMfpRelationEntity.PermissionListName = new List<string>();
                     var list = sysMfpRelationEntity.Permissions.Split(',').ToList();
@@ -85,7 +84,7 @@ namespace stonefw.Biz.SystemModule
                         if (!string.IsNullOrEmpty(s))
                         {
                             sysMfpRelationEntity.PermissionList.Add(s);
-                            sysMfpRelationEntity.PermissionListName.Add(sysPermsPointBiz.GetName(s));
+                            sysMfpRelationEntity.PermissionListName.Add(new SysPermsPointEnumBiz().GetDescription(s));
                         }
                     }
                     if (sysMfpRelationEntity.PermissionListName.Count > 0)

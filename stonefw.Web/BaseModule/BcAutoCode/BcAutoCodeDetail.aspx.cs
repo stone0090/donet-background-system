@@ -41,10 +41,10 @@ namespace stonefw.Web.BaseModule.BcAutoCode
         }
         private void BindControlData()
         {
-            this.ddlFuncPoint.DataSource = new SysFuncPointBiz().GetSysFuncPointList().Where(n => n.IsAutoCode == true).ToList();
-            this.ddlFuncPoint.DataTextField = "FuncPointName";
-            this.ddlFuncPoint.DataValueField = "FuncPointId";
-            this.ddlFuncPoint.DataBind();
+            //this.ddlFuncPoint.DataSource = new SysFuncPointEnumBiz().GetSysFuncPointEnumList().Where(n => n.IsAutoCode == true).ToList();
+            //this.ddlFuncPoint.DataTextField = "Name";
+            //this.ddlFuncPoint.DataValueField = "Description";
+            //this.ddlFuncPoint.DataBind();
         }
         private void FillFormData()
         {

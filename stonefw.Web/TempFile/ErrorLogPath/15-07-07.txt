@@ -1,0 +1,62 @@
+﻿2015-07-07 20:01:01
+----------------------------------------------------------
+System.Data.SqlClient.SqlException: 对象名 'Sys_Module' 无效。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   在 System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   在 System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   在 stonefw.Utility.Database.ExecuteDataTable(DbCommand dm) 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Utility\Database.cs:行号 201
+   在 stonefw.Utility.Database.ExecuteDataTable(String commandText) 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Utility\Database.cs:行号 187
+   在 stonefw.Dao.SystemModule.SysMfpRelationDao.GetSysMfpRelationList() 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Dao\SystemModule\SysMfpRelationDao.cs:行号 23
+   在 stonefw.Biz.SystemModule.SysMfpRelationBiz.SetSysMfpRelationListCache() 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Biz\SystemModule\SysMfpRelationBiz.cs:行号 74
+   在 stonefw.Biz.SystemModule.SysMfpRelationBiz.GetSysMfpRelationList() 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Biz\SystemModule\SysMfpRelationBiz.cs:行号 25
+   在 stonefw.Biz.SystemModule.SysMfpRelationBiz.GetEnabledSysMfpRelationList() 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Biz\SystemModule\SysMfpRelationBiz.cs:行号 56
+   在 stonefw.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Biz\BaseModule\BcUserInfoBiz.cs:行号 137
+   在 stonefw.Web.Utility.BaseClass.BasePage.get_CurrentUserInfo() 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Web\Utility\BaseClass\BasePage.cs:行号 37
+   在 stonefw.Web.Utility.BaseClass.BasePage.CheckPermission() 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Web\Utility\BaseClass\BasePage.cs:行号 119
+   在 stonefw.Web.Utility.BaseClass.BasePage.OnPreInit(EventArgs e) 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Web\Utility\BaseClass\BasePage.cs:行号 84
+   在 System.Web.UI.Page.PerformPreInit()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+----------------------------------------------------------
+
+2015-07-07 20:01:01
+----------------------------------------------------------
+System.Data.SqlClient.SqlException: 对象名 'Sys_Module' 无效。
+   在 System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection)
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj)
+   在 System.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   在 System.Data.SqlClient.SqlDataReader.ConsumeMetaData()
+   在 System.Data.SqlClient.SqlDataReader.get_MetaData()
+   在 System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, DbAsyncResult result)
+   在 System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   在 System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   在 System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   在 System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   在 stonefw.Utility.Database.ExecuteDataTable(DbCommand dm) 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Utility\Database.cs:行号 201
+   在 stonefw.Utility.Database.ExecuteDataTable(String commandText) 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Utility\Database.cs:行号 187
+   在 stonefw.Dao.SystemModule.SysMfpRelationDao.GetSysMfpRelationList() 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Dao\SystemModule\SysMfpRelationDao.cs:行号 23
+   在 stonefw.Biz.SystemModule.SysMfpRelationBiz.SetSysMfpRelationListCache() 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Biz\SystemModule\SysMfpRelationBiz.cs:行号 74
+   在 stonefw.Biz.SystemModule.SysMfpRelationBiz.GetSysMfpRelationList() 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Biz\SystemModule\SysMfpRelationBiz.cs:行号 25
+   在 stonefw.Biz.SystemModule.SysMfpRelationBiz.GetEnabledSysMfpRelationList() 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Biz\SystemModule\SysMfpRelationBiz.cs:行号 56
+   在 stonefw.Biz.BaseModule.BcUserInfoBiz.GetBcUserInfoWithPermission(String userAccount) 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Biz\BaseModule\BcUserInfoBiz.cs:行号 137
+   在 stonefw.Web.Utility.BaseClass.BaseGlobal.Application_Error(Object sender, EventArgs e) 位置 c:\stone\work\develop\code\github\stone0090\stonefw_easyui\stonefw.Web\Utility\BaseClass\BaseGlobal.cs:行号 51
+----------------------------------------------------------
+

@@ -41,9 +41,9 @@ namespace stonefw.Web.SystemModule.SysPageFuncPoint
 
         private void BindControlData()
         {
-            this.ddlFuncPointId.DataSource = new SysFuncPointBiz().GetSysFuncPointList();
-            this.ddlFuncPointId.DataValueField = "FuncPointId";
-            this.ddlFuncPointId.DataTextField = "FuncPointName";
+            this.ddlFuncPointId.DataSource = new SysFuncPointEnumBiz().GetSysFuncPointEnumList();
+            this.ddlFuncPointId.DataValueField = "Name";
+            this.ddlFuncPointId.DataTextField = "Description";
             this.ddlFuncPointId.DataBind();
         }
         private void FillFormData()
