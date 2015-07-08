@@ -19,27 +19,14 @@ namespace stonefw.Dao.SystemModule
         {
             string sql = @"select * from Sys_Menu a
                             left join Sys_PageFuncPoint b on a.PageUrl = b.PageUrl
-                            left join Sys_MfpRelation d ON c.FuncPointId = d.FuncPointId
+                            left join Sys_MfpRelation c ON b.FuncPointId = c.FuncPointId
                             where a.DeleteFlag = 0 ";
-            //left join Sys_FuncPoint c ON b.FuncPointId = c.FuncPointId
-            //left join Sys_Module e ON d.ModuleId = e.ModuleId
             if (menuId != null) sql += " and a.MenuId = @MenuId ";
             sql += " Order by MenuLevel,Seq ";
             DbCommand dm = Db.GetSqlStringCommand(sql);
             if (menuId != null) Db.AddInParameter(dm, "@MenuId", DbType.Int32, menuId);
             return DataTableHepler.DataTableToList<SysMenuEntity>(Db.ExecuteDataTable(dm));
         }
-
-        //        public DataTable GetMenuData()
-        //        {
-        //            var sql = @"select * from Sys_Menu a
-        //                        left join Sys_PageFuncPoint b on a.PageUrl = b.PageUrl
-        //                        left join Sys_MfpRelation d ON c.FuncPoint_Id = d.FuncPointId
-        //                        where a.DeleteFlag = 0 Order by Seq";
-        //            //left join Sys_FuncPoint c ON b.FuncPointId = c.FuncPointId
-        //            //left join Sys_Module e ON d.ModuleId = e.ModuleId
-        //            return Db.ExecuteDataTable("select * from Sys_Menu where DeleteFlag = 0 Order by Seq");
-        //        }
 
         public void UpdateSeq(int menuId, int seq)
         {
@@ -52,8 +39,7 @@ namespace stonefw.Dao.SystemModule
 
         public void SeqRecal()
         {
-            const string strScript =
-                "UPDATE a SET Seq = b.rownumber FROM Sys_Menu a INNER JOIN (SELECT MenuId,row_number() OVER ( partition BY FatherNode ORDER BY Seq) as rownumber FROM SysMenu ) b ON a.MenuId = b.MenuId";
+            const string strScript = @"UPDATE a SET Seq = b.rownumber FROM Sys_Menu a INNER JOIN (SELECT MenuId,row_number() OVER ( partition BY FatherNode ORDER BY Seq) as rownumber FROM SysMenu ) b ON a.MenuId = b.MenuId";
             Db.ExecuteNonQuery(strScript);
         }
 

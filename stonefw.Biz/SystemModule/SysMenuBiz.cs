@@ -27,7 +27,7 @@ namespace stonefw.Biz.SystemModule
         /// </summary>
         public List<SysMenuEntity> GetSysMenuTree()
         {
-            List<SysMenuEntity> list = Dao.GetSysMenuList();
+            List<SysMenuEntity> list = GetSysMenuDetailList();
             GetMenuTree(ref list);
             return list;
         }
@@ -36,7 +36,7 @@ namespace stonefw.Biz.SystemModule
         /// </summary>
         public List<SysMenuEntity> GetSysMenuList()
         {
-            List<SysMenuEntity> list = Dao.GetSysMenuList();
+            List<SysMenuEntity> list = GetSysMenuDetailList();
             int position = 0;
             GetMenuList(ref list, ref position);
             return list;
@@ -44,7 +44,7 @@ namespace stonefw.Biz.SystemModule
 
         public SysMenuEntity GetSysMenuEntity(int? menuId)
         {
-            var list = Dao.GetSysMenuList(menuId);
+            var list = GetSysMenuDetailList(menuId);
             return list.Count > 0 ? list[0] : null;
         }
         public List<SysMenuEntity> GetSysMenuListByFatherNode(int fatherNode = 0)
@@ -116,7 +116,7 @@ namespace stonefw.Biz.SystemModule
         }
         public List<SysMenuEntity> GetEnabledSysMenuList()
         {
-            var sysMenuList = Dao.GetSysMenuList().Where(n => n.ActivityFlag == true).ToList();
+            var sysMenuList = GetSysMenuDetailList().Where(n => n.ActivityFlag == true).ToList();
             int position = 0;
             GetMenuList(ref sysMenuList, ref position);
             return sysMenuList;
@@ -163,6 +163,37 @@ namespace stonefw.Biz.SystemModule
         }
 
         #region 私有方法
+
+        private List<SysMenuEntity> GetSysMenuDetailList(int? menuId = null)
+        {
+            var listSysMenuEntity = Dao.GetSysMenuList(menuId);
+            var listSysModuleEnumEntity = new SysModuleEnumBiz().GetSysModuleEnumList();
+            var listSysFuncPointEnumEntity = new SysFuncPointEnumBiz().GetSysFuncPointEnumList();
+            var query = from sysMenuEntity in listSysMenuEntity
+                        join sysModuleEnumEntity in listSysModuleEnumEntity on sysMenuEntity.ModuleId equals sysModuleEnumEntity.Name into r1
+                        from sysModuleEnumEntity in r1.DefaultIfEmpty()
+                        join sysFuncPointEnumEntity in listSysFuncPointEnumEntity on sysMenuEntity.FuncPointId equals sysFuncPointEnumEntity.Name into r2
+                        from sysFuncPointEnumEntity in r2.DefaultIfEmpty()
+                        select new SysMenuEntity()
+                        {
+                            MenuId = sysMenuEntity.MenuId,
+                            MenuName = sysMenuEntity.MenuName,
+                            MenuLevel = sysMenuEntity.MenuLevel,
+                            Seq = sysMenuEntity.Seq,
+                            FatherNode = sysMenuEntity.FatherNode,
+                            Description = sysMenuEntity.Description,
+                            PageUrl = sysMenuEntity.PageUrl,
+                            UrlParameter = sysMenuEntity.UrlParameter,
+                            ActivityFlag = sysMenuEntity.ActivityFlag,
+                            DeleteFlag = sysMenuEntity.DeleteFlag,
+                            ModuleId = sysMenuEntity.ModuleId,
+                            FuncPointId = sysMenuEntity.FuncPointId,
+                            ModuleName = sysModuleEnumEntity == null ? string.Empty : sysModuleEnumEntity.Description,
+                            FuncPointName = sysFuncPointEnumEntity == null ? string.Empty : sysFuncPointEnumEntity.Description,
+                        };
+            var list = query.ToList<SysMenuEntity>();
+            return list;
+        }
 
         /// <summary>
         /// 获取菜单树，递归生成树结构
