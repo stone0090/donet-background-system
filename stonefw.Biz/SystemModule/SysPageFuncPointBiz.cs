@@ -50,7 +50,17 @@ namespace stonefw.Biz.SystemModule
 
         private List<SysPageFuncPointEntity> SetSysPageFuncPointListCache()
         {
-            List<SysPageFuncPointEntity> list = Dao.GetSysPageFuncPointList();
+            var listSysPageFuncPointEntity = EntityExecution.ReadEntityList2<SysPageFuncPointEntity>(null).OrderBy(n => n.PageUrl);
+            var listSysFuncPointEnumEntity = new SysFuncPointEnumBiz().GetSysFuncPointEnumList();
+            var query = from sysPageFuncPointEntity in listSysPageFuncPointEntity
+                        join sysFuncPointEnumEntity in listSysFuncPointEnumEntity on sysPageFuncPointEntity.FuncPointId equals sysFuncPointEnumEntity.Name
+                        select new SysPageFuncPointEntity()
+                        {
+                            PageUrl = sysPageFuncPointEntity.PageUrl,
+                            FuncPointId = sysPageFuncPointEntity.FuncPointId,
+                            FuncPointName = sysFuncPointEnumEntity.Description,
+                        };
+            var list = query.ToList<SysPageFuncPointEntity>();
             DataCache.SetCache(CacheKey, list);
             return list;
         }

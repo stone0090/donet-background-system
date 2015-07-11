@@ -71,8 +71,22 @@ namespace stonefw.Biz.SystemModule
 
         private List<SysMfpRelationEntity> SetSysMfpRelationListCache()
         {
-            var sysMfpRelationList = Dao.GetSysMfpRelationList();
-            foreach (SysMfpRelationEntity sysMfpRelationEntity in sysMfpRelationList)
+            var listSysMfpRelationEntity = EntityExecution.ReadEntityList2<SysMfpRelationEntity>(null);
+            var listSysModuleEnumEntity = new SysModuleEnumBiz().GetSysModuleEnumList();
+            var listSysFuncPointEnumEntity = new SysFuncPointEnumBiz().GetSysFuncPointEnumList();
+            var query = from sysMfpRelationEntity in listSysMfpRelationEntity
+                        join sysModuleEnumEntity in listSysModuleEnumEntity on sysMfpRelationEntity.ModuleId equals sysModuleEnumEntity.Name
+                        join sysFuncPointEnumEntity in listSysFuncPointEnumEntity on sysMfpRelationEntity.FuncPointId equals sysFuncPointEnumEntity.Name
+                        select new SysMfpRelationEntity()
+                        {
+                            ModuleId = sysMfpRelationEntity.ModuleId,
+                            FuncPointId = sysMfpRelationEntity.FuncPointId,
+                            Permissions = sysMfpRelationEntity.Permissions,
+                            ModuleName = sysModuleEnumEntity.Description,
+                            FuncPointName = sysFuncPointEnumEntity.Description,
+                        };
+            listSysMfpRelationEntity = query.ToList<SysMfpRelationEntity>();
+            foreach (SysMfpRelationEntity sysMfpRelationEntity in listSysMfpRelationEntity)
             {
                 if (!string.IsNullOrEmpty(sysMfpRelationEntity.Permissions))
                 {
@@ -91,8 +105,8 @@ namespace stonefw.Biz.SystemModule
                         sysMfpRelationEntity.PermissionsName = string.Join(",", sysMfpRelationEntity.PermissionListName.ToArray());
                 }
             }
-            DataCache.SetCache(CacheKey, sysMfpRelationList);
-            return sysMfpRelationList;
+            DataCache.SetCache(CacheKey, listSysMfpRelationEntity);
+            return listSysMfpRelationEntity;
         }
     }
 }
