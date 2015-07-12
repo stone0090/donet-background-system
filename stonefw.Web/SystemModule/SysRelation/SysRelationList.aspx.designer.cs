@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.SystemModule.SysMfpRelation {
+namespace stonefw.Web.SystemModule.SysRelation {
     
     
-    public partial class SysMfpRelationDetail {
+    public partial class SysRelationList {
         
         /// <summary>
         /// form1 control.
@@ -31,22 +31,31 @@ namespace stonefw.Web.SystemModule.SysMfpRelation {
         protected global::System.Web.UI.WebControls.DropDownList ddlModule;
         
         /// <summary>
-        /// ddlFuncPoint control.
+        /// btnQuery control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlFuncPoint;
+        protected global::System.Web.UI.WebControls.LinkButton btnQuery;
         
         /// <summary>
-        /// cblPermission control.
+        /// btnAddNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblPermission;
+        protected global::System.Web.UI.WebControls.LinkButton btnAddNew;
+        
+        /// <summary>
+        /// gvSysRelation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvSysRelation;
         
         /// <summary>
         /// lMessage control.
@@ -56,14 +65,5 @@ namespace stonefw.Web.SystemModule.SysMfpRelation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lMessage;
-        
-        /// <summary>
-        /// btnSave control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnSave;
     }
 }

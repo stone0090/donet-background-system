@@ -7,7 +7,7 @@ using stonefw.Utility;
 
 namespace stonefw.Dao.SystemModule
 {
-    public class SysMfpRelationDao
+    public class SysRelationDao
     {
         private Database _db;
         private Database Db

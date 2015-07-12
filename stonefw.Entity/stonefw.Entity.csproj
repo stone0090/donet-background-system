@@ -76,14 +76,14 @@
     <Compile Include="BaseModule\BcRoleEntity.cs" />
     <Compile Include="BaseModule\BcGroupEntity.AutoCode.cs" />
     <Compile Include="BaseModule\BcGroupEntity.cs" />
-    <Compile Include="SystemModule\SysMfpRelationEntity.cs" />
+    <Compile Include="SystemModule\SysRelationEntity.cs" />
     <Compile Include="SystemModule\SysEnumNameEntity.AutoCode.cs" />
     <Compile Include="SystemModule\SysEnumNameEntity.cs" />
     <Compile Include="SystemModule\SysGlobalSettingEntity.AutoCode.cs" />
     <Compile Include="SystemModule\SysGlobalSettingEntity.cs" />
     <Compile Include="BaseModule\BcUserInfoEntity.AutoCode.cs" />
     <Compile Include="BaseModule\BcUserInfoEntity.cs" />
-    <Compile Include="SystemModule\SysMfpRelationEntity.AutoCode.cs" />
+    <Compile Include="SystemModule\SysRelationEntity.AutoCode.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\stonefw.Utility\stonefw.Utility.csproj">

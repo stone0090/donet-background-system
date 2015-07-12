@@ -5,8 +5,8 @@ using stonefw.Utility.EntityExpressions.Attribute;
 namespace stonefw.Entity.SystemModule
 {
     [Serializable]
-    [Table("Sys_MfpRelation")]
-    public partial class SysMfpRelationEntity
+    [Table("Sys_Relation")]
+    public partial class SysRelationEntity
     {
         public string ModuleName { get; set; }
         public string FuncPointName { get; set; }

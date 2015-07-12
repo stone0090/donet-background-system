@@ -19,7 +19,7 @@ namespace stonefw.Dao.SystemModule
         {
             string sql = @"select * from Sys_Menu a
                             left join Sys_PageFuncPoint b on a.PageUrl = b.PageUrl
-                            left join Sys_MfpRelation c ON b.FuncPointId = c.FuncPointId
+                            left join Sys_Relation c ON b.FuncPointId = c.FuncPointId
                             where a.DeleteFlag = 0 ";
             if (menuId != null) sql += " and a.MenuId = @MenuId ";
             sql += " Order by MenuLevel,Seq ";

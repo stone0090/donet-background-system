@@ -58,7 +58,7 @@ namespace stonefw.Web.BaseModule.BcPermission
 
         private void BindControlData()
         {
-            this.gvBcPermission.DataSource = new SysMfpRelationBiz().GetEnabledSysMfpRelationList();
+            this.gvBcPermission.DataSource = new SysRelationBiz().GetEnabledSysRelationList();
             this.gvBcPermission.DataBind();
         }
         private void FillFormData()

@@ -2,7 +2,7 @@
 {
     public enum SysFuncPointEnum
     {
-        Acc_Test,
+        Ac_Test,
 
         Bs_AutoCode,
         Bs_ErrorLog,

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysMfpRelationList.aspx.cs" Inherits="stonefw.Web.SystemModule.SysMfpRelation.SysMfpRelationList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysRelationList.aspx.cs" Inherits="stonefw.Web.SystemModule.SysRelation.SysRelationList" %>
 
 <!DOCTYPE html>
 
@@ -18,12 +18,12 @@
                     </td>
                     <td>
                         <asp:LinkButton runat="server" ID="btnQuery" Text="查询" class="easyui-linkbutton" data-options="iconCls:'icon-search'" OnClick="btnQuery_Click"></asp:LinkButton>
-                        <asp:LinkButton runat="server" ID="btnAddNew" Text="新增" class="easyui-linkbutton" data-options="iconCls:'icon-add'" OnClientClick="return showDialog('新增', 'SysMfpRelationDetail.aspx?moduleid=-1&funcpointid=-1',this);">新增</asp:LinkButton>
+                        <asp:LinkButton runat="server" ID="btnAddNew" Text="新增" class="easyui-linkbutton" data-options="iconCls:'icon-add'" OnClientClick="return showDialog('新增', 'SysRelationDetail.aspx?moduleid=-1&funcpointid=-1',this);">新增</asp:LinkButton>
                     </td>
                 </tr>
             </table>
         </div>
-        <asp:GridView ID="gvSysMfpRelation" runat="server" AutoGenerateColumns="False" AllowPaging="True" Width="100%" CssClass="gridview" OnRowCommand="gvSysMfpRelation_RowCommand" OnPageIndexChanged="gvSysMfpRelation_PageIndexChanged" OnPageIndexChanging="gvSysMfpRelation_PageIndexChanging">
+        <asp:GridView ID="gvSysRelation" runat="server" AutoGenerateColumns="False" AllowPaging="True" Width="100%" CssClass="gridview" OnRowCommand="gvSysRelation_RowCommand" OnPageIndexChanged="gvSysRelation_PageIndexChanged" OnPageIndexChanging="gvSysRelation_PageIndexChanging">
             <HeaderStyle HorizontalAlign="Center"></HeaderStyle>
             <RowStyle HorizontalAlign="Center"></RowStyle>
             <Columns>
@@ -34,7 +34,7 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="修改" ItemStyle-Width="45px">
                     <ItemTemplate>
-                        <a href="#" class="easyui-linkbutton" onclick='<%# "showDialog(\"修改\", \"SysMfpRelationDetail.aspx?moduleid="+Eval("ModuleId")+"&funcpointid="+Eval("FuncPointId")+"&permissions="+Eval("Permissions")+"\");" %>'>修改</a>
+                        <a href="#" class="easyui-linkbutton" onclick='<%# "showDialog(\"修改\", \"SysRelationDetail.aspx?moduleid="+Eval("ModuleId")+"&funcpointid="+Eval("FuncPointId")+"&permissions="+Eval("Permissions")+"\");" %>'>修改</a>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField DataField="ModuleName" HeaderText="模块名称" />

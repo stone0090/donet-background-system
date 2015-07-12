@@ -3,13 +3,13 @@ using System.Web.UI.WebControls;
 using stonefw.Biz.SystemModule;
 using stonefw.Web.Utility.BaseClass;
 
-namespace stonefw.Web.SystemModule.SysMfpRelation
+namespace stonefw.Web.SystemModule.SysRelation
 {
-    public partial class SysMfpRelationList : BasePage
+    public partial class SysRelationList : BasePage
     {
-        private SysMfpRelationBiz _biz;
-        private SysMfpRelationBiz Biz
-        { get { return _biz ?? (_biz = new SysMfpRelationBiz()); } }
+        private SysRelationBiz _biz;
+        private SysRelationBiz Biz
+        { get { return _biz ?? (_biz = new SysRelationBiz()); } }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,18 +20,18 @@ namespace stonefw.Web.SystemModule.SysMfpRelation
             }
         }
         protected void btnQuery_Click(object sender, EventArgs e) { BindData(); this.lMessage.Text = "执行成功！"; }
-        protected void gvSysMfpRelation_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void gvSysRelation_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Row_Delete")
             {
                 string[] arg = e.CommandArgument.ToString().Split('|');
-                Biz.DeleteSysMfpRelation(arg[0], arg[1]);
+                Biz.DeleteSysRelation(arg[0], arg[1]);
                 BindData();
             }
         }
-        protected void gvSysMfpRelation_PageIndexChanged(object sender, EventArgs e) { BindData(); }
-        protected void gvSysMfpRelation_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        { this.gvSysMfpRelation.PageIndex = e.NewPageIndex; }
+        protected void gvSysRelation_PageIndexChanged(object sender, EventArgs e) { BindData(); }
+        protected void gvSysRelation_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        { this.gvSysRelation.PageIndex = e.NewPageIndex; }
         protected void ddlModule_SelectedIndexChanged(object sender, EventArgs e)
         {
             BindData();
@@ -47,11 +47,11 @@ namespace stonefw.Web.SystemModule.SysMfpRelation
         }
         private void BindData()
         {
-            gvSysMfpRelation.PageSize = int.Parse(SysGlobalSetting.GridViewPageSize);
-            gvSysMfpRelation.DataSource = string.IsNullOrEmpty(this.ddlModule.SelectedValue)
-                ? Biz.GetSysMfpRelationList()
-                : Biz.GetSysMfpRelationList(this.ddlModule.SelectedValue);
-            gvSysMfpRelation.DataBind();
+            gvSysRelation.PageSize = int.Parse(SysGlobalSetting.GridViewPageSize);
+            gvSysRelation.DataSource = string.IsNullOrEmpty(this.ddlModule.SelectedValue)
+                ? Biz.GetSysRelationList()
+                : Biz.GetSysRelationList(this.ddlModule.SelectedValue);
+            gvSysRelation.DataBind();
         }
     }
 }

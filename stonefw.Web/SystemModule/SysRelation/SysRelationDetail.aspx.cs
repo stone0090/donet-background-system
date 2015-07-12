@@ -5,12 +5,12 @@ using stonefw.Entity.SystemModule;
 using stonefw.Utility;
 using stonefw.Web.Utility.BaseClass;
 
-namespace stonefw.Web.SystemModule.SysMfpRelation
+namespace stonefw.Web.SystemModule.SysRelation
 {
-    public partial class SysMfpRelationDetail : BasePage
+    public partial class SysRelationDetail : BasePage
     {
-        private SysMfpRelationBiz _biz;
-        private SysMfpRelationBiz Biz { get { return _biz ?? (_biz = new SysMfpRelationBiz()); } }
+        private SysRelationBiz _biz;
+        private SysRelationBiz Biz { get { return _biz ?? (_biz = new SysRelationBiz()); } }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -23,14 +23,14 @@ namespace stonefw.Web.SystemModule.SysMfpRelation
         {
             try
             {
-                SysMfpRelationEntity entity = PrepareFormData();
+                SysRelationEntity entity = PrepareFormData();
                 if (Request["moduleid"] == "-1" && Request["funcpointid"] == "-1")
                 {
-                    Biz.AddNewSysMfpRelation(entity);
+                    Biz.AddNewSysRelation(entity);
                 }
                 else
                 {
-                    Biz.UpdateSysMfpRelation(entity);
+                    Biz.UpdateSysRelation(entity);
                 }
                 base.FatherQuery();
             }
@@ -84,12 +84,12 @@ namespace stonefw.Web.SystemModule.SysMfpRelation
             }
             catch (Exception ex) { this.lMessage.Text = string.Format("数据加载失败，原因：{0}", ex.Message); }
         }
-        private SysMfpRelationEntity PrepareFormData()
+        private SysRelationEntity PrepareFormData()
         {
             this.ddlModule.SelectedValue.InitValidation("模块编号").NotEmpty();
             this.ddlFuncPoint.SelectedValue.InitValidation("功能点编号").NotEmpty();
 
-            var entity = new SysMfpRelationEntity();
+            var entity = new SysRelationEntity();
             entity.ModuleId = this.ddlModule.SelectedValue;
             entity.FuncPointId = this.ddlFuncPoint.SelectedValue;
             foreach (ListItem li in this.cblPermission.Items)

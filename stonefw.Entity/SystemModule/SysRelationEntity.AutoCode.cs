@@ -3,7 +3,7 @@ using stonefw.Utility.EntityExpressions.Attribute;
 
 namespace stonefw.Entity.SystemModule
 {
-    partial class SysMfpRelationEntity
+    partial class SysRelationEntity
     {
         [Field("ModuleId", FieldDBType = DbType.AnsiString, FieldDesc = "", IsIdentityField = false, IsPrimaryKey = true)]
         public string ModuleId { get; set; }

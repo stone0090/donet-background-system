@@ -134,14 +134,14 @@ namespace stonefw.Biz.BaseModule
             {
                 //如果是超级管理员，获取所有权限
                 entity.PermisionList = new List<PermissionEntity>();
-                var sysRelationList = new SysMfpRelationBiz().GetEnabledSysMfpRelationList();
-                foreach (SysMfpRelationEntity sysMfpRelationEntity in sysRelationList)
+                var sysRelationList = new SysRelationBiz().GetEnabledSysRelationList();
+                foreach (SysRelationEntity sysRelationEntity in sysRelationList)
                 {
                     entity.PermisionList.Add(new PermissionEntity()
                     {
-                        ModuleId = sysMfpRelationEntity.ModuleId,
-                        FuncPointId = sysMfpRelationEntity.FuncPointId,
-                        PermissionList = sysMfpRelationEntity.PermissionList
+                        ModuleId = sysRelationEntity.ModuleId,
+                        FuncPointId = sysRelationEntity.FuncPointId,
+                        PermissionList = sysRelationEntity.PermissionList
                     });
                 }
             }

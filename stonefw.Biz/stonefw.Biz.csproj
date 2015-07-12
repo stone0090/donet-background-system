@@ -54,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseModule\BcRoleBiz.cs" />
     <Compile Include="BaseModule\BcGroupBiz.cs" />
-    <Compile Include="SystemModule\SysMfpRelationBiz.cs" />
+    <Compile Include="SystemModule\SysRelationBiz.cs" />
     <Compile Include="SystemModule\SysEnumNameBiz.cs" />
     <Compile Include="SystemModule\SysGlobalSettingBiz.cs" />
     <Compile Include="BaseModule\BcUserInfoBiz.cs" />

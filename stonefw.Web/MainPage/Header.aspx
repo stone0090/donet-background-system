@@ -46,7 +46,7 @@
             <div onclick="addNewTab('模块管理','/SystemModule/SysModuleEnum/SysModuleEnumList.aspx');">模块枚举</div>
             <div onclick="addNewTab('功能点枚举','/SystemModule/SysFuncPointEnum/SysFuncPointEnumList.aspx');">功能点枚举</div>
             <div onclick="addNewTab('权限点管理','/SystemModule/SysPermsPointEnum/SysPermsPointEnumList.aspx');">权限点枚举</div>          
-            <div onclick="addNewTab('权限关系管理','/SystemModule/SysMfpRelation/SysMfpRelationList.aspx');">权限关系管理</div>
+            <div onclick="addNewTab('权限关系管理','/SystemModule/SysRelation/SysRelationList.aspx');">权限关系管理</div>
             <div onclick="addNewTab('页面功能管理','/SystemModule/SysPageFuncPoint/SysPageFuncPointList.aspx');">页面功能管理</div>
         </div>
         <script src="/Resource/js/common.js"></script>

@@ -46,7 +46,7 @@
     <Compile Include="CustomerModule\CuContactPersonDao.cs" />
     <Compile Include="CustomerModule\CuCustomerDao.cs" />
     <Compile Include="SystemModule\SysPageFuncPointDao.cs" />
-    <Compile Include="SystemModule\SysMfpRelationDao.cs" />
+    <Compile Include="SystemModule\SysRelationDao.cs" />
     <Compile Include="SystemModule\SysEnumNameDao.cs" />
     <Compile Include="SystemModule\SysGlobalSettingDao.cs" />
     <Compile Include="BaseModule\BcUserInfoDao.cs" />

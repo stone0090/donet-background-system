@@ -434,8 +434,8 @@
     <Content Include="Resource\easyui\themes\metro\validatebox.css" />
     <Content Include="Resource\easyui\themes\metro\window.css" />
     <Content Include="Resource\login\images\header_short.png" />
-    <Content Include="SystemModule\SysMfpRelation\SysMfpRelationDetail.aspx" />
-    <Content Include="SystemModule\SysMfpRelation\SysMfpRelationList.aspx" />
+    <Content Include="SystemModule\SysRelation\SysRelationDetail.aspx" />
+    <Content Include="SystemModule\SysRelation\SysRelationList.aspx" />
     <Content Include="SystemModule\SysEnumName\SysEnumNameDetail.aspx" />
     <Content Include="SystemModule\SysEnumName\SysEnumNameList.aspx" />
     <Content Include="Resource\js\json2.js" />
@@ -730,19 +730,19 @@
     <Compile Include="BaseModule\BcUserInfo\BcUserInfoList.aspx.designer.cs">
       <DependentUpon>BcUserInfoList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SystemModule\SysMfpRelation\SysMfpRelationDetail.aspx.cs">
-      <DependentUpon>SysMfpRelationDetail.aspx</DependentUpon>
+    <Compile Include="SystemModule\SysRelation\SysRelationDetail.aspx.cs">
+      <DependentUpon>SysRelationDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SystemModule\SysMfpRelation\SysMfpRelationDetail.aspx.designer.cs">
-      <DependentUpon>SysMfpRelationDetail.aspx</DependentUpon>
+    <Compile Include="SystemModule\SysRelation\SysRelationDetail.aspx.designer.cs">
+      <DependentUpon>SysRelationDetail.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SystemModule\SysMfpRelation\SysMfpRelationList.aspx.cs">
-      <DependentUpon>SysMfpRelationList.aspx</DependentUpon>
+    <Compile Include="SystemModule\SysRelation\SysRelationList.aspx.cs">
+      <DependentUpon>SysRelationList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SystemModule\SysMfpRelation\SysMfpRelationList.aspx.designer.cs">
-      <DependentUpon>SysMfpRelationList.aspx</DependentUpon>
+    <Compile Include="SystemModule\SysRelation\SysRelationList.aspx.designer.cs">
+      <DependentUpon>SysRelationList.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
