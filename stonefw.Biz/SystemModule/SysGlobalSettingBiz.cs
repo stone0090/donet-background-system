@@ -19,7 +19,6 @@ namespace stonefw.Biz.SystemModule
 
         public SysGlobalSettingEntity GetSysSettingEntity()
         {
-
             object objModel = DataCache.GetCache(CacheKey);
             if (objModel == null)
             {

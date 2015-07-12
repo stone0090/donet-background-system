@@ -7,23 +7,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <script type="text/javascript">
-        $(function () {
-            setControlState();
-            $("#ddlPermissionType").bind("change", function () {
-                setControlState();
-            });
-        });
-        function setControlState() {
-            if ($("#ddlPermissionType").val() == "1") {
-                $("#tName").text("角色：");
-                $("#ddlUser").hide();
-                $("#ddlRole").show();
-            } else {
-                $("#tName").text("用户：");
-                $("#ddlUser").show();
-                $("#ddlRole").hide();
-            }
-        }
         function AddNewOrEdit(self) {
             if ($("#ddlPermissionType").val() == "1")
                 return showDialog('新增/修改 - 角色（' + $('#ddlRole option:selected').text() + '）', 'BcPermissionDetail.aspx?permissionid=' + $("#ddlRole").val() + '&permissiontype=1', self);
@@ -39,14 +22,14 @@
                 <tr>
                     <td>类型：</td>
                     <td>
-                        <asp:DropDownList runat="server" ID="ddlPermissionType" AutoPostBack="True" OnSelectedIndexChanged="SelectedIndexChanged">
+                        <asp:DropDownList runat="server" ID="ddlPermissionType" AutoPostBack="True" OnSelectedIndexChanged="SelectedIndexChanged" class="easyui-combobox" data-options="required:true,panelHeight:'auto',editable:false">
                             <asp:ListItem Value="2">用户</asp:ListItem>
                             <asp:ListItem Value="1">角色</asp:ListItem>
                         </asp:DropDownList></td>
                     <td id="tName">角色：</td>
                     <td>
-                        <asp:DropDownList runat="server" ID="ddlRole" AutoPostBack="True" OnSelectedIndexChanged="SelectedIndexChanged" />
-                        <asp:DropDownList runat="server" ID="ddlUser" AutoPostBack="True" OnSelectedIndexChanged="SelectedIndexChanged" Style="display: none" />
+                        <asp:DropDownList runat="server" ID="ddlRole" AutoPostBack="True" OnSelectedIndexChanged="SelectedIndexChanged" class="easyui-combobox" data-options="required:true,panelHeight:'auto',editable:false" />
+                        <asp:DropDownList runat="server" ID="ddlUser" AutoPostBack="True" OnSelectedIndexChanged="SelectedIndexChanged" class="easyui-combobox" data-options="required:true,panelHeight:'auto',editable:false" />
                     </td>
                     <td>
                         <asp:LinkButton runat="server" ID="btnQuery" Text="查询" OnClick="btnQuery_Click" class="easyui-linkbutton" data-options="iconCls:'icon-search'"></asp:LinkButton>

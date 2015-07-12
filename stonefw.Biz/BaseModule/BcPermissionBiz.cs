@@ -10,6 +10,7 @@ using stonefw.Utility.EntityExpressions;
 using stonefw.Dao.BaseModule;
 using stonefw.Entity.BaseModule;
 using stonefw.Entity.SystemModule;
+using stonefw.Entity.Enum;
 
 namespace stonefw.Biz.BaseModule
 {
@@ -85,8 +86,8 @@ namespace stonefw.Biz.BaseModule
 
             foreach (BcPermissionEntity bcPermissionEntity in enabledBcPermissionList)
             {
-                bcPermissionEntity.ModuleName = new SysModuleEnumBiz().GetDescription(bcPermissionEntity.ModuleId);
-                bcPermissionEntity.FuncPointName = new SysFuncPointEnumBiz().GetDescription(bcPermissionEntity.FuncPointId);
+                bcPermissionEntity.ModuleName = SysEnumNameExtensionBiz.GetDescription<SysModuleEnum>(bcPermissionEntity.ModuleId);
+                bcPermissionEntity.FuncPointName = SysEnumNameExtensionBiz.GetDescription<SysFuncPointEnum>(bcPermissionEntity.FuncPointId);
                 if (permissionType == 1)
                 {
                     var list = allBcRoleList.Where(n => n.RoleId == bcPermissionEntity.UserRoleId).ToList();
@@ -108,7 +109,7 @@ namespace stonefw.Biz.BaseModule
                         if (!string.IsNullOrEmpty(s))
                         {
                             bcPermissionEntity.PermissionList.Add(s);
-                            bcPermissionEntity.PermissionNameList.Add(new SysPermsPointEnumBiz().GetDescription(s));
+                            bcPermissionEntity.PermissionNameList.Add(SysEnumNameExtensionBiz.GetDescription<SysFuncPointEnum>(s));
                         }
                     }
                     if (bcPermissionEntity.PermissionNameList.Count > 0)

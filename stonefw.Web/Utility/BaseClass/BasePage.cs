@@ -34,16 +34,17 @@ namespace stonefw.Web.Utility.BaseClass
                     {
                         //重建Session，以避免Session丢失
                         var identity = HttpContext.Current.User.Identity as FormsIdentity;
-                        if (identity != null) Session["CurrentUserInfo"] = new BcUserInfoBiz().GetBcUserInfoWithPermission(identity.Ticket.UserData);
+                        if (identity != null)
+                            Session["CurrentUserInfo"] = new BcUserInfoBiz().GetBcUserInfoWithPermission(identity.Ticket.UserData);
                     }
                     if (Session["CurrentUserInfo"] == null)
                         throw new Exception("获取用户信息失败！");
+                    return (BcUserInfoEntity)Session["CurrentUserInfo"];
                 }
                 else
                 {
                     return null;
                 }
-                return (BcUserInfoEntity)Session["CurrentUserInfo"];
             }
             set
             {
@@ -59,19 +60,12 @@ namespace stonefw.Web.Utility.BaseClass
         }
         protected SysPageFuncPointEntity CurrentPageFuncPoint
         {
-            get { return new SysPageFuncPointBiz().GetSysPageFuncPointEntity(Request.Path); }
+            get { return new SysPageFuncPointBiz().GetSingleSysPageFuncPoint(Request.Path); }
         }
 
         protected bool IsDevelopMode
         {
             get { return ConfigHelper.GetConfigBool("IsDevelopMode"); }
-        }
-        protected string[] SuperAdmins
-        {
-            get
-            {
-                return SysGlobalSetting.SuperAdmins.Split(',');
-            }
         }
 
         #endregion
@@ -103,7 +97,6 @@ namespace stonefw.Web.Utility.BaseClass
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
-
         }
 
         #endregion
@@ -116,7 +109,7 @@ namespace stonefw.Web.Utility.BaseClass
         private void CheckPermission()
         {
             //未登录状态，不需要判断权限
-            if (CurrentUserInfo != null)
+            if (!this.Context.User.Identity.IsAuthenticated)
             {
                 //1.获取页面自定义的访问权限
                 if (!InitPermission())
@@ -200,25 +193,21 @@ namespace stonefw.Web.Utility.BaseClass
             {
                 var pageUrl = Request.Path;
                 if (pageUrl.Contains("?")) pageUrl = pageUrl.Split('?')[0];
-                var entity = new SysPageFuncPointBiz().GetSysPageFuncPointEntity(pageUrl);
+                var entity = new SysPageFuncPointBiz().GetSingleSysPageFuncPoint(pageUrl);
                 return CurrentUserInfo.PermisionList.Where(n => n.FuncPointId == entity.FuncPointId).ToList()[0];
             }
             catch
             {
                 Response.Write("您没有权限访问该页面！");
                 Response.End();
+                return null;
             }
-            return null;
         }
         public bool LoadPermission(SysPermsPointEnum permsPoint)
         {
             var permissionEntity = LoadPermission();
             if (permissionEntity != null)
                 return permissionEntity.PermissionList.Any(n => n == permsPoint.ToString());
-            return false;
-        }
-        public bool LoadPermission(SysFuncPointEnum funcPoint, SysPermsPointEnum permsPoint)
-        {
             return false;
         }
 

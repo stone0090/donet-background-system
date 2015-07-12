@@ -1,7 +1,7 @@
 /**
- * jQuery EasyUI 1.4.1
+ * jQuery EasyUI 1.4.3
  * 
- * Copyright (c) 2009-2014 www.jeasyui.com. All rights reserved.
+ * Copyright (c) 2009-2015 www.jeasyui.com. All rights reserved.
  *
  * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
  * To use it on other terms please contact us at info@jeasyui.com
@@ -54,6 +54,11 @@
 			css:'propertygrid.css',
 			dependencies:['datagrid']
 		},
+		datalist:{
+			js:'jquery.datalist.js',
+			css:'datalist.css',
+			dependencies:['datagrid']
+		},
 		panel: {
 			js:'jquery.panel.js',
 			css:'panel.css'
@@ -99,6 +104,10 @@
 			js:'jquery.splitbutton.js',
 			css:'splitbutton.css',
 			dependencies:['menubutton']
+		},
+		switchbutton:{
+			js:'jquery.switchbutton.js',
+			css:'switchbutton.css'
 		},
 		accordion:{
 			js:'jquery.accordion.js',
@@ -187,6 +196,9 @@
 		},
 		parser:{
 			js:'jquery.parser.js'
+		},
+		mobile:{
+			js:'jquery.mobile.js'
 		}
 	};
 	

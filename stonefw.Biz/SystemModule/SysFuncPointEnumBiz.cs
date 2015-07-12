@@ -18,12 +18,6 @@ namespace stonefw.Biz.SystemModule
             return (List<SysFuncPointEnumEntity>)list;
         }
 
-        public string GetDescription(string name)
-        {
-            var result = GetSysFuncPointEnumList().Where(n => n.Name == name).ToList();
-            return result.Count > 0 ? result[0].Description : string.Empty;
-        }
-
         private List<SysFuncPointEnumEntity> SetSysFuncPointEnumListCache()
         {
             var dt = EnumHelper.ToDataTable<SysFuncPointEnum>(SysEnumNameExtensionBiz.GetDescription);

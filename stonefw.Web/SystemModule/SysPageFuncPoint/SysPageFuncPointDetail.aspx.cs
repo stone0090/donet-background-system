@@ -51,7 +51,7 @@ namespace stonefw.Web.SystemModule.SysPageFuncPoint
             try
             {
                 this.hdPageUrl.Value = Request["pageurl"];
-                SysPageFuncPointEntity entity = Biz.GetSysPageFuncPointEntity(this.hdPageUrl.Value);
+                SysPageFuncPointEntity entity = Biz.GetSingleSysPageFuncPoint(this.hdPageUrl.Value);
                 if (entity != null)
                 {
                     this.txtPageUrl.Text = entity.PageUrl.ToString();

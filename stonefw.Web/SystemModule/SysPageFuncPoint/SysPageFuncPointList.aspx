@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysPageFuncPointList.aspx.cs" Inherits="stonefw.Web.SystemModule.SysPageFuncPoint.SysPageFuncPointList" %>
 
+<%@ Import Namespace="stonefw.Entity.Enum" %>
 <%@ Import Namespace="stonefw.Biz.SystemModule" %>
 
 <!DOCTYPE html>
@@ -32,7 +33,7 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="功能点">
                     <ItemTemplate>
-                        <%# new SysFuncPointEnumBiz().GetDescription(Eval("FuncPointId").ToString()) %>
+                        <%# SysEnumNameExtensionBiz.GetDescription<SysFuncPointEnum>(Eval("FuncPointId").ToString()) %>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField DataField="FuncPointId" HeaderText="FuncPointId" />

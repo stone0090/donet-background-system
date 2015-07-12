@@ -64,6 +64,11 @@ namespace stonefw.Web.BaseModule.BcPermission
                 Biz.GetEnabledBcPermissionList(1, int.Parse(this.ddlRole.SelectedValue)) :
                 Biz.GetEnabledBcPermissionList(2, int.Parse(this.ddlUser.SelectedValue));
             gvBcPermission.DataBind();
+
+            if (this.ddlPermissionType.SelectedValue == "1")
+                this.ddlUser.Visible = false;
+            if (this.ddlPermissionType.SelectedValue == "2")
+                this.ddlRole.Visible = false;
         }
 
     }

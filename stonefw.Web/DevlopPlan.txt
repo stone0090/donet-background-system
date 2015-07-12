@@ -1,10 +1,6 @@
 ﻿20150703改造的计划
-1、用枚举替代部分系统表的数据。
 2、添加联系作者页面，加入联系方式和捐赠信息。
 3、添加修改密码功能。
-4、SysGlobalSettingBiz初始化放到Global的ApplicationStart中
-5、修改表名Sys_EnumName为Sys_EnumDescription
-6、表名修改Bc_Group Bc_UserGroup
 
 待办：
 1.消灭所有表中的下划线

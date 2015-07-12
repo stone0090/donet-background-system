@@ -1,12 +1,13 @@
-using System.Collections.Generic;
-using System.Linq;
 using stonefw.Biz.BaseModule;
 using stonefw.Dao.BaseModule;
 using stonefw.Dao.SystemModule;
 using stonefw.Entity.BaseModule;
+using stonefw.Entity.Enum;
 using stonefw.Entity.SystemModule;
 using stonefw.Utility;
 using stonefw.Utility.EntityExpressions;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace stonefw.Biz.SystemModule
 {
@@ -50,7 +51,6 @@ namespace stonefw.Biz.SystemModule
             var list = GetSysRelationList().Where(n => n.ModuleId == moduleId && n.FuncPointId == funcPointId).ToList();
             return list.Count > 0 ? list[0] : null;
         }
-
         public List<SysRelationEntity> GetEnabledSysRelationList()
         {
             var listEnabledSysRelation = GetSysRelationList();
@@ -98,7 +98,7 @@ namespace stonefw.Biz.SystemModule
                         if (!string.IsNullOrEmpty(s))
                         {
                             sysRelationEntity.PermissionList.Add(s);
-                            sysRelationEntity.PermissionListName.Add(new SysPermsPointEnumBiz().GetDescription(s));
+                            sysRelationEntity.PermissionListName.Add(SysEnumNameExtensionBiz.GetDescription<SysFuncPointEnum>(s));
                         }
                     }
                     if (sysRelationEntity.PermissionListName.Count > 0)

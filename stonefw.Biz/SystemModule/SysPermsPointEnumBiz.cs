@@ -18,12 +18,6 @@ namespace stonefw.Biz.SystemModule
             return (List<SysPermsPointEnumEntity>)list;
         }
 
-        public string GetDescription(string name)
-        {
-            var result = GetSysPermsPointEnumList().Where(n => n.Name == name).ToList();
-            return result.Count > 0 ? result[0].Description : string.Empty;
-        }
-
         private List<SysPermsPointEnumEntity> SetSysPermsPointEnumListCache()
         {
             var dt = EnumHelper.ToDataTable<SysPermsPointEnum>(SysEnumNameExtensionBiz.GetDescription);

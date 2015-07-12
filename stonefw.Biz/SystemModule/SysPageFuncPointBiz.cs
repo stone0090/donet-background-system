@@ -42,7 +42,7 @@ namespace stonefw.Biz.SystemModule
             EntityExecution.UpdateEntity(entity);
             SetSysPageFuncPointListCache();
         }
-        public SysPageFuncPointEntity GetSysPageFuncPointEntity(string pageUrl)
+        public SysPageFuncPointEntity GetSingleSysPageFuncPoint(string pageUrl)
         {
             var list = GetSysPageFuncPointList().Where(n => n.PageUrl == pageUrl).ToList();
             return list.Count > 0 ? list[0] : null;

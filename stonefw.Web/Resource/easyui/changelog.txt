@@ -1,3 +1,42 @@
+Version 1.4.3
+-------------
+* Bug
+ * textbox: The 'setText' method does not accept value 0. fixed.
+ * timespinner: When running in IE11, the error occurs when clicking on the empty textbox. fixed.
+ * tabs: The 'update' method can not update only the panel body. fixed.
+* Improvement
+ * combobox: Improve the performance of displaying the drop-down panel.
+ * combogrid: Remember the displaying text when the drop-down datagrid go to other pages.
+ * combogrid: The 'setValue' and 'setValues' methods accept a key-value object.
+ * window: The inline window's mask can auto-stretch its size to fill parent container.
+ * tabs: The 'showTool' and 'hideTool' methods are available for users to show or hide the tools.
+ * layout: Allow the user to override the 'cls','headerCls' and 'bodyCls' property values.
+* New Plugins
+ * switchbutton: The switch button with two states:'on' and 'off'.
+
+Version 1.4.2
+-------------
+* Bug
+ * treegrid: The column will restore its size to original size after recreating the treegrid. fixed.
+* Improvement
+ * draggable: Add 'delay' property that allows the user to delay the drag operation.
+ * tree: Add 'filter' property and 'doFilter' method.
+ * tabs: The 'add' method allows the user to insert a tab panel at a specified index.
+ * tabs: The user can determine what tab panel can be selected.
+ * tabs: Add 'justified' and 'narrow' properties.
+ * layout: Add 'unsplit' and 'split' methods.
+ * messager: Keyboard navigation features are supported now.
+ * form: Add 'onChange' event.
+ * combobox: Add 'queryParams' property.
+ * slider: Add 'range' property.
+ * menu: Add 'itemHeight','inline','noline' properties.
+ * panel: The 'header' property allows the user to customize the panel header.
+ * menubutton: Add 'hasDownArrow' property.
+* New Plugins
+ * datalist: The plugin to render items in a list.
+ * navpanel: The root component for the mobile page.
+ * mobile: The plugin to provide the mobile page stack management and navigation.
+
 Version 1.4.1
 -------------
 * Bug

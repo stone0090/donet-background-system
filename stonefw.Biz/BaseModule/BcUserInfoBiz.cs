@@ -195,7 +195,6 @@ namespace stonefw.Biz.BaseModule
             //根据用户权限，获取用户的菜单列表
             entity.MenuList = new SysMenuBiz().GetEnabledSysMenuListByPermission(entity.PermisionList);
 
-
             return entity;
         }
 
