@@ -20,16 +20,11 @@ namespace stonefw.Biz.SystemModule
 
         private List<SysPermsPointEnumEntity> SetSysPermsPointEnumListCache()
         {
-            var dt = EnumHelper.ToDataTable<SysPermsPointEnum>(SysEnumNameExtensionBiz.GetDescription);
+            var dt = EnumHelper.ToDataTable<SysPermsPointEnum>(SysEnumNameExBiz.GetDescription);
             var list = DataTableHepler.DataTableToList<SysPermsPointEnumEntity>(dt);
             DataCache.SetCache(CacheKey, list);
             return list;
         }
 
-
-        public object GetEnabledSysPermsPointEnumList(string[] permissionList)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

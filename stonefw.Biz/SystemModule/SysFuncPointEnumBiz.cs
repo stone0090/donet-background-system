@@ -20,7 +20,7 @@ namespace stonefw.Biz.SystemModule
 
         private List<SysFuncPointEnumEntity> SetSysFuncPointEnumListCache()
         {
-            var dt = EnumHelper.ToDataTable<SysFuncPointEnum>(SysEnumNameExtensionBiz.GetDescription);
+            var dt = EnumHelper.ToDataTable<SysFuncPointEnum>(SysEnumNameExBiz.GetDescription);
             var list = DataTableHepler.DataTableToList<SysFuncPointEnumEntity>(dt);
             DataCache.SetCache(CacheKey, list);
             return list;

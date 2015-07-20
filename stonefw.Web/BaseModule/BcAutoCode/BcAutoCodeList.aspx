@@ -2,6 +2,7 @@
 
 <%@ Import Namespace="stonefw.Biz.BaseModule" %>
 <%@ Import Namespace="stonefw.Biz.SystemModule" %>
+<%@ Import Namespace="stonefw.Entity.Enum" %>
 
 <!DOCTYPE html>
 
@@ -38,7 +39,7 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="功能点">
                     <ItemTemplate>
-                        <%# new SysFuncPointBiz().GetName(Eval("FuncPointId").ToString()) %>
+                        <%# SysEnumNameExBiz.GetDescription<SysFuncPointEnum>(Eval("FuncPointId").ToString()) %>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField DataField="Prefix" HeaderText="前缀" />

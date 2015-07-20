@@ -33,7 +33,7 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="功能点">
                     <ItemTemplate>
-                        <%# SysEnumNameExtensionBiz.GetDescription<SysFuncPointEnum>(Eval("FuncPointId").ToString()) %>
+                        <%# SysEnumNameExBiz.GetDescription<SysFuncPointEnum>(Eval("FuncPointId").ToString()) %>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField DataField="FuncPointId" HeaderText="FuncPointId" />

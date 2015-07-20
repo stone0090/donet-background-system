@@ -55,7 +55,7 @@ namespace stonefw.Biz.SystemModule
         }
     }
 
-    public static class SysEnumNameExtensionBiz
+    public static class SysEnumNameExBiz
     {
         public static string GetDescription<T>(this T enumValue)
         {

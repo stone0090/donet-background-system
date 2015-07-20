@@ -20,7 +20,7 @@ namespace stonefw.Biz.SystemModule
 
         private List<SysModuleEnumEntity> SetSysModuleEnumListCache()
         {
-            var dt = EnumHelper.ToDataTable<SysModuleEnum>(SysEnumNameExtensionBiz.GetDescription);
+            var dt = EnumHelper.ToDataTable<SysModuleEnum>(SysEnumNameExBiz.GetDescription);
             var list = DataTableHepler.DataTableToList<SysModuleEnumEntity>(dt);
             DataCache.SetCache(CacheKey, list);
             return list;

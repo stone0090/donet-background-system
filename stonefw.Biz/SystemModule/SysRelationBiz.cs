@@ -6,6 +6,7 @@ using stonefw.Entity.Enum;
 using stonefw.Entity.SystemModule;
 using stonefw.Utility;
 using stonefw.Utility.EntityExpressions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -98,7 +99,7 @@ namespace stonefw.Biz.SystemModule
                         if (!string.IsNullOrEmpty(s))
                         {
                             sysRelationEntity.PermissionList.Add(s);
-                            sysRelationEntity.PermissionListName.Add(SysEnumNameExtensionBiz.GetDescription<SysFuncPointEnum>(s));
+                            sysRelationEntity.PermissionListName.Add(SysEnumNameExBiz.GetDescription<SysFuncPointEnum>(s));
                         }
                     }
                     if (sysRelationEntity.PermissionListName.Count > 0)
@@ -107,6 +108,12 @@ namespace stonefw.Biz.SystemModule
             }
             DataCache.SetCache(CacheKey, listSysRelationEntity);
             return listSysRelationEntity;
+        }
+
+
+        public object GetEnabledSysPermsPointEnumList(string[] permissionList)
+        {
+            throw new NotImplementedException();
         }
     }
 }

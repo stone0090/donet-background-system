@@ -47,6 +47,7 @@
                         <asp:LinkButton class="easyui-linkbutton" runat="server" CommandName="Row_Delete" CommandArgument='<%# Eval("UserRoleId")+"|"+Eval("PermissionType")+"|"+Eval("ModuleId")+"|"+Eval("FuncPointId") %>' OnClientClick="return deleteWarning(this);">删除</asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:BoundField DataField="UserRoleName" HeaderText="用户名称" />
                 <asp:BoundField DataField="ModuleName" HeaderText="模块名称" />
                 <asp:BoundField DataField="FuncPointName" HeaderText="功能点名称" />
                 <asp:BoundField DataField="PermissionNames" HeaderText="包含权限点" />
@@ -56,6 +57,11 @@
             <asp:Label ID="lMessage" runat="server"></asp:Label>
         </div>
         <div id="dlg" class="easyui-dialog" data-options="closed:'false'"></div>
+        <script type="text/javascript">
+            $('#<%= this.ddlPermissionType.ClientID %>').combobox({ onChange: function () { $('#<%= this.form1.ClientID %>').submit(); } });
+            $('#<%= this.ddlRole.ClientID %>').combobox({ onChange: function () { $('#<%= this.form1.ClientID %>').submit(); } });
+            $('#<%= this.ddlUser.ClientID %>').combobox({ onChange: function () { $('#<%= this.form1.ClientID %>').submit(); } });
+        </script>
     </form>
 </body>
 </html>

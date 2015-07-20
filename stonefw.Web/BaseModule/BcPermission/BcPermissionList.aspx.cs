@@ -37,9 +37,14 @@ namespace stonefw.Web.BaseModule.BcPermission
                 BindData();
             }
         }
-        protected void gvBcPermission_PageIndexChanged(object sender, EventArgs e) { BindData(); }
+        protected void gvBcPermission_PageIndexChanged(object sender, EventArgs e)
+        {
+            BindData();
+        }
         protected void gvBcPermission_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        { this.gvBcPermission.PageIndex = e.NewPageIndex; }
+        {
+            this.gvBcPermission.PageIndex = e.NewPageIndex;
+        }
         protected void SelectedIndexChanged(object sender, EventArgs e)
         {
             BindData();
@@ -51,11 +56,13 @@ namespace stonefw.Web.BaseModule.BcPermission
             this.ddlRole.DataValueField = "RoleId";
             this.ddlRole.DataTextField = "RoleName";
             this.ddlRole.DataBind();
+            this.ddlRole.Items.Insert(0, new ListItem("*全部*", "0"));
 
             this.ddlUser.DataSource = new BcUserInfoBiz().GetEnabledBcUserInfoList();
             this.ddlUser.DataValueField = "UserId";
             this.ddlUser.DataTextField = "UserName";
             this.ddlUser.DataBind();
+            this.ddlUser.Items.Insert(0, new ListItem("*全部*", "0"));
         }
         private void BindData()
         {
@@ -65,10 +72,17 @@ namespace stonefw.Web.BaseModule.BcPermission
                 Biz.GetEnabledBcPermissionList(2, int.Parse(this.ddlUser.SelectedValue));
             gvBcPermission.DataBind();
 
-            if (this.ddlPermissionType.SelectedValue == "1")
-                this.ddlUser.Visible = false;
+            this.ddlRole.Visible = this.ddlPermissionType.SelectedValue == "1";
+            this.ddlUser.Visible = this.ddlPermissionType.SelectedValue == "2";
+
             if (this.ddlPermissionType.SelectedValue == "2")
-                this.ddlRole.Visible = false;
+                this.gvBcPermission.Columns[1].HeaderText = "角色名称";
+
+            if ((this.ddlPermissionType.SelectedValue == "1" && this.ddlRole.SelectedValue == "0")||
+                (this.ddlPermissionType.SelectedValue == "2" && this.ddlUser.SelectedValue == "0"))
+                this.btnAddNew.Visible = false;
+            else
+                this.btnAddNew.Visible = true;
         }
 
     }
