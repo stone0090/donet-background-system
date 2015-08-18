@@ -355,7 +355,7 @@ namespace stonefw.Utility
         }
 
         /// <summary>
-        /// 检查调用存储过程时相关的参数是否有注入的风险[wukea 20130604]
+        /// 检查调用存储过程时相关的参数是否有注入的风险
         /// </summary>
         /// <param name="dm"></param>
         /// <param name="val"></param>
