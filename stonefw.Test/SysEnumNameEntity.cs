@@ -1,4 +1,4 @@
-using stonefw.Utility.EntityExpressions2.Attribute;
+using stonefw.Utility.EntityExpression.Attribute;
 using System;
 using System.Data;
 
