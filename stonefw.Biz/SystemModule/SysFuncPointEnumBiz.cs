@@ -1,10 +1,7 @@
-﻿using stonefw.Entity.Enum;
-using stonefw.Entity.SystemModule;
+﻿using System.Collections.Generic;
+using stonefw.Entity.Enum;
+using stonefw.Entity.Extension;
 using stonefw.Utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace stonefw.Biz.SystemModule
 {

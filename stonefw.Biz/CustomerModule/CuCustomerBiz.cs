@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using stonefw.Dao.CustomerModule;
 using stonefw.Entity.CustomerModule;
-using stonefw.Utility.EntityExpressions;
+using stonefw.Utility.EntitySql.Data;
 
 namespace stonefw.Biz.CustomerModule
 {
@@ -15,25 +15,25 @@ namespace stonefw.Biz.CustomerModule
 
         public List<CuCustomerEntity> GetCuCustomerList()
         {
-            return EntityExecution.ReadEntityList2<CuCustomerEntity>(n => n.DeleteFlag == false);
+            return EntityExecution.ReadEntityList<CuCustomerEntity>(n => n.DeleteFlag == false);
         }
         public void DeleteCuCustomer(string cuId)
         {
             CuCustomerEntity entity = new CuCustomerEntity() { CuId = cuId, DeleteFlag = true };
-            EntityExecution.UpdateEntity(entity);
+            EntityExecution.ExecUpdate(entity);
         }
         public void AddNewCuCustomer(CuCustomerEntity entity)
         {
             entity.DeleteFlag = false;
-            EntityExecution.InsertEntity(entity);
+            EntityExecution.ExecInsert(entity);
         }
         public void UpdateCuCustomer(CuCustomerEntity entity)
         {
-            EntityExecution.UpdateEntity(entity);
+            EntityExecution.ExecUpdate(entity);
         }
         public CuCustomerEntity GetCuCustomerEntity(string cuId)
         {
-            return EntityExecution.ReadEntity2<CuCustomerEntity>(n => n.CuId == cuId && n.DeleteFlag == false);
+            return EntityExecution.ReadEntity<CuCustomerEntity>(n => n.CuId == cuId && n.DeleteFlag == false);
         }
     }
 }

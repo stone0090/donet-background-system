@@ -1,12 +1,12 @@
-using stonefw.Utility.EntityToSql.Attribute;
 using System;
-using System.Data;
+using stonefw.Utility.EntitySql.Attribute;
+using stonefw.Utility.EntitySql.Entity;
 
-namespace stonefw.Entity.SystemModule
+namespace stonefw.Test
 {
     [Serializable]
     [Table("Sys_EnumName")]
-    public class SysEnumNameEntity
+    public class SysEnumNameEntity : BaseEntity
     {
         [Field("Type")]
         public string Type { get; set; }

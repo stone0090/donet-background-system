@@ -3,7 +3,7 @@ using stonefw.Dao.SystemModule;
 using stonefw.Entity.BaseModule;
 using stonefw.Entity.SystemModule;
 using stonefw.Utility;
-using stonefw.Utility.EntityExpressions;
+using stonefw.Utility.EntitySql.Data;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -27,17 +27,17 @@ namespace stonefw.Biz.SystemModule
         public void DeleteSysEnumName(string type, string value)
         {
             SysEnumNameEntity entity = new SysEnumNameEntity() { Type = type, Value = value };
-            EntityExecution.DeleteEntity(entity);
+            EntityExecution.ExecDelete(entity);
             SetSysEnumNameListCache();
         }
         public void AddNewSysEnumName(SysEnumNameEntity entity)
         {
-            EntityExecution.InsertEntity(entity);
+            EntityExecution.ExecInsert(entity);
             SetSysEnumNameListCache();
         }
         public void UpdateSysEnumName(SysEnumNameEntity entity)
         {
-            EntityExecution.UpdateEntity(entity);
+            EntityExecution.ExecUpdate(entity);
             SetSysEnumNameListCache();
         }
         public SysEnumNameEntity GetSingleSysEnumName(string type, string value)
@@ -49,7 +49,7 @@ namespace stonefw.Biz.SystemModule
 
         private List<SysEnumNameEntity> SetSysEnumNameListCache()
         {
-            var list = EntityExecution.ReadEntityList2<SysEnumNameEntity>(null);
+            var list = EntityExecution.ReadEntityList<SysEnumNameEntity>();
             DataCache.SetCache(CacheKey, list);
             return list;
         }

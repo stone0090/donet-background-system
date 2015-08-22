@@ -49,52 +49,32 @@
     <Compile Include="DataCache.cs" />
     <Compile Include="DataTableHepler.cs" />
     <Compile Include="Encryption.cs" />
-    <Compile Include="EntityToSql\Attribute\Field.cs" />
-    <Compile Include="EntityToSql\Attribute\Table.cs" />
-    <Compile Include="EntityToSql\Data\EntityInstanceTool.cs" />
-    <Compile Include="EntityToSql\Data\EntityOperation.cs" />
-    <Compile Include="EntityToSql\Data\SqlCreator.cs" />
-    <Compile Include="EntityToSql\Data\SqlEntity.cs" />
-    <Compile Include="EntityToSql\EntityExecution.cs" />
-    <Compile Include="EntityToSql\Entity\EntityToSqlException.cs" />
-    <Compile Include="EntityToSql\Entity\GenericPairEntity.cs" />
-    <Compile Include="EntityToSql\Entity\GenericJoinEntity.cs" />
-    <Compile Include="EntityToSql\Entity\GenericWhereEntity.cs" />
-    <Compile Include="EntityToSql\Entity\JoinModeEnum.cs" />
-    <Compile Include="EntityToSql\Data\SqlType.cs" />
-    <Compile Include="EntityToSql\Utility\BuildDbColumnSelect.cs" />
-    <Compile Include="EntityToSql\Utility\BuildDbQuerysGeneric.cs" />
-    <Compile Include="EntityToSql\Utility\DiagnoseUtilitys\PreGenerateSQL.cs" />
-    <Compile Include="EntityToSql\Utility\EntityUtilitys.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionToSQL\BaseVisitor.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionToSQL\ConditionBuilder.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionToSQL\ExpressionPreTreatment.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionToSQL\SQLConvertor\BaseVisitorForWhereExpression.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionToSQL\SQLConvertor\BinaryExpressionTreeNode.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionToSQL\SQLConvertor\IWhereExpressionConvertor.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionToSQL\SQLConvertor\MSSQL\MethodCalls\MSSQLStringMethodCallVisitor.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionToSQL\SQLConvertor\MSSQL\MSSQLJoinConditionBuilder.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionToSQL\SQLConvertor\MSSQL\VisitorForMSSQLWhereExpression.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionToSQL\SQLConvertor\MSSQL\WhereExpressionConvertor.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionToSQL\SQLConvertor\MySQL\WhereExpressionConvertor.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionToSQL\SQLConvertor\Oracle\WhereExpressionConvertor.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionVisitors\ConditionBuilderGeneric.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionVisitors\ExpressionVisitor.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionVisitors\ExpressionVisitorForEntity.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionVisitors\JoinConditionBuilderGeneric.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionVisitors\MethodCalls\StringMethodCallVisitor.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionVisitors\MethodCallVisitor.cs" />
-    <Compile Include="EntityToSql\Utility\ExpressionVisitors\PartialEvaluator.cs" />
-    <Compile Include="EntityToSql\Entity\DbTableMappingEntity.cs" />
-    <Compile Include="EntityToSql\Data\DbTableMapping.cs" />
+    <Compile Include="EntitySql\Attribute\Field.cs" />
+    <Compile Include="EntitySql\Attribute\Table.cs" />
+    <Compile Include="EntitySql\Data\EntityInstanceTool.cs" />
+    <Compile Include="EntitySql\Data\EntityExecution.cs" />
+    <Compile Include="EntitySql\Data\SqlCreator.cs" />
+    <Compile Include="EntitySql\Entity\BaseEntity.cs" />
+    <Compile Include="EntitySql\Entity\EntitySqlException.cs" />
+    <Compile Include="EntitySql\Entity\GenericPairEntity.cs" />
+    <Compile Include="EntitySql\Entity\GenericJoinEntity.cs" />
+    <Compile Include="EntitySql\Entity\GenericWhereEntity.cs" />
+    <Compile Include="EntitySql\Entity\JoinModeEnum.cs" />
+    <Compile Include="EntitySql\Data\SqlType.cs" />
+    <Compile Include="EntitySql\Data\ExpressionVisitor\ConditionBuilderGeneric.cs" />
+    <Compile Include="EntitySql\Data\ExpressionVisitor\ExpressionVisitor.cs" />
+    <Compile Include="EntitySql\Data\ExpressionVisitor\JoinConditionBuilderGeneric.cs" />
+    <Compile Include="EntitySql\Data\ExpressionVisitor\MethodCall\StringMethodCallVisitor.cs" />
+    <Compile Include="EntitySql\Data\ExpressionVisitor\MethodCallVisitor.cs" />
+    <Compile Include="EntitySql\Data\ExpressionVisitor\PartialEvaluator.cs" />
+    <Compile Include="EntitySql\Entity\EntityMappingEntity.cs" />
+    <Compile Include="EntitySql\Data\EntityMappingTool.cs" />
     <Compile Include="EnumHelper.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValidationHelper.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EntityToSql\Utility\InternalEntityUtilitys\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

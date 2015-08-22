@@ -40,17 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseModule\BcAutoCodeEntity.AutoCode.cs" />
     <Compile Include="BaseModule\BcAutoCodeEntity.cs" />
-    <Compile Include="BaseModule\BcLogErrorEntity.AutoCode.cs" />
     <Compile Include="BaseModule\BcLogErrorEntity.cs" />
-    <Compile Include="BaseModule\BcPermissionEntity.AutoCode.cs" />
     <Compile Include="BaseModule\BcPermissionEntity.cs" />
-    <Compile Include="BaseModule\BcUserRoleEntity.AutoCode.cs" />
     <Compile Include="BaseModule\BcUserRoleEntity.cs" />
-    <Compile Include="CustomerModule\CuContactPersonEntity.AutoCode.cs" />
     <Compile Include="CustomerModule\CuContactPersonEntity.cs" />
-    <Compile Include="CustomerModule\CuCustomerEntity.AutoCode.cs" />
     <Compile Include="CustomerModule\CuCustomerEntity.cs" />
     <Compile Include="Enum\SysFuncPointEnum.cs" />
     <Compile Include="Enum\SysPermsPointEnum.cs" />
@@ -58,32 +52,22 @@
     <Compile Include="Extension\PermissionEntity.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SystemModule\SysModuleEnumEntity.cs" />
-    <Compile Include="SystemModule\SysFuncPointEnumEntity.cs" />
-    <Compile Include="SystemModule\SysPermsPointEnumEntity.cs" />
-    <Compile Include="SystemModule\SysPageFuncPointEntity.AutoCode.cs" />
+    <Compile Include="Extension\SysModuleEnumEntity.cs" />
+    <Compile Include="Extension\SysFuncPointEnumEntity.cs" />
+    <Compile Include="Extension\SysPermsPointEnumEntity.cs" />
     <Compile Include="SystemModule\SysPageFuncPointEntity.cs" />
-    <Compile Include="SystemModule\SysMenuEntity.AutoCode.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="SystemModule\SysMenuEntity.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Enum\ExcuteResultEnum.cs" />
     <Compile Include="Enum\LoginStatusEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BaseModule\BcRoleEntity.AutoCode.cs" />
     <Compile Include="BaseModule\BcRoleEntity.cs" />
-    <Compile Include="BaseModule\BcGroupEntity.AutoCode.cs" />
     <Compile Include="BaseModule\BcGroupEntity.cs" />
-    <Compile Include="SystemModule\SysRelationEntity.cs" />
-    <Compile Include="SystemModule\SysEnumNameEntity.AutoCode.cs" />
     <Compile Include="SystemModule\SysEnumNameEntity.cs" />
-    <Compile Include="SystemModule\SysGlobalSettingEntity.AutoCode.cs" />
     <Compile Include="SystemModule\SysGlobalSettingEntity.cs" />
-    <Compile Include="BaseModule\BcUserInfoEntity.AutoCode.cs" />
     <Compile Include="BaseModule\BcUserInfoEntity.cs" />
-    <Compile Include="SystemModule\SysRelationEntity.AutoCode.cs" />
+    <Compile Include="SystemModule\SysRelationEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\stonefw.Utility\stonefw.Utility.csproj">

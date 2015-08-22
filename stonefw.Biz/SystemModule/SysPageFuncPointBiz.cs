@@ -3,7 +3,7 @@ using System.Linq;
 using stonefw.Dao.SystemModule;
 using stonefw.Entity.SystemModule;
 using stonefw.Utility;
-using stonefw.Utility.EntityExpressions;
+using stonefw.Utility.EntitySql.Data;
 
 namespace stonefw.Biz.SystemModule
 {
@@ -29,17 +29,17 @@ namespace stonefw.Biz.SystemModule
         public void DeleteSysPageFuncPoint(string pageUrl)
         {
             SysPageFuncPointEntity entity = new SysPageFuncPointEntity() { PageUrl = pageUrl };
-            EntityExecution.DeleteEntity(entity);
+            EntityExecution.ExecDelete(entity);
             SetSysPageFuncPointListCache();
         }
         public void AddNewSysPageFuncPoint(SysPageFuncPointEntity entity)
         {
-            EntityExecution.InsertEntity(entity);
+            EntityExecution.ExecInsert(entity);
             SetSysPageFuncPointListCache();
         }
         public void UpdateSysPageFuncPoint(SysPageFuncPointEntity entity)
         {
-            EntityExecution.UpdateEntity(entity);
+            EntityExecution.ExecUpdate(entity);
             SetSysPageFuncPointListCache();
         }
         public SysPageFuncPointEntity GetSingleSysPageFuncPoint(string pageUrl)
@@ -50,7 +50,7 @@ namespace stonefw.Biz.SystemModule
 
         private List<SysPageFuncPointEntity> SetSysPageFuncPointListCache()
         {
-            var listSysPageFuncPointEntity = EntityExecution.ReadEntityList2<SysPageFuncPointEntity>(null).OrderBy(n => n.PageUrl);
+            var listSysPageFuncPointEntity = EntityExecution.ReadEntityList<SysPageFuncPointEntity>().OrderBy(n => n.PageUrl);
             var listSysFuncPointEnumEntity = new SysFuncPointEnumBiz().GetSysFuncPointEnumList();
             var query = from sysPageFuncPointEntity in listSysPageFuncPointEntity
                         join sysFuncPointEnumEntity in listSysFuncPointEnumEntity on sysPageFuncPointEntity.FuncPointId equals sysFuncPointEnumEntity.Name

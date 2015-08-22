@@ -1,13 +1,11 @@
 using System;
-using System.Data;
-using System.Data.Common;
-using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Transactions;
-using stonefw.Utility.EntityExpressions;
 using stonefw.Dao.BaseModule;
 using stonefw.Entity.BaseModule;
+using stonefw.Utility.EntitySql.Data;
 
 namespace stonefw.Biz.BaseModule
 {
@@ -18,12 +16,13 @@ namespace stonefw.Biz.BaseModule
         {
             get { return _dao ?? (_dao = new BcAutoCodeDao()); }
         }
+
         public List<BcAutoCodeEntity> GetBcAutoCodeList()
-        { return EntityExecution.ReadEntityList2<BcAutoCodeEntity>(null); }
+        { return EntityExecution.ReadEntityList<BcAutoCodeEntity>(); }
         public void DeleteBcAutoCode(int id)
         {
             BcAutoCodeEntity entity = new BcAutoCodeEntity() { Id = id };
-            EntityExecution.DeleteEntity(entity);
+            EntityExecution.ExecDelete(entity);
         }
         public void AddNewBcAutoCode(BcAutoCodeEntity entity)
         {
@@ -33,7 +32,7 @@ namespace stonefw.Biz.BaseModule
             using (var ts = new TransactionScope())
             {
                 Dao.ClearDefault(entity.FuncPointId);
-                EntityExecution.InsertEntity(entity);
+                EntityExecution.ExecInsert(entity);
                 ts.Complete();
             }
         }
@@ -44,16 +43,16 @@ namespace stonefw.Biz.BaseModule
                 using (var ts = new TransactionScope())
                 {
                     Dao.ClearDefault(entity.FuncPointId);
-                    EntityExecution.UpdateEntity(entity);
+                    EntityExecution.ExecUpdate(entity);
                     ts.Complete();
                 }
             }
             else
             {
-                EntityExecution.UpdateEntity(entity);
+                EntityExecution.ExecUpdate(entity);
             }
         }
-        public BcAutoCodeEntity GetSingleBcAutoCode(int id) { return EntityExecution.ReadEntity2<BcAutoCodeEntity>(n => n.Id == id); }
+        public BcAutoCodeEntity GetSingleBcAutoCode(int id) { return EntityExecution.ReadEntity<BcAutoCodeEntity>(n => n.Id == id); }
 
         public string GetCode(string funcPointId)
         {

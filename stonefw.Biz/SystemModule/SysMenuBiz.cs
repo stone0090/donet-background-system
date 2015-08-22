@@ -10,7 +10,7 @@ using stonefw.Entity.Enum;
 using stonefw.Entity.Extension;
 using stonefw.Entity.SystemModule;
 using stonefw.Utility;
-using stonefw.Utility.EntityExpressions;
+using stonefw.Utility.EntitySql.Data;
 
 namespace stonefw.Biz.SystemModule
 {
@@ -49,7 +49,7 @@ namespace stonefw.Biz.SystemModule
         }
         public List<SysMenuEntity> GetSysMenuListByFatherNode(int fatherNode = 0)
         {
-            List<SysMenuEntity> list = EntityExecution.ReadEntityList2<SysMenuEntity>(n => n.DeleteFlag == false && n.FatherNode == fatherNode);
+            List<SysMenuEntity> list = EntityExecution.ReadEntityList<SysMenuEntity>(n => n.DeleteFlag == false && n.FatherNode == fatherNode);
             list = list.OrderBy(n => n.Seq).ToList();
             return list;
         }
@@ -66,7 +66,7 @@ namespace stonefw.Biz.SystemModule
             entity.MenuId = null;
             entity.Seq = GetCountByFatherNode(entity.FatherNode) + 1;
             entity.DeleteFlag = false;
-            EntityExecution.InsertEntity(entity);
+            EntityExecution.ExecInsert(entity);
         }
         public void UpdateSysMenu(SysMenuEntity entity, int orgFatherNode)
         {
@@ -81,7 +81,7 @@ namespace stonefw.Biz.SystemModule
                 }
                 entity.Seq = GetCountByFatherNode(entity.FatherNode) + 1;
             }
-            EntityExecution.UpdateEntity(entity);
+            EntityExecution.ExecUpdate(entity);
             if (entity.FatherNode != orgFatherNode)
             {
                 Dao.SeqRecal();
@@ -93,12 +93,12 @@ namespace stonefw.Biz.SystemModule
                 return ExcuteResultEnum.IsOccupied;
 
             SysMenuEntity entity = new SysMenuEntity() { MenuId = menuId, DeleteFlag = true };
-            EntityExecution.UpdateEntity(entity);
+            EntityExecution.ExecUpdate(entity);
             return ExcuteResultEnum.Success;
         }
         public int GetCountByFatherNode(int? fatherNode)
         {
-            return EntityExecution.GetEntityCount2<SysMenuEntity>(n => n.FatherNode == fatherNode && n.DeleteFlag == false);
+            return EntityExecution.GetEntityCount<SysMenuEntity>(n => n.FatherNode == fatherNode && n.DeleteFlag == false);
         }
 
         /// <summary>

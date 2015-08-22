@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using stonefw.Entity.SystemModule;
 using stonefw.Utility;
-using stonefw.Utility.EntityExpressions;
 
 namespace stonefw.Dao.SystemModule
 {

@@ -1,10 +1,9 @@
 using System.Data;
 using System.Reflection;
 using System.Text;
-using stonefw.Entity.BaseModule;
 using stonefw.Entity.SystemModule;
 using stonefw.Utility;
-using stonefw.Utility.EntityExpressions.Attribute;
+using stonefw.Utility.EntitySql.Attribute;
 
 namespace stonefw.Dao.SystemModule
 {

@@ -6,9 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using stonefw.Entity.Enum;
-using stonefw.Utility.EntityExpressions;
+
 using stonefw.Dao.BaseModule;
 using stonefw.Entity.BaseModule;
+using stonefw.Utility.EntitySql.Data;
 
 namespace stonefw.Biz.BaseModule
 {
@@ -27,16 +28,16 @@ namespace stonefw.Biz.BaseModule
         public void DeleteBcUserRole(int userId, int roleId)
         {
             BcUserRoleEntity entity = new BcUserRoleEntity() { UserId = userId, RoleId = roleId };
-            EntityExecution.DeleteEntity(entity);
+            EntityExecution.ExecDelete(entity);
         }
         public ExcuteResultEnum AddNewBcUserRole(BcUserRoleEntity entity)
         {
-            if (EntityExecution.GetEntityCount2<BcUserRoleEntity>(n => n.RoleId == entity.RoleId && n.UserId == entity.UserId) > 0)
+            if (EntityExecution.GetEntityCount<BcUserRoleEntity>(n => n.RoleId == entity.RoleId && n.UserId == entity.UserId) > 0)
                 return ExcuteResultEnum.IsExist;
-            EntityExecution.InsertEntity(entity);
+            EntityExecution.ExecInsert(entity);
             return ExcuteResultEnum.Success;
         }
-        public void UpdateBcUserRole(BcUserRoleEntity entity) { EntityExecution.UpdateEntity(entity); }
-        public BcUserRoleEntity GetSingleBcUserRole(int userId, int roleId) { return EntityExecution.ReadEntity2<BcUserRoleEntity>(n => n.UserId == userId && n.RoleId == roleId); }
+        public void UpdateBcUserRole(BcUserRoleEntity entity) { EntityExecution.ExecUpdate(entity); }
+        public BcUserRoleEntity GetSingleBcUserRole(int userId, int roleId) { return EntityExecution.ReadEntity<BcUserRoleEntity>(n => n.UserId == userId && n.RoleId == roleId); }
     }
 }

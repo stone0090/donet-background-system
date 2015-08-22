@@ -8,13 +8,13 @@ using System.Linq;
 using System.Transactions;
 using stonefw.Biz.SystemModule;
 using stonefw.Utility;
-using stonefw.Utility.EntityExpressions;
+
 using stonefw.Entity.Enum;
 using stonefw.Dao.BaseModule;
 using stonefw.Entity.BaseModule;
 using stonefw.Entity.Extension;
 using stonefw.Entity.SystemModule;
-
+using stonefw.Utility.EntitySql.Data;
 
 namespace stonefw.Biz.BaseModule
 {
@@ -32,7 +32,7 @@ namespace stonefw.Biz.BaseModule
         }
         public ExcuteResultEnum DeleteBcUserInfo(int userId)
         {
-            if (EntityExecution.GetEntityCount2<BcUserRoleEntity>(n => n.UserId == userId) > 0)
+            if (EntityExecution.GetEntityCount<BcUserRoleEntity>(n => n.UserId == userId) > 0)
                 return ExcuteResultEnum.IsOccupied;
 
             var entity = GetSingleBcUserInfo(userId);
@@ -44,7 +44,7 @@ namespace stonefw.Biz.BaseModule
         }
         public ExcuteResultEnum AddNewBcUserInfo(BcUserInfoEntity entity, string roleIds = null)
         {
-            if (EntityExecution.GetEntityCount2<BcUserInfoEntity>(n => n.UserAccount == entity.UserAccount && n.DeleteFlag == false) > 0)
+            if (EntityExecution.GetEntityCount<BcUserInfoEntity>(n => n.UserAccount == entity.UserAccount && n.DeleteFlag == false) > 0)
                 return ExcuteResultEnum.IsExist;
 
             using (TransactionScope ts = new TransactionScope())
@@ -52,13 +52,13 @@ namespace stonefw.Biz.BaseModule
                 entity.UserId = null;
                 entity.DeleteFlag = false;
                 entity.Password = Encryption.Encrypt(entity.Password);
-                var id = EntityExecution.InsertEntityWithIdentity(entity);
+                var id = EntityExecution.ExecInsertWithIdentity(entity);
                 if (!string.IsNullOrEmpty(roleIds))
                 {
                     foreach (string roleId in roleIds.Split(','))
                     {
                         var userRoleEntity = new BcUserRoleEntity { UserId = (int?)id, RoleId = int.Parse(roleId) };
-                        EntityExecution.InsertEntity(userRoleEntity);
+                        EntityExecution.ExecInsert(userRoleEntity);
                     }
                 }
                 ts.Complete();
@@ -70,8 +70,8 @@ namespace stonefw.Biz.BaseModule
             entity.Password = Encryption.Encrypt(entity.Password);
             using (TransactionScope ts = new TransactionScope())
             {
-                EntityExecution.UpdateEntity(entity);
-                EntityExecution.DeleteEntity2<BcUserRoleEntity>(n => n.UserId == entity.UserId);
+                EntityExecution.ExecUpdate(entity);
+                EntityExecution.ExecDelete<BcUserRoleEntity>(n => n.UserId == entity.UserId);
                 if (!string.IsNullOrEmpty(roleIds))
                 {
                     foreach (string roleId in roleIds.Split(','))
@@ -81,7 +81,7 @@ namespace stonefw.Biz.BaseModule
                             UserId = entity.UserId,
                             RoleId = int.Parse(roleId)
                         };
-                        EntityExecution.InsertEntity(userRoleEntity);
+                        EntityExecution.ExecInsert(userRoleEntity);
                     }
                 }
                 ts.Complete();
@@ -90,18 +90,18 @@ namespace stonefw.Biz.BaseModule
         }
         public BcUserInfoEntity GetSingleBcUserInfo(int userId)
         {
-            var entity = EntityExecution.ReadEntity2<BcUserInfoEntity>(n => n.UserId == userId);
+            var entity = EntityExecution.ReadEntity<BcUserInfoEntity>(n => n.UserId == userId);
             if (entity != null) entity.Password = Encryption.Decrypt(entity.Password);
             return entity;
         }
 
         public List<BcUserInfoEntity> GetEnabledBcUserInfoList()
         {
-            return EntityExecution.ReadEntityList2<BcUserInfoEntity>(n => n.DeleteFlag == false && n.ActivityFlag == true);
+            return EntityExecution.ReadEntityList<BcUserInfoEntity>(n => n.DeleteFlag == false && n.ActivityFlag == true);
         }
         public LoginStatusEnum DoLogin(string userAccount, string password)
         {
-            var entity = EntityExecution.ReadEntity2<BcUserInfoEntity>(n => n.UserAccount == userAccount && n.DeleteFlag == false);
+            var entity = EntityExecution.ReadEntity<BcUserInfoEntity>(n => n.UserAccount == userAccount && n.DeleteFlag == false);
 
             if (entity == null)
                 return LoginStatusEnum.UserNotExist;
@@ -116,7 +116,7 @@ namespace stonefw.Biz.BaseModule
         }
         public BcUserInfoEntity GetBcUserInfoWithPermission(string userAccount)
         {
-            var entity = EntityExecution.ReadEntity2<BcUserInfoEntity>(n => n.UserAccount == userAccount && n.ActivityFlag == true && n.DeleteFlag == false);
+            var entity = EntityExecution.ReadEntity<BcUserInfoEntity>(n => n.UserAccount == userAccount && n.ActivityFlag == true && n.DeleteFlag == false);
 
             //获取用户的角色
             var userRoleList = new BcUserRoleBiz().GetBcUserRoleList(entity.UserId);

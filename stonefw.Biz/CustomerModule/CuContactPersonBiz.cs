@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Transactions;
 using stonefw.Dao.CustomerModule;
 using stonefw.Entity.CustomerModule;
-using stonefw.Utility.EntityExpressions;
+using stonefw.Utility.EntitySql.Data;
 
 namespace stonefw.Biz.CustomerModule
 {
@@ -16,16 +16,16 @@ namespace stonefw.Biz.CustomerModule
 
         public List<CuContactPersonEntity> GetCuContactPersonList()
         {
-            return EntityExecution.ReadEntityList2<CuContactPersonEntity>(n => n.DeleteFlag == false);
+            return EntityExecution.ReadEntityList<CuContactPersonEntity>(n => n.DeleteFlag == false);
         }
         public List<CuContactPersonEntity> GetCuContactPersonList(string cuId)
         {
-            return EntityExecution.ReadEntityList2<CuContactPersonEntity>(n => n.CuId == cuId && n.DeleteFlag == false);
+            return EntityExecution.ReadEntityList<CuContactPersonEntity>(n => n.CuId == cuId && n.DeleteFlag == false);
         }
         public void DeleteCuContactPerson(int cpId)
         {
             CuContactPersonEntity entity = new CuContactPersonEntity() { CpId = cpId, DeleteFlag = true };
-            EntityExecution.UpdateEntity(entity);
+            EntityExecution.ExecUpdate(entity);
         }
         public void AddNewCuContactPerson(CuContactPersonEntity entity)
         {
@@ -37,7 +37,7 @@ namespace stonefw.Biz.CustomerModule
             entity.Other = string.Empty;
             entity.Remark = string.Empty;
             entity.DeleteFlag = false;
-            EntityExecution.InsertEntity(entity);
+            EntityExecution.ExecInsert(entity);
         }
         public void UpdateCuContactPerson(CuContactPersonEntity entity)
         {
@@ -46,18 +46,18 @@ namespace stonefw.Biz.CustomerModule
                 using (var ts = new TransactionScope())
                 {
                     Dao.ClearDefault(entity.CuId);
-                    EntityExecution.UpdateEntity(entity);
+                    EntityExecution.ExecUpdate(entity);
                     ts.Complete();
                 }
             }
             else
             {
-                EntityExecution.UpdateEntity(entity);
+                EntityExecution.ExecUpdate(entity);
             }
         }
         public CuContactPersonEntity GetCuContactPersonEntity(int cpId)
         {
-            return EntityExecution.ReadEntity2<CuContactPersonEntity>(n => n.CpId == cpId && n.DeleteFlag == false);
+            return EntityExecution.ReadEntity<CuContactPersonEntity>(n => n.CpId == cpId && n.DeleteFlag == false);
         }
     }
 }

@@ -129,7 +129,7 @@ namespace stonefw.GenCode
             codeBuffer.AppendLine("using System;");
             codeBuffer.AppendLine("using System.Data;");
             codeBuffer.AppendLine("using System.Data.Common;");
-            codeBuffer.AppendLine("using stonefw.Utility.EntityExpressions.Attribute;");
+            codeBuffer.AppendLine("using stonefw.Utility.EntitySql.Entity;");
             codeBuffer.AppendLine("");
             codeBuffer.Append("namespace ").Append(this.cbNameSpaceList.Text.Split(':')[1]).AppendLine(".entity");
             codeBuffer.AppendLine("{");//命名空间
@@ -147,7 +147,7 @@ namespace stonefw.GenCode
             codeBuffer.AppendLine("using System;");
             codeBuffer.AppendLine("using System.Data;");
             codeBuffer.AppendLine("using System.Data.Common;");
-            codeBuffer.AppendLine("using stonefw.Utility.EntityExpressions.Attribute;");
+            codeBuffer.AppendLine("using stonefw.Utility.EntitySql.Entity;");
             codeBuffer.AppendLine("");
             codeBuffer.Append("namespace ").Append(this.cbNameSpaceList.Text.Split(':')[1]).AppendLine(".entity");
             codeBuffer.AppendLine("{");//命名空间
@@ -197,7 +197,7 @@ namespace stonefw.GenCode
             codeBuffer.AppendLine("using System.Collections;");
             codeBuffer.AppendLine("using System.Collections.Generic;");
             codeBuffer.AppendLine("using System.Linq;");
-            codeBuffer.AppendLine("using stonefw.Utility.EntityExpressions;");
+            codeBuffer.AppendLine("");
             codeBuffer.AppendLine("");
             codeBuffer.Append("namespace ").Append(this.cbNameSpaceList.Text.Split(':')[1]).AppendLine(".biz ");
             codeBuffer.AppendLine("{");//命名空间
@@ -213,7 +213,7 @@ namespace stonefw.GenCode
             //GetList
             codeBuffer.Append("public List<").Append(n).Append("Entity> Get").Append(n).AppendLine("List()");
             codeBuffer.AppendLine("{");
-            codeBuffer.Append("return EntityExecution.ReadEntityList2<").Append(n).AppendLine("Entity>(null);");
+            codeBuffer.Append("return EntityExecution.ReadEntityList<").Append(n).AppendLine("Entity>(null);");
             codeBuffer.AppendLine("}");
 
             //删除
@@ -231,7 +231,7 @@ namespace stonefw.GenCode
             codeBuffer.Append("public void Delete").Append(n).Append("(").Append(strDeleteArg1).AppendLine(")");
             codeBuffer.AppendLine("{");
             codeBuffer.Append(n).Append("Entity entity = new ").Append(n).Append("Entity() { ").Append(strDeleteArg2).AppendLine(" };");
-            codeBuffer.AppendLine("EntityExecution.DeleteEntity(entity);");
+            codeBuffer.AppendLine("EntityExecution.ExecDelete(entity);");
             codeBuffer.AppendLine("}");
 
             //新增
@@ -239,13 +239,13 @@ namespace stonefw.GenCode
             codeBuffer.AppendLine("{");
             //如果有自增长的字段，新增时设置为null
             if (!string.IsNullOrEmpty(identityColumns)) codeBuffer.Append("entity.").Append(identityColumns).AppendLine(" = null;");
-            codeBuffer.AppendLine("EntityExecution.InsertEntity(entity);");
+            codeBuffer.AppendLine("EntityExecution.ExecInsert(entity);");
             codeBuffer.AppendLine("}");
 
             //更新
             codeBuffer.Append("public void Update").Append(n).Append("(").Append(n).AppendLine("Entity entity)");
             codeBuffer.AppendLine("{");
-            codeBuffer.AppendLine("EntityExecution.UpdateEntity(entity);");
+            codeBuffer.AppendLine("EntityExecution.ExecUpdate(entity);");
             codeBuffer.AppendLine("}");
 
             string strQueryArg1 = "";
@@ -261,7 +261,7 @@ namespace stonefw.GenCode
             //查询
             codeBuffer.Append("public ").Append(n).Append("Entity Get").Append(n).Append("Entity(").Append(strQueryArg1).Append(")");
             codeBuffer.AppendLine("{");
-            codeBuffer.Append("return EntityExecution.ReadEntity2<").Append(n).Append("Entity>(n => ").Append(strQueryArg2).AppendLine(");");
+            codeBuffer.Append("return EntityExecution.ReadEntity<").Append(n).Append("Entity>(n => ").Append(strQueryArg2).AppendLine(");");
             codeBuffer.AppendLine("}");
 
             codeBuffer.AppendLine("}");//Class

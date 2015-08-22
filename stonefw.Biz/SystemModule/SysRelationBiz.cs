@@ -5,7 +5,7 @@ using stonefw.Entity.BaseModule;
 using stonefw.Entity.Enum;
 using stonefw.Entity.SystemModule;
 using stonefw.Utility;
-using stonefw.Utility.EntityExpressions;
+using stonefw.Utility.EntitySql.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,17 +34,17 @@ namespace stonefw.Biz.SystemModule
         public void DeleteSysRelation(string moduleId, string funcPointId)
         {
             SysRelationEntity entity = new SysRelationEntity() { ModuleId = moduleId, FuncPointId = funcPointId };
-            EntityExecution.DeleteEntity(entity);
+            EntityExecution.ExecDelete(entity);
             SetSysRelationListCache();
         }
         public void AddNewSysRelation(SysRelationEntity entity)
         {
-            EntityExecution.InsertEntity(entity);
+            EntityExecution.ExecInsert(entity);
             SetSysRelationListCache();
         }
         public void UpdateSysRelation(SysRelationEntity entity)
         {
-            EntityExecution.UpdateEntity(entity);
+            EntityExecution.ExecUpdate(entity);
             SetSysRelationListCache();
         }
         public SysRelationEntity GetSingleSysRelation(string moduleId, string funcPointId)
@@ -72,7 +72,7 @@ namespace stonefw.Biz.SystemModule
 
         private List<SysRelationEntity> SetSysRelationListCache()
         {
-            var listSysRelationEntity = EntityExecution.ReadEntityList2<SysRelationEntity>(null);
+            var listSysRelationEntity = EntityExecution.ReadEntityList<SysRelationEntity>();
             var listSysModuleEnumEntity = new SysModuleEnumBiz().GetSysModuleEnumList();
             var listSysFuncPointEnumEntity = new SysFuncPointEnumBiz().GetSysFuncPointEnumList();
             var query = from sysRelationEntity in listSysRelationEntity
