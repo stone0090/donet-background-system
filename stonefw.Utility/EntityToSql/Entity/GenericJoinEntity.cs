@@ -56,9 +56,9 @@ namespace stonefw.Utility.EntityToSql.Entity
         private void Join(GenericWhereEntity<TA> TA, GenericWhereEntity<TB> TB, Expression<Func<TA, TB, bool>> conditionExpression, JoinModeEnum joinMode)
         {
             if (conditionExpression.Body == null)
-                throw new Exception("未指定连接条件！");
+                throw new EntityToSqlException("未指定连接条件！");
             if (!(conditionExpression.Body is BinaryExpression) || !CheckJoinCondition(conditionExpression.Body))
-                throw new Exception("指定的连接条件无效！");
+                throw new EntityToSqlException("指定的连接条件无效！");
 
             JoinMode = joinMode;
             MainEntity = TA;

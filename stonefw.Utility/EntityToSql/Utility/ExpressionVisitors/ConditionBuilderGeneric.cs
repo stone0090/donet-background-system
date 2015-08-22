@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Data;
 
 using stonefw.Utility.EntityToSql.Entity;
-using stonefw.Utility.EntityToSql.GenSQL;
+using stonefw.Utility.EntityToSql.Data;
 
 namespace stonefw.Utility.EntityToSql.Utility.ExpressionVisitors
 {

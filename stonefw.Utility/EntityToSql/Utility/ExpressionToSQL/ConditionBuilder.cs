@@ -77,7 +77,7 @@ namespace stonefw.Utility.EntityToSql.Utility.ExpressionToSQL
                 case "system.data.sqlclient":
                     return new WhereExpressionConvertor();
                 default:
-                    throw new Exception("暂不支持数据库：" + providerName);
+                    throw new EntityToSqlException("暂不支持数据库：" + providerName);
             }
         }
         #endregion

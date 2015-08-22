@@ -2,7 +2,7 @@
 using System.Text;
 
 using stonefw.Utility.EntityToSql.Entity;
-using stonefw.Utility.EntityToSql.GenSQL;
+using stonefw.Utility.EntityToSql.Data;
 
 namespace stonefw.Utility.EntityToSql.Utility.ExpressionToSQL.SQLConvertor.MSSQL
 {
@@ -22,7 +22,7 @@ namespace stonefw.Utility.EntityToSql.Utility.ExpressionToSQL.SQLConvertor.MSSQL
             string dbTableName = DbTableMapping.GetDbTableName(theWhereEntity.EntityType);
             if (string.IsNullOrEmpty(dbTableName))
             {
-                throw new Exception(string.Format("未给类型{0}设置数据表信息!", typeof(TA).FullName));
+                throw new EntityToSqlException(string.Format("未给类型{0}设置数据表信息!", typeof(TA).FullName));
             }
             StringBuilder tsqlBuffer = new StringBuilder(2048);
             if (theWhereEntity.DisableTableAlias)

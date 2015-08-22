@@ -9,7 +9,7 @@ using stonefw.Utility.EntityToSql.Entity;
 using stonefw.Utility.EntityToSql.Attribute;
 using System.Data.Common;
 
-namespace stonefw.Utility.EntityToSql.GenSQL
+namespace stonefw.Utility.EntityToSql.Data
 {
     internal static class DbTableMapping
     {
@@ -157,6 +157,7 @@ namespace stonefw.Utility.EntityToSql.GenSQL
             return buffer.EntityFieldNames;
         }
 
+
         public static List<PropertyInfo> GetEntityPropertyInfos(Type entityType)
         {
             var buffer = GetDbTableMappingEntity(entityType);
@@ -178,6 +179,7 @@ namespace stonefw.Utility.EntityToSql.GenSQL
             }
             return entityPropertyInfos;
         }
+
 
         public static string GetDbColumnName(Type entityType, string entityFieldName)
         {
@@ -209,6 +211,7 @@ namespace stonefw.Utility.EntityToSql.GenSQL
             return dbColumnNames;
         }
 
+
         public static DbType GetDbColumnType(Type entityType, string entityFieldName)
         {
             var buffer = GetDbTableMappingEntity(entityType);
@@ -231,6 +234,7 @@ namespace stonefw.Utility.EntityToSql.GenSQL
             return dbColumnTypes;
         }
 
+
         public static List<string> GetPrimaryKeyOfEntityField(Type entityType)
         {
             var buffer = GetDbTableMappingEntity(entityType);
@@ -241,5 +245,16 @@ namespace stonefw.Utility.EntityToSql.GenSQL
         }
 
 
+        public static bool HasPrimaryKey(Type entityType)
+        {
+            var list = GetPrimaryKeyOfEntityField(entityType);
+            return !(list != null && list.Count > 0);
+        }
+
+
+        public static string GetDbTableName(this SqlEntity sqlEntity)
+        {
+            return GetDbTableName(sqlEntity.GetType());
+        }
     }
 }

@@ -10,8 +10,6 @@ namespace stonefw.Utility.EntityToSql.Attribute
             this.TableName = tableName;
         }
 
-        public string TableName { get; set; }
-
-        
+        public string TableName { get; set; }        
     }
 }

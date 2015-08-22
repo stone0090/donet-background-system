@@ -45,22 +45,23 @@
   <ItemGroup>
     <Compile Include="ChinaDate.cs" />
     <Compile Include="ConfigHelper.cs" />
-    <Compile Include="DataCache.cs" />
-    <Compile Include="Encryption.cs" />
     <Compile Include="Database.cs" />
+    <Compile Include="DataCache.cs" />
+    <Compile Include="DataTableHepler.cs" />
+    <Compile Include="Encryption.cs" />
     <Compile Include="EntityToSql\Attribute\Field.cs" />
     <Compile Include="EntityToSql\Attribute\Table.cs" />
     <Compile Include="EntityToSql\Data\EntityInstanceTool.cs" />
-    <Compile Include="EntityToSql\Data\EntityOperations.cs" />
-    <Compile Include="EntityToSql\Data\LambdaDelegates.cs" />
+    <Compile Include="EntityToSql\Data\EntityOperation.cs" />
     <Compile Include="EntityToSql\Data\SqlCreator.cs" />
+    <Compile Include="EntityToSql\Data\SqlEntity.cs" />
     <Compile Include="EntityToSql\EntityExecution.cs" />
-    <Compile Include="EntityToSql\Entity\EntityExpressionsException.cs" />
-    <Compile Include="EntityToSql\Entity\GenericPairsEntity.cs" />
+    <Compile Include="EntityToSql\Entity\EntityToSqlException.cs" />
+    <Compile Include="EntityToSql\Entity\GenericPairEntity.cs" />
     <Compile Include="EntityToSql\Entity\GenericJoinEntity.cs" />
     <Compile Include="EntityToSql\Entity\GenericWhereEntity.cs" />
     <Compile Include="EntityToSql\Entity\JoinModeEnum.cs" />
-    <Compile Include="EntityToSql\GenSQL\SqlType.cs" />
+    <Compile Include="EntityToSql\Data\SqlType.cs" />
     <Compile Include="EntityToSql\Utility\BuildDbColumnSelect.cs" />
     <Compile Include="EntityToSql\Utility\BuildDbQuerysGeneric.cs" />
     <Compile Include="EntityToSql\Utility\DiagnoseUtilitys\PreGenerateSQL.cs" />
@@ -85,10 +86,9 @@
     <Compile Include="EntityToSql\Utility\ExpressionVisitors\MethodCallVisitor.cs" />
     <Compile Include="EntityToSql\Utility\ExpressionVisitors\PartialEvaluator.cs" />
     <Compile Include="EntityToSql\Entity\DbTableMappingEntity.cs" />
-    <Compile Include="EntityToSql\GenSQL\DbTableMapping.cs" />
-    <Compile Include="DataTableHepler.cs" />
-    <Compile Include="JsonHelper.cs" />
+    <Compile Include="EntityToSql\Data\DbTableMapping.cs" />
     <Compile Include="EnumHelper.cs" />
+    <Compile Include="JsonHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValidationHelper.cs" />
   </ItemGroup>

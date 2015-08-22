@@ -5,7 +5,7 @@
 //using System.Text;
 
 //using stonefw.Utility.EntityToSql.Entity;
-//using stonefw.Utility.EntityToSql.GenSQL;
+//
 
 //namespace stonefw.Utility.EntityToSql.Utilitys
 //{

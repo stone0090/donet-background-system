@@ -1,4 +1,5 @@
-﻿using System;
+﻿using stonefw.Utility.EntityToSql.Entity;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
@@ -85,7 +86,7 @@ namespace stonefw.Utility.EntityToSql.Utility.ExpressionToSQL
                 case ExpressionType.ListInit:
                     return this.VisitListInit((ListInitExpression)exp);
                 default:
-                    throw new Exception(string.Format("Unhandled expression type: '{0}'", exp.NodeType));
+                    throw new EntityToSqlException(string.Format("Unhandled expression type: '{0}'", exp.NodeType));
             }
         }
 
@@ -100,7 +101,7 @@ namespace stonefw.Utility.EntityToSql.Utility.ExpressionToSQL
                 case MemberBindingType.ListBinding:
                     return this.VisitMemberListBinding((MemberListBinding)binding);
                 default:
-                    throw new Exception(string.Format("Unhandled binding type '{0}'", binding.BindingType));
+                    throw new EntityToSqlException(string.Format("Unhandled binding type '{0}'", binding.BindingType));
             }
         }
 

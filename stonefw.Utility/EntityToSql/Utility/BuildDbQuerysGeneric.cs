@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using stonefw.Utility.EntityToSql.Utility.ExpressionVisitors;
 using stonefw.Utility.EntityToSql.Entity;
-using stonefw.Utility.EntityToSql.GenSQL;
+using stonefw.Utility.EntityToSql.Data;
 
 namespace stonefw.Utility.EntityToSql.Utilitys
 {
@@ -22,19 +22,16 @@ namespace stonefw.Utility.EntityToSql.Utilitys
         public static string BuildCondition<TA>(GenericWhereEntity<TA> theWhereEntity)
         {
             string dbTableName = DbTableMapping.GetDbTableName(theWhereEntity.EntityType);
+
             if (string.IsNullOrEmpty(dbTableName))
-            {
-                throw new Exception(string.Format("未给类型{0}设置数据表信息!", typeof(TA).FullName));
-            }
+                throw new EntityToSqlException(string.Format("未给类型{0}设置数据表信息!", typeof(TA).FullName));
+
             StringBuilder tsqlBuffer = new StringBuilder(2048);
+
             if (theWhereEntity.DisableTableAlias)
-            {
                 tsqlBuffer.Append(" FROM [").Append(dbTableName).Append("]");
-            }
             else
-            {
                 tsqlBuffer.Append(" FROM [").Append(dbTableName).Append("] AS ").Append(theWhereEntity.TableName);
-            }
 
             if (theWhereEntity.WhereExpressions.Count > 0)
             {
@@ -44,10 +41,10 @@ namespace stonefw.Utility.EntityToSql.Utilitys
                 {
                     ConditionBuilderGeneric<TA> conditionBuilder = new ConditionBuilderGeneric<TA>((theWhereEntity.DisableTableAlias ? dbTableName : theWhereEntity.TableName), theWhereEntity);
                     conditionBuilder.Build(theWhereEntity.WhereExpressions[i]);
+
                     if (i > 0)
-                    {
                         tsqlBuffer.Append(" AND ");
-                    }
+
                     tsqlBuffer.Append(conditionBuilder.Condition);
 
                     if (conditionBuilder.Arguments != null && conditionBuilder.Arguments.Length > 0)
@@ -73,6 +70,7 @@ namespace stonefw.Utility.EntityToSql.Utilitys
             //重置表的别名
             joinEntity.MainEntity.ResetTableName(0);
             joinEntity.EntityToJoin.ResetTableName(1);
+
             //预生成查询条件
             BuildConditionForJoin(joinEntity.MainEntity);
             BuildConditionForJoin(joinEntity.EntityToJoin);
@@ -80,18 +78,18 @@ namespace stonefw.Utility.EntityToSql.Utilitys
             //生成最终条件
             string dbTableName = DbTableMapping.GetDbTableName(joinEntity.MainEntity.EntityType);
             string joinDBTableName = DbTableMapping.GetDbTableName(joinEntity.EntityToJoin.EntityType);
+
             StringBuilder tsqlBuffer = new StringBuilder(2048);
             tsqlBuffer.Append(" FROM [").Append(dbTableName).Append("] AS ").Append(joinEntity.MainEntity.TableName);
             if (joinEntity.JoinMode == JoinModeEnum.InnerJoin)
-            {
                 tsqlBuffer.Append(" INNER JOIN [");
-            }
+
             else if (joinEntity.JoinMode == JoinModeEnum.InnerJoin)
-            {
                 tsqlBuffer.Append(" LEFT JOIN [");
-            }
+
             tsqlBuffer.Append(joinDBTableName).Append("] AS ").Append(joinEntity.EntityToJoin.TableName);
             tsqlBuffer.Append(" ON ");
+
             string joinCon = JoinConditionBuilderGeneric.GetJoinCondition(joinEntity);
             tsqlBuffer.Append(joinCon);
 
@@ -102,6 +100,7 @@ namespace stonefw.Utility.EntityToSql.Utilitys
                 addWherePart = true;
                 tsqlBuffer.Append(theWhereEntity.WhereCondition);
             }
+
             if (!string.IsNullOrEmpty(joinEntity.EntityToJoin.WhereCondition))
             {
                 tsqlBuffer.Append(addWherePart ? " AND " : " WHERE ");
@@ -130,6 +129,7 @@ namespace stonefw.Utility.EntityToSql.Utilitys
             //重置表的别名
             joinEntity.MainEntity.ResetTableName(0);
             joinEntity.EntityToJoin.ResetTableName(1);
+
             //预生成查询条件
             BuildConditionForJoin(joinEntity.MainEntity);
             BuildConditionForJoin(joinEntity.EntityToJoin);
@@ -137,18 +137,19 @@ namespace stonefw.Utility.EntityToSql.Utilitys
             //生成最终条件
             string dbTableName = DbTableMapping.GetDbTableName(joinEntity.MainEntity.EntityType);
             string joinDBTableName = DbTableMapping.GetDbTableName(joinEntity.EntityToJoin.EntityType);
+
             StringBuilder tsqlBuffer = new StringBuilder(2048);
             tsqlBuffer.Append(" FROM [").Append(dbTableName).Append("] AS ").Append(joinEntity.MainEntity.TableName);
+
             if (joinEntity.JoinMode == JoinModeEnum.InnerJoin)
-            {
                 tsqlBuffer.Append(" INNER JOIN [");
-            }
+
             else if (joinEntity.JoinMode == JoinModeEnum.InnerJoin)
-            {
                 tsqlBuffer.Append(" LEFT JOIN [");
-            }
+
             tsqlBuffer.Append(joinDBTableName).Append("] AS ").Append(joinEntity.EntityToJoin.TableName);
             tsqlBuffer.Append(" ON ");
+
             string joinCon = JoinConditionBuilderGeneric.GetJoinCondition(joinEntity);
             tsqlBuffer.Append(joinCon);
 
@@ -159,6 +160,7 @@ namespace stonefw.Utility.EntityToSql.Utilitys
                 addWherePart = true;
                 tsqlBuffer.Append(theWhereEntity.WhereCondition);
             }
+
             if (!string.IsNullOrEmpty(joinEntity.EntityToJoin.WhereCondition))
             {
                 tsqlBuffer.Append(addWherePart ? " AND " : " WHERE ");
@@ -192,6 +194,7 @@ namespace stonefw.Utility.EntityToSql.Utilitys
             joinEntity1.MainEntity.ResetTableName(0);
             joinEntity1.EntityToJoin.ResetTableName(1);
             joinEntity2.EntityToJoin.ResetTableName(2);
+
             //预生成查询条件
             BuildConditionForJoin(theWhereEntity);
             BuildConditionForJoin(joinEntity1.EntityToJoin);
@@ -201,32 +204,31 @@ namespace stonefw.Utility.EntityToSql.Utilitys
             string dbTableName = DbTableMapping.GetDbTableName(theWhereEntity.EntityType);
             string joinDBTableName1 = DbTableMapping.GetDbTableName(joinEntity1.EntityToJoin.EntityType);
             string joinDBTableName2 = DbTableMapping.GetDbTableName(joinEntity2.EntityToJoin.EntityType);
+
             StringBuilder tsqlBuffer = new StringBuilder(2048);
             tsqlBuffer.Append(" FROM [").Append(dbTableName).Append("] AS ").Append(theWhereEntity.TableName);
 
             if (joinEntity1.JoinMode == JoinModeEnum.InnerJoin)
-            {
                 tsqlBuffer.Append(" INNER JOIN [");
-            }
+
             else if (joinEntity1.JoinMode == JoinModeEnum.InnerJoin)
-            {
                 tsqlBuffer.Append(" LEFT JOIN [");
-            }
+
             tsqlBuffer.Append(joinDBTableName1).Append("] AS ").Append(joinEntity1.EntityToJoin.TableName);
             tsqlBuffer.Append(" ON ");
+
             string joinCon = JoinConditionBuilderGeneric.GetJoinCondition(joinEntity1);
             tsqlBuffer.Append(joinCon);
 
             if (joinEntity2.JoinMode == JoinModeEnum.InnerJoin)
-            {
                 tsqlBuffer.Append(" INNER JOIN [");
-            }
+
             else if (joinEntity2.JoinMode == JoinModeEnum.InnerJoin)
-            {
                 tsqlBuffer.Append(" LEFT JOIN [");
-            }
+
             tsqlBuffer.Append(joinDBTableName2).Append("] AS ").Append(joinEntity2.EntityToJoin.TableName);
             tsqlBuffer.Append(" ON ");
+
             joinCon = JoinConditionBuilderGeneric.GetJoinCondition(joinEntity2);
             tsqlBuffer.Append(joinCon);
 
@@ -237,12 +239,14 @@ namespace stonefw.Utility.EntityToSql.Utilitys
                 addWherePart = true;
                 tsqlBuffer.Append(theWhereEntity.WhereCondition);
             }
+
             if (!string.IsNullOrEmpty(joinEntity1.EntityToJoin.WhereCondition))
             {
                 tsqlBuffer.Append(addWherePart ? " AND " : " WHERE ");
                 addWherePart = true;
                 tsqlBuffer.Append(joinEntity1.EntityToJoin.WhereCondition);
             }
+
             if (!string.IsNullOrEmpty(joinEntity2.EntityToJoin.WhereCondition))
             {
                 tsqlBuffer.Append(addWherePart ? " AND " : " WHERE ");
@@ -284,10 +288,10 @@ namespace stonefw.Utility.EntityToSql.Utilitys
                 {
                     ConditionBuilderGeneric<TA> conditionBuilder = new ConditionBuilderGeneric<TA>(theWhereEntity.TableName, theWhereEntity);
                     conditionBuilder.Build(theWhereEntity.WhereExpressions[i]);
-                    if (i > 0)
-                    {
+
+                    if (i > 0)                    
                         tsqlBuffer.Append(" AND ");
-                    }
+                    
                     tsqlBuffer.Append(conditionBuilder.Condition);
 
                     if (conditionBuilder.Arguments != null && conditionBuilder.Arguments.Length > 0)

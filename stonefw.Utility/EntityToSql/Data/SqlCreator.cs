@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Text;
 using stonefw.Utility.EntityToSql.Utilitys;
 using stonefw.Utility.EntityToSql.Entity;
-using stonefw.Utility.EntityToSql.GenSQL;
 
 namespace stonefw.Utility.EntityToSql.Data
 {
@@ -27,20 +26,17 @@ namespace stonefw.Utility.EntityToSql.Data
             StringBuilder sqlBuilder = new StringBuilder();
             sqlBuilder.Append("SELECT ");
 
-            if (topCount > 0)
-                sqlBuilder.AppendFormat("TOP {0} ", topCount);
+            if (topCount > 0) sqlBuilder.AppendFormat("TOP {0} ", topCount);
 
             for (int i = 0; i < dbColumnNamesA.Count; i++)
             {
-                if (i > 0)
-                    sqlBuilder.Append(", ");
+                if (i > 0) sqlBuilder.Append(", ");
                 sqlBuilder.Append(string.Format("{0}.[{1}]", tableNameA, dbColumnNamesA[i]));
             }
 
             for (int i = 0; i < dbColumnNamesB.Count; i++)
             {
-                if (dbColumnNamesA.Count > 0)
-                    sqlBuilder.Append(", ");
+                if (dbColumnNamesA.Count > 0) sqlBuilder.Append(", ");
                 sqlBuilder.Append(string.Format("{0}.[{1}]", tableNameB, dbColumnNamesB[i]));
             }
 
@@ -53,16 +49,22 @@ namespace stonefw.Utility.EntityToSql.Data
         /// <param name="tableName"></param>
         /// <param name="dbColumnNames"></param>
         /// <returns></returns>
-        public static string GetMemberSelectSql(string tableName, List<string> dbColumnNames)
+        public static string GetMemberSelectSql<T>(int topCount)
         {
-            return GetMemberSelectSql(tableName, dbColumnNames, 0);
+            List<string> dbColumnNames = null;
+            return GetMemberSelectSql<T>(dbColumnNames, topCount);
         }
 
         /// <summary>
         /// 创建成员查询的Sql语句
         /// </summary>
-        public static string GetMemberSelectSql(string tableName, List<string> dbColumnNames, int topCount)
+        public static string GetMemberSelectSql<T>(List<string> dbColumnNames = null, int topCount = 0)
         {
+            string tableName = DbTableMapping.GetDbTableName(typeof(T));
+
+            if (dbColumnNames == null)
+                dbColumnNames = DbTableMapping.GetDbColumnNames(typeof(T));
+
             StringBuilder sqlBuilder = new StringBuilder();
             sqlBuilder.Append("SELECT ");
 
@@ -71,8 +73,7 @@ namespace stonefw.Utility.EntityToSql.Data
 
             for (int i = 0; i < dbColumnNames.Count; i++)
             {
-                if (i > 0)
-                    sqlBuilder.Append(", ");
+                if (i > 0) sqlBuilder.Append(", ");
                 sqlBuilder.Append(string.Format("{0}.[{1}]", tableName, dbColumnNames[i]));
             }
 
@@ -82,12 +83,13 @@ namespace stonefw.Utility.EntityToSql.Data
         /// <summary>
         /// 创建成员查询的Sql语句
         /// </summary>
-        public static string GetMemberSelectSql(string tableName, Type entityType, MemberExpression expression, int topCount)
+        public static string GetMemberSelectSql<T>(MemberExpression expression, int topCount)
         {
             if (expression == null)
                 return "";
 
-            string dbColumnName = DbTableMapping.GetDbColumnName(entityType, expression.Member.Name);
+            string dbTableName = DbTableMapping.GetDbTableName(typeof(T));
+            string dbColumnName = DbTableMapping.GetDbColumnName(typeof(T), expression.Member.Name);
 
             StringBuilder sqlBuilder = new StringBuilder();
             sqlBuilder.Append("SELECT ");
@@ -95,10 +97,10 @@ namespace stonefw.Utility.EntityToSql.Data
             if (topCount > 0)
                 sqlBuilder.AppendFormat("TOP {0} ", topCount);
 
-            if (string.IsNullOrEmpty(tableName))
+            if (string.IsNullOrEmpty(dbTableName))
                 sqlBuilder.AppendFormat("[{0}] ", dbColumnName);
             else
-                sqlBuilder.AppendFormat("{0}.[{1}] ", tableName, dbColumnName);
+                sqlBuilder.AppendFormat("{0}.[{1}] ", dbTableName, dbColumnName);
 
             return sqlBuilder.ToString();
         }
@@ -106,10 +108,12 @@ namespace stonefw.Utility.EntityToSql.Data
         /// <summary>
         /// 创建成员查询的Sql语句
         /// </summary>
-        public static string GetMemberSelectSql(string tableName, Type entityType, NewExpression expression, int topCount)
+        public static string GetMemberSelectSql<T>(NewExpression expression, int topCount)
         {
             if (expression == null)
                 return "";
+
+            string dbTableName = DbTableMapping.GetDbTableName(typeof(T));
 
             StringBuilder sqlBuilder = new StringBuilder();
             sqlBuilder.Append("SELECT ");
@@ -123,68 +127,54 @@ namespace stonefw.Utility.EntityToSql.Data
                     sqlBuilder.Append(", ");
 
                 string memberName = expression.Members[i].Name;
-                string dbColumnName = DbTableMapping.GetDbColumnName(entityType, memberName);
+                string dbColumnName = DbTableMapping.GetDbColumnName(typeof(T), memberName);
 
-                if (string.IsNullOrEmpty(tableName))
+                if (string.IsNullOrEmpty(dbTableName))
                     sqlBuilder.Append(string.Format("[{0}]", dbColumnName));
                 else
-                    sqlBuilder.Append(string.Format("{0}.[{1}]", tableName, dbColumnName));
+                    sqlBuilder.Append(string.Format("{0}.[{1}]", dbTableName, dbColumnName));
             }
+
             sqlBuilder.Append(" ");
             return sqlBuilder.ToString();
         }
 
-        /// <summary>
-        /// 填充Sql参数
-        /// </summary>
-        public static void FillSqlParameters<E>(Database db, DbCommand cmd, GenericWhereEntity<E> whereEntity)
-        {
-            for (int i = 0; i < whereEntity.WhereParameterNames.Count; i++)
-            {
-                db.AddInParameter(cmd, whereEntity.WhereParameterNames[i], whereEntity.WhereParameterTypes[i], whereEntity.WhereParameterValues[i]);
-            }
-        }
 
         /// <summary>
         /// 生成用于插入的Sql命令
         /// </summary>
-        public static DbCommand CreateInsertCommand<T>(T entity, Database db)
+        public static DbCommand CreateInsertCommand<T>(Database db, T entity)
         {
             var entityType = typeof(T);
-            List<string> entityFieldNames = DbTableMapping.GetEntityFieldNames(entityType);
-            List<PropertyInfo> entityPropertyInfos = DbTableMapping.GetEntityPropertyInfos(entityType);
 
-            List<string> notNullEntityMembers = EntityInstanceTool.GetNotNullEntityMembers(entity, entityFieldNames, entityPropertyInfos);
-            List<PropertyInfo> notNullEntityPropertys = EntityInstanceTool.GetNotNullEntityPropertyInfos(entity, entityPropertyInfos);
-
-            List<string> notNullDBCloumns = DbTableMapping.GetDbColumnNames(entityType, notNullEntityMembers);
-            List<DbType> notNullColumnTypes = DbTableMapping.GetDbColumnTypes(entityType, notNullEntityMembers);
+            List<string> notNullEntityFields = EntityInstanceTool.GetNotNullFields(entity);
+            List<string> notNullDbCloumnNames = DbTableMapping.GetDbColumnNames(entityType, notNullEntityFields);
+            List<DbType> notNullDbColumnTypes = DbTableMapping.GetDbColumnTypes(entityType, notNullEntityFields);
+            List<PropertyInfo> notNullEntityPropertys = EntityInstanceTool.GetNotNullEntityPropertys(entity);
 
             StringBuilder sqlBuilder = new StringBuilder();
             sqlBuilder.Append("INSERT INTO [").Append(DbTableMapping.GetDbTableName(entity.GetType())).Append("] (");
 
-            for (int i = 0; i < notNullDBCloumns.Count; i++)
+            for (int i = 0; i < notNullDbCloumnNames.Count; i++)
             {
-                if (i > 0)
-                    sqlBuilder.Append(", ");
-                sqlBuilder.Append("[").Append(notNullDBCloumns[i]).Append("]");
+                if (i > 0) sqlBuilder.Append(", ");
+                sqlBuilder.Append("[").Append(notNullDbCloumnNames[i]).Append("]");
             }
 
             sqlBuilder.Append(") VALUES (");
 
-            for (int i = 0; i < notNullDBCloumns.Count; i++)
+            for (int i = 0; i < notNullDbCloumnNames.Count; i++)
             {
-                if (i > 0)
-                    sqlBuilder.Append(", ");
-                sqlBuilder.Append("@").Append(notNullDBCloumns[i]);
+                if (i > 0) sqlBuilder.Append(", ");
+                sqlBuilder.Append("@").Append(notNullDbCloumnNames[i]);
             }
 
             sqlBuilder.Append(")");
 
             DbCommand cmd = db.GetSqlStringCommand(sqlBuilder.ToString());
-            for (int i = 0; i < notNullDBCloumns.Count; i++)
+            for (int i = 0; i < notNullDbCloumnNames.Count; i++)
             {
-                db.AddInParameter(cmd, "@" + notNullDBCloumns[i], notNullColumnTypes[i], notNullEntityPropertys[i].GetValue(entity, null));
+                db.AddInParameter(cmd, "@" + notNullDbCloumnNames[i], notNullDbColumnTypes[i], notNullEntityPropertys[i].GetValue(entity, null));
             }
 
             return cmd;
@@ -193,69 +183,71 @@ namespace stonefw.Utility.EntityToSql.Data
         /// <summary>
         /// 生成用于插入的Sql命令(返回标识值)
         /// </summary>
-        public static DbCommand CreateInsertCommandWithIdentity<T>(T entity, Database db)
+        public static DbCommand CreateInsertCommandWithIdentity<T>(Database db, T entity)
         {
             var entityType = typeof(T);
-            List<string> entityFieldNames = DbTableMapping.GetEntityFieldNames(entityType);
-            List<PropertyInfo> entityPropertyInfos = DbTableMapping.GetEntityPropertyInfos(entityType);
 
-            List<string> notNullEntityMembers = EntityInstanceTool.GetNotNullEntityMembers(entity, entityFieldNames, entityPropertyInfos);
-            List<PropertyInfo> notNullEntityPropertys = EntityInstanceTool.GetNotNullEntityPropertyInfos(entity, entityPropertyInfos);
-
-            List<string> notNullDBCloumns = DbTableMapping.GetDbColumnNames(entityType, notNullEntityMembers);
-            List<DbType> notNullColumnTypes = DbTableMapping.GetDbColumnTypes(entityType, notNullEntityMembers);
+            List<string> notNullEntityFields = EntityInstanceTool.GetNotNullFields(entity);
+            List<string> notNullDbCloumnNames = DbTableMapping.GetDbColumnNames(entityType, notNullEntityFields);
+            List<DbType> notNullDbColumnTypes = DbTableMapping.GetDbColumnTypes(entityType, notNullEntityFields);
+            List<PropertyInfo> notNullEntityPropertys = EntityInstanceTool.GetNotNullEntityPropertys(entity);
 
             StringBuilder sqlBuilder = new StringBuilder();
             sqlBuilder.Append("INSERT INTO [").Append(DbTableMapping.GetDbTableName(entityType)).Append("] (");
-            for (int i = 0; i < notNullDBCloumns.Count; i++)
+            for (int i = 0; i < notNullDbCloumnNames.Count; i++)
             {
-                if (i > 0)
-                    sqlBuilder.Append(", ");
-                sqlBuilder.Append("[").Append(notNullDBCloumns[i]).Append("]");
+                if (i > 0) sqlBuilder.Append(", ");
+                sqlBuilder.Append("[").Append(notNullDbCloumnNames[i]).Append("]");
             }
 
             sqlBuilder.Append(") VALUES (");
 
-            for (int i = 0; i < notNullDBCloumns.Count; i++)
+            for (int i = 0; i < notNullDbCloumnNames.Count; i++)
             {
-                if (i > 0)
-                    sqlBuilder.Append(", ");
-                sqlBuilder.Append("@").Append(notNullDBCloumns[i]);
+                if (i > 0) sqlBuilder.Append(", ");
+                sqlBuilder.Append("@").Append(notNullDbCloumnNames[i]);
             }
 
             sqlBuilder.Append(") select @@identity");
 
             DbCommand cmd = db.GetSqlStringCommand(sqlBuilder.ToString());
-            for (int i = 0; i < notNullDBCloumns.Count; i++)
+            for (int i = 0; i < notNullDbCloumnNames.Count; i++)
             {
-                db.AddInParameter(cmd, "@" + notNullDBCloumns[i], notNullColumnTypes[i], notNullEntityPropertys[i].GetValue(entity, null));
+                db.AddInParameter(cmd, "@" + notNullDbCloumnNames[i], notNullDbColumnTypes[i], notNullEntityPropertys[i].GetValue(entity, null));
             }
 
             return cmd;
         }
 
+
         /// <summary>
         /// 生成用于更新的Sql命令
         /// </summary>
-        public static DbCommand CreateUpdateCommand(Database db, Type entityType, object entityInstance, List<string> notNullEntityMembers, List<string> notNullDBCloumns, List<PropertyInfo> notNullEntityPropertys, List<string> dbPrimaryKeys, List<string> primaryKeyDBCloumns)
+        public static DbCommand CreateUpdateCommand<T>(Database db, T entity)
         {
-            DbCommand cmd = null;
-            List<DbType> notNullColumnTypes = DbTableMapping.GetDbColumnTypes(entityType, notNullEntityMembers);
-            List<DbType> primaryKeyColumnTypes = DbTableMapping.GetDbColumnTypes(entityType, dbPrimaryKeys);
+            Type entityType = typeof(T);
+
+            List<string> primaryKeyEntityFieldNames = DbTableMapping.GetPrimaryKeyOfEntityField(entityType);
+            List<string> primaryKeyDbCloumnNames = DbTableMapping.GetDbColumnNames(entityType, primaryKeyEntityFieldNames);
+            List<DbType> primaryKeyDbColumnTypes = DbTableMapping.GetDbColumnTypes(entityType, primaryKeyEntityFieldNames);
+
+            List<string> notNullEntityFields = EntityInstanceTool.GetNotNullFields(entity);
+            List<string> notNullDbCloumnNames = DbTableMapping.GetDbColumnNames(entityType, notNullEntityFields);
+            List<DbType> notNullDbColumnTypes = DbTableMapping.GetDbColumnTypes(entityType, notNullEntityFields);
+            List<PropertyInfo> notNullEntityPropertys = EntityInstanceTool.GetNotNullEntityPropertys(entity);
 
             //生成Sql语句
             List<string> parameterIndex = new List<string>();
             StringBuilder sqlBuilder = new StringBuilder();
             sqlBuilder.Append("UPDATE [").Append(DbTableMapping.GetDbTableName(entityType)).Append("] SET ");
             bool firstColumn = true;
-            for (int i = 0; i < notNullDBCloumns.Count; i++)
+            for (int i = 0; i < notNullDbCloumnNames.Count; i++)
             {
-                string loopColumn = notNullDBCloumns[i];
+                string loopColumn = notNullDbCloumnNames[i];
+
                 //当前模式主键不更新
-                if (primaryKeyDBCloumns.Contains(loopColumn))
-                {
+                if (primaryKeyDbCloumnNames.Contains(loopColumn))
                     continue;
-                }
 
                 sqlBuilder.Append(firstColumn ? "" : ",");
                 firstColumn = false;
@@ -265,38 +257,43 @@ namespace stonefw.Utility.EntityToSql.Data
 
             //WHERE
             sqlBuilder.Append(" WHERE ");
-            for (int i = 0; i < primaryKeyDBCloumns.Count; i++)
+            for (int i = 0; i < primaryKeyDbCloumnNames.Count; i++)
             {
                 sqlBuilder.Append((i > 0) ? " AND " : "");
-                sqlBuilder.AppendFormat("([{0}]=@{0})", primaryKeyDBCloumns[i]);
-                parameterIndex.Add(primaryKeyDBCloumns[i]);
+                sqlBuilder.AppendFormat("([{0}]=@{0})", primaryKeyDbCloumnNames[i]);
+                parameterIndex.Add(primaryKeyDbCloumnNames[i]);
             }
 
-            cmd = db.GetSqlStringCommand(sqlBuilder.ToString());
+            DbCommand cmd = db.GetSqlStringCommand(sqlBuilder.ToString());
             for (int i = 0; i < parameterIndex.Count; i++)
             {
-                int pIndex = notNullDBCloumns.IndexOf(parameterIndex[i]);
-                db.AddInParameter(cmd, "@" + notNullDBCloumns[pIndex], notNullColumnTypes[pIndex], notNullEntityPropertys[pIndex].GetValue(entityInstance, null));
+                int pIndex = notNullDbCloumnNames.IndexOf(parameterIndex[i]);
+                db.AddInParameter(cmd, "@" + notNullDbCloumnNames[pIndex], notNullDbColumnTypes[pIndex], notNullEntityPropertys[pIndex].GetValue(entity, null));
             }
+
             return cmd;
         }
 
         /// <summary>
         /// 生成用于更新的Sql命令
         /// </summary>
-        public static DbCommand CreateUpdateCommand<E>(Database db, GenericWhereEntity<E> whereEntity, Type entityType, object entityInstance, List<string> notNullEntityMembers, List<string> notNullDBCloumns, List<PropertyInfo> notNullEntityPropertys)
+        public static DbCommand CreateUpdateCommand<T>(Database db, T entity, GenericWhereEntity<T> whereEntity)
         {
-            DbCommand cmd = null;
-            List<DbType> notNullColumnTypes = DbTableMapping.GetDbColumnTypes(entityType, notNullEntityMembers);
+            Type entityType = typeof(T);
+
+            List<string> notNullEntityFields = EntityInstanceTool.GetNotNullFields(entity);
+            List<string> notNullDbCloumnNames = DbTableMapping.GetDbColumnNames(entityType, notNullEntityFields);
+            List<DbType> notNullDbColumnTypes = DbTableMapping.GetDbColumnTypes(entityType, notNullEntityFields);
+            List<PropertyInfo> notNullEntityPropertys = EntityInstanceTool.GetNotNullEntityPropertys(entity);
 
             //生成Sql语句
             List<string> parameterIndex = new List<string>();
             StringBuilder sqlBuilder = new StringBuilder();
             sqlBuilder.AppendFormat("UPDATE {0} SET ", whereEntity.TableName);
             bool firstColumn = true;
-            for (int i = 0; i < notNullDBCloumns.Count; i++)
+            for (int i = 0; i < notNullDbCloumnNames.Count; i++)
             {
-                string loopColumn = notNullDBCloumns[i];
+                string loopColumn = notNullDbCloumnNames[i];
                 sqlBuilder.Append(firstColumn ? "" : ",");
                 firstColumn = false;
                 sqlBuilder.AppendFormat("{0}.[{1}]=@{1}", whereEntity.TableName, loopColumn);
@@ -308,23 +305,24 @@ namespace stonefw.Utility.EntityToSql.Data
             sqlBuilder.Append(" ").Append(whereSql);
 
             //参数
-            cmd = db.GetSqlStringCommand(sqlBuilder.ToString());
-            for (int i = 0; i < notNullDBCloumns.Count; i++)
+            DbCommand cmd = db.GetSqlStringCommand(sqlBuilder.ToString());
+            for (int i = 0; i < notNullDbCloumnNames.Count; i++)
             {
-                db.AddInParameter(cmd, "@" + notNullDBCloumns[i], notNullColumnTypes[i], notNullEntityPropertys[i].GetValue(entityInstance, null));
+                db.AddInParameter(cmd, "@" + notNullDbCloumnNames[i], notNullDbColumnTypes[i], notNullEntityPropertys[i].GetValue(entity, null));
             }
             FillSqlParameters(db, cmd, whereEntity);
 
             return cmd;
         }
 
+
         /// <summary>
         /// 生成用于更新的Sql命令
         /// </summary>
-        public static DbCommand CreateUpdateMemberToNULLCommand<E>(Database db, GenericWhereEntity<E> whereEntity, Type entityType, string memberName)
+        public static DbCommand CreateUpdateMemberToNullCommand<T>(Database db, GenericWhereEntity<T> whereEntity, string memberName)
         {
-            DbCommand cmd = null;
-            string dbColumnName = DbTableMapping.GetDbColumnName(entityType, memberName);
+            string dbColumnName = DbTableMapping.GetDbColumnName(typeof(T), memberName);
+
             //生成Sql语句
             StringBuilder sqlBuilder = new StringBuilder();
             sqlBuilder.AppendFormat("UPDATE {0} SET  {0}.[{1}]=null", whereEntity.TableName, dbColumnName);
@@ -334,7 +332,7 @@ namespace stonefw.Utility.EntityToSql.Data
             sqlBuilder.Append(" ").Append(whereSql);
 
             //参数
-            cmd = db.GetSqlStringCommand(sqlBuilder.ToString());
+            DbCommand cmd = db.GetSqlStringCommand(sqlBuilder.ToString());
             FillSqlParameters(db, cmd, whereEntity);
 
             return cmd;
@@ -343,10 +341,10 @@ namespace stonefw.Utility.EntityToSql.Data
         /// <summary>
         /// 生成用于更新的Sql命令
         /// </summary>
-        public static DbCommand CreateUpdateMemberToNULLCommand<E>(Database db, GenericWhereEntity<E> whereEntity, Type entityType, List<string> memberNames)
+        public static DbCommand CreateUpdateMemberToNullCommand<T>(Database db, GenericWhereEntity<T> whereEntity, List<string> memberNames)
         {
-            DbCommand cmd = null;
-            var dbColumnNames = DbTableMapping.GetDbColumnNames(entityType, memberNames);
+            var dbColumnNames = DbTableMapping.GetDbColumnNames(typeof(T), memberNames);
+
             //生成Sql语句
             StringBuilder sqlBuilder = new StringBuilder();
             sqlBuilder.AppendFormat("UPDATE {0} SET", whereEntity.TableName);
@@ -361,34 +359,37 @@ namespace stonefw.Utility.EntityToSql.Data
             sqlBuilder.Append(" ").Append(whereSql);
 
             //参数
-            cmd = db.GetSqlStringCommand(sqlBuilder.ToString());
+            DbCommand cmd = db.GetSqlStringCommand(sqlBuilder.ToString());
             FillSqlParameters(db, cmd, whereEntity);
 
             return cmd;
         }
 
+
         /// <summary>
         /// 创建用于删除的Sql命令
         /// </summary>
-        public static DbCommand CreatDeleteCommand(Database db, Type entityType, object entityInstance, List<string> conditionMembers, List<string> conditionDBCloumns, List<PropertyInfo> conditionEntityPropertys)
+        public static DbCommand CreatDeleteCommand<T>(Database db, T entity)
         {
-            DbCommand cmd = null;
-            List<DbType> conditionColumnTypes = DbTableMapping.GetDbColumnTypes(entityType, conditionMembers);
+            Type entityType = typeof(T);
+            List<string> primaryKeyEntityFieldNames = DbTableMapping.GetPrimaryKeyOfEntityField(entityType);
+            List<string> primaryKeyDbCloumnNames = DbTableMapping.GetDbColumnNames(entityType, primaryKeyEntityFieldNames);
+            List<DbType> primaryKeyDbColumnTypes = DbTableMapping.GetDbColumnTypes(entityType, primaryKeyEntityFieldNames);
+            List<PropertyInfo> primaryKeyPropertyInfos = DbTableMapping.GetEntityPropertyInfos(entityType, primaryKeyEntityFieldNames);
 
             StringBuilder sqlBuilder = new StringBuilder();
             sqlBuilder.AppendFormat("DELETE FROM [{0}] WHERE ", DbTableMapping.GetDbTableName(entityType));
-
-            for (int i = 0; i < conditionMembers.Count; i++)
+            for (int i = 0; i < primaryKeyEntityFieldNames.Count; i++)
             {
                 sqlBuilder.Append((i > 0) ? " AND " : "");
-                sqlBuilder.AppendFormat("([{0}]=@{0})", conditionDBCloumns[i]);
+                sqlBuilder.AppendFormat("([{0}]=@{0})", primaryKeyDbCloumnNames[i]);
             }
 
             //参数
-            cmd = db.GetSqlStringCommand(sqlBuilder.ToString());
-            for (int i = 0; i < conditionMembers.Count; i++)
+            DbCommand cmd = db.GetSqlStringCommand(sqlBuilder.ToString());
+            for (int i = 0; i < primaryKeyEntityFieldNames.Count; i++)
             {
-                db.AddInParameter(cmd, "@" + conditionDBCloumns[i], conditionColumnTypes[i], conditionEntityPropertys[i].GetValue(entityInstance, null));
+                db.AddInParameter(cmd, "@" + primaryKeyDbCloumnNames[i], primaryKeyDbColumnTypes[i], primaryKeyPropertyInfos[i].GetValue(entity, null));
             }
 
             return cmd;
@@ -397,17 +398,27 @@ namespace stonefw.Utility.EntityToSql.Data
         /// <summary>
         /// 创建用于删除的Sql命令
         /// </summary>
-        public static DbCommand CreatDeleteCommand<E>(Database db, Type entityType, GenericWhereEntity<E> whereEntity)
+        public static DbCommand CreatDeleteCommand<T>(Database db, GenericWhereEntity<T> whereEntity)
         {
-            DbCommand cmd = null;
-            //生成Sql语句
+            //生成Sql语句            
             StringBuilder sqlBuilder = new StringBuilder();
-            sqlBuilder.AppendFormat("DELETE ");
-            string whereSql = BuildDbQuerysGeneric.BuildCondition(whereEntity);
-            sqlBuilder.Append(whereSql);
-            cmd = db.GetSqlStringCommand(sqlBuilder.ToString());
+            sqlBuilder.AppendFormat("DELETE FROM [{0}] WHERE ", DbTableMapping.GetDbTableName(typeof(T)));
+            sqlBuilder.Append(BuildDbQuerysGeneric.BuildCondition(whereEntity));
+            DbCommand cmd = db.GetSqlStringCommand(sqlBuilder.ToString());
             FillSqlParameters(db, cmd, whereEntity);
             return cmd;
+        }
+
+
+        /// <summary>
+        /// 填充Sql参数
+        /// </summary>
+        public static void FillSqlParameters<T>(Database db, DbCommand cmd, GenericWhereEntity<T> whereEntity)
+        {
+            for (int i = 0; i < whereEntity.WhereParameterNames.Count; i++)
+            {
+                db.AddInParameter(cmd, whereEntity.WhereParameterNames[i], whereEntity.WhereParameterTypes[i], whereEntity.WhereParameterValues[i]);
+            }
         }
     }
 }

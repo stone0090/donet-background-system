@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace stonefw.Utility.EntityToSql.GenSQL
+namespace stonefw.Utility.EntityToSql.Data
 {
     public class SqlType
     {

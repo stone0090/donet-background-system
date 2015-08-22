@@ -2,6 +2,7 @@
 using System.Data;
 using System.Reflection;
 using stonefw.Utility.EntityToSql.Entity;
+using System.Linq;
 
 namespace stonefw.Utility.EntityToSql.Data
 {
@@ -17,16 +18,18 @@ namespace stonefw.Utility.EntityToSql.Data
         /// <param name="reader">DataReader</param>
         /// <param name="entityPropertyInfos">已经排好序的实体类的属性集合</param>
         /// <returns></returns>
-        public static T FillOneEntity<T>(IDataReader reader, List<PropertyInfo> entityPropertyInfos) where T : class, new()
+        public static T FillOneEntity<T>(IDataReader reader) where T : class, new()
         {
+            List<PropertyInfo> entityPropertyInfo = DbTableMapping.GetEntityPropertyInfos(typeof(T));
             T entity = new T();
-            for (int i = 0; i < entityPropertyInfos.Count; i++)
+
+            for (int i = 0; i < entityPropertyInfo.Count; i++)
             {
                 if (reader.IsDBNull(i))
                     continue;
-
-                entityPropertyInfos[i].SetValue(entity, reader.GetValue(i), null);
+                entityPropertyInfo[i].SetValue(entity, reader.GetValue(i), null);
             }
+
             return entity;
         }
 
@@ -39,31 +42,32 @@ namespace stonefw.Utility.EntityToSql.Data
         /// <param name="entityPropertysA">已经排好序的实体类的属性集合TA</param>
         /// <param name="entityPropertysB">已经排好序的实体类的属性集合TB</param>
         /// <returns></returns>
-        public static GenericPairEntity<TA, TB> FillOneEntityPair<TA, TB>(IDataReader reader, List<PropertyInfo> entityPropertysA, List<PropertyInfo> entityPropertysB)
+        public static GenericPairEntity<TA, TB> FillOnePairEntity<TA, TB>(IDataReader reader)
             where TA : class, new()
             where TB : class, new()
         {
+            List<PropertyInfo> entityPropertyInfoA = DbTableMapping.GetEntityPropertyInfos(typeof(TA));
+            List<PropertyInfo> entityPropertyInfoB = DbTableMapping.GetEntityPropertyInfos(typeof(TB));
             GenericPairEntity<TA, TB> pair = new GenericPairEntity<TA, TB>();
             pair.EntityA = new TA();
             pair.EntityB = new TB();
+
             int offset = 0;
-            for (int i = 0; i < entityPropertysA.Count; i++)
+            for (int i = 0; i < entityPropertyInfoA.Count; i++)
             {
                 if (reader.IsDBNull(offset + i))
-                {
                     continue;
-                }
-                entityPropertysA[i].SetValue(pair.EntityA, reader.GetValue(offset + i), null);
+                entityPropertyInfoA[i].SetValue(pair.EntityA, reader.GetValue(offset + i), null);
             }
-            offset = entityPropertysA.Count;
-            for (int i = 0; i < entityPropertysB.Count; i++)
+
+            offset = entityPropertyInfoA.Count;
+            for (int i = 0; i < entityPropertyInfoB.Count; i++)
             {
                 if (reader.IsDBNull(offset + i))
-                {
                     continue;
-                }
-                entityPropertysB[i].SetValue(pair.EntityB, reader.GetValue(offset + i), null);
+                entityPropertyInfoB[i].SetValue(pair.EntityB, reader.GetValue(offset + i), null);
             }
+
             return pair;
         }
 
@@ -75,17 +79,19 @@ namespace stonefw.Utility.EntityToSql.Data
         /// <param name="effectiveEntityMemberNames">有效的Entity字段名称</param>
         /// <param name="entityPropertyInfos">实体类对应的属性</param>
         /// <returns>Entity实例中有设置值的字段</returns>
-        public static List<string> GetNotNullEntityMembers<T>(T entity, List<string> effectiveEntityMemberNames, List<PropertyInfo> entityPropertyInfos)
+        public static List<string> GetNotNullFields<T>(T entity)
         {
-            List<string> notNullEntityMembers = new List<string>(effectiveEntityMemberNames.Count);
-            for (int i = 0; i < effectiveEntityMemberNames.Count; i++)
+            List<string> entityFieldNames = DbTableMapping.GetEntityFieldNames((typeof(T)));
+            List<PropertyInfo> entityPropertyInfos = DbTableMapping.GetEntityPropertyInfos((typeof(T)));
+            List<string> notNullEntityFields = new List<string>(entityFieldNames.Count);
+
+            for (int i = 0; i < entityFieldNames.Count; i++)
             {
                 if (entityPropertyInfos[i].GetValue(entity, null) != null)
-                {
-                    notNullEntityMembers.Add(effectiveEntityMemberNames[i]);
-                }
+                    notNullEntityFields.Add(entityFieldNames[i]);
             }
-            return notNullEntityMembers;
+
+            return notNullEntityFields;
         }
 
         /// <summary>
@@ -95,17 +101,40 @@ namespace stonefw.Utility.EntityToSql.Data
         /// <param name="entity">实体类的实例</param>
         /// <param name="entityPropertyInfos">实体类对应的属性</param>
         /// <returns>Entity实例中有设置值的属性</returns>
-        public static List<PropertyInfo> GetNotNullEntityPropertyInfos<T>(T entity, List<PropertyInfo> entityPropertyInfos)
+        public static List<PropertyInfo> GetNotNullEntityPropertys<T>(T entity)
         {
-            List<PropertyInfo> notNullEntityPropertyInfos = new List<PropertyInfo>(entityPropertyInfos.Count);
+            List<PropertyInfo> entityPropertyInfos = DbTableMapping.GetEntityPropertyInfos((typeof(T)));
+            List<PropertyInfo> notNullEntityPropertys = new List<PropertyInfo>(entityPropertyInfos.Count);
+
             for (int i = 0; i < entityPropertyInfos.Count; i++)
             {
                 if (entityPropertyInfos[i].GetValue(entity, null) != null)
-                {
-                    notNullEntityPropertyInfos.Add(entityPropertyInfos[i]);
-                }
+                    notNullEntityPropertys.Add(entityPropertyInfos[i]);
             }
-            return notNullEntityPropertyInfos;
+
+            return notNullEntityPropertys;
+        }
+
+        /// <summary>
+        /// 判断Entity实例中有没有设置主键值
+        /// </summary>
+        public static bool HasPrimaryKeyValue<T>(T entity)
+        {
+            if (!DbTableMapping.HasPrimaryKey(typeof(T)))
+                return false;
+
+            List<string> notNullEntityFields = GetNotNullFields(entity);
+            if (notNullEntityFields == null)
+                return false;
+
+            var primaryKeyEntityFieldNames = DbTableMapping.GetPrimaryKeyOfEntityField(typeof(T));
+            for (int i = 0; i < primaryKeyEntityFieldNames.Count; i++)
+            {
+                if (!notNullEntityFields.Any(n => n == primaryKeyEntityFieldNames[i]))
+                    return false;
+            }
+
+            return true;
         }
     }
 }

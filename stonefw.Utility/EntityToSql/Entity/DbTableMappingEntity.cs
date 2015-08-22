@@ -27,7 +27,6 @@ namespace stonefw.Utility.EntityToSql.Entity
         /// </summary>
         public List<string> EntityFieldNames { get; set; }
 
-
         /// <summary>
         /// 实体的属性的集合的映射(key为EntityFieldName)
         /// </summary>

@@ -1,4 +1,6 @@
-﻿using stonefw.Utility.EntityToSql.GenSQL;
+﻿
+using stonefw.Utility.EntityToSql.Data;
+using stonefw.Utility.EntityToSql.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -58,7 +60,7 @@ namespace stonefw.Utility.EntityToSql.Utility.ExpressionToSQL.SQLConvertor.MSSQL
                         colArguments.Add("%" + GetArgumentValue(m.Arguments[0] as ConstantExpression));
                         break;
                     default:
-                        throw new Exception("暂不支持{" + m.ToString() + "}的调用！");
+                        throw new EntityToSqlException("暂不支持{" + m.ToString() + "}的调用！");
                 }
             }
             else if (m.Object is ConstantExpression)
@@ -84,12 +86,12 @@ namespace stonefw.Utility.EntityToSql.Utility.ExpressionToSQL.SQLConvertor.MSSQL
                         colArguments.Add(GetArgumentValue(m.Object as ConstantExpression));
                         break;
                     default:
-                        throw new Exception("暂不支持{" + m.ToString() + "}的调用！");
+                        throw new EntityToSqlException("暂不支持{" + m.ToString() + "}的调用！");
                 }
             }
             else
             {
-                throw new Exception("暂不支持{" + m.ToString() + "}的调用！");
+                throw new EntityToSqlException("暂不支持{" + m.ToString() + "}的调用！");
             }
         }
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Linq.Expressions;
 using System.Data;
 using stonefw.Utility.EntityToSql.Utility.ExpressionVisitors.MethodCalls;
+using stonefw.Utility.EntityToSql.Entity;
 
 namespace stonefw.Utility.EntityToSql.Utility.ExpressionVisitors
 {
@@ -34,7 +35,7 @@ namespace stonefw.Utility.EntityToSql.Utility.ExpressionVisitors
                 }
                 else
                 {
-                    throw new Exception("暂不支持{" + m.ToString() + "}的调用!");
+                    throw new EntityToSqlException("暂不支持{" + m.ToString() + "}的调用!");
                 }
             }
             else if (m.Object is ConstantExpression)
@@ -47,12 +48,12 @@ namespace stonefw.Utility.EntityToSql.Utility.ExpressionVisitors
                 }
                 else
                 {
-                    throw new Exception("暂不支持{" + m.ToString() + "}的调用!");
+                    throw new EntityToSqlException("暂不支持{" + m.ToString() + "}的调用!");
                 }
             }
             else
             {
-               throw new Exception("暂不支持{" + m.ToString() + "}的调用!");
+               throw new EntityToSqlException("暂不支持{" + m.ToString() + "}的调用!");
             }
         }
     }
