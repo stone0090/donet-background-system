@@ -13,7 +13,7 @@ namespace stonefw.Web.BaseModule.BcUserRole
         private BcUserRoleBiz _biz;
         private BcUserRoleBiz Biz { get { return _biz ?? (_biz = new BcUserRoleBiz()); } }
 
-        public override bool InitPermission()
+        protected override bool InitPermission()
         {
             return LoadPermission(SysPermsPointEnum.Add) || LoadPermission(SysPermsPointEnum.Edit);
         }

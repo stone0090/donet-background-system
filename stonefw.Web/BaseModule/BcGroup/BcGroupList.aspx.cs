@@ -13,7 +13,7 @@ namespace stonefw.Web.BaseModule.BcGroup
         private BcGroupBiz Biz
         { get { return _biz ?? (_biz = new BcGroupBiz()); } }
 
-        public override bool InitPermission()
+        protected override bool InitPermission()
         {
             this.btnAddNew.Visible = LoadPermission(SysPermsPointEnum.Add);
             this.gvUserGroup.Columns[0].Visible = LoadPermission(SysPermsPointEnum.Delete);

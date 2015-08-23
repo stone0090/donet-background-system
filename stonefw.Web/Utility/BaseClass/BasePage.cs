@@ -177,17 +177,17 @@ namespace stonefw.Web.Utility.BaseClass
 
         #region 供子类使用的通用方法
 
-        public void FatherQuery()
+        protected void FatherQuery()
         {
             const string script = "<script type='text/javascript'>window.parent.__doPostBack('btnQuery', '');</script>";
             ClientScript.RegisterClientScriptBlock(this.GetType(), null, script);
         }
-        public void FatherQuery2()
+        protected void FatherQuery2()
         {
             string script = string.Format("<script type='text/javascript'>window.parent.refreshRelationTab('{0}');window.parent.closeSelectedTab(true);</script>", Request.Path);
             ClientScript.RegisterClientScriptBlock(this.GetType(), null, script);
         }
-        public PermissionEntity LoadPermission()
+        protected PermissionEntity LoadPermission()
         {
             try
             {
@@ -203,7 +203,7 @@ namespace stonefw.Web.Utility.BaseClass
                 return null;
             }
         }
-        public bool LoadPermission(SysPermsPointEnum permsPoint)
+        protected bool LoadPermission(SysPermsPointEnum permsPoint)
         {
             var permissionEntity = LoadPermission();
             if (permissionEntity != null)
@@ -215,7 +215,7 @@ namespace stonefw.Web.Utility.BaseClass
 
         #region 子类必须实现的方法
 
-        public virtual bool InitPermission()
+        protected virtual bool InitPermission()
         {
             return true;
         }

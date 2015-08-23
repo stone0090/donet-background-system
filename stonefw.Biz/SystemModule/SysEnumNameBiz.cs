@@ -1,9 +1,7 @@
-using stonefw.Dao.BaseModule;
-using stonefw.Dao.SystemModule;
 using stonefw.Entity.BaseModule;
 using stonefw.Entity.SystemModule;
 using stonefw.Utility;
-using stonefw.Utility.EntitySql.Data;
+using stonefw.Utility.EntitySql;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,12 +11,6 @@ namespace stonefw.Biz.SystemModule
     {
         const string CacheKey = "SysEnumNameBiz-GetSysEnumNameList";
 
-        private SysEnumNameDao _dao;
-        private SysEnumNameDao Dao
-        {
-            get { return _dao ?? (_dao = new SysEnumNameDao()); }
-        }
-
         public List<SysEnumNameEntity> GetSysEnumNameList()
         {
             object list = DataCache.GetCache(CacheKey) ?? SetSysEnumNameListCache();
@@ -27,17 +19,17 @@ namespace stonefw.Biz.SystemModule
         public void DeleteSysEnumName(string type, string value)
         {
             SysEnumNameEntity entity = new SysEnumNameEntity() { Type = type, Value = value };
-            EntityExecution.ExecDelete(entity);
+            EntityExecution.Delete(entity);
             SetSysEnumNameListCache();
         }
         public void AddNewSysEnumName(SysEnumNameEntity entity)
         {
-            EntityExecution.ExecInsert(entity);
+            EntityExecution.Insert(entity);
             SetSysEnumNameListCache();
         }
         public void UpdateSysEnumName(SysEnumNameEntity entity)
         {
-            EntityExecution.ExecUpdate(entity);
+            EntityExecution.Update(entity);
             SetSysEnumNameListCache();
         }
         public SysEnumNameEntity GetSingleSysEnumName(string type, string value)
@@ -49,7 +41,7 @@ namespace stonefw.Biz.SystemModule
 
         private List<SysEnumNameEntity> SetSysEnumNameListCache()
         {
-            var list = EntityExecution.ReadEntityList<SysEnumNameEntity>();
+            var list = EntityExecution.SelectAll<SysEnumNameEntity>();
             DataCache.SetCache(CacheKey, list);
             return list;
         }

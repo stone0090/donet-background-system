@@ -6,9 +6,9 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using stonefw.Utility.EntitySql.Entity;
-using stonefw.Utility.EntitySql.Data.ExpressionVisitor;
+using stonefw.Utility.EntitySql.ExpressionVisitor;
 
-namespace stonefw.Utility.EntitySql.Data
+namespace stonefw.Utility.EntitySql
 {
     /// <summary>
     /// Sql语句的创建器
@@ -16,51 +16,25 @@ namespace stonefw.Utility.EntitySql.Data
     internal static class SqlCreator
     {
         /// <summary>
-        /// 创建成员查询的Sql语句(连接查询)
-        /// </summary>
-        public static string GetJoinMemberSelectSql(
-            string tableNameA, List<string> dbColumnNamesA,
-            string tableNameB, List<string> dbColumnNamesB,
-            int topCount)
-        {
-            StringBuilder sqlBuilder = new StringBuilder();
-            sqlBuilder.Append("SELECT ");
-
-            if (topCount > 0) sqlBuilder.AppendFormat("TOP {0} ", topCount);
-
-            for (int i = 0; i < dbColumnNamesA.Count; i++)
-            {
-                if (i > 0) sqlBuilder.Append(", ");
-                sqlBuilder.Append(string.Format("{0}.[{1}]", tableNameA, dbColumnNamesA[i]));
-            }
-
-            for (int i = 0; i < dbColumnNamesB.Count; i++)
-            {
-                if (dbColumnNamesA.Count > 0) sqlBuilder.Append(", ");
-                sqlBuilder.Append(string.Format("{0}.[{1}]", tableNameB, dbColumnNamesB[i]));
-            }
-
-            return sqlBuilder.ToString();
-        }
-
-        /// <summary>
         /// 创建成员查询的Sql语句
         /// </summary>
         /// <param name="tableName"></param>
         /// <param name="dbColumnNames"></param>
         /// <returns></returns>
-        public static string GetMemberSelectSql<T>(int topCount)
+        public static string CreateSelectSql<T>(GenericWhereEntity<T> theWhereEntity, int topCount)
         {
-            List<string> dbColumnNames = null;
-            return GetMemberSelectSql<T>(dbColumnNames, topCount);
+            return CreateSelectSql<T>(theWhereEntity, null, topCount);
         }
-
         /// <summary>
         /// 创建成员查询的Sql语句
         /// </summary>
-        public static string GetMemberSelectSql<T>(List<string> dbColumnNames = null, int topCount = 0)
+        public static string CreateSelectSql<T>(GenericWhereEntity<T> theWhereEntity, List<string> dbColumnNames = null, int topCount = 0)
         {
-            string tableName = EntityMappingTool.GetDbTableName(typeof(T));
+
+            string dbTableName = EntityMappingTool.GetDbTableName(theWhereEntity.EntityType);
+
+            if (string.IsNullOrEmpty(dbTableName))
+                throw new EntitySqlException(string.Format("未给类型{0}设置数据表信息!", theWhereEntity.EntityType.FullName));
 
             if (dbColumnNames == null)
                 dbColumnNames = EntityMappingTool.GetDbColumnNames(typeof(T));
@@ -74,71 +48,57 @@ namespace stonefw.Utility.EntitySql.Data
             for (int i = 0; i < dbColumnNames.Count; i++)
             {
                 if (i > 0) sqlBuilder.Append(", ");
-                sqlBuilder.Append(string.Format("{0}.[{1}]", tableName, dbColumnNames[i]));
+
+                if (theWhereEntity.DisableTableAlias)
+                    sqlBuilder.Append(string.Format("{0}.[{1}]", dbTableName, dbColumnNames[i]));
+                else
+                    sqlBuilder.Append(string.Format("{0}.[{1}]", theWhereEntity.TableName, dbColumnNames[i]));
             }
 
             return sqlBuilder.ToString();
         }
-
         /// <summary>
-        /// 创建成员查询的Sql语句
+        /// 创建查询条件
         /// </summary>
-        public static string GetMemberSelectSql<T>(MemberExpression expression, int topCount)
+        public static string CreateWhereSql<T>(GenericWhereEntity<T> theWhereEntity)
         {
-            if (expression == null)
-                return "";
-
-            string dbTableName = EntityMappingTool.GetDbTableName(typeof(T));
-            string dbColumnName = EntityMappingTool.GetDbColumnName(typeof(T), expression.Member.Name);
-
-            StringBuilder sqlBuilder = new StringBuilder();
-            sqlBuilder.Append("SELECT ");
-
-            if (topCount > 0)
-                sqlBuilder.AppendFormat("TOP {0} ", topCount);
+            string dbTableName = EntityMappingTool.GetDbTableName(theWhereEntity.EntityType);
 
             if (string.IsNullOrEmpty(dbTableName))
-                sqlBuilder.AppendFormat("[{0}] ", dbColumnName);
+                throw new EntitySqlException(string.Format("未给类型{0}设置数据表信息!", theWhereEntity.EntityType.FullName));
+
+            StringBuilder tsqlBuffer = new StringBuilder(2048);
+
+            if (theWhereEntity.DisableTableAlias)
+                tsqlBuffer.Append(" FROM [").Append(dbTableName).Append("]");
             else
-                sqlBuilder.AppendFormat("{0}.[{1}] ", dbTableName, dbColumnName);
+                tsqlBuffer.Append(" FROM [").Append(dbTableName).Append("] AS ").Append(theWhereEntity.TableName);
 
-            return sqlBuilder.ToString();
-        }
-
-        /// <summary>
-        /// 创建成员查询的Sql语句
-        /// </summary>
-        public static string GetMemberSelectSql<T>(NewExpression expression, int topCount)
-        {
-            if (expression == null)
-                return "";
-
-            string dbTableName = EntityMappingTool.GetDbTableName(typeof(T));
-
-            StringBuilder sqlBuilder = new StringBuilder();
-            sqlBuilder.Append("SELECT ");
-
-            if (topCount > 0)
-                sqlBuilder.AppendFormat("TOP {0} ", topCount);
-
-            for (int i = 0; i < expression.Members.Count; i++)
+            if (theWhereEntity.WhereExpressions.Count > 0)
             {
-                if (i > 0)
-                    sqlBuilder.Append(", ");
+                tsqlBuffer.Append(" WHERE ");
+                //逐个语句查询，并合并参数
+                for (int i = 0; i < theWhereEntity.WhereExpressions.Count; i++)
+                {
+                    ConditionBuilderGeneric<T> conditionBuilder = new ConditionBuilderGeneric<T>((theWhereEntity.DisableTableAlias ? dbTableName : theWhereEntity.TableName), theWhereEntity);
+                    conditionBuilder.Build(theWhereEntity.WhereExpressions[i]);
 
-                string memberName = expression.Members[i].Name;
-                string dbColumnName = EntityMappingTool.GetDbColumnName(typeof(T), memberName);
+                    if (i > 0)
+                        tsqlBuffer.Append(" AND ");
 
-                if (string.IsNullOrEmpty(dbTableName))
-                    sqlBuilder.Append(string.Format("[{0}]", dbColumnName));
-                else
-                    sqlBuilder.Append(string.Format("{0}.[{1}]", dbTableName, dbColumnName));
+                    tsqlBuffer.Append(conditionBuilder.Condition);
+
+                    if (conditionBuilder.Arguments != null && conditionBuilder.Arguments.Length > 0)
+                        theWhereEntity.WhereParameterValues.AddRange(conditionBuilder.Arguments);
+                    if (conditionBuilder.ParameterNames != null && conditionBuilder.ParameterNames.Length > 0)
+                        theWhereEntity.WhereParameterNames.AddRange(conditionBuilder.ParameterNames);
+                    if (conditionBuilder.DbTypes != null && conditionBuilder.DbTypes.Length > 0)
+                        theWhereEntity.WhereParameterTypes.AddRange(conditionBuilder.DbTypes);
+                }
             }
 
-            sqlBuilder.Append(" ");
-            return sqlBuilder.ToString();
+            return tsqlBuffer.ToString();
         }
-
 
         /// <summary>
         /// 生成用于插入的Sql命令
@@ -179,7 +139,6 @@ namespace stonefw.Utility.EntitySql.Data
 
             return cmd;
         }
-
         /// <summary>
         /// 生成用于插入的Sql命令(返回标识值)
         /// </summary>
@@ -218,7 +177,6 @@ namespace stonefw.Utility.EntitySql.Data
 
             return cmd;
         }
-
 
         /// <summary>
         /// 生成用于更新的Sql命令
@@ -273,7 +231,6 @@ namespace stonefw.Utility.EntitySql.Data
 
             return cmd;
         }
-
         /// <summary>
         /// 生成用于更新的Sql命令
         /// </summary>
@@ -315,7 +272,6 @@ namespace stonefw.Utility.EntitySql.Data
             return cmd;
         }
 
-
         /// <summary>
         /// 生成用于更新的Sql命令
         /// </summary>
@@ -337,7 +293,6 @@ namespace stonefw.Utility.EntitySql.Data
 
             return cmd;
         }
-
         /// <summary>
         /// 生成用于更新的Sql命令
         /// </summary>
@@ -364,7 +319,6 @@ namespace stonefw.Utility.EntitySql.Data
 
             return cmd;
         }
-
 
         /// <summary>
         /// 创建用于删除的Sql命令
@@ -394,7 +348,6 @@ namespace stonefw.Utility.EntitySql.Data
 
             return cmd;
         }
-
         /// <summary>
         /// 创建用于删除的Sql命令
         /// </summary>
@@ -402,13 +355,12 @@ namespace stonefw.Utility.EntitySql.Data
         {
             //生成Sql语句            
             StringBuilder sqlBuilder = new StringBuilder();
-            sqlBuilder.AppendFormat("DELETE FROM [{0}] WHERE ", EntityMappingTool.GetDbTableName(typeof(T)));
+            sqlBuilder.AppendFormat("DELETE ", EntityMappingTool.GetDbTableName(typeof(T)));
             sqlBuilder.Append(SqlCreator.CreateWhereSql(whereEntity));
             DbCommand cmd = db.GetSqlStringCommand(sqlBuilder.ToString());
             FillSqlParameters(db, cmd, whereEntity);
             return cmd;
         }
-
 
         /// <summary>
         /// 填充Sql参数
@@ -421,48 +373,94 @@ namespace stonefw.Utility.EntitySql.Data
             }
         }
 
-        /// <summary>
-        /// 创建查询条件
-        /// </summary>
-        public static string CreateWhereSql<T>(GenericWhereEntity<T> theWhereEntity)
-        {
-            string dbTableName = EntityMappingTool.GetDbTableName(theWhereEntity.EntityType);
 
-            if (string.IsNullOrEmpty(dbTableName))
-                throw new EntitySqlException(string.Format("未给类型{0}设置数据表信息!", theWhereEntity.EntityType.FullName));
+        #region 暂时不用的方法   
+        ///// <summary>
+        ///// 创建成员查询的Sql语句(连接查询)
+        ///// </summary>
+        //public static string GetJoinMemberSelectSql(
+        //    string tableNameA, List<string> dbColumnNamesA,
+        //    string tableNameB, List<string> dbColumnNamesB,
+        //    int topCount)
+        //{
+        //    StringBuilder sqlBuilder = new StringBuilder();
+        //    sqlBuilder.Append("SELECT ");
 
-            StringBuilder tsqlBuffer = new StringBuilder(2048);
+        //    if (topCount > 0) sqlBuilder.AppendFormat("TOP {0} ", topCount);
 
-            if (theWhereEntity.DisableTableAlias)
-                tsqlBuffer.Append(" FROM [").Append(dbTableName).Append("]");
-            else
-                tsqlBuffer.Append(" FROM [").Append(dbTableName).Append("] AS ").Append(theWhereEntity.TableName);
+        //    for (int i = 0; i < dbColumnNamesA.Count; i++)
+        //    {
+        //        if (i > 0) sqlBuilder.Append(", ");
+        //        sqlBuilder.Append(string.Format("{0}.[{1}]", tableNameA, dbColumnNamesA[i]));
+        //    }
 
-            if (theWhereEntity.WhereExpressions.Count > 0)
-            {
-                tsqlBuffer.Append(" WHERE ");
-                //逐个语句查询，并合并参数
-                for (int i = 0; i < theWhereEntity.WhereExpressions.Count; i++)
-                {
-                    ConditionBuilderGeneric<T> conditionBuilder = new ConditionBuilderGeneric<T>((theWhereEntity.DisableTableAlias ? dbTableName : theWhereEntity.TableName), theWhereEntity);
-                    conditionBuilder.Build(theWhereEntity.WhereExpressions[i]);
+        //    for (int i = 0; i < dbColumnNamesB.Count; i++)
+        //    {
+        //        if (dbColumnNamesA.Count > 0) sqlBuilder.Append(", ");
+        //        sqlBuilder.Append(string.Format("{0}.[{1}]", tableNameB, dbColumnNamesB[i]));
+        //    }
 
-                    if (i > 0)
-                        tsqlBuffer.Append(" AND ");
+        //    return sqlBuilder.ToString();
+        //}
 
-                    tsqlBuffer.Append(conditionBuilder.Condition);
+        ///// <summary>
+        ///// 创建成员查询的Sql语句
+        ///// </summary>
+        //public static string CreateSelectSql<T>(MemberExpression expression, int topCount)
+        //{
+        //    if (expression == null)
+        //        return "";
 
-                    if (conditionBuilder.Arguments != null && conditionBuilder.Arguments.Length > 0)
-                        theWhereEntity.WhereParameterValues.AddRange(conditionBuilder.Arguments);
-                    if (conditionBuilder.ParameterNames != null && conditionBuilder.ParameterNames.Length > 0)
-                        theWhereEntity.WhereParameterNames.AddRange(conditionBuilder.ParameterNames);
-                    if (conditionBuilder.DbTypes != null && conditionBuilder.DbTypes.Length > 0)
-                        theWhereEntity.WhereParameterTypes.AddRange(conditionBuilder.DbTypes);
-                }
-            }
+        //    string dbTableName = EntityMappingTool.GetDbTableName(typeof(T));
+        //    string dbColumnName = EntityMappingTool.GetDbColumnName(typeof(T), expression.Member.Name);
 
-            return tsqlBuffer.ToString();
-        }
+        //    StringBuilder sqlBuilder = new StringBuilder();
+        //    sqlBuilder.Append("SELECT ");
+
+        //    if (topCount > 0)
+        //        sqlBuilder.AppendFormat("TOP {0} ", topCount);
+
+        //    if (string.IsNullOrEmpty(dbTableName))
+        //        sqlBuilder.AppendFormat("[{0}] ", dbColumnName);
+        //    else
+        //        sqlBuilder.AppendFormat("{0}.[{1}] ", dbTableName, dbColumnName);
+
+        //    return sqlBuilder.ToString();
+        //}
+
+        ///// <summary>
+        ///// 创建成员查询的Sql语句
+        ///// </summary>
+        //public static string CreateSelectSql<T>(NewExpression expression, int topCount)
+        //{
+        //    if (expression == null)
+        //        return "";
+
+        //    string dbTableName = EntityMappingTool.GetDbTableName(typeof(T));
+
+        //    StringBuilder sqlBuilder = new StringBuilder();
+        //    sqlBuilder.Append("SELECT ");
+
+        //    if (topCount > 0)
+        //        sqlBuilder.AppendFormat("TOP {0} ", topCount);
+
+        //    for (int i = 0; i < expression.Members.Count; i++)
+        //    {
+        //        if (i > 0)
+        //            sqlBuilder.Append(", ");
+
+        //        string memberName = expression.Members[i].Name;
+        //        string dbColumnName = EntityMappingTool.GetDbColumnName(typeof(T), memberName);
+
+        //        if (string.IsNullOrEmpty(dbTableName))
+        //            sqlBuilder.Append(string.Format("[{0}]", dbColumnName));
+        //        else
+        //            sqlBuilder.Append(string.Format("{0}.[{1}]", dbTableName, dbColumnName));
+        //    }
+
+        //    sqlBuilder.Append(" ");
+        //    return sqlBuilder.ToString();
+        //}
 
         ///// <summary>
         ///// 创建查询条件
@@ -710,5 +708,6 @@ namespace stonefw.Utility.EntitySql.Data
         //    theWhereEntity.WhereCondition = tsqlBuffer.ToString();
         //}
         //#endregion
+        #endregion
     }
 }

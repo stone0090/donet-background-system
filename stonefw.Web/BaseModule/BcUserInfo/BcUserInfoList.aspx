@@ -11,8 +11,7 @@
     <form id="form1" runat="server">
         <div class="query">
             <table>
-                <tr>
-                    <%--<td>角色列表：</td><td><asp:DropDownList ID="ddlRole" runat="server" class="easyui-combobox" data-options="required:true,panelHeight:'auto',editable:false"></asp:DropDownList></td>--%>
+                <tr>                    
                     <td>组别列表：</td>
                     <td>
                         <asp:DropDownList ID="ddlGroup" runat="server" class="easyui-combobox" data-options="required:true,panelHeight:'auto',editable:false"></asp:DropDownList>

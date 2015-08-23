@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Collections.ObjectModel;
 using stonefw.Utility.EntitySql.Entity;
 
-namespace stonefw.Utility.EntitySql.Data.ExpressionVisitor
+namespace stonefw.Utility.EntitySql.ExpressionVisitor
 {
     /// <summary>
     /// 实体类使用的语法树访问器[基类]

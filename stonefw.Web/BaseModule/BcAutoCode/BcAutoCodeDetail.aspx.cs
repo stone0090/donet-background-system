@@ -13,7 +13,7 @@ namespace stonefw.Web.BaseModule.BcAutoCode
         private BcAutoCodeBiz _biz;
         private BcAutoCodeBiz Biz { get { return _biz ?? (_biz = new BcAutoCodeBiz()); } }
 
-        public override bool InitPermission()
+        protected override bool InitPermission()
         {
             return LoadPermission(SysPermsPointEnum.Add) || LoadPermission(SysPermsPointEnum.Edit);
         }

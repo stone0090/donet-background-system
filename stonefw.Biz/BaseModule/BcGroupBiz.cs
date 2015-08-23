@@ -1,41 +1,31 @@
-using System;
-using System.Data;
-using System.Data.Common;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using stonefw.Entity.Enum;
-
-using stonefw.Dao.BaseModule;
 using stonefw.Entity.BaseModule;
-using stonefw.Utility.EntitySql.Data;
+using stonefw.Entity.Enum;
+using stonefw.Utility;
+using stonefw.Utility.EntitySql;
+
 
 namespace stonefw.Biz.BaseModule
 {
     public class BcGroupBiz
     {
-        private BcGroupDao _dao;
-        private BcGroupDao Dao
-        {
-            get { return _dao ?? (_dao = new BcGroupDao()); }
-        }
         public List<BcGroupEntity> GetBcGroupList()
-        { return EntityExecution.ReadEntityList<BcGroupEntity>(); }
+        { return EntityExecution.SelectAll<BcGroupEntity>(); }
         public ExcuteResultEnum DeleteBcGroup(int groupId)
         {
-            if (EntityExecution.GetEntityCount<BcUserInfoEntity>(n => n.GroupId == groupId && n.DeleteFlag == false) > 0)
+            if (EntityExecution.Count<BcUserInfoEntity>(n => n.GroupId == groupId && n.DeleteFlag == false) > 0)
                 return ExcuteResultEnum.IsOccupied;
 
             BcGroupEntity entity = new BcGroupEntity() { GroupId = groupId };
-            EntityExecution.ExecDelete(entity);
+            EntityExecution.Delete(entity);
             return ExcuteResultEnum.Success;
         }
         public void AddNewBcGroup(BcGroupEntity entity)
         {
             entity.GroupId = null;
-            EntityExecution.ExecInsert(entity);
+            EntityExecution.Insert(entity);
         }
-        public void UpdateBcGroup(BcGroupEntity entity) { EntityExecution.ExecUpdate(entity); }
-        public BcGroupEntity GetSingleBcGroup(int groupId) { return EntityExecution.ReadEntity<BcGroupEntity>(n => n.GroupId == groupId); }
+        public void UpdateBcGroup(BcGroupEntity entity) { EntityExecution.Update(entity); }
+        public BcGroupEntity GetSingleBcGroup(int groupId) { return EntityExecution.SelectOne<BcGroupEntity>(n => n.GroupId == groupId); }
     }
 }

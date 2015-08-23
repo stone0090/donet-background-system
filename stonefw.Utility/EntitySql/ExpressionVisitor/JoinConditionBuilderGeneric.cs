@@ -5,9 +5,9 @@ using System.Text;
 using System.Linq.Expressions;
 
 using stonefw.Utility.EntitySql.Entity;
-using stonefw.Utility.EntitySql.Data;
+using stonefw.Utility.EntitySql;
 
-namespace stonefw.Utility.EntitySql.Data.ExpressionVisitor
+namespace stonefw.Utility.EntitySql.ExpressionVisitor
 {
     internal static class JoinConditionBuilderGeneric
     {

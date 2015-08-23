@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
 using stonefw.Utility;
 
-namespace stonefw.GenCode.SqlServer
+namespace stonefw.CodeGenerate.SqlServer
 {
     internal static class SqlServerTools
     {

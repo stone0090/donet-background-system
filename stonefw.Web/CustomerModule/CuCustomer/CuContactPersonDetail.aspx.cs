@@ -14,7 +14,7 @@ namespace stonefw.Web.CustomerModule.CuCustomer
             get { return _biz ?? (_biz = new CuContactPersonBiz()); }
         }
 
-        public override bool InitPermission()
+        protected override bool InitPermission()
         {
             return LoadPermission(SysPermsPointEnum.Add) || LoadPermission(SysPermsPointEnum.Edit);
         }

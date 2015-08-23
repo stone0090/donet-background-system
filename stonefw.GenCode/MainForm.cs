@@ -3,9 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using stonefw.GenCode.SqlServer;
+using stonefw.CodeGenerate.SqlServer;
 
-namespace stonefw.GenCode
+namespace stonefw.CodeGenerate
 {
     public partial class MainForm : Form
     {
@@ -38,7 +38,6 @@ namespace stonefw.GenCode
             {
                 this.chkEntity.Checked = true;
                 this.chkBiz.Checked = true;
-                this.chkDao.Checked = true;
                 this.chkUi.Checked = true;
                 this.btnSeleteAll.Text = "反选";
             }
@@ -46,7 +45,6 @@ namespace stonefw.GenCode
             {
                 this.chkEntity.Checked = false;
                 this.chkBiz.Checked = false;
-                this.chkDao.Checked = false;
                 this.chkUi.Checked = false;
                 this.btnSeleteAll.Text = "全选";
             }
@@ -98,7 +96,6 @@ namespace stonefw.GenCode
 
             if (this.chkEntity.Checked) CreateCodeOfEntity(folder);
             if (this.chkBiz.Checked) CreateCodeOfBiz(folder);
-            if (this.chkDao.Checked) CreateCodeOfDao(folder);
             if (this.chkUi.Checked) CreateCodeOfUi(folder);
 
             MessageBox.Show("生成成功！");
@@ -117,57 +114,30 @@ namespace stonefw.GenCode
         private void CreateCodeOfEntity(string folder)
         {
             var ns = this.cbNameSpaceList.Text.Split(':')[1];
-            string fileOfUser = folder + ns + ".entity\\" + this.txtEntityName.Text + "Entity.cs";
-            string fileOfCodeCreator = folder + ns + ".entity\\" + this.txtEntityName.Text + "Entity.AutoCode.cs";
-            CreateDirectory(fileOfUser);
-            CreateCodeOfUser(fileOfUser);
-            CreateCodeOfAuto(fileOfCodeCreator);
-        }
-        private void CreateCodeOfUser(string fileName)
-        {
-            var codeBuffer = new StringBuilder(100000);
+            string fileOfCodeCreator = folder + ns + ".entity\\" + this.txtEntityName.Text + "Entity.cs";
+            CreateDirectory(fileOfCodeCreator);
+
+            StringBuilder codeBuffer = new StringBuilder(100000);
             codeBuffer.AppendLine("using System;");
-            codeBuffer.AppendLine("using System.Data;");
-            codeBuffer.AppendLine("using System.Data.Common;");
+            codeBuffer.AppendLine("using stonefw.Utility.EntitySql.Attribute;");
             codeBuffer.AppendLine("using stonefw.Utility.EntitySql.Entity;");
             codeBuffer.AppendLine("");
-            codeBuffer.Append("namespace ").Append(this.cbNameSpaceList.Text.Split(':')[1]).AppendLine(".entity");
+            codeBuffer.Append("namespace ").Append(ns).AppendLine(".Entity");
             codeBuffer.AppendLine("{");//命名空间
             codeBuffer.AppendLine("    [Serializable]");
             codeBuffer.Append("    [Table(\"").Append(this.cbDataTableList.Text).AppendLine("\")]");
-            codeBuffer.Append("    public partial class ").Append(this.txtEntityName.Text).AppendLine("Entity");
-            codeBuffer.AppendLine("    {");//Class
-            codeBuffer.AppendLine("    }");//Class
-            codeBuffer.AppendLine("}");//命名空间
-            File.WriteAllText(fileName, codeBuffer.ToString());
-        }
-        private void CreateCodeOfAuto(string fileName)
-        {
-            StringBuilder codeBuffer = new StringBuilder(100000);
-            codeBuffer.AppendLine("using System;");
-            codeBuffer.AppendLine("using System.Data;");
-            codeBuffer.AppendLine("using System.Data.Common;");
-            codeBuffer.AppendLine("using stonefw.Utility.EntitySql.Entity;");
-            codeBuffer.AppendLine("");
-            codeBuffer.Append("namespace ").Append(this.cbNameSpaceList.Text.Split(':')[1]).AppendLine(".entity");
-            codeBuffer.AppendLine("{");//命名空间
-            codeBuffer.Append("    partial class ").Append(this.txtEntityName.Text).AppendLine("Entity");
-            codeBuffer.AppendLine("    {");//Class
+            codeBuffer.Append("    public class ").Append(this.txtEntityName.Text).AppendLine("Entity : BaseEntity");
+            codeBuffer.AppendLine("    {");//命名空间
 
             var columns = ColumnEnumerator.GetColumnsOfTable(this.cbDataTableList.Text);
-            string[] primaryKeyColumns = ColumnEnumerator.GetPrimaryKeyColumns(this.cbDataTableList.Text);
-            string identityColumns = ColumnEnumerator.GetIdentityColumn(this.cbDataTableList.Text);
             for (int i = 0; i < columns.Length; i++)
             {
                 string objType = GetObjectTypeOfDBColumnForCode(columns[i].ColumnType);
                 if (objType != "string")
-                {
                     objType += "?";
-                }
+
                 string dbType = GetDBTypeFromRawType(columns[i].ColumnType);
-                string identityTag = (columns[i].ColumnName == identityColumns) ? "true" : "false";
-                string primaryKeyTag = (primaryKeyColumns != null && primaryKeyColumns.Contains(columns[i].ColumnName)) ? "true" : "false";
-                codeBuffer.AppendLine(string.Format("        [Field(\"{0}\", FieldDBType = {1}, FieldDesc = \"\", IsIdentityField = {2}, IsPrimaryKey = {3})]", columns[i].ColumnName, dbType, identityTag, primaryKeyTag));
+                codeBuffer.AppendLine(string.Format("        [Field(\"{0}\")]", columns[i].ColumnName));
                 codeBuffer.Append("        public ").Append(objType).Append(" ").Append(columns[i].ColumnName);
                 codeBuffer.AppendLine(" { get; set; }");
             }
@@ -175,7 +145,7 @@ namespace stonefw.GenCode
             codeBuffer.AppendLine("    }");//Class
             codeBuffer.AppendLine("}");//命名空间
 
-            File.WriteAllText(fileName, codeBuffer.ToString());
+            File.WriteAllText(fileOfCodeCreator, codeBuffer.ToString());
         }
 
         //AutoGenBiz
@@ -192,29 +162,23 @@ namespace stonefw.GenCode
 
             var codeBuffer = new StringBuilder(100000);
             codeBuffer.AppendLine("using System;");
-            codeBuffer.AppendLine("using System.Data;");
-            codeBuffer.AppendLine("using System.Data.Common;");
             codeBuffer.AppendLine("using System.Collections;");
             codeBuffer.AppendLine("using System.Collections.Generic;");
+            codeBuffer.AppendLine("using System.Data;");
+            codeBuffer.AppendLine("using System.Data.Common;");
             codeBuffer.AppendLine("using System.Linq;");
+            codeBuffer.AppendLine("using System.Text;");
+            codeBuffer.AppendLine("using stonefw.Entity;");
+            codeBuffer.AppendLine("using stonefw.Entity.Enum;");
+            codeBuffer.AppendLine("using stonefw.Entity.Extension;");
+            codeBuffer.AppendLine("using stonefw.Entity.SystemModule;");
+            codeBuffer.AppendLine("using stonefw.Utility;");
+            codeBuffer.AppendLine("using stonefw.Utility.EntitySql;");
             codeBuffer.AppendLine("");
-            codeBuffer.AppendLine("");
-            codeBuffer.Append("namespace ").Append(this.cbNameSpaceList.Text.Split(':')[1]).AppendLine(".biz ");
-            codeBuffer.AppendLine("{");//命名空间
-            codeBuffer.Append("public class ").Append(this.txtEntityName.Text).AppendLine("Biz ");
-            codeBuffer.AppendLine("{");//Class
-            codeBuffer.Append("private ").Append(this.txtEntityName.Text).AppendLine("Dao _dao; ");
-            codeBuffer.Append("private ").Append(this.txtEntityName.Text).AppendLine("Dao Dao ");
+            codeBuffer.Append("namespace ").Append(ns).AppendLine(".Biz");
             codeBuffer.AppendLine("{");
-            codeBuffer.Append("get { return _dao ?? (_dao = new ").Append(this.txtEntityName.Text).AppendLine("Dao()); } ");
-            codeBuffer.AppendLine("}");
-            codeBuffer.AppendLine("");
-
-            //GetList
-            codeBuffer.Append("public List<").Append(n).Append("Entity> Get").Append(n).AppendLine("List()");
-            codeBuffer.AppendLine("{");
-            codeBuffer.Append("return EntityExecution.ReadEntityList<").Append(n).AppendLine("Entity>(null);");
-            codeBuffer.AppendLine("}");
+            codeBuffer.Append("    public class ").Append(this.txtEntityName.Text).AppendLine("Biz ");
+            codeBuffer.AppendLine("    {");
 
             //删除
             string strDeleteArg1 = "";
@@ -228,25 +192,25 @@ namespace stonefw.GenCode
             strDeleteArg1 = strDeleteArg1.Substring(0, strDeleteArg1.Length - 1);
             strDeleteArg2 = strDeleteArg2.Substring(0, strDeleteArg2.Length - 1);
 
-            codeBuffer.Append("public void Delete").Append(n).Append("(").Append(strDeleteArg1).AppendLine(")");
-            codeBuffer.AppendLine("{");
-            codeBuffer.Append(n).Append("Entity entity = new ").Append(n).Append("Entity() { ").Append(strDeleteArg2).AppendLine(" };");
-            codeBuffer.AppendLine("EntityExecution.ExecDelete(entity);");
-            codeBuffer.AppendLine("}");
+            codeBuffer.Append("        public void Delete").Append(n).Append("(").Append(strDeleteArg1).AppendLine(")");
+            codeBuffer.AppendLine("        {");
+            codeBuffer.Append("            ").Append(n).Append("Entity entity = new ").Append(n).Append("Entity() { ").Append(strDeleteArg2).AppendLine(" };");
+            codeBuffer.AppendLine("            entity.Delete();");
+            codeBuffer.AppendLine("        }");
 
             //新增
-            codeBuffer.Append("public void AddNew").Append(n).Append("(").Append(n).AppendLine("Entity entity)");
-            codeBuffer.AppendLine("{");
+            codeBuffer.Append("        public void AddNew").Append(n).Append("(").Append(n).AppendLine("Entity entity)");
+            codeBuffer.AppendLine("        {");
             //如果有自增长的字段，新增时设置为null
-            if (!string.IsNullOrEmpty(identityColumns)) codeBuffer.Append("entity.").Append(identityColumns).AppendLine(" = null;");
-            codeBuffer.AppendLine("EntityExecution.ExecInsert(entity);");
-            codeBuffer.AppendLine("}");
+            if (!string.IsNullOrEmpty(identityColumns)) codeBuffer.Append("            entity.").Append(identityColumns).AppendLine(" = null;");
+            codeBuffer.AppendLine("            entity.Insert();");
+            codeBuffer.AppendLine("        }");
 
             //更新
-            codeBuffer.Append("public void Update").Append(n).Append("(").Append(n).AppendLine("Entity entity)");
-            codeBuffer.AppendLine("{");
-            codeBuffer.AppendLine("EntityExecution.ExecUpdate(entity);");
-            codeBuffer.AppendLine("}");
+            codeBuffer.Append("        public void Update").Append(n).Append("(").Append(n).AppendLine("Entity entity)");
+            codeBuffer.AppendLine("        {");
+            codeBuffer.AppendLine("            entity.Update();");
+            codeBuffer.AppendLine("        }");
 
             string strQueryArg1 = "";
             string strQueryArg2 = "";
@@ -258,40 +222,31 @@ namespace stonefw.GenCode
             }
             strQueryArg1 = strQueryArg1.Substring(0, strQueryArg1.Length - 1);
             strQueryArg2 = strQueryArg2.Substring(0, strQueryArg2.Length - 2);
+
             //查询
-            codeBuffer.Append("public ").Append(n).Append("Entity Get").Append(n).Append("Entity(").Append(strQueryArg1).Append(")");
-            codeBuffer.AppendLine("{");
-            codeBuffer.Append("return EntityExecution.ReadEntity<").Append(n).Append("Entity>(n => ").Append(strQueryArg2).AppendLine(");");
-            codeBuffer.AppendLine("}");
+            codeBuffer.Append("        public ").Append(n).Append("Entity Get").Append(n).Append("Entity(").Append(strQueryArg1).AppendLine(")");
+            codeBuffer.AppendLine("        {");
+            codeBuffer.Append("            return EntityExecution.SelectOne<").Append(n).Append("Entity>(n => ").Append(strQueryArg2).AppendLine(");");
+            codeBuffer.AppendLine("        }");
 
-            codeBuffer.AppendLine("}");//Class
-            codeBuffer.AppendLine("}");//命名空间
+            //GetList
+            codeBuffer.Append("        public List<").Append(n).Append("Entity> Get").Append(n).AppendLine("List()");
+            codeBuffer.AppendLine("        {");
+            codeBuffer.Append("            return EntityExecution.SelectAll<").Append(n).AppendLine("Entity>();");
+            codeBuffer.AppendLine("        }");
 
-            File.WriteAllText(fileName, codeBuffer.ToString());
-        }
-
-        //AutoGenDao
-        private void CreateCodeOfDao(string folder)
-        {
-            var ns = this.cbNameSpaceList.Text.Split(':')[1];
-            string fileName = folder + ns + ".dao\\" + this.txtEntityName.Text + "Dao.cs";
-            CreateDirectory(fileName);
-
-            var codeBuffer = new StringBuilder(100000);
-            codeBuffer.AppendLine("using System;");
-            codeBuffer.AppendLine("using System.Data;");
-            codeBuffer.AppendLine("using System.Data.Common;");
-            codeBuffer.AppendLine("using stonefw.Utility;");
             codeBuffer.AppendLine("");
-            codeBuffer.Append("namespace ").Append(this.cbNameSpaceList.Text.Split(':')[1]).AppendLine(".dao ");
-            codeBuffer.AppendLine("{");//命名空间
-            codeBuffer.Append("    public class ").Append(this.txtEntityName.Text).AppendLine("Dao ");
-            codeBuffer.AppendLine("    {");//Class
-            codeBuffer.AppendLine("     private Database _db;");
-            codeBuffer.AppendLine("     private Database Db");
-            codeBuffer.AppendLine("     {");
-            codeBuffer.AppendLine("     get { return _db ?? (_db = DatabaseFactory.CreateDatabase()); }");
-            codeBuffer.AppendLine("     }");
+            codeBuffer.AppendLine("        #region 扩展方法");
+            codeBuffer.AppendLine("");
+
+            codeBuffer.AppendLine("        private Database _db; ");
+            codeBuffer.AppendLine("        private Database Db ");
+            codeBuffer.AppendLine("        {");
+            codeBuffer.AppendLine("            get { return _db ?? (_db = DatabaseFactory.CreateDatabase()); }");
+            codeBuffer.AppendLine("        }");
+            codeBuffer.AppendLine("");
+            codeBuffer.AppendLine("        #endregion");
+
             codeBuffer.AppendLine("    }");//Class
             codeBuffer.AppendLine("}");//命名空间
 
@@ -329,8 +284,7 @@ namespace stonefw.GenCode
             codeBuffer.Append("<%@ Page Language=\"C#\" AutoEventWireup=\"true\" CodeBehind=\"").Append(n).Append("List.aspx.cs\" Inherits=\"").Append(ns).Append(".web.").Append(n).AppendLine("List\" %>");
             codeBuffer.AppendLine("");
             codeBuffer.AppendLine("<!DOCTYPE html>");
-            codeBuffer.AppendLine("");
-            codeBuffer.AppendLine("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
+            codeBuffer.AppendLine("<html>");
             codeBuffer.AppendLine("<head runat=\"server\">");
             codeBuffer.AppendLine("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
             codeBuffer.AppendLine("<title></title>");
@@ -400,9 +354,12 @@ namespace stonefw.GenCode
             codeBuffer.AppendLine("using System.Web;");
             codeBuffer.AppendLine("using System.Web.UI;");
             codeBuffer.AppendLine("using System.Web.UI.WebControls;");
-            codeBuffer.AppendLine("using stonefw.Web.Utility.BaseClass;");
+            codeBuffer.AppendLine("using stonefw.Biz;");
+            codeBuffer.AppendLine("using stonefw.Entity;");
             codeBuffer.AppendLine("using stonefw.Entity.Enum;");
             codeBuffer.AppendLine("using stonefw.Utility;");
+            codeBuffer.AppendLine("using stonefw.Web.Utility.BaseClass;");
+            
             codeBuffer.AppendLine("");
             codeBuffer.AppendLine("namespace " + ns + ".web");
             codeBuffer.AppendLine("{");
@@ -413,11 +370,11 @@ namespace stonefw.GenCode
             codeBuffer.Append("{ get { return _biz ?? (_biz = new ").Append(n).AppendLine("Biz()); }");
             codeBuffer.AppendLine("}");
             codeBuffer.AppendLine("");
-            codeBuffer.AppendLine("public override bool InitPermission(){");
-            codeBuffer.AppendLine("this.btnAddNew.Visible = LoadPermission(PermsPointEnum.Add);");
-            codeBuffer.Append("this.gv").Append(n).AppendLine(".Columns[0].Visible = LoadPermission(PermsPointEnum.Delete);");
-            codeBuffer.Append("this.gv").Append(n).AppendLine(".Columns[1].Visible = LoadPermission(PermsPointEnum.Edit);");
-            codeBuffer.AppendLine("return LoadPermission(PermsPointEnum.View);");
+            codeBuffer.AppendLine("protected override bool InitPermission(){");
+            codeBuffer.AppendLine("this.btnAddNew.Visible = LoadPermission(SysPermsPointEnum.Add);");
+            codeBuffer.Append("this.gv").Append(n).AppendLine(".Columns[0].Visible = LoadPermission(SysPermsPointEnum.Delete);");
+            codeBuffer.Append("this.gv").Append(n).AppendLine(".Columns[1].Visible = LoadPermission(SysPermsPointEnum.Edit);");
+            codeBuffer.AppendLine("return LoadPermission(SysPermsPointEnum.View);");
             codeBuffer.AppendLine("}");
             codeBuffer.AppendLine("");
             codeBuffer.AppendLine("protected void Page_Load(object sender, EventArgs e)");
@@ -478,8 +435,7 @@ namespace stonefw.GenCode
             codeBuffer.Append("<%@ Page Language=\"C#\" AutoEventWireup=\"true\" CodeBehind=\"").Append(n).Append("Detail.aspx.cs\" Inherits=\"").Append(ns).Append(".web.").Append(n).AppendLine("Detail\" %>");
             codeBuffer.AppendLine("");
             codeBuffer.AppendLine("<!DOCTYPE html>");
-            codeBuffer.AppendLine("");
-            codeBuffer.AppendLine("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
+            codeBuffer.AppendLine("<html>");
             codeBuffer.AppendLine("<head runat=\"server\">");
             codeBuffer.AppendLine("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
             codeBuffer.AppendLine("<title></title>");
@@ -551,14 +507,16 @@ namespace stonefw.GenCode
             StringBuilder codeBuffer = new StringBuilder(100000);
             codeBuffer.AppendLine("using System;");
             codeBuffer.AppendLine("using System.Collections.Generic;");
-            codeBuffer.AppendLine("using System.Globalization;");
             codeBuffer.AppendLine("using System.Linq;");
             codeBuffer.AppendLine("using System.Web;");
             codeBuffer.AppendLine("using System.Web.UI;");
             codeBuffer.AppendLine("using System.Web.UI.WebControls;");
-            codeBuffer.AppendLine("using stonefw.Web.Utility.BaseClass;");
+            codeBuffer.AppendLine("using stonefw.Biz;");
+            codeBuffer.AppendLine("using stonefw.Entity;");
             codeBuffer.AppendLine("using stonefw.Entity.Enum;");
             codeBuffer.AppendLine("using stonefw.Utility;");
+            codeBuffer.AppendLine("using stonefw.Web.Utility.BaseClass;");
+
             codeBuffer.AppendLine("");
             codeBuffer.AppendLine("namespace " + ns + ".web{");
 
@@ -568,9 +526,9 @@ namespace stonefw.GenCode
             codeBuffer.Append("private ").Append(n).Append("Biz Biz{get { return _biz ?? (_biz = new ").Append(n).AppendLine("Biz()); }");
             codeBuffer.AppendLine("}");
             codeBuffer.AppendLine("");
-            codeBuffer.AppendLine("public override bool InitPermission()");
+            codeBuffer.AppendLine("protected override bool InitPermission()");
             codeBuffer.AppendLine("{");
-            codeBuffer.AppendLine("return LoadPermission(PermsPointEnum.Add) || LoadPermission(PermsPointEnum.Edit);");
+            codeBuffer.AppendLine("return LoadPermission(SysPermsPointEnum.Add) || LoadPermission(SysPermsPointEnum.Edit);");
             codeBuffer.AppendLine("}");
             codeBuffer.AppendLine("");
 

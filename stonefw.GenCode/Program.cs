@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace stonefw.GenCode
+namespace stonefw.CodeGenerate
 {
     static class Program
     {

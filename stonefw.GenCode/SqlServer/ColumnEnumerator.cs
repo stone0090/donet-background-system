@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.Common;
 using stonefw.Utility;
 
-namespace stonefw.GenCode.SqlServer
+namespace stonefw.CodeGenerate.SqlServer
 {
     public static class ColumnEnumerator
     {

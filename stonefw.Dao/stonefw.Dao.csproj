@@ -39,22 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseModule\BcAutoCodeDao.cs" />
-    <Compile Include="BaseModule\BcLogErrorDao.cs" />
-    <Compile Include="BaseModule\BcPermissionDao.cs" />
-    <Compile Include="BaseModule\BcUserRoleDao.cs" />
-    <Compile Include="CustomerModule\CuContactPersonDao.cs" />
-    <Compile Include="CustomerModule\CuCustomerDao.cs" />
-    <Compile Include="SystemModule\SysPageFuncPointDao.cs" />
-    <Compile Include="SystemModule\SysRelationDao.cs" />
-    <Compile Include="SystemModule\SysEnumNameDao.cs" />
     <Compile Include="SystemModule\SysGlobalSettingDao.cs" />
-    <Compile Include="BaseModule\BcUserInfoDao.cs" />
     <Compile Include="SystemModule\SysMenuDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BaseModule\BcRoleDao.cs" />
-    <Compile Include="SystemModule\SysErrorInfoDao.cs" />
-    <Compile Include="BaseModule\BcGroupDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\stonefw.Entity\stonefw.Entity.csproj">

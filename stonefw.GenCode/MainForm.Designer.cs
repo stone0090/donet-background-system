@@ -1,4 +1,4 @@
-﻿namespace stonefw.GenCode
+﻿namespace stonefw.CodeGenerate
 {
     partial class MainForm
     {
@@ -38,7 +38,6 @@
             this.btnCreateCodeFile = new System.Windows.Forms.Button();
             this.chkEntity = new System.Windows.Forms.CheckBox();
             this.chkBiz = new System.Windows.Forms.CheckBox();
-            this.chkDao = new System.Windows.Forms.CheckBox();
             this.chkUi = new System.Windows.Forms.CheckBox();
             this.btnSeleteAll = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -114,9 +113,9 @@
             // btnCreateCodeFile
             // 
             this.btnCreateCodeFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnCreateCodeFile.Location = new System.Drawing.Point(397, 128);
+            this.btnCreateCodeFile.Location = new System.Drawing.Point(368, 128);
             this.btnCreateCodeFile.Name = "btnCreateCodeFile";
-            this.btnCreateCodeFile.Size = new System.Drawing.Size(65, 23);
+            this.btnCreateCodeFile.Size = new System.Drawing.Size(94, 23);
             this.btnCreateCodeFile.TabIndex = 4;
             this.btnCreateCodeFile.Text = "生成";
             this.btnCreateCodeFile.UseVisualStyleBackColor = true;
@@ -142,31 +141,21 @@
             this.chkBiz.Text = "创建Biz";
             this.chkBiz.UseVisualStyleBackColor = true;
             // 
-            // chkDao
-            // 
-            this.chkDao.AutoSize = true;
-            this.chkDao.Location = new System.Drawing.Point(180, 132);
-            this.chkDao.Name = "chkDao";
-            this.chkDao.Size = new System.Drawing.Size(66, 16);
-            this.chkDao.TabIndex = 7;
-            this.chkDao.Text = "创建Dao";
-            this.chkDao.UseVisualStyleBackColor = true;
-            // 
             // chkUi
             // 
             this.chkUi.AutoSize = true;
-            this.chkUi.Location = new System.Drawing.Point(253, 132);
+            this.chkUi.Location = new System.Drawing.Point(179, 132);
             this.chkUi.Name = "chkUi";
-            this.chkUi.Size = new System.Drawing.Size(60, 16);
+            this.chkUi.Size = new System.Drawing.Size(66, 16);
             this.chkUi.TabIndex = 8;
-            this.chkUi.Text = "创建UI";
+            this.chkUi.Text = "创建Web";
             this.chkUi.UseVisualStyleBackColor = true;
             // 
             // btnSeleteAll
             // 
-            this.btnSeleteAll.Location = new System.Drawing.Point(325, 128);
+            this.btnSeleteAll.Location = new System.Drawing.Point(267, 128);
             this.btnSeleteAll.Name = "btnSeleteAll";
-            this.btnSeleteAll.Size = new System.Drawing.Size(65, 23);
+            this.btnSeleteAll.Size = new System.Drawing.Size(94, 23);
             this.btnSeleteAll.TabIndex = 9;
             this.btnSeleteAll.Text = "全选";
             this.btnSeleteAll.UseVisualStyleBackColor = true;
@@ -179,7 +168,6 @@
             this.ClientSize = new System.Drawing.Size(474, 167);
             this.Controls.Add(this.btnSeleteAll);
             this.Controls.Add(this.chkUi);
-            this.Controls.Add(this.chkDao);
             this.Controls.Add(this.chkBiz);
             this.Controls.Add(this.chkEntity);
             this.Controls.Add(this.btnCreateCodeFile);
@@ -211,7 +199,6 @@
         private System.Windows.Forms.Button btnCreateCodeFile;
         private System.Windows.Forms.CheckBox chkEntity;
         private System.Windows.Forms.CheckBox chkBiz;
-        private System.Windows.Forms.CheckBox chkDao;
         private System.Windows.Forms.CheckBox chkUi;
         private System.Windows.Forms.Button btnSeleteAll;
     }

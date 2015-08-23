@@ -7,9 +7,9 @@ using System.Reflection;
 using System.Data;
 
 using stonefw.Utility.EntitySql.Entity;
-using stonefw.Utility.EntitySql.Data;
+using stonefw.Utility.EntitySql;
 
-namespace stonefw.Utility.EntitySql.Data.ExpressionVisitor
+namespace stonefw.Utility.EntitySql.ExpressionVisitor
 {
     internal class ConditionBuilderGeneric<T> : ExpressionVisitor
     {

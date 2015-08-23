@@ -5,9 +5,9 @@ using System.Text;
 using System.Linq.Expressions;
 using System.Data;
 using stonefw.Utility.EntitySql.Entity;
-using stonefw.Utility.EntitySql.Data.ExpressionVisitor.MethodCall;
+using stonefw.Utility.EntitySql.ExpressionVisitor.MethodCall;
 
-namespace stonefw.Utility.EntitySql.Data.ExpressionVisitor
+namespace stonefw.Utility.EntitySql.ExpressionVisitor
 {
     /// <summary>
     /// 方法调用的访问器

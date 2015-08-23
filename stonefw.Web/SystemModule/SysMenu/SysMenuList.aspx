@@ -38,9 +38,9 @@
                             <a href="#" class="easyui-linkbutton" onclick='<%# "showDialog(\"修改\", \"SysMenuDetail.aspx?menuid="+Eval("MenuId")+"\");" %>'>修改</a>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:BoundField DataField="MenuTreeName" HeaderText="菜单结构" ItemStyle-HorizontalAlign="Left" />
                     <asp:BoundField DataField="ModuleName" HeaderText="所属模块" />
                     <asp:BoundField DataField="FuncPointName" HeaderText="所属功能" />
-                    <asp:BoundField DataField="MenuTreeName" HeaderText="菜单结构" ItemStyle-HorizontalAlign="Left" />
                     <asp:TemplateField HeaderText="菜单状态" ItemStyle-Width="60px">
                         <ItemTemplate>
                             <%# (bool)Eval("ActivityFlag")?"启用":"停用"  %>

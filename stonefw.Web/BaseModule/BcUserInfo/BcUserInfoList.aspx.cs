@@ -13,19 +13,13 @@ namespace stonefw.Web.BaseModule.BcUserInfo
         private BcUserInfoBiz Biz
         { get { return _biz ?? (_biz = new BcUserInfoBiz()); } }
 
-        public override bool InitPermission()
+        protected override bool InitPermission()
         {
             this.btnAddNew.Visible = LoadPermission(SysPermsPointEnum.Add);
             this.gvUserInfo.Columns[0].Visible = LoadPermission(SysPermsPointEnum.Delete);
             this.gvUserInfo.Columns[1].Visible = LoadPermission(SysPermsPointEnum.Edit);
             return LoadPermission(SysPermsPointEnum.View);
         }
-        //public override void InitPermission()
-        //{
-        //    this.btnAddNew.Visible = LoadPermission(PermsPointEnum.Add);
-        //    this.gvUserInfo.Columns[0].Visible = LoadPermission(PermsPointEnum.Delete);
-        //    this.gvUserInfo.Columns[1].Visible = LoadPermission(PermsPointEnum.Edit);
-        //}
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -53,12 +47,6 @@ namespace stonefw.Web.BaseModule.BcUserInfo
 
         private void BindControlData()
         {
-            //this.ddlRole.DataSource = new BcRoleBiz().GetBcRoleList();
-            //this.ddlRole.DataValueField = "Role_Id";
-            //this.ddlRole.DataTextField = "Role_Name";
-            //this.ddlRole.DataBind();
-            //this.ddlRole.Items.Insert(0, new ListItem("*È«²¿*", "0"));
-
             this.ddlGroup.DataSource = new BcGroupBiz().GetBcGroupList();
             this.ddlGroup.DataValueField = "GroupId";
             this.ddlGroup.DataTextField = "GroupName";
@@ -70,7 +58,7 @@ namespace stonefw.Web.BaseModule.BcUserInfo
             gvUserInfo.PageSize = int.Parse(SysGlobalSetting.GridViewPageSize);
             gvUserInfo.DataSource = Biz.GetBcUserInfoList(
                 int.Parse(ddlGroup.SelectedValue),
-                0, //int.Parse(ddlRole.SelectedValue)
+                0, 
                 txtUserName.Text.Trim());
             gvUserInfo.DataBind();
         }

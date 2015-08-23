@@ -60,10 +60,6 @@
     <Compile Include="BaseModule\BcUserInfoBiz.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\stonefw.Dao\stonefw.Dao.csproj">
-      <Project>{53ab83a9-26ea-461a-ae2c-cf99c7ef1d45}</Project>
-      <Name>stonefw.Dao</Name>
-    </ProjectReference>
     <ProjectReference Include="..\stonefw.Entity\stonefw.Entity.csproj">
       <Project>{fa43e73b-a3f4-4a80-a662-0307cf3f7941}</Project>
       <Name>stonefw.Entity</Name>

@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Transactions;
-using stonefw.Dao.BaseModule;
 using stonefw.Entity.BaseModule;
-using stonefw.Utility.EntitySql.Data;
+using stonefw.Utility;
+using stonefw.Utility.EntitySql;
+using System.Data.Common;
 
 namespace stonefw.Biz.BaseModule
 {
     public class BcAutoCodeBiz
     {
-        private BcAutoCodeDao _dao;
-        private BcAutoCodeDao Dao
+        private Database _db;
+        private Database Db
         {
-            get { return _dao ?? (_dao = new BcAutoCodeDao()); }
+            get { return _db ?? (_db = DatabaseFactory.CreateDatabase()); }
         }
 
         public List<BcAutoCodeEntity> GetBcAutoCodeList()
-        { return EntityExecution.ReadEntityList<BcAutoCodeEntity>(); }
+        { return EntityExecution.SelectAll<BcAutoCodeEntity>(); }
         public void DeleteBcAutoCode(int id)
         {
             BcAutoCodeEntity entity = new BcAutoCodeEntity() { Id = id };
-            EntityExecution.ExecDelete(entity);
+            EntityExecution.Delete(entity);
         }
         public void AddNewBcAutoCode(BcAutoCodeEntity entity)
         {
@@ -31,8 +32,8 @@ namespace stonefw.Biz.BaseModule
             entity.CurrentCode = 0;
             using (var ts = new TransactionScope())
             {
-                Dao.ClearDefault(entity.FuncPointId);
-                EntityExecution.ExecInsert(entity);
+                ClearDefault(entity.FuncPointId);
+                EntityExecution.Insert(entity);
                 ts.Complete();
             }
         }
@@ -42,17 +43,17 @@ namespace stonefw.Biz.BaseModule
             {
                 using (var ts = new TransactionScope())
                 {
-                    Dao.ClearDefault(entity.FuncPointId);
-                    EntityExecution.ExecUpdate(entity);
+                    ClearDefault(entity.FuncPointId);
+                    EntityExecution.Update(entity);
                     ts.Complete();
                 }
             }
             else
             {
-                EntityExecution.ExecUpdate(entity);
+                EntityExecution.Update(entity);
             }
         }
-        public BcAutoCodeEntity GetSingleBcAutoCode(int id) { return EntityExecution.ReadEntity<BcAutoCodeEntity>(n => n.Id == id); }
+        public BcAutoCodeEntity GetSingleBcAutoCode(int id) { return EntityExecution.SelectOne<BcAutoCodeEntity>(n => n.Id == id); }
 
         public string GetCode(string funcPointId)
         {
@@ -71,6 +72,15 @@ namespace stonefw.Biz.BaseModule
             var result = string.Format("{0}{1}{2}", prefix, date, code);
             UpdateBcAutoCode(entity);
             return result;
+        }
+        private void ClearDefault(string funcPointId)
+        {
+            string sql = "UPDATE Bc_AutoCode SET IsDefault = 0 WHERE FuncPointId = @FuncPointId ";
+            using (DbCommand dm = Db.GetSqlStringCommand(sql))
+            {
+                Db.AddInParameter(dm, "@FuncPointId", DbType.AnsiString, funcPointId);
+                Db.ExecuteNonQuery(dm);
+            }
         }
     }
 }

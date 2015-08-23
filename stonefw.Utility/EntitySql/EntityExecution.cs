@@ -8,7 +8,7 @@ using System.Reflection;
 using stonefw.Utility.EntitySql.Entity;
 
 
-namespace stonefw.Utility.EntitySql.Data
+namespace stonefw.Utility.EntitySql
 {
     /// <summary>
     /// 实体类的操作
@@ -27,7 +27,7 @@ namespace stonefw.Utility.EntitySql.Data
         /// <summary>
         /// 插入实体
         /// </summary>
-        public static void ExecInsert<T>(this T entity, Database db = null)
+        public static void Insert<T>(this T entity, Database db = null)
             where T : BaseEntity
         {
             if (db == null) db = DatabaseFactory.CreateDatabase();
@@ -41,7 +41,7 @@ namespace stonefw.Utility.EntitySql.Data
         /// <summary>
         /// 插入实体，并返回标识列的值
         /// </summary>
-        public static object ExecInsertWithIdentity<T>(this T entity, Database db = null)
+        public static object InsertWithIdentity<T>(this T entity, Database db = null)
             where T : BaseEntity
         {
             if (db == null) db = DatabaseFactory.CreateDatabase();
@@ -59,7 +59,7 @@ namespace stonefw.Utility.EntitySql.Data
         /// <summary>
         /// 删除实体类
         /// </summary>
-        public static int ExecDelete<T>(Expression<Func<T, bool>> conditionExpression, Database db = null)
+        public static int Delete<T>(Expression<Func<T, bool>> conditionExpression, Database db = null)
             where T : BaseEntity
         {
             if (conditionExpression == null)
@@ -68,13 +68,13 @@ namespace stonefw.Utility.EntitySql.Data
             if (db == null) db = DatabaseFactory.CreateDatabase();
             GenericWhereEntity<T> whereEntity = new GenericWhereEntity<T>();
             whereEntity.Where(conditionExpression);
-            return ExecDelete(whereEntity, db);
+            return Delete(whereEntity, db);
         }
 
         /// <summary>
         /// 删除实体类
         /// </summary>
-        public static int ExecDelete<T>(GenericWhereEntity<T> whereEntity, Database db = null)
+        public static int Delete<T>(GenericWhereEntity<T> whereEntity, Database db = null)
             where T : BaseEntity
         {
             //DELETE时应该禁用别名
@@ -90,7 +90,7 @@ namespace stonefw.Utility.EntitySql.Data
         /// <summary>
         /// 删除实体类
         /// </summary>
-        public static int ExecDelete<T>(this T entity, Database db = null)
+        public static int Delete<T>(this T entity, Database db = null)
             where T : BaseEntity
         {
             //获取主键相关的字段
@@ -112,7 +112,7 @@ namespace stonefw.Utility.EntitySql.Data
         /// <summary>
         /// 更新实体类
         /// </summary>
-        public static void ExecUpdate<T>(this T entity, Database db = null)
+        public static void Update<T>(this T entity, Database db = null)
             where T : BaseEntity
         {
             //检索数据库相关的字段和属性
@@ -136,7 +136,7 @@ namespace stonefw.Utility.EntitySql.Data
         /// <summary>
         /// 更新实体类
         /// </summary>
-        public static void ExecUpdate<T>(this T entity, Expression<Func<T, bool>> conditionExpression, Database db = null)
+        public static void Update<T>(this T entity, Expression<Func<T, bool>> conditionExpression, Database db = null)
             where T : BaseEntity
         {
             if (conditionExpression == null)
@@ -146,13 +146,13 @@ namespace stonefw.Utility.EntitySql.Data
             if (conditionExpression != null)
                 whereEntity.Where(conditionExpression);
 
-            ExecUpdate(entity, whereEntity, db);
+            Update(entity, whereEntity, db);
         }
 
         /// <summary>
         /// 更新实体类
         /// </summary>
-        public static void ExecUpdate<T>(this T entity, GenericWhereEntity<T> whereEntity, Database db = null)
+        public static void Update<T>(this T entity, GenericWhereEntity<T> whereEntity, Database db = null)
             where T : BaseEntity
         {
             if (db == null) db = DatabaseFactory.CreateDatabase();
@@ -252,7 +252,7 @@ namespace stonefw.Utility.EntitySql.Data
 
         #endregion
 
-        #region 单表查询        
+        #region 查询操作
 
         /// <summary>
         /// 读取一个实体类的实例
@@ -261,14 +261,14 @@ namespace stonefw.Utility.EntitySql.Data
         /// <param name="conditionExpression">查询条件的表达式</param>
         /// <param name="db">数据库连接</param>
         /// <returns></returns>
-        public static T ReadEntity<T>(Expression<Func<T, bool>> conditionExpression, Database db = null)
-            where T : BaseEntity, new() //where T : class, new()
+        public static T SelectOne<T>(Expression<Func<T, bool>> conditionExpression, Database db = null)
+            where T : BaseEntity, new()
         {
             GenericWhereEntity<T> whereEntity = new GenericWhereEntity<T>();
             if (conditionExpression != null)
                 whereEntity.Where(conditionExpression);
 
-            return ReadEntity(whereEntity, db);
+            return SelectOne(whereEntity, db);
         }
 
         /// <summary>
@@ -278,11 +278,11 @@ namespace stonefw.Utility.EntitySql.Data
         /// <param name="whereEntity">查询条件</param>
         /// <param name="db">数据库连接</param>
         /// <returns>实体类的实例</returns>
-        public static T ReadEntity<T>(GenericWhereEntity<T> whereEntity, Database db = null)
-            where T : BaseEntity, new() //where T : class, new()
+        public static T SelectOne<T>(GenericWhereEntity<T> whereEntity, Database db = null)
+            where T : BaseEntity, new()
         {
+            string selectSql = SqlCreator.CreateSelectSql<T>(whereEntity, 1);
             string whereSql = SqlCreator.CreateWhereSql(whereEntity);
-            string selectSql = SqlCreator.GetMemberSelectSql<T>(1);
 
             if (db == null) db = DatabaseFactory.CreateDatabase();
             using (var cmd = db.GetSqlStringCommand(selectSql + whereSql))
@@ -305,14 +305,14 @@ namespace stonefw.Utility.EntitySql.Data
         /// <param name="db">数据库连接</param>
         /// <param name="maxRowCounts">读取的记录数量</param>
         /// <returns>实体类的列表</returns>
-        public static List<T> ReadEntityList<T>(Expression<Func<T, bool>> conditionExpression = null, Database db = null, params int[] maxRowCounts)
-            where T : BaseEntity, new() //where T : class, new()
+        public static List<T> SelectAll<T>(Expression<Func<T, bool>> conditionExpression = null, Database db = null, params int[] maxRowCounts)
+            where T : BaseEntity, new()
         {
             GenericWhereEntity<T> whereEntity = new GenericWhereEntity<T>();
             if (conditionExpression != null)
                 whereEntity.Where(conditionExpression);
 
-            return ReadEntityList(whereEntity, db, maxRowCounts);
+            return SelectAll(whereEntity, db, maxRowCounts);
         }
 
         /// <summary>
@@ -323,12 +323,12 @@ namespace stonefw.Utility.EntitySql.Data
         /// <param name="db">数据库连接</param>
         /// <param name="maxRowCounts">读取的记录数量</param>
         /// <returns>实体类的列表</returns>
-        public static List<T> ReadEntityList<T>(GenericWhereEntity<T> whereEntity, Database db = null, params int[] maxRowCounts)
-            where T : BaseEntity, new() //where T : class, new()
+        public static List<T> SelectAll<T>(GenericWhereEntity<T> whereEntity, Database db = null, params int[] maxRowCounts)
+            where T : BaseEntity, new()
         {
             int rowCount = (maxRowCounts == null || maxRowCounts.Length < 1) ? 0 : maxRowCounts[0];
+            string selectSql = SqlCreator.CreateSelectSql<T>(whereEntity, rowCount);
             string whereSql = SqlCreator.CreateWhereSql(whereEntity);
-            string selectSql = SqlCreator.GetMemberSelectSql<T>(rowCount);
 
             if (db == null) db = DatabaseFactory.CreateDatabase();
             using (var cmd = db.GetSqlStringCommand(selectSql + whereSql))
@@ -353,14 +353,14 @@ namespace stonefw.Utility.EntitySql.Data
         /// <param name="conditionExpression">查询条件</param>
         /// <param name="db">数据库连接</param>
         /// <returns>符合条件的实体的数量</returns>
-        public static int GetEntityCount<T>(Expression<Func<T, bool>> conditionExpression, Database db = null)
+        public static int Count<T>(Expression<Func<T, bool>> conditionExpression, Database db = null)
             where T : BaseEntity
         {
             GenericWhereEntity<T> whereEntity = new GenericWhereEntity<T>();
             if (conditionExpression != null)
                 whereEntity.Where(conditionExpression);
 
-            return GetEntityCount(whereEntity, db);
+            return Count(whereEntity, db);
         }
 
         /// <summary>
@@ -370,7 +370,7 @@ namespace stonefw.Utility.EntitySql.Data
         /// <param name="whereEntity">查询条件</param>
         /// <param name="db">数据库连接</param>
         /// <returns>符合条件的实体的数量</returns>
-        public static int GetEntityCount<T>(GenericWhereEntity<T> whereEntity, Database db = null)
+        public static int Count<T>(GenericWhereEntity<T> whereEntity, Database db = null)
             where T : BaseEntity
         {
             string whereSql = SqlCreator.CreateWhereSql(whereEntity);
@@ -434,165 +434,165 @@ namespace stonefw.Utility.EntitySql.Data
 
         #endregion
 
+
+        #region 暂时不用的方法       
+
         #region 成员选择
 
-        /// <summary>
-        /// 检索指定的字段
-        /// </summary>
-        /// <typeparam name="T">实体类型</typeparam>
-        /// <typeparam name="TKey"></typeparam>
-        /// <param name="conditionExpression"></param>
-        /// <param name="keySelector"></param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public static TKey SelectSingleMember<T, TKey>(Expression<Func<T, bool>> conditionExpression, Expression<Func<T, TKey>> keySelector, Database db = null)
-            where T : BaseEntity
-        {
-            GenericWhereEntity<T> whereEntity = new GenericWhereEntity<T>();
-            if (conditionExpression != null)
-                whereEntity.Where(conditionExpression);
+        ///// <summary>
+        ///// 检索指定的字段
+        ///// </summary>
+        ///// <typeparam name="T">实体类型</typeparam>
+        ///// <typeparam name="TKey"></typeparam>
+        ///// <param name="conditionExpression"></param>
+        ///// <param name="keySelector"></param>
+        ///// <param name="db"></param>
+        ///// <returns></returns>
+        //public static TKey SelectSingleMember<T, TKey>(Expression<Func<T, bool>> conditionExpression, Expression<Func<T, TKey>> keySelector, Database db = null)
+        //    where T : BaseEntity
+        //{
+        //    GenericWhereEntity<T> whereEntity = new GenericWhereEntity<T>();
+        //    if (conditionExpression != null)
+        //        whereEntity.Where(conditionExpression);
 
-            return SelectSingleMember(whereEntity, keySelector, db);
-        }
+        //    return SelectSingleMember(whereEntity, keySelector, db);
+        //}
 
-        /// <summary>
-        /// 检索指定的字段
-        /// </summary>
-        /// <typeparam name="T">实体类型</typeparam>
-        /// <typeparam name="TKey"></typeparam>
-        /// <param name="whereEntity"></param>
-        /// <param name="keySelector"></param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public static TKey SelectSingleMember<T, TKey>(GenericWhereEntity<T> whereEntity, Expression<Func<T, TKey>> keySelector, Database db = null)
-            where T : BaseEntity
-        {
-            MemberExpression m = keySelector.Body as MemberExpression;
-            List<string> dbColumnNames = new List<string>(1) { EntityMappingTool.GetDbColumnName(typeof(T), m.Member.Name) };
-            string whereSql = SqlCreator.CreateWhereSql(whereEntity);
-            string selectSql = SqlCreator.GetMemberSelectSql<T>(dbColumnNames, 1);
+        ///// <summary>
+        ///// 检索指定的字段
+        ///// </summary>
+        ///// <typeparam name="T">实体类型</typeparam>
+        ///// <typeparam name="TKey"></typeparam>
+        ///// <param name="whereEntity"></param>
+        ///// <param name="keySelector"></param>
+        ///// <param name="db"></param>
+        ///// <returns></returns>
+        //public static TKey SelectSingleMember<T, TKey>(GenericWhereEntity<T> whereEntity, Expression<Func<T, TKey>> keySelector, Database db = null)
+        //    where T : BaseEntity
+        //{
+        //    MemberExpression m = keySelector.Body as MemberExpression;
+        //    List<string> dbColumnNames = new List<string>(1) { EntityMappingTool.GetDbColumnName(typeof(T), m.Member.Name) };
+        //    string whereSql = SqlCreator.CreateWhereSql(whereEntity);
+        //    string selectSql = SqlCreator.CreateSelectSql<T>(dbColumnNames, 1);
 
-            if (db == null) db = DatabaseFactory.CreateDatabase();
-            using (var cmd = db.GetSqlStringCommand(selectSql + whereSql))
-            {
-                SqlCreator.FillSqlParameters(db, cmd, whereEntity);
-                var tmpObj = db.ExecuteScalar(cmd);
-                return (TKey)tmpObj;
-            }
-        }
+        //    if (db == null) db = DatabaseFactory.CreateDatabase();
+        //    using (var cmd = db.GetSqlStringCommand(selectSql + whereSql))
+        //    {
+        //        SqlCreator.FillSqlParameters(db, cmd, whereEntity);
+        //        var tmpObj = db.ExecuteScalar(cmd);
+        //        return (TKey)tmpObj;
+        //    }
+        //}
 
-        /// <summary>
-        /// 检索指定的字段
-        /// </summary>
-        /// <typeparam name="T">实体类型</typeparam>
-        /// <typeparam name="TKey"></typeparam>
-        /// <param name="conditionExpression"></param>
-        /// <param name="keySelector"></param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public static List<TKey> SelectSingleMemberList<T, TKey>(Expression<Func<T, bool>> conditionExpression, Expression<Func<T, TKey>> keySelector, Database db = null)
-            where T : BaseEntity
-        {
-            GenericWhereEntity<T> whereEntity = new GenericWhereEntity<T>();
-            if (conditionExpression != null)
-                whereEntity.Where(conditionExpression);
+        ///// <summary>
+        ///// 检索指定的字段
+        ///// </summary>
+        ///// <typeparam name="T">实体类型</typeparam>
+        ///// <typeparam name="TKey"></typeparam>
+        ///// <param name="conditionExpression"></param>
+        ///// <param name="keySelector"></param>
+        ///// <param name="db"></param>
+        ///// <returns></returns>
+        //public static List<TKey> SelectSingleMemberList<T, TKey>(Expression<Func<T, bool>> conditionExpression, Expression<Func<T, TKey>> keySelector, Database db = null)
+        //    where T : BaseEntity
+        //{
+        //    GenericWhereEntity<T> whereEntity = new GenericWhereEntity<T>();
+        //    if (conditionExpression != null)
+        //        whereEntity.Where(conditionExpression);
 
-            return SelectSingleMemberList(whereEntity, keySelector, db);
-        }
+        //    return SelectSingleMemberList(whereEntity, keySelector, db);
+        //}
 
-        /// <summary>
-        /// 检索指定的字段
-        /// </summary>
-        /// <typeparam name="T">实体类型</typeparam>
-        /// <typeparam name="TKey"></typeparam>
-        /// <param name="whereEntity"></param>
-        /// <param name="keySelector"></param>
-        /// <param name="db"></param>
-        /// <returns></returns>
-        public static List<TKey> SelectSingleMemberList<T, TKey>(GenericWhereEntity<T> whereEntity, Expression<Func<T, TKey>> keySelector, Database db = null)
-            where T : BaseEntity
-        {
-            MemberExpression m = keySelector.Body as MemberExpression;
-            List<string> dbColumnNames = new List<string>(1) { EntityMappingTool.GetDbColumnName(typeof(T), m.Member.Name) };
-            string whereSql = SqlCreator.CreateWhereSql(whereEntity);
-            string selectSql = SqlCreator.GetMemberSelectSql<T>(dbColumnNames, 1);
+        ///// <summary>
+        ///// 检索指定的字段
+        ///// </summary>
+        ///// <typeparam name="T">实体类型</typeparam>
+        ///// <typeparam name="TKey"></typeparam>
+        ///// <param name="whereEntity"></param>
+        ///// <param name="keySelector"></param>
+        ///// <param name="db"></param>
+        ///// <returns></returns>
+        //public static List<TKey> SelectSingleMemberList<T, TKey>(GenericWhereEntity<T> whereEntity, Expression<Func<T, TKey>> keySelector, Database db = null)
+        //    where T : BaseEntity
+        //{
+        //    MemberExpression m = keySelector.Body as MemberExpression;
+        //    List<string> dbColumnNames = new List<string>(1) { EntityMappingTool.GetDbColumnName(typeof(T), m.Member.Name) };
+        //    string whereSql = SqlCreator.CreateWhereSql(whereEntity);
+        //    string selectSql = SqlCreator.CreateSelectSql<T>(dbColumnNames, 1);
 
-            if (db == null) db = DatabaseFactory.CreateDatabase();
-            using (var cmd = db.GetSqlStringCommand(selectSql + whereSql))
-            {
-                SqlCreator.FillSqlParameters(db, cmd, whereEntity);
-                using (var reader = db.ExecuteReader(cmd))
-                {
-                    List<TKey> retList = new List<TKey>();
-                    while (reader.Read())
-                    {
-                        if (reader.IsDBNull(0))
-                            continue;
-                        retList.Add((TKey)reader.GetValue(0));
-                    }
-                    return retList;
-                }
-            }
-        }
+        //    if (db == null) db = DatabaseFactory.CreateDatabase();
+        //    using (var cmd = db.GetSqlStringCommand(selectSql + whereSql))
+        //    {
+        //        SqlCreator.FillSqlParameters(db, cmd, whereEntity);
+        //        using (var reader = db.ExecuteReader(cmd))
+        //        {
+        //            List<TKey> retList = new List<TKey>();
+        //            while (reader.Read())
+        //            {
+        //                if (reader.IsDBNull(0))
+        //                    continue;
+        //                retList.Add((TKey)reader.GetValue(0));
+        //            }
+        //            return retList;
+        //        }
+        //    }
+        //}
 
-        /// <summary>
-        /// 查询指定的成员,并以DataTable的形式返回
-        /// </summary>
-        /// <typeparam name="T">实体类型</typeparam>
-        /// <param name="conditionExpression">查询条件的表达式</param>
-        /// <param name="memberExpression">要查询的成员</param>
-        /// <param name="db">数据库连接</param>
-        /// <param name="maxRowCounts">要返回记录的数量</param>
-        /// <returns>查询得到的成员</returns>
-        public static DataTable SelectMembers<T, TResult>(Expression<Func<T, bool>> conditionExpression, Expression<VisitMember<T, TResult>> memberExpression, Database db = null, params int[] maxRowCounts)
-            where T : BaseEntity
-        {
-            GenericWhereEntity<T> whereEntity = new GenericWhereEntity<T>();
-            if (conditionExpression != null)
-                whereEntity.Where(conditionExpression);
+        ///// <summary>
+        ///// 查询指定的成员,并以DataTable的形式返回
+        ///// </summary>
+        ///// <typeparam name="T">实体类型</typeparam>
+        ///// <param name="conditionExpression">查询条件的表达式</param>
+        ///// <param name="memberExpression">要查询的成员</param>
+        ///// <param name="db">数据库连接</param>
+        ///// <param name="maxRowCounts">要返回记录的数量</param>
+        ///// <returns>查询得到的成员</returns>
+        //public static DataTable SelectMembers<T, TResult>(Expression<Func<T, bool>> conditionExpression, Expression<VisitMember<T, TResult>> memberExpression, Database db = null, params int[] maxRowCounts)
+        //    where T : BaseEntity
+        //{
+        //    GenericWhereEntity<T> whereEntity = new GenericWhereEntity<T>();
+        //    if (conditionExpression != null)
+        //        whereEntity.Where(conditionExpression);
 
-            return whereEntity.SelectMembers(memberExpression, db, maxRowCounts);
-        }
+        //    return whereEntity.SelectMembers(memberExpression, db, maxRowCounts);
+        //}
 
-        /// <summary>
-        /// 查询指定的成员,并以DataTable的形式返回
-        /// </summary>
-        /// <typeparam name="T">实体类型</typeparam>
-        /// <param name="whereEntity">查询条件</param>
-        /// <param name="memberExpression">要查询的成员</param>
-        /// <param name="db">数据库连接</param>
-        /// <param name="maxRowCounts">要返回记录的数量</param>
-        /// <returns>查询得到的成员</returns>
-        public static DataTable SelectMembers<T, TResult>(this GenericWhereEntity<T> whereEntity, Expression<VisitMember<T, TResult>> memberExpression, Database db = null, params int[] maxRowCounts)
-            where T : BaseEntity
-        {
-            if (memberExpression == null || memberExpression.Body == null)
-                throw new EntitySqlException("必须指定要查询的成员!");
+        ///// <summary>
+        ///// 查询指定的成员,并以DataTable的形式返回
+        ///// </summary>
+        ///// <typeparam name="T">实体类型</typeparam>
+        ///// <param name="whereEntity">查询条件</param>
+        ///// <param name="memberExpression">要查询的成员</param>
+        ///// <param name="db">数据库连接</param>
+        ///// <param name="maxRowCounts">要返回记录的数量</param>
+        ///// <returns>查询得到的成员</returns>
+        //public static DataTable SelectMembers<T, TResult>(this GenericWhereEntity<T> whereEntity, Expression<VisitMember<T, TResult>> memberExpression, Database db = null, params int[] maxRowCounts)
+        //    where T : BaseEntity
+        //{
+        //    if (memberExpression == null || memberExpression.Body == null)
+        //        throw new EntitySqlException("必须指定要查询的成员!");
 
-            if (!(memberExpression.Body is NewExpression) && !(memberExpression.Body is MemberExpression))
-                throw new EntitySqlException("指定要查询的成员无效!");
+        //    if (!(memberExpression.Body is NewExpression) && !(memberExpression.Body is MemberExpression))
+        //        throw new EntitySqlException("指定要查询的成员无效!");
 
-            Type entityType = typeof(T);
-            string whereSql = SqlCreator.CreateWhereSql(whereEntity);
-            string selectSql = null;
-            int rowCount = (maxRowCounts == null || maxRowCounts.Length < 1) ? 0 : maxRowCounts[0];
-            if (memberExpression.Body is NewExpression)
-                selectSql = SqlCreator.GetMemberSelectSql<T>(memberExpression.Body as NewExpression, rowCount);
-            else
-                selectSql = SqlCreator.GetMemberSelectSql<T>(memberExpression.Body as MemberExpression, rowCount);
+        //    Type entityType = typeof(T);
+        //    string whereSql = SqlCreator.CreateWhereSql(whereEntity);
+        //    string selectSql = null;
+        //    int rowCount = (maxRowCounts == null || maxRowCounts.Length < 1) ? 0 : maxRowCounts[0];
+        //    if (memberExpression.Body is NewExpression)
+        //        selectSql = SqlCreator.CreateSelectSql<T>(memberExpression.Body as NewExpression, rowCount);
+        //    else
+        //        selectSql = SqlCreator.CreateSelectSql<T>(memberExpression.Body as MemberExpression, rowCount);
 
-            if (db == null) db = DatabaseFactory.CreateDatabase();
-            using (var cmd = db.GetSqlStringCommand(selectSql + whereSql))
-            {
-                SqlCreator.FillSqlParameters(db, cmd, whereEntity);
-                return db.ExecuteDataTable(cmd);
-            }
-        }
+        //    if (db == null) db = DatabaseFactory.CreateDatabase();
+        //    using (var cmd = db.GetSqlStringCommand(selectSql + whereSql))
+        //    {
+        //        SqlCreator.FillSqlParameters(db, cmd, whereEntity);
+        //        return db.ExecuteDataTable(cmd);
+        //    }
+        //}
 
-        #endregion
-
-
-        #region 暂时不用的方法        
+        #endregion 
 
         #region 双表连接
 
@@ -682,7 +682,7 @@ namespace stonefw.Utility.EntitySql.Data
         //    string whereSql = SqlCreator.CreateWhereSql(joinEntity.MainEntity, joinEntity);
         //    List<string> dbColumnNames = DbTableMapping.GetDbColumnNames(joinEntity.MainEntity.EntityType);
 
-        //    string selectSql = SqlCreator.GetMemberSelectSql(joinEntity.MainEntity.TableName, dbColumnNames, 1);
+        //    string selectSql = SqlCreator.CreateSelectSql(joinEntity.MainEntity.TableName, dbColumnNames, 1);
         //    var cmd = db.GetSqlStringCommand(selectSql + whereSql);
         //    SqlCreator.FillSqlParameters(db, cmd, joinEntity.MainEntity);
         //    IDataReader reader = null;
@@ -798,7 +798,7 @@ namespace stonefw.Utility.EntitySql.Data
         //    //构造查询条件
         //    string whereSql = SqlCreator.CreateWhereSql(joinEntity.EntityToJoin, joinEntity);
         //    List<string> dbColumnNames = DbTableMapping.GetDbColumnNames(joinEntity.EntityToJoin.EntityType);
-        //    string selectSql = SqlCreator.GetMemberSelectSql(joinEntity.EntityToJoin.TableName, dbColumnNames, 1);
+        //    string selectSql = SqlCreator.CreateSelectSql(joinEntity.EntityToJoin.TableName, dbColumnNames, 1);
         //    var cmd = db.GetSqlStringCommand(selectSql + whereSql);
         //    SqlCreator.FillSqlParameters(db, cmd, joinEntity.EntityToJoin);
         //    IDataReader reader = null;
@@ -921,7 +921,7 @@ namespace stonefw.Utility.EntitySql.Data
         //    string whereSql = SqlCreator.CreateWhereSql(joinEntity.MainEntity, joinEntity);
         //    List<string> dbColumnNames = DbTableMapping.GetDbColumnNames(joinEntity.EntityToJoin.EntityType);
         //    int rowCount = (maxRowCounts == null || maxRowCounts.Length < 1) ? 0 : maxRowCounts[0];
-        //    string selectSql = SqlCreator.GetMemberSelectSql(joinEntity.EntityToJoin.TableName, dbColumnNames, rowCount);
+        //    string selectSql = SqlCreator.CreateSelectSql(joinEntity.EntityToJoin.TableName, dbColumnNames, rowCount);
         //    var cmd = db.GetSqlStringCommand(selectSql + whereSql);
         //    SqlCreator.FillSqlParameters(db, cmd, joinEntity.MainEntity);
         //    IDataReader reader = null;
@@ -1076,7 +1076,7 @@ namespace stonefw.Utility.EntitySql.Data
         //    string whereSql = SqlCreator.CreateWhereSql(joinEntity0.MainEntity, joinEntity0, joinEntity1);
         //    List<string> dbColumnNames = DbTableMapping.GetDbColumnNames(joinEntity1.EntityToJoin.EntityType);
         //    int rowCount = (maxRowCounts == null || maxRowCounts.Length < 1) ? 0 : maxRowCounts[0];
-        //    string selectSql = SqlCreator.GetMemberSelectSql(joinEntity1.EntityToJoin.TableName, dbColumnNames, rowCount);
+        //    string selectSql = SqlCreator.CreateSelectSql(joinEntity1.EntityToJoin.TableName, dbColumnNames, rowCount);
         //    var cmd = db.GetSqlStringCommand(selectSql + whereSql);
         //    SqlCreator.FillSqlParameters(db, cmd, joinEntity0.MainEntity);
         //    IDataReader reader = null;
@@ -1164,70 +1164,70 @@ namespace stonefw.Utility.EntitySql.Data
 
         #region 特殊操作
 
-        /// <summary>
-        /// 从DataReader中加载实体类
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="reader"></param>
-        /// <returns></returns>
-        public static T LoadEntityFromReader<T>(IDataReader reader) where T : class, new()
-        {
-            if (!reader.Read())
-            {
-                return null;
-            }
-            Type entityType = typeof(T);
-            List<string> dbColumns = new List<string>(reader.FieldCount);
-            for (int i = 0; i < reader.FieldCount; i++)
-            {
-                dbColumns.Add(reader.GetName(i));
-            }
-            List<PropertyInfo> entityPropertyInfos = EntityMappingTool.GetEntityPropertyInfos(entityType, dbColumns);
+        ///// <summary>
+        ///// 从DataReader中加载实体类
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <param name="reader"></param>
+        ///// <returns></returns>
+        //public static T LoadEntityFromReader<T>(IDataReader reader) where T : class, new()
+        //{
+        //    if (!reader.Read())
+        //    {
+        //        return null;
+        //    }
+        //    Type entityType = typeof(T);
+        //    List<string> dbColumns = new List<string>(reader.FieldCount);
+        //    for (int i = 0; i < reader.FieldCount; i++)
+        //    {
+        //        dbColumns.Add(reader.GetName(i));
+        //    }
+        //    List<PropertyInfo> entityPropertyInfos = EntityMappingTool.GetEntityPropertyInfos(entityType, dbColumns);
 
-            T entity = new T();
-            for (int i = 0; i < entityPropertyInfos.Count; i++)
-            {
-                if (reader.IsDBNull(i) || entityPropertyInfos[i] == null)
-                {
-                    continue;
-                }
-                entityPropertyInfos[i].SetValue(entity, reader.GetValue(i), null);
-            }
-            return entity;
-        }
+        //    T entity = new T();
+        //    for (int i = 0; i < entityPropertyInfos.Count; i++)
+        //    {
+        //        if (reader.IsDBNull(i) || entityPropertyInfos[i] == null)
+        //        {
+        //            continue;
+        //        }
+        //        entityPropertyInfos[i].SetValue(entity, reader.GetValue(i), null);
+        //    }
+        //    return entity;
+        //}
 
-        /// <summary>
-        /// 从DataReader中加载实体类的列表
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="reader"></param>
-        /// <returns></returns>
-        public static List<T> LoadEntityListFromReader<T>(IDataReader reader) where T : class, new()
-        {
-            Type entityType = typeof(T);
-            List<string> dbColumns = new List<string>(reader.FieldCount);
-            for (int i = 0; i < reader.FieldCount; i++)
-            {
-                dbColumns.Add(reader.GetName(i));
-            }
-            List<PropertyInfo> entityPropertyInfos = EntityMappingTool.GetEntityPropertyInfos(entityType, dbColumns);
+        ///// <summary>
+        ///// 从DataReader中加载实体类的列表
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <param name="reader"></param>
+        ///// <returns></returns>
+        //public static List<T> LoadEntityListFromReader<T>(IDataReader reader) where T : class, new()
+        //{
+        //    Type entityType = typeof(T);
+        //    List<string> dbColumns = new List<string>(reader.FieldCount);
+        //    for (int i = 0; i < reader.FieldCount; i++)
+        //    {
+        //        dbColumns.Add(reader.GetName(i));
+        //    }
+        //    List<PropertyInfo> entityPropertyInfos = EntityMappingTool.GetEntityPropertyInfos(entityType, dbColumns);
 
-            List<T> entityList = new List<T>();
-            while (reader.Read())
-            {
-                T entity = new T();
-                for (int i = 0; i < entityPropertyInfos.Count; i++)
-                {
-                    if (reader.IsDBNull(i) || entityPropertyInfos[i] == null)
-                    {
-                        continue;
-                    }
-                    entityPropertyInfos[i].SetValue(entity, reader.GetValue(i), null);
-                }
-                entityList.Add(entity);
-            }
-            return entityList;
-        }
+        //    List<T> entityList = new List<T>();
+        //    while (reader.Read())
+        //    {
+        //        T entity = new T();
+        //        for (int i = 0; i < entityPropertyInfos.Count; i++)
+        //        {
+        //            if (reader.IsDBNull(i) || entityPropertyInfos[i] == null)
+        //            {
+        //                continue;
+        //            }
+        //            entityPropertyInfos[i].SetValue(entity, reader.GetValue(i), null);
+        //        }
+        //        entityList.Add(entity);
+        //    }
+        //    return entityList;
+        //}
 
         #endregion
 

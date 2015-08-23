@@ -15,7 +15,7 @@ namespace stonefw.Web.BaseModule.BcPermission
         private BcPermissionBiz _biz;
         private BcPermissionBiz Biz { get { return _biz ?? (_biz = new BcPermissionBiz()); } }
 
-        public override bool InitPermission()
+        protected override bool InitPermission()
         {
             return LoadPermission(SysPermsPointEnum.Add) || LoadPermission(SysPermsPointEnum.Edit);
         }

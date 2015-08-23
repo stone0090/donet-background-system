@@ -7,25 +7,19 @@ using System.Linq;
 using System.Transactions;
 using stonefw.Biz.SystemModule;
 
-using stonefw.Dao.BaseModule;
+
 using stonefw.Entity.BaseModule;
 using stonefw.Entity.SystemModule;
 using stonefw.Entity.Enum;
-using stonefw.Utility.EntitySql.Data;
+using stonefw.Utility.EntitySql;
 
 namespace stonefw.Biz.BaseModule
 {
     public class BcPermissionBiz
     {
-        private BcPermissionDao _dao;
-        private BcPermissionDao Dao
-        {
-            get { return _dao ?? (_dao = new BcPermissionDao()); }
-        }
-
         public void DeleteBcPermission(int? permissionId, int? permissionType)
         {
-            EntityExecution.ExecDelete<BcPermissionEntity>(n => n.UserRoleId == permissionId && n.PermissionType == permissionType);
+            EntityExecution.Delete<BcPermissionEntity>(n => n.UserRoleId == permissionId && n.PermissionType == permissionType);
         }
         public void DeleteBcPermission(int permissionId, int permissionType, string moduleId, string funcPointId)
         {
@@ -34,7 +28,7 @@ namespace stonefw.Biz.BaseModule
             entity.PermissionType = permissionType;
             entity.ModuleId = moduleId;
             entity.FuncPointId = funcPointId;
-            EntityExecution.ExecDelete(entity);
+            EntityExecution.Delete(entity);
         }
         public void AddNewBcPermission(List<BcPermissionEntity> list)
         {
@@ -43,7 +37,7 @@ namespace stonefw.Biz.BaseModule
                 foreach (BcPermissionEntity entity in list)
                 {
                     if (!string.IsNullOrEmpty(entity.Permissions))
-                        EntityExecution.ExecInsert(entity);
+                        EntityExecution.Insert(entity);
                 }
                 ts.Complete();
             }
@@ -57,7 +51,7 @@ namespace stonefw.Biz.BaseModule
         public List<BcPermissionEntity> GetEnabledBcPermissionList(int? permissionType, int? userRoleId = 0)
         {
             //获取可用的权限列表
-            var allBcPermissionList = EntityExecution.ReadEntityList<BcPermissionEntity>();
+            var allBcPermissionList = EntityExecution.SelectAll<BcPermissionEntity>();
             var enabledBcPermissionList = new List<BcPermissionEntity>();
             if (userRoleId == 0)
             {

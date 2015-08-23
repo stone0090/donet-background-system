@@ -9,7 +9,7 @@ using stonefw.Utility.EntitySql.Entity;
 using stonefw.Utility.EntitySql.Attribute;
 using System.Data.Common;
 
-namespace stonefw.Utility.EntitySql.Data
+namespace stonefw.Utility.EntitySql
 {
     internal static class EntityMappingTool
     {

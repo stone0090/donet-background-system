@@ -1,31 +1,33 @@
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 using System.Transactions;
-using stonefw.Dao.CustomerModule;
 using stonefw.Entity.CustomerModule;
-using stonefw.Utility.EntitySql.Data;
+using stonefw.Utility;
+using stonefw.Utility.EntitySql;
 
 namespace stonefw.Biz.CustomerModule
 {
     public class CuContactPersonBiz
     {
-        private CuContactPersonDao _dao;
-        private CuContactPersonDao Dao
+        private Database _db;
+        private Database Db
         {
-            get { return _dao ?? (_dao = new CuContactPersonDao()); }
+            get { return _db ?? (_db = DatabaseFactory.CreateDatabase()); }
         }
 
         public List<CuContactPersonEntity> GetCuContactPersonList()
         {
-            return EntityExecution.ReadEntityList<CuContactPersonEntity>(n => n.DeleteFlag == false);
+            return EntityExecution.SelectAll<CuContactPersonEntity>(n => n.DeleteFlag == false);
         }
         public List<CuContactPersonEntity> GetCuContactPersonList(string cuId)
         {
-            return EntityExecution.ReadEntityList<CuContactPersonEntity>(n => n.CuId == cuId && n.DeleteFlag == false);
+            return EntityExecution.SelectAll<CuContactPersonEntity>(n => n.CuId == cuId && n.DeleteFlag == false);
         }
         public void DeleteCuContactPerson(int cpId)
         {
             CuContactPersonEntity entity = new CuContactPersonEntity() { CpId = cpId, DeleteFlag = true };
-            EntityExecution.ExecUpdate(entity);
+            EntityExecution.Update(entity);
         }
         public void AddNewCuContactPerson(CuContactPersonEntity entity)
         {
@@ -37,7 +39,7 @@ namespace stonefw.Biz.CustomerModule
             entity.Other = string.Empty;
             entity.Remark = string.Empty;
             entity.DeleteFlag = false;
-            EntityExecution.ExecInsert(entity);
+            EntityExecution.Insert(entity);
         }
         public void UpdateCuContactPerson(CuContactPersonEntity entity)
         {
@@ -45,19 +47,27 @@ namespace stonefw.Biz.CustomerModule
             {
                 using (var ts = new TransactionScope())
                 {
-                    Dao.ClearDefault(entity.CuId);
-                    EntityExecution.ExecUpdate(entity);
+                    ClearDefault(entity.CuId);
+                    EntityExecution.Update(entity);
                     ts.Complete();
                 }
             }
             else
             {
-                EntityExecution.ExecUpdate(entity);
+                EntityExecution.Update(entity);
             }
         }
         public CuContactPersonEntity GetCuContactPersonEntity(int cpId)
         {
-            return EntityExecution.ReadEntity<CuContactPersonEntity>(n => n.CpId == cpId && n.DeleteFlag == false);
+            return EntityExecution.SelectOne<CuContactPersonEntity>(n => n.CpId == cpId && n.DeleteFlag == false);
+        }
+
+        public void ClearDefault(string cuId)
+        {
+            string sql = "UPDATE Cu_ContactPerson SET IsDefault = 0 WHERE a.DeleteFlag = 0 ";
+            DbCommand dm = Db.GetSqlStringCommand(sql);
+            Db.AddInParameter(dm, "@CuId", DbType.AnsiString, cuId);
+            Db.ExecuteNonQuery(dm);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace stonefw.Web.CustomerModule.CuCustomer
             get { return _biz ?? (_biz = new CuCustomerBiz()); }
         }
 
-        public override bool InitPermission()
+        protected override bool InitPermission()
         {
             this.btnAddNew.Visible = LoadPermission(SysPermsPointEnum.Add);
             this.gvCuCustomer.Columns[0].Visible = LoadPermission(SysPermsPointEnum.Delete);

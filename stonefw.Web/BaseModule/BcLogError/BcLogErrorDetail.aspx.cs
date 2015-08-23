@@ -11,7 +11,7 @@ namespace stonefw.Web.BaseModule.BcLogError
         private BcLogErrorBiz _biz;
         private BcLogErrorBiz Biz { get { return _biz ?? (_biz = new BcLogErrorBiz()); } }
 
-        public override bool InitPermission()
+        protected override bool InitPermission()
         {
             return LoadPermission(SysPermsPointEnum.View);
         }

@@ -1,5 +1,5 @@
 ﻿
-using stonefw.Utility.EntitySql.Data;
+using stonefw.Utility.EntitySql;
 using stonefw.Utility.EntitySql.Entity;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Data;
 using System.Linq.Expressions;
 
 
-namespace stonefw.Utility.EntitySql.Data.ExpressionVisitor.MethodCall
+namespace stonefw.Utility.EntitySql.ExpressionVisitor.MethodCall
 {
     /// <summary>
     /// 对字符串函数调用的访问器

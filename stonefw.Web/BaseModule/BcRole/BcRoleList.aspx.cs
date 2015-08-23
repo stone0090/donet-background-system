@@ -13,7 +13,7 @@ namespace stonefw.Web.BaseModule.BcRole
         private BcRoleBiz Biz
         { get { return _biz ?? (_biz = new BcRoleBiz()); } }
 
-        public override bool InitPermission()
+        protected override bool InitPermission()
         {
             this.btnAddNew.Visible = LoadPermission(SysPermsPointEnum.Add);
             this.gvRole.Columns[0].Visible = LoadPermission(SysPermsPointEnum.Delete);

@@ -12,7 +12,7 @@ namespace stonefw.Web.BaseModule.BcAutoCode
         private BcAutoCodeBiz Biz
         { get { return _biz ?? (_biz = new BcAutoCodeBiz()); } }
 
-        public override bool InitPermission()
+        protected override bool InitPermission()
         {
             this.btnAddNew.Visible = LoadPermission(SysPermsPointEnum.Add);
             this.gvAutoCode.Columns[0].Visible = LoadPermission(SysPermsPointEnum.Delete);

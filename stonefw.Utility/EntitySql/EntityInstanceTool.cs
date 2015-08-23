@@ -4,7 +4,7 @@ using System.Reflection;
 using stonefw.Utility.EntitySql.Entity;
 using System.Linq;
 
-namespace stonefw.Utility.EntitySql.Data
+namespace stonefw.Utility.EntitySql
 {
     /// <summary>
     /// 实体实例的工具

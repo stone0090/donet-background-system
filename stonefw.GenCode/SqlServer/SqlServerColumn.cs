@@ -1,4 +1,4 @@
-﻿namespace stonefw.GenCode.SqlServer
+﻿namespace stonefw.CodeGenerate.SqlServer
 {
     public class SqlServerColumn
     {

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace stonefw.GenCode
+namespace stonefw.CodeGenerate
 {
     /// <summary>
     /// 运行配置信息

@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 using System.Linq;
-using stonefw.Biz.BaseModule;
-using stonefw.Dao.BaseModule;
-using stonefw.Dao.SystemModule;
-using stonefw.Entity.BaseModule;
+using System.Text;
 using stonefw.Entity.Enum;
 using stonefw.Entity.Extension;
 using stonefw.Entity.SystemModule;
 using stonefw.Utility;
-using stonefw.Utility.EntitySql.Data;
+using stonefw.Utility.EntitySql;
 
 namespace stonefw.Biz.SystemModule
 {
     public class SysMenuBiz
     {
-        private SysMenuDao _dao;
-        private SysMenuDao Dao
+        private Database _db;
+        private Database Db
         {
-            get { return _dao ?? (_dao = new SysMenuDao()); }
+            get { return _db ?? (_db = DatabaseFactory.CreateDatabase()); }
         }
 
         /// <summary>
@@ -49,7 +47,7 @@ namespace stonefw.Biz.SystemModule
         }
         public List<SysMenuEntity> GetSysMenuListByFatherNode(int fatherNode = 0)
         {
-            List<SysMenuEntity> list = EntityExecution.ReadEntityList<SysMenuEntity>(n => n.DeleteFlag == false && n.FatherNode == fatherNode);
+            List<SysMenuEntity> list = EntityExecution.SelectAll<SysMenuEntity>(n => n.DeleteFlag == false && n.FatherNode == fatherNode);
             list = list.OrderBy(n => n.Seq).ToList();
             return list;
         }
@@ -66,7 +64,7 @@ namespace stonefw.Biz.SystemModule
             entity.MenuId = null;
             entity.Seq = GetCountByFatherNode(entity.FatherNode) + 1;
             entity.DeleteFlag = false;
-            EntityExecution.ExecInsert(entity);
+            EntityExecution.Insert(entity);
         }
         public void UpdateSysMenu(SysMenuEntity entity, int orgFatherNode)
         {
@@ -81,10 +79,10 @@ namespace stonefw.Biz.SystemModule
                 }
                 entity.Seq = GetCountByFatherNode(entity.FatherNode) + 1;
             }
-            EntityExecution.ExecUpdate(entity);
+            EntityExecution.Update(entity);
             if (entity.FatherNode != orgFatherNode)
             {
-                Dao.SeqRecal();
+                SeqRecal();
             }
         }
         public ExcuteResultEnum DeleteSysMenu(int menuId)
@@ -93,12 +91,12 @@ namespace stonefw.Biz.SystemModule
                 return ExcuteResultEnum.IsOccupied;
 
             SysMenuEntity entity = new SysMenuEntity() { MenuId = menuId, DeleteFlag = true };
-            EntityExecution.ExecUpdate(entity);
+            EntityExecution.Update(entity);
             return ExcuteResultEnum.Success;
         }
         public int GetCountByFatherNode(int? fatherNode)
         {
-            return EntityExecution.GetEntityCount<SysMenuEntity>(n => n.FatherNode == fatherNode && n.DeleteFlag == false);
+            return EntityExecution.Count<SysMenuEntity>(n => n.FatherNode == fatherNode && n.DeleteFlag == false);
         }
 
         /// <summary>
@@ -111,7 +109,7 @@ namespace stonefw.Biz.SystemModule
 
             foreach (DictionaryEntry entry in ht)
             {
-                Dao.UpdateSeq(int.Parse(entry.Key.ToString()), int.Parse(entry.Value.ToString()));
+                UpdateSeq(int.Parse(entry.Key.ToString()), int.Parse(entry.Value.ToString()));
             }
         }
         public List<SysMenuEntity> GetEnabledSysMenuList()
@@ -166,7 +164,7 @@ namespace stonefw.Biz.SystemModule
 
         private List<SysMenuEntity> GetSysMenuDetailList(int? menuId = null)
         {
-            var listSysMenuEntity = Dao.GetSysMenuList(menuId);
+            var listSysMenuEntity = GetSysMenuList(menuId);
             var listSysModuleEnumEntity = new SysModuleEnumBiz().GetSysModuleEnumList();
             var listSysFuncPointEnumEntity = new SysFuncPointEnumBiz().GetSysFuncPointEnumList();
             var query = from sysMenuEntity in listSysMenuEntity
@@ -353,6 +351,46 @@ namespace stonefw.Biz.SystemModule
         }
 
         #endregion
+
+        public List<SysMenuEntity> GetSysMenuList(int? menuId = null)
+        {
+            string sql = @"select * from Sys_Menu a
+                            left join Sys_PageFuncPoint b on a.PageUrl = b.PageUrl
+                            left join Sys_Relation c ON b.FuncPointId = c.FuncPointId
+                            where a.DeleteFlag = 0 ";
+            if (menuId != null) sql += " and a.MenuId = @MenuId ";
+            sql += " Order by MenuLevel,Seq ";
+            DbCommand dm = Db.GetSqlStringCommand(sql);
+            if (menuId != null) Db.AddInParameter(dm, "@MenuId", DbType.Int32, menuId);
+            return DataTableHepler.DataTableToList<SysMenuEntity>(Db.ExecuteDataTable(dm));
+        }
+        public void UpdateSeq(int menuId, int seq)
+        {
+            const string strScript = "UPDATE Sys_Menu SET Seq = @Seq WHERE MenuId = @MenuId AND Seq <> @Seq";
+            DbCommand dm = Db.GetSqlStringCommand(strScript);
+            Db.AddInParameter(dm, "@MenuId", DbType.Int32, menuId);
+            Db.AddInParameter(dm, "@Seq", DbType.Int32, seq);
+            Db.ExecuteNonQuery(dm);
+        }
+        public void SeqRecal()
+        {
+            const string strScript = @"UPDATE a SET Seq = b.rownumber FROM Sys_Menu a INNER JOIN (SELECT MenuId,row_number() OVER ( partition BY FatherNode ORDER BY Seq) as rownumber FROM SysMenu ) b ON a.MenuId = b.MenuId";
+            Db.ExecuteNonQuery(strScript);
+        }
+        public void Recal(int menuId, int fatherNode, int sourceSeq, int targetSeq)
+        {
+            StringBuilder strScript = new StringBuilder();
+            strScript.Append("update Sys_Menu set Seq = @sourceSeq ");
+            strScript.Append("where FatherNode = @FatherNode and Seq = @targetSeq ");
+            strScript.Append("update Menu set Seq = @targetSeq ");
+            strScript.Append("where MenuId = @MenuId ");
+            DbCommand dm = Db.GetSqlStringCommand(strScript.ToString());
+            Db.AddInParameter(dm, "@MenuId", DbType.Int32, menuId);
+            Db.AddInParameter(dm, "@FatherNode", DbType.Int32, fatherNode);
+            Db.AddInParameter(dm, "@sourceSeq", DbType.Int32, sourceSeq);
+            Db.AddInParameter(dm, "@targetSeq", DbType.Int32, targetSeq);
+            Db.ExecuteNonQuery(dm);
+        }
 
     }
 }

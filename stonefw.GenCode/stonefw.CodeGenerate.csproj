@@ -7,8 +7,8 @@
     <ProjectGuid>{114CA120-D272-43F3-8170-6FDFDB27E525}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>stonefw.GenCode</RootNamespace>
-    <AssemblyName>stonefw.GenCode</AssemblyName>
+    <RootNamespace>stonefw.CodeGenerate</RootNamespace>
+    <AssemblyName>stonefw.CodeGenerate</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

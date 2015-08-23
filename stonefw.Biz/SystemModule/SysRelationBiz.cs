@@ -1,11 +1,11 @@
 using stonefw.Biz.BaseModule;
-using stonefw.Dao.BaseModule;
-using stonefw.Dao.SystemModule;
+
+
 using stonefw.Entity.BaseModule;
 using stonefw.Entity.Enum;
 using stonefw.Entity.SystemModule;
 using stonefw.Utility;
-using stonefw.Utility.EntitySql.Data;
+using stonefw.Utility.EntitySql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +15,6 @@ namespace stonefw.Biz.SystemModule
     public class SysRelationBiz
     {
         const string CacheKey = "SysRelationBiz-GetSysRelationList";
-
-        private SysRelationDao _dao;
-        private SysRelationDao Dao
-        {
-            get { return _dao ?? (_dao = new SysRelationDao()); }
-        }
 
         public List<SysRelationEntity> GetSysRelationList()
         {
@@ -34,17 +28,17 @@ namespace stonefw.Biz.SystemModule
         public void DeleteSysRelation(string moduleId, string funcPointId)
         {
             SysRelationEntity entity = new SysRelationEntity() { ModuleId = moduleId, FuncPointId = funcPointId };
-            EntityExecution.ExecDelete(entity);
+            EntityExecution.Delete(entity);
             SetSysRelationListCache();
         }
         public void AddNewSysRelation(SysRelationEntity entity)
         {
-            EntityExecution.ExecInsert(entity);
+            EntityExecution.Insert(entity);
             SetSysRelationListCache();
         }
         public void UpdateSysRelation(SysRelationEntity entity)
         {
-            EntityExecution.ExecUpdate(entity);
+            EntityExecution.Update(entity);
             SetSysRelationListCache();
         }
         public SysRelationEntity GetSingleSysRelation(string moduleId, string funcPointId)
@@ -72,7 +66,7 @@ namespace stonefw.Biz.SystemModule
 
         private List<SysRelationEntity> SetSysRelationListCache()
         {
-            var listSysRelationEntity = EntityExecution.ReadEntityList<SysRelationEntity>();
+            var listSysRelationEntity = EntityExecution.SelectAll<SysRelationEntity>();
             var listSysModuleEnumEntity = new SysModuleEnumBiz().GetSysModuleEnumList();
             var listSysFuncPointEnumEntity = new SysFuncPointEnumBiz().GetSysFuncPointEnumList();
             var query = from sysRelationEntity in listSysRelationEntity
@@ -109,7 +103,6 @@ namespace stonefw.Biz.SystemModule
             DataCache.SetCache(CacheKey, listSysRelationEntity);
             return listSysRelationEntity;
         }
-
 
         public object GetEnabledSysPermsPointEnumList(string[] permissionList)
         {

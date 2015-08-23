@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 
-namespace stonefw.Utility.EntitySql.Data.ExpressionVisitor
+namespace stonefw.Utility.EntitySql.ExpressionVisitor
 {
     /// <summary>
     /// 预处理，执行部分求值
