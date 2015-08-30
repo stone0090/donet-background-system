@@ -36,7 +36,7 @@ namespace Stonefw.Web.BaseModule.BcUserInfo
         protected void btnQuery_Click(object sender, EventArgs e)
         {
             BindData();
-            lMessage.Text = "ִ�гɹ���";
+            lMessage.Text = "执行成功！";
         }
 
         protected void gvUserInfo_RowCommand(object sender, GridViewCommandEventArgs e)

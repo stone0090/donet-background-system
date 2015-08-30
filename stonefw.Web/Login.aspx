@@ -70,7 +70,7 @@
     <div class="main">
         <div class="header"><%= SysGlobalSetting.SysName %></div>
         <div class="content">
-            <div class="title"> 用户登录</div>
+            <div class="title">&nbsp;&nbsp;&nbsp;&nbsp;用户登录</div>
             <fieldset>
                 <div class="input">
                     <asp:TextBox runat="server" ID="name" MaxLength="24" placeholder="用户名" class="input_all name" onfocus="this.className='input_all name_now';" onblur="this.className='input_all name'"> </asp:TextBox>
