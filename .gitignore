@@ -10,8 +10,12 @@ _ReSharper.*/
 *.vssscc
 *.user
 /stonefw.Web/TempFile
+/*.vs
+/.vs
 
 # Folder view configuration files
+/*.DS_Store
+*.DS_Store
 .DS_Store
 Desktop.ini
 
@@ -33,4 +37,3 @@ Thumbs.db
 venv
 node_modules
 .sass-cache
-

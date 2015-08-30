@@ -1,5 +1,5 @@
 
-博主在业余时间开发了一个简单的后台管理系统，其中用到了 jQuery EasyUI 框架，上次分享过系统系统布局，参考文章：[jQuery EasyUI 后台管理系统布局分享](http://shijiajie.com/2014/10/27/frontend-jquery-easyui-layout-demo/)，目前已完成系统的整体框架的搭建，再次分享给大家。
+博主在业余时间开发了一个简单的后台管理系统，其中用到了 jQuery EasyUI 框架，上次分享过系统布局，参考文章：[jQuery EasyUI 后台管理系统布局分享](http://shijiajie.com/2014/10/27/frontend-jquery-easyui-layout-demo/)，目前已完成系统的整体框架的搭建，再次分享给大家。
 
 - 演示系统正在部署中... (测试账号：admin admin)
 
