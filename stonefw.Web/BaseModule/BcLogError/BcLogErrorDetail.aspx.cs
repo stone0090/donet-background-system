@@ -1,15 +1,19 @@
-using System;
-using stonefw.Biz.BaseModule;
-using stonefw.Entity.BaseModule;
-using stonefw.Entity.Enum;
-using stonefw.Web.Utility.BaseClass;
+﻿using System;
+using Stonefw.Biz.BaseModule;
+using Stonefw.Entity.BaseModule;
+using Stonefw.Entity.Enum;
+using Stonefw.Web.Utility.BaseClass;
 
-namespace stonefw.Web.BaseModule.BcLogError
+namespace Stonefw.Web.BaseModule.BcLogError
 {
     public partial class BcLogErrorDetail : BasePage
     {
         private BcLogErrorBiz _biz;
-        private BcLogErrorBiz Biz { get { return _biz ?? (_biz = new BcLogErrorBiz()); } }
+
+        private BcLogErrorBiz Biz
+        {
+            get { return _biz ?? (_biz = new BcLogErrorBiz()); }
+        }
 
         protected override bool InitPermission()
         {
@@ -17,60 +21,76 @@ namespace stonefw.Web.BaseModule.BcLogError
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        { if (!IsPostBack) { FillFormData(); } }
+        {
+            if (!IsPostBack)
+            {
+                FillFormData();
+            }
+        }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                BcLogErrorEntity entity = PrepareFormData();
-                if (this.txtId.Text == "-1")
+                var entity = PrepareFormData();
+                if (txtId.Text == "-1")
                 {
                     Biz.AddNewBcLogError(entity);
                 }
                 else
-                { Biz.UpdateBcLogError(entity); }
-                base.FatherQuery();
+                {
+                    Biz.UpdateBcLogError(entity);
+                }
+                FatherQuery();
             }
-            catch (Exception ex) { this.lMessage.Text = string.Format("保存失败，原因：{0}", ex.Message); }
+            catch (Exception ex)
+            {
+                lMessage.Text = string.Format("保存失败，原因：{0}", ex.Message);
+            }
         }
+
         private void FillFormData()
         {
             try
             {
-                this.txtId.Text = Request["id"];
-                BcLogErrorEntity entity = Biz.GetSingleBcLogError(int.Parse(this.txtId.Text));
+                txtId.Text = Request["id"];
+                var entity = Biz.GetSingleBcLogError(int.Parse(txtId.Text));
                 if (entity != null)
                 {
-                    this.txtId.Text = entity.Id.ToString();
-                    this.txtUserId.Text = entity.UserId.ToString();
-                    this.txtUserName.Text = entity.UserName.ToString();
-                    this.txtOpUrl.Text = entity.OpUrl.ToString();
-                    this.txtOpTime.Text = entity.OpTime.ToString();
-                    this.txtOpHostAddress.Text = entity.OpHostAddress.ToString();
-                    this.txtOpHostName.Text = entity.OpHostName.ToString();
-                    this.txtOpUserAgent.Text = entity.OpUserAgent.ToString();
-                    this.txtOpQueryString.Text = entity.OpQueryString.ToString();
-                    this.txtOpHttpMethod.Text = entity.OpHttpMethod.ToString();
-                    this.txtMessage.Text = entity.Message.ToString();
+                    txtId.Text = entity.Id.ToString();
+                    txtUserId.Text = entity.UserId.ToString();
+                    txtUserName.Text = entity.UserName;
+                    txtOpUrl.Text = entity.OpUrl;
+                    txtOpTime.Text = entity.OpTime.ToString();
+                    txtOpHostAddress.Text = entity.OpHostAddress;
+                    txtOpHostName.Text = entity.OpHostName;
+                    txtOpUserAgent.Text = entity.OpUserAgent;
+                    txtOpQueryString.Text = entity.OpQueryString;
+                    txtOpHttpMethod.Text = entity.OpHttpMethod;
+                    txtMessage.Text = entity.Message;
                 }
             }
-            catch (Exception ex) { this.lMessage.Text = string.Format("数据加载失败，原因：{0}", ex.Message); }
+            catch (Exception ex)
+            {
+                lMessage.Text = string.Format("数据加载失败，原因：{0}", ex.Message);
+            }
         }
+
         private BcLogErrorEntity PrepareFormData()
         {
             //TODO:需要校验参数的合法性
             var entity = new BcLogErrorEntity();
-            entity.Id = int.Parse(this.txtId.Text);
-            entity.UserId = int.Parse(this.txtUserId.Text);
-            entity.UserName = this.txtUserName.Text;
-            entity.OpUrl = this.txtOpUrl.Text;
-            entity.OpTime = DateTime.Parse(this.txtOpTime.Text);
-            entity.OpHostAddress = this.txtOpHostAddress.Text;
-            entity.OpHostName = this.txtOpHostName.Text;
-            entity.OpUserAgent = this.txtOpUserAgent.Text;
-            entity.OpQueryString = this.txtOpQueryString.Text;
-            entity.OpHttpMethod = this.txtOpHttpMethod.Text;
-            entity.Message = this.txtMessage.Text;
+            entity.Id = int.Parse(txtId.Text);
+            entity.UserId = int.Parse(txtUserId.Text);
+            entity.UserName = txtUserName.Text;
+            entity.OpUrl = txtOpUrl.Text;
+            entity.OpTime = DateTime.Parse(txtOpTime.Text);
+            entity.OpHostAddress = txtOpHostAddress.Text;
+            entity.OpHostName = txtOpHostName.Text;
+            entity.OpUserAgent = txtOpUserAgent.Text;
+            entity.OpQueryString = txtOpQueryString.Text;
+            entity.OpHttpMethod = txtOpHttpMethod.Text;
+            entity.Message = txtMessage.Text;
             return entity;
         }
     }

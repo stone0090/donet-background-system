@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.CustomerModule.CuCustomer {
+namespace Stonefw.Web.CustomerModule.CuCustomer {
     
     
     public partial class CuCustomerList {

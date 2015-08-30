@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.SystemModule.SysMenu {
+namespace Stonefw.Web.SystemModule.SysMenu {
     
     
     public partial class SysMenuList {

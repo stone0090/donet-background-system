@@ -1,4 +1,4 @@
-﻿namespace stonefw.CodeGenerate.SqlServer
+﻿namespace Stonefw.CodeGenerate.SqlServer
 {
     public class SqlServerColumn
     {
@@ -9,4 +9,3 @@
         public string ColumnType { get; set; }
     }
 }
-

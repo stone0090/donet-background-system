@@ -1,13 +1,10 @@
-﻿
-using stonefw.Utility.EntitySql;
-using stonefw.Utility.EntitySql.Entity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq.Expressions;
+using Stonefw.Utility.EntitySql.Entity;
 
-
-namespace stonefw.Utility.EntitySql.ExpressionVisitor.MethodCall
+namespace Stonefw.Utility.EntitySql.ExpressionVisitor.MethodCall
 {
     /// <summary>
     /// 对字符串函数调用的访问器
@@ -24,15 +21,19 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor.MethodCall
         /// <param name="colParameterNames">存储参数名称的列表</param>
         /// <param name="colDbTypes">存储数据库字段类型的列表</param>
         /// <param name="colArguments">存储条件值的列表</param>
-        public static void Visit(Type theEntityType, MethodCallExpression m, string tableAlias, Stack<string> colConditionParts, List<string> colParameterNames, List<DbType> colDbTypes, List<object> colArguments)
+        public static void Visit(Type theEntityType, MethodCallExpression m, string tableAlias,
+            Stack<string> colConditionParts, List<string> colParameterNames, List<DbType> colDbTypes,
+            List<object> colArguments)
         {
             string methodName = m.Method.Name;
             if (m.Object is MemberExpression)
             {
                 string condition = null;
                 //string memberName = GetMemberName(m.Object as MemberExpression, out theDbType);
-                string memberName = EntityMappingTool.GetDbColumnName(theEntityType, ((MemberExpression)m.Object).Member.Name);
-                DbType theDbType = EntityMappingTool.GetDbColumnType(theEntityType, ((MemberExpression)m.Object).Member.Name);
+                string memberName = EntityMappingTool.GetDbColumnName(theEntityType,
+                    ((MemberExpression) m.Object).Member.Name);
+                DbType theDbType = EntityMappingTool.GetDbColumnType(theEntityType,
+                    ((MemberExpression) m.Object).Member.Name);
                 string parameterName = GetParameterName(colParameterNames, memberName, tableAlias);
                 switch (methodName)
                 {
@@ -64,8 +65,10 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor.MethodCall
             else if (m.Object is ConstantExpression)
             {
                 string condition = null;
-                string memberName = EntityMappingTool.GetDbColumnName(theEntityType, ((MemberExpression)m.Arguments[0]).Member.Name);
-                DbType theDbType = EntityMappingTool.GetDbColumnType(theEntityType, ((MemberExpression)m.Arguments[0]).Member.Name);
+                string memberName = EntityMappingTool.GetDbColumnName(theEntityType,
+                    ((MemberExpression) m.Arguments[0]).Member.Name);
+                DbType theDbType = EntityMappingTool.GetDbColumnType(theEntityType,
+                    ((MemberExpression) m.Arguments[0]).Member.Name);
                 string parameterName = GetParameterName(colParameterNames, memberName, tableAlias);
                 switch (methodName)
                 {

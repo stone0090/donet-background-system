@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>stonefw.Web</RootNamespace>
-    <AssemblyName>stonefw.Web</AssemblyName>
+    <RootNamespace>Stonefw.Web</RootNamespace>
+    <AssemblyName>Stonefw.Web</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
@@ -42,18 +42,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="BaseModule\BcAutoCode\BcAutoCodeDetail.aspx" />
@@ -757,17 +749,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\stonefw.Biz\stonefw.Biz.csproj">
+    <ProjectReference Include="..\stonefw.Biz\Stonefw.Biz.csproj">
       <Project>{3dec0ad6-30df-43c6-b8a3-d0376dca88df}</Project>
-      <Name>stonefw.Biz</Name>
+      <Name>Stonefw.Biz</Name>
     </ProjectReference>
-    <ProjectReference Include="..\stonefw.Entity\stonefw.Entity.csproj">
+    <ProjectReference Include="..\stonefw.Entity\Stonefw.Entity.csproj">
       <Project>{fa43e73b-a3f4-4a80-a662-0307cf3f7941}</Project>
-      <Name>stonefw.Entity</Name>
+      <Name>Stonefw.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\stonefw.Utility\stonefw.Utility.csproj">
+    <ProjectReference Include="..\stonefw.Utility\Stonefw.Utility.csproj">
       <Project>{4f097047-9cd3-4876-9d18-8ae0856cd1c1}</Project>
-      <Name>stonefw.Utility</Name>
+      <Name>Stonefw.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

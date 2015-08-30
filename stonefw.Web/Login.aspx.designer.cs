@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web {
+namespace Stonefw.Web {
     
     
     public partial class Login {

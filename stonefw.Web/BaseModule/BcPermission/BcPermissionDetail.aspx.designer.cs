@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.BaseModule.BcPermission {
+namespace Stonefw.Web.BaseModule.BcPermission {
     
     
     public partial class BcPermissionDetail {

@@ -1,8 +1,8 @@
 using System;
-using stonefw.Utility.EntitySql.Attribute;
-using stonefw.Utility.EntitySql.Entity;
+using Stonefw.Utility.EntitySql.Attribute;
+using Stonefw.Utility.EntitySql.Entity;
 
-namespace stonefw.Entity.BaseModule
+namespace Stonefw.Entity.BaseModule
 {
     [Serializable]
     [Table("Bc_Group")]
@@ -10,6 +10,7 @@ namespace stonefw.Entity.BaseModule
     {
         [Field("GroupId")]
         public int? GroupId { get; set; }
+
         [Field("GroupName")]
         public string GroupName { get; set; }
     }

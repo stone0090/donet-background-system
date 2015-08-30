@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace stonefw.Utility.EntitySql.Entity
+namespace Stonefw.Utility.EntitySql.Entity
 {
     /// <summary>
     /// 实体对,用于部分连接操作的Entity化

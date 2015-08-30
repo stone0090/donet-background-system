@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.SystemModule.SysEnumName {
+namespace Stonefw.Web.SystemModule.SysEnumName {
     
     
     public partial class SysEnumNameList {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 
-namespace stonefw.Utility
+namespace Stonefw.Utility
 {
     /// <summary>
     /// web.config操作类
@@ -27,10 +27,14 @@ namespace stonefw.Utility
                         DataCache.SetCache(cacheKey, objModel, DateTime.Now.AddMinutes(180), TimeSpan.Zero);
                     }
                 }
-                catch { ;}
+                catch
+                {
+                    ;
+                }
             }
             return objModel != null ? objModel.ToString() : null;
         }
+
         /// <summary>
         /// 得到AppSettings中的配置String信息
         /// </summary>
@@ -40,6 +44,7 @@ namespace stonefw.Utility
         {
             return GetAppSettings(key);
         }
+
         /// <summary>
         /// 得到AppSettings中的配置Bool信息
         /// </summary>
@@ -62,6 +67,7 @@ namespace stonefw.Utility
             }
             return result;
         }
+
         /// <summary>
         /// 得到AppSettings中的配置int信息
         /// </summary>
@@ -84,6 +90,7 @@ namespace stonefw.Utility
             }
             return result;
         }
+
         /// <summary>
         /// 得到AppSettings中的配置Decimal信息
         /// </summary>
@@ -122,10 +129,14 @@ namespace stonefw.Utility
                         DataCache.SetCache(cacheKey, objModel, DateTime.Now.AddMinutes(180), TimeSpan.Zero);
                     }
                 }
-                catch { ;}
+                catch
+                {
+                    ;
+                }
             }
-            return objModel != null ? (ConnectionStringSettings)objModel : null;
+            return objModel != null ? (ConnectionStringSettings) objModel : null;
         }
+
         public static ConnectionStringSettings GetConnectionStrings(int index)
         {
             string cacheKey = "ConnectionStrings-" + index;
@@ -137,9 +148,12 @@ namespace stonefw.Utility
                     objModel = ConfigurationManager.ConnectionStrings[index];
                     DataCache.SetCache(cacheKey, objModel, DateTime.Now.AddMinutes(180), TimeSpan.Zero);
                 }
-                catch { ;}
+                catch
+                {
+                    ;
+                }
             }
-            return objModel != null ? (ConnectionStringSettings)objModel : null;
+            return objModel != null ? (ConnectionStringSettings) objModel : null;
         }
 
         public static string GetDbString(string key)
@@ -151,6 +165,7 @@ namespace stonefw.Utility
             }
             return string.Empty;
         }
+
         public static string GetDbString(int key)
         {
             var result = GetConnectionStrings(key);
@@ -170,6 +185,7 @@ namespace stonefw.Utility
             }
             return string.Empty;
         }
+
         public static string GetDbProviderName(int index)
         {
             var result = GetConnectionStrings(index);
@@ -189,6 +205,7 @@ namespace stonefw.Utility
             }
             return string.Empty;
         }
+
         public static string GetDbName(int index)
         {
             var result = GetConnectionStrings(index);
@@ -198,6 +215,5 @@ namespace stonefw.Utility
             }
             return string.Empty;
         }
-
     }
 }

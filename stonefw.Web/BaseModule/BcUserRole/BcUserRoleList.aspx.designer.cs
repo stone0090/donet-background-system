@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.BaseModule.BcUserRole {
+namespace Stonefw.Web.BaseModule.BcUserRole {
     
     
     public partial class BcUserRoleList {

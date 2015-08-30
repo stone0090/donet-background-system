@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
 
-namespace stonefw.Utility.EntitySql.ExpressionVisitor
+namespace Stonefw.Utility.EntitySql.ExpressionVisitor
 {
     /// <summary>
     /// 预处理，执行部分求值
@@ -15,6 +13,7 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
         /// 用于判断是否需要求值的委托
         /// </summary>
         private Func<Expression, bool> m_fnCanBeEvaluated;
+
         /// <summary>
         /// 需要进行求值的节点
         /// </summary>
@@ -25,7 +24,8 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
         /// </summary>
         public PartialEvaluator()
             : this(CanBeEvaluatedLocally)
-        { }
+        {
+        }
 
         /// <summary>
         /// 构造函数
@@ -56,12 +56,12 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
         /// <returns></returns>
         protected override Expression Visit(Expression exp)
         {
-            if (exp == null)            
-                return null;            
+            if (exp == null)
+                return null;
 
             //如果是需要执行求值的节点，则执行求值方法
-            if (this.m_candidates.Contains(exp))            
-                return this.Evaluate(exp);            
+            if (this.m_candidates.Contains(exp))
+                return this.Evaluate(exp);
 
             return base.Visit(exp);
         }
@@ -74,8 +74,8 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
         private Expression Evaluate(Expression e)
         {
             //访问常量的话直接返回
-            if (e.NodeType == ExpressionType.Constant)            
-                return e;            
+            if (e.NodeType == ExpressionType.Constant)
+                return e;
 
             //执行Lambda表达式
             LambdaExpression lambda = Expression.Lambda(e);
@@ -105,10 +105,12 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
             /// 评估器的委托
             /// </summary>
             private Func<Expression, bool> m_fnCanBeEvaluated;
+
             /// <summary>
             /// 需要执行求值操作的节点
             /// </summary>
             private HashSet<Expression> m_candidates;
+
             /// <summary>
             /// 状态：是否不能执行求值操作
             /// </summary>

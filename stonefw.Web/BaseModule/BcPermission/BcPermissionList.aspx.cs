@@ -1,21 +1,24 @@
-using System;
+﻿using System;
 using System.Web.UI.WebControls;
-using stonefw.Biz.BaseModule;
-using stonefw.Entity.Enum;
-using stonefw.Web.Utility.BaseClass;
+using Stonefw.Biz.BaseModule;
+using Stonefw.Entity.Enum;
+using Stonefw.Web.Utility.BaseClass;
 
-namespace stonefw.Web.BaseModule.BcPermission
+namespace Stonefw.Web.BaseModule.BcPermission
 {
     public partial class BcPermissionList : BasePage
     {
         private BcPermissionBiz _biz;
+
         private BcPermissionBiz Biz
-        { get { return _biz ?? (_biz = new BcPermissionBiz()); } }
+        {
+            get { return _biz ?? (_biz = new BcPermissionBiz()); }
+        }
 
         protected override bool InitPermission()
         {
-            this.btnAddNew.Visible = LoadPermission(SysPermsPointEnum.Add);
-            this.gvBcPermission.Columns[0].Visible = LoadPermission(SysPermsPointEnum.Delete);
+            btnAddNew.Visible = LoadPermission(SysPermsPointEnum.Add);
+            gvBcPermission.Columns[0].Visible = LoadPermission(SysPermsPointEnum.Delete);
             return LoadPermission(SysPermsPointEnum.View);
         }
 
@@ -27,24 +30,33 @@ namespace stonefw.Web.BaseModule.BcPermission
                 BindData();
             }
         }
-        protected void btnQuery_Click(object sender, EventArgs e) { BindData(); this.lMessage.Text = "执行成功！"; }
+
+        protected void btnQuery_Click(object sender, EventArgs e)
+        {
+            BindData();
+            lMessage.Text = "执行成功！";
+        }
+
         protected void gvBcPermission_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Row_Delete")
             {
-                string[] arg = e.CommandArgument.ToString().Split('|');
+                var arg = e.CommandArgument.ToString().Split('|');
                 Biz.DeleteBcPermission(int.Parse(arg[0]), int.Parse(arg[1]), arg[2], arg[3]);
                 BindData();
             }
         }
+
         protected void gvBcPermission_PageIndexChanged(object sender, EventArgs e)
         {
             BindData();
         }
+
         protected void gvBcPermission_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            this.gvBcPermission.PageIndex = e.NewPageIndex;
+            gvBcPermission.PageIndex = e.NewPageIndex;
         }
+
         protected void SelectedIndexChanged(object sender, EventArgs e)
         {
             BindData();
@@ -52,38 +64,38 @@ namespace stonefw.Web.BaseModule.BcPermission
 
         private void BindControlData()
         {
-            this.ddlRole.DataSource = new BcRoleBiz().GetBcRoleList();
-            this.ddlRole.DataValueField = "RoleId";
-            this.ddlRole.DataTextField = "RoleName";
-            this.ddlRole.DataBind();
-            this.ddlRole.Items.Insert(0, new ListItem("*全部*", "0"));
+            ddlRole.DataSource = new BcRoleBiz().GetBcRoleList();
+            ddlRole.DataValueField = "RoleId";
+            ddlRole.DataTextField = "RoleName";
+            ddlRole.DataBind();
+            ddlRole.Items.Insert(0, new ListItem("*全部*", "0"));
 
-            this.ddlUser.DataSource = new BcUserInfoBiz().GetEnabledBcUserInfoList();
-            this.ddlUser.DataValueField = "UserId";
-            this.ddlUser.DataTextField = "UserName";
-            this.ddlUser.DataBind();
-            this.ddlUser.Items.Insert(0, new ListItem("*全部*", "0"));
+            ddlUser.DataSource = new BcUserInfoBiz().GetEnabledBcUserInfoList();
+            ddlUser.DataValueField = "UserId";
+            ddlUser.DataTextField = "UserName";
+            ddlUser.DataBind();
+            ddlUser.Items.Insert(0, new ListItem("*全部*", "0"));
         }
+
         private void BindData()
         {
             gvBcPermission.PageSize = int.Parse(SysGlobalSetting.GridViewPageSize);
-            gvBcPermission.DataSource = this.ddlPermissionType.SelectedValue == "1" ?
-                Biz.GetEnabledBcPermissionList(1, int.Parse(this.ddlRole.SelectedValue)) :
-                Biz.GetEnabledBcPermissionList(2, int.Parse(this.ddlUser.SelectedValue));
+            gvBcPermission.DataSource = ddlPermissionType.SelectedValue == "1"
+                ? Biz.GetEnabledBcPermissionList(1, int.Parse(ddlRole.SelectedValue))
+                : Biz.GetEnabledBcPermissionList(2, int.Parse(ddlUser.SelectedValue));
             gvBcPermission.DataBind();
 
-            this.ddlRole.Visible = this.ddlPermissionType.SelectedValue == "1";
-            this.ddlUser.Visible = this.ddlPermissionType.SelectedValue == "2";
+            ddlRole.Visible = ddlPermissionType.SelectedValue == "1";
+            ddlUser.Visible = ddlPermissionType.SelectedValue == "2";
 
-            if (this.ddlPermissionType.SelectedValue == "2")
-                this.gvBcPermission.Columns[1].HeaderText = "角色名称";
+            if (ddlPermissionType.SelectedValue == "2")
+                gvBcPermission.Columns[1].HeaderText = "角色名称";
 
-            if ((this.ddlPermissionType.SelectedValue == "1" && this.ddlRole.SelectedValue == "0")||
-                (this.ddlPermissionType.SelectedValue == "2" && this.ddlUser.SelectedValue == "0"))
-                this.btnAddNew.Visible = false;
+            if ((ddlPermissionType.SelectedValue == "1" && ddlRole.SelectedValue == "0") ||
+                (ddlPermissionType.SelectedValue == "2" && ddlUser.SelectedValue == "0"))
+                btnAddNew.Visible = false;
             else
-                this.btnAddNew.Visible = true;
+                btnAddNew.Visible = true;
         }
-
     }
 }

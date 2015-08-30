@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace stonefw.Utility.EntitySql.Entity
+namespace Stonefw.Utility.EntitySql.Entity
 {
     /// <summary>
     /// 支持泛型的表连接的条件
@@ -15,8 +15,15 @@ namespace stonefw.Utility.EntitySql.Entity
         private string _leftTableGuid = null;
         private string _rightTableGuid = null;
 
-        public string LeftTableGuid { get { return _leftTableGuid; } }
-        public string RightTableGuid { get { return _rightTableGuid; } }
+        public string LeftTableGuid
+        {
+            get { return _leftTableGuid; }
+        }
+
+        public string RightTableGuid
+        {
+            get { return _rightTableGuid; }
+        }
 
         public GenericWhereEntity<TA> MainEntity { get; set; }
         public GenericWhereEntity<TB> EntityToJoin { get; set; }
@@ -32,28 +39,39 @@ namespace stonefw.Utility.EntitySql.Entity
         public string JoinCondition { get; set; }
 
         private string _joinConditionFirstParameter = null;
+
         /// <summary>
         /// 连接条件的首参数，用于表达式的定位
         /// </summary>
-        public string JoinConditionFirstParameter { get { return _joinConditionFirstParameter; } }
+        public string JoinConditionFirstParameter
+        {
+            get { return _joinConditionFirstParameter; }
+        }
 
         private Expression _joinConditionExpression = null;
+
         /// <summary>
         /// 连接条件表达式
         /// </summary>
-        public Expression JoinConditionExpression { get { return _joinConditionExpression; } }
+        public Expression JoinConditionExpression
+        {
+            get { return _joinConditionExpression; }
+        }
 
-        public void InnerJoin(GenericWhereEntity<TA> TA, GenericWhereEntity<TB> TB, Expression<Func<TA, TB, bool>> conditionExpression)
+        public void InnerJoin(GenericWhereEntity<TA> TA, GenericWhereEntity<TB> TB,
+            Expression<Func<TA, TB, bool>> conditionExpression)
         {
             Join(TA, TB, conditionExpression, JoinModeEnum.InnerJoin);
         }
 
-        public void LeftJoin(GenericWhereEntity<TA> TA, GenericWhereEntity<TB> TB, Expression<Func<TA, TB, bool>> conditionExpression)
+        public void LeftJoin(GenericWhereEntity<TA> TA, GenericWhereEntity<TB> TB,
+            Expression<Func<TA, TB, bool>> conditionExpression)
         {
             Join(TA, TB, conditionExpression, JoinModeEnum.LeftJoin);
         }
 
-        private void Join(GenericWhereEntity<TA> TA, GenericWhereEntity<TB> TB, Expression<Func<TA, TB, bool>> conditionExpression, JoinModeEnum joinMode)
+        private void Join(GenericWhereEntity<TA> TA, GenericWhereEntity<TB> TB,
+            Expression<Func<TA, TB, bool>> conditionExpression, JoinModeEnum joinMode)
         {
             if (conditionExpression.Body == null)
                 throw new EntitySqlException("未指定连接条件！");
@@ -78,7 +96,7 @@ namespace stonefw.Utility.EntitySql.Entity
         {
             if (joinExpression is BinaryExpression)
             {
-                BinaryExpression b = (BinaryExpression)joinExpression;
+                BinaryExpression b = (BinaryExpression) joinExpression;
                 return CheckJoinCondition(b.Left) && CheckJoinCondition(b.Right);
             }
             else if (joinExpression is MemberExpression)

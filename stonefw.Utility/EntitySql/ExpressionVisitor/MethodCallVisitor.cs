@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Linq.Expressions;
 using System.Data;
-using stonefw.Utility.EntitySql.Entity;
-using stonefw.Utility.EntitySql.ExpressionVisitor.MethodCall;
+using System.Linq.Expressions;
+using Stonefw.Utility.EntitySql.Entity;
+using Stonefw.Utility.EntitySql.ExpressionVisitor.MethodCall;
 
-namespace stonefw.Utility.EntitySql.ExpressionVisitor
+namespace Stonefw.Utility.EntitySql.ExpressionVisitor
 {
     /// <summary>
     /// 方法调用的访问器
@@ -24,14 +22,17 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
         /// <param name="colParameterNames">存储参数名称的列表</param>
         /// <param name="colDbTypes">存储数据库字段类型的列表</param>
         /// <param name="colArguments">存储条件值的列表</param>
-        public static void Visit(Type theEntityType, MethodCallExpression m, string tableAlias, Stack<string> colConditionParts, List<string> colParameterNames, List<DbType> colDbTypes, List<object> colArguments)
+        public static void Visit(Type theEntityType, MethodCallExpression m, string tableAlias,
+            Stack<string> colConditionParts, List<string> colParameterNames, List<DbType> colDbTypes,
+            List<object> colArguments)
         {
             if (m.Object is MemberExpression)
             {
                 //类似n.Name.StartsWith("吴")这样的调用
-                if (m.Object.Type == typeof(string))
+                if (m.Object.Type == typeof (string))
                 {
-                    StringMethodCallVisitor.Visit(theEntityType, m, tableAlias, colConditionParts, colParameterNames, colDbTypes, colArguments);
+                    StringMethodCallVisitor.Visit(theEntityType, m, tableAlias, colConditionParts, colParameterNames,
+                        colDbTypes, colArguments);
                 }
                 else
                 {
@@ -42,9 +43,10 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
             {
                 //类似"ABCD".Contains(n.Name)这样的调用
                 var cons = m.Object as ConstantExpression;
-                if (cons.Type == typeof(string))
+                if (cons.Type == typeof (string))
                 {
-                    StringMethodCallVisitor.Visit(theEntityType, m, tableAlias, colConditionParts, colParameterNames, colDbTypes, colArguments);
+                    StringMethodCallVisitor.Visit(theEntityType, m, tableAlias, colConditionParts, colParameterNames,
+                        colDbTypes, colArguments);
                 }
                 else
                 {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace stonefw.Utility.EntitySql.Entity
+﻿namespace Stonefw.Utility.EntitySql.Entity
 {
     public class BaseEntity
     {

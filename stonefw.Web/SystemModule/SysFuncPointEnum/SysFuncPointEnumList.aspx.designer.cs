@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.SystemModule.SysFuncPointEnum {
+namespace Stonefw.Web.SystemModule.SysFuncPointEnum {
     
     
     public partial class SysFuncPointEnumList {

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Web.Security;
-using stonefw.Web.Utility.BaseClass;
-using stonefw.Biz.SystemModule;
+using Stonefw.Biz.SystemModule;
+using Stonefw.Web.Utility.BaseClass;
 
-
-namespace stonefw.Web.MainPage
+namespace Stonefw.Web.MainPage
 {
     public partial class Index : BasePage
     {

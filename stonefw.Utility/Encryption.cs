@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace stonefw.Utility
+namespace Stonefw.Utility
 {
     /// <summary>
     /// 连接字符串加密解密方法
@@ -19,7 +19,7 @@ namespace stonefw.Utility
         {
             if (!Regex.IsMatch(connectString, "^[0-9,a-f,A-F]{2,}$"))
                 return false;
-            if ((connectString.Length % 2) != 0)
+            if ((connectString.Length%2) != 0)
                 return false;
             return true;
         }
@@ -68,8 +68,8 @@ namespace stonefw.Utility
             return System.Text.Encoding.UTF8.GetString(destData);
         }
 
-        private static readonly byte[] ConnectStringDesKey = { 0x2e, 0x3f, 0x83, 0xc9, 0x22, 0x8e, 0x92, 0x88 };
-        private static readonly byte[] ConnectStringDesIv = { 0xc3, 0x22, 0x06, 0x9a, 0x3b, 0x52, 0x92, 0xf5 };
+        private static readonly byte[] ConnectStringDesKey = {0x2e, 0x3f, 0x83, 0xc9, 0x22, 0x8e, 0x92, 0x88};
+        private static readonly byte[] ConnectStringDesIv = {0xc3, 0x22, 0x06, 0x9a, 0x3b, 0x52, 0x92, 0xf5};
 
         /// <summary>
         /// 使用DES加密
@@ -85,7 +85,8 @@ namespace stonefw.Utility
             //开辟一块内存流
             MemoryStream msEncrypt = new MemoryStream();
             //把内存流对象包装成加密流对象
-            CryptoStream csEncrypt = new CryptoStream(msEncrypt, desEncrypt.CreateEncryptor(key, iv), CryptoStreamMode.Write);
+            CryptoStream csEncrypt = new CryptoStream(msEncrypt, desEncrypt.CreateEncryptor(key, iv),
+                CryptoStreamMode.Write);
             csEncrypt.Write(srcData, 0, srcData.Length);
             //加密流关闭
             csEncrypt.Close();
@@ -114,7 +115,8 @@ namespace stonefw.Utility
             byte[] buffer = new byte[512];
             int readCount = 0;
             //把内存流对象包装成解密流对象
-            CryptoStream csDecrypt = new CryptoStream(msCipherData, desDecrypt.CreateDecryptor(key, iv), CryptoStreamMode.Read);
+            CryptoStream csDecrypt = new CryptoStream(msCipherData, desDecrypt.CreateDecryptor(key, iv),
+                CryptoStreamMode.Read);
             while ((readCount = csDecrypt.Read(buffer, 0, 512)) > 0)
             {
                 msRawData.Write(buffer, 0, readCount);

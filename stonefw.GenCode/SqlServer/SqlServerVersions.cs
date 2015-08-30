@@ -1,4 +1,4 @@
-﻿namespace stonefw.CodeGenerate.SqlServer
+﻿namespace Stonefw.CodeGenerate.SqlServer
 {
     internal enum SqlServerVersions
     {
@@ -9,4 +9,3 @@
         SqlServer2012
     }
 }
-

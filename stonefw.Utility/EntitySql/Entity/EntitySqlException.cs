@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace stonefw.Utility.EntitySql.Entity
+namespace Stonefw.Utility.EntitySql.Entity
 {
     /// <summary>
     /// 语法树异常
@@ -11,6 +11,7 @@ namespace stonefw.Utility.EntitySql.Entity
         public EntitySqlException()
         {
         }
+
         public EntitySqlException(string msg)
             : base(msg)
         {

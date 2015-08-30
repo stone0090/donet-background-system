@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace stonefw.CodeGenerate
+namespace Stonefw.CodeGenerate
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             //获取运行信息
             string applicationPath = Application.ExecutablePath;

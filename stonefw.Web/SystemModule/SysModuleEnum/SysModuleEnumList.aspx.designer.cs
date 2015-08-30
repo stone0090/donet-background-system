@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.SystemModule.SysModuleEnum {
+namespace Stonefw.Web.SystemModule.SysModuleEnum {
     
     
     public partial class SysModuleEnumList {

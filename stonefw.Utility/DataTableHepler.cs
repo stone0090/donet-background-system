@@ -4,14 +4,14 @@ using System.ComponentModel;
 using System.Data;
 using System.Reflection;
 
-namespace stonefw.Utility
+namespace Stonefw.Utility
 {
     public static class DataTableHepler
     {
         public static T DataRowToEntity<T>(DataRow tableRow) where T : new()
         {
             // Create a new type of the entity I want
-            Type t = typeof(T);
+            Type t = typeof (T);
             T returnObject = new T();
 
             foreach (DataColumn col in tableRow.Table.Columns)
@@ -50,9 +50,7 @@ namespace stonefw.Utility
                         }
                         catch (Exception)
                         {
-
                         }
-
                     }
                     try
                     {
@@ -61,7 +59,6 @@ namespace stonefw.Utility
                     }
                     catch (Exception)
                     {
-
                     }
                 }
             }
@@ -69,6 +66,7 @@ namespace stonefw.Utility
             // return the entity object with values
             return returnObject;
         }
+
         public static List<T> DataTableToList<T>(DataTable table) where T : new()
         {
             // Create a new type of the entity I want
@@ -76,7 +74,7 @@ namespace stonefw.Utility
 
             foreach (DataRow tableRow in table.Rows)
             {
-                Type t = typeof(T);
+                Type t = typeof (T);
                 T returnObject = new T();
                 foreach (DataColumn col in table.Columns)
                 {
@@ -103,7 +101,7 @@ namespace stonefw.Utility
                             {
                                 // Convert the db type into the T we have in our Nullable<T> type
                                 val = Convert.ChangeType
-                        (val, Nullable.GetUnderlyingType(pInfo.PropertyType));
+                                    (val, Nullable.GetUnderlyingType(pInfo.PropertyType));
                             }
                         }
                         else
@@ -121,25 +119,27 @@ namespace stonefw.Utility
             // return the entity object with values
             return result;
         }
+
         public static DataTable GetDataTableSchema<T>()
         {
             PropertyDescriptorCollection props =
-                           TypeDescriptor.GetProperties(typeof(T));
+                TypeDescriptor.GetProperties(typeof (T));
             DataTable table = new DataTable();
             for (int i = 0; i < props.Count; i++)
             {
                 PropertyDescriptor prop = props[i];
                 Type pt = prop.PropertyType;
-                if (pt.IsGenericType && pt.GetGenericTypeDefinition() == typeof(Nullable<>))
+                if (pt.IsGenericType && pt.GetGenericTypeDefinition() == typeof (Nullable<>))
                     pt = Nullable.GetUnderlyingType(pt);
                 table.Columns.Add(prop.Name, pt);
             }
             return table;
         }
+
         public static DataTable ListToDataTable<T>(List<T> data)
         {
             PropertyDescriptorCollection props =
-                           TypeDescriptor.GetProperties(typeof(T));
+                TypeDescriptor.GetProperties(typeof (T));
             DataTable table = GetDataTableSchema<T>();
             object[] values = new object[props.Count];
             foreach (T item in data)
@@ -159,7 +159,9 @@ namespace stonefw.Utility
         /// </summary>
         public static void RemoveDbNullColumn<T>(T customRow) where T : class
         {
-            PropertyInfo[] pis = typeof(T).GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.SetProperty);
+            PropertyInfo[] pis =
+                typeof (T).GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public |
+                                         BindingFlags.NonPublic | BindingFlags.SetProperty);
 
             foreach (PropertyInfo pi in pis)
             {
@@ -173,12 +175,15 @@ namespace stonefw.Utility
                 }
             }
         }
+
         /// <summary>
         /// 比较新旧customRow的内容，新customRow中为dbnull的字段，用旧customRow中的字段来填充
         /// </summary>
         public static void RemoveDbNullColumn<T>(T newCustomRow, T oldCustomRow) where T : class
         {
-            PropertyInfo[] pis = typeof(T).GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.SetProperty);
+            PropertyInfo[] pis =
+                typeof (T).GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public |
+                                         BindingFlags.NonPublic | BindingFlags.SetProperty);
 
             foreach (PropertyInfo pi in pis)
             {
@@ -199,6 +204,7 @@ namespace stonefw.Utility
                 }
             }
         }
+
         /// <summary>
         /// 供RemoveDbNullColumn方法使用，返回每种类型的默认值
         /// </summary>

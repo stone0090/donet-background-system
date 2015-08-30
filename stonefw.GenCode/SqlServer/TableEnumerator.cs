@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using stonefw.Utility;
+using Stonefw.Utility;
 
-namespace stonefw.CodeGenerate.SqlServer
+namespace Stonefw.CodeGenerate.SqlServer
 {
     public static class TableEnumerator
     {
@@ -64,4 +64,3 @@ namespace stonefw.CodeGenerate.SqlServer
         }
     }
 }
-

@@ -1,4 +1,4 @@
-﻿namespace stonefw.CodeGenerate
+﻿namespace Stonefw.CodeGenerate
 {
     /// <summary>
     /// 运行信息
@@ -8,10 +8,6 @@
         /// <summary>
         /// 应用程序所在的目录
         /// </summary>
-        public static string ApplicationFolderPath
-        {
-            get;
-            set;
-        }
+        public static string ApplicationFolderPath { get; set; }
     }
 }

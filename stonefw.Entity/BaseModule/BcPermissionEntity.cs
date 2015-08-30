@@ -1,9 +1,9 @@
 using System;
-using stonefw.Utility.EntitySql.Attribute;
-using stonefw.Utility.EntitySql.Entity;
 using System.Collections.Generic;
+using Stonefw.Utility.EntitySql.Attribute;
+using Stonefw.Utility.EntitySql.Entity;
 
-namespace stonefw.Entity.BaseModule
+namespace Stonefw.Entity.BaseModule
 {
     [Serializable]
     [Table("Bc_Permission")]
@@ -11,12 +11,16 @@ namespace stonefw.Entity.BaseModule
     {
         [Field("UserRoleId")]
         public int? UserRoleId { get; set; }
+
         [Field("PermissionType")]
         public int? PermissionType { get; set; }
+
         [Field("ModuleId")]
         public string ModuleId { get; set; }
+
         [Field("FuncPointId")]
         public string FuncPointId { get; set; }
+
         [Field("Permissions")]
         public string Permissions { get; set; }
 
@@ -26,6 +30,5 @@ namespace stonefw.Entity.BaseModule
         public List<string> PermissionList { get; set; }
         public List<string> PermissionNameList { get; set; }
         public string PermissionNames { get; set; }
-        
     }
 }

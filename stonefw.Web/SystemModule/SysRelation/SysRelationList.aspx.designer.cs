@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.SystemModule.SysRelation {
+namespace Stonefw.Web.SystemModule.SysRelation {
     
     
     public partial class SysRelationList {

@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.MainPage {
+namespace Stonefw.Web.MainPage {
     
     
     public partial class Header {

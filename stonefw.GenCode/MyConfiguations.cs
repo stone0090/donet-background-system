@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace stonefw.CodeGenerate
+namespace Stonefw.CodeGenerate
 {
     /// <summary>
     /// 运行配置信息
@@ -14,33 +14,30 @@ namespace stonefw.CodeGenerate
         /// </summary>
         static MyConfiguations()
         {
-            _ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DBForEntity"].ConnectionString;
+            _ConnectionString =
+                System.Configuration.ConfigurationManager.ConnectionStrings["DBForEntity"].ConnectionString;
             _NameSpaceList = new NameValueCollection(256);
             LoadNameSpaceList();
         }
 
         private static string _ConnectionString = null;
+
         /// <summary>
         /// 连接字符串
         /// </summary>
         public static string ConnectionString
         {
-            get
-            {
-                return _ConnectionString;
-            }
+            get { return _ConnectionString; }
         }
 
         private static NameValueCollection _NameSpaceList = null;
+
         /// <summary>
         /// 命名空间列表
         /// </summary>
         public static NameValueCollection NameSpaceList
         {
-            get
-            {
-                return _NameSpaceList;
-            }
+            get { return _NameSpaceList; }
         }
 
         #region 公开的函数

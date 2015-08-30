@@ -1,6 +1,6 @@
 using System;
 
-namespace stonefw.Utility.EntitySql.Attribute
+namespace Stonefw.Utility.EntitySql.Attribute
 {
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class Table : System.Attribute
@@ -10,6 +10,6 @@ namespace stonefw.Utility.EntitySql.Attribute
             this.TableName = tableName;
         }
 
-        public string TableName { get; set; }        
+        public string TableName { get; set; }
     }
 }

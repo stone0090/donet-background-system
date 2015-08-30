@@ -1,11 +1,11 @@
 using System;
-using stonefw.Utility.EntitySql.Attribute;
-using stonefw.Utility.EntitySql.Entity;
-using stonefw.Entity.Extension;
 using System.Collections.Generic;
-using stonefw.Entity.SystemModule;
+using Stonefw.Entity.Extension;
+using Stonefw.Entity.SystemModule;
+using Stonefw.Utility.EntitySql.Attribute;
+using Stonefw.Utility.EntitySql.Entity;
 
-namespace stonefw.Entity.BaseModule
+namespace Stonefw.Entity.BaseModule
 {
     [Serializable]
     [Table("Bc_UserInfo")]
@@ -13,24 +13,34 @@ namespace stonefw.Entity.BaseModule
     {
         [Field("UserId")]
         public int? UserId { get; set; }
+
         [Field("GroupId")]
         public int? GroupId { get; set; }
+
         [Field("UserAccount")]
         public string UserAccount { get; set; }
+
         [Field("UserName")]
         public string UserName { get; set; }
+
         [Field("Password")]
         public string Password { get; set; }
+
         [Field("Sex")]
         public bool? Sex { get; set; }
+
         [Field("OfficePhone")]
         public string OfficePhone { get; set; }
+
         [Field("MobilePhone")]
         public string MobilePhone { get; set; }
+
         [Field("Email")]
         public string Email { get; set; }
+
         [Field("ActivityFlag")]
         public bool? ActivityFlag { get; set; }
+
         [Field("DeleteFlag")]
         public bool? DeleteFlag { get; set; }
 

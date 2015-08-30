@@ -1,51 +1,54 @@
-using stonefw.Biz.BaseModule;
-
-
-using stonefw.Entity.BaseModule;
-using stonefw.Entity.Enum;
-using stonefw.Entity.SystemModule;
-using stonefw.Utility;
-using stonefw.Utility.EntitySql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Stonefw.Entity.Enum;
+using Stonefw.Entity.SystemModule;
+using Stonefw.Utility;
+using Stonefw.Utility.EntitySql;
 
-namespace stonefw.Biz.SystemModule
+namespace Stonefw.Biz.SystemModule
 {
     public class SysRelationBiz
     {
-        const string CacheKey = "SysRelationBiz-GetSysRelationList";
+        private const string CacheKey = "SysRelationBiz-GetSysRelationList";
 
         public List<SysRelationEntity> GetSysRelationList()
         {
             object list = DataCache.GetCache(CacheKey) ?? SetSysRelationListCache();
-            return (List<SysRelationEntity>)list;
+            return (List<SysRelationEntity>) list;
         }
+
         public List<SysRelationEntity> GetSysRelationList(string moduleId)
         {
             return GetSysRelationList().Where(n => n.ModuleId == moduleId).ToList();
         }
+
         public void DeleteSysRelation(string moduleId, string funcPointId)
         {
-            SysRelationEntity entity = new SysRelationEntity() { ModuleId = moduleId, FuncPointId = funcPointId };
+            SysRelationEntity entity = new SysRelationEntity() {ModuleId = moduleId, FuncPointId = funcPointId};
             EntityExecution.Delete(entity);
             SetSysRelationListCache();
         }
+
         public void AddNewSysRelation(SysRelationEntity entity)
         {
-            EntityExecution.Insert(entity);
+            entity.Insert();
             SetSysRelationListCache();
         }
+
         public void UpdateSysRelation(SysRelationEntity entity)
         {
-            EntityExecution.Update(entity);
+            ;
+            entity.Update();
             SetSysRelationListCache();
         }
+
         public SysRelationEntity GetSingleSysRelation(string moduleId, string funcPointId)
         {
             var list = GetSysRelationList().Where(n => n.ModuleId == moduleId && n.FuncPointId == funcPointId).ToList();
             return list.Count > 0 ? list[0] : null;
         }
+
         public List<SysRelationEntity> GetEnabledSysRelationList()
         {
             var listEnabledSysRelation = GetSysRelationList();
@@ -57,7 +60,10 @@ namespace stonefw.Biz.SystemModule
             for (int i = listEnabledSysRelation.Count - 1; i >= 0; i--)
             {
                 var permisionEntity = listEnabledSysRelation[i];
-                var list = listEnabledSysMenuEntity.Where(n => n.ModuleId == permisionEntity.ModuleId && n.FuncPointId == permisionEntity.FuncPointId).ToList();
+                var list =
+                    listEnabledSysMenuEntity.Where(
+                        n => n.ModuleId == permisionEntity.ModuleId && n.FuncPointId == permisionEntity.FuncPointId)
+                        .ToList();
                 if (list.Count <= 0) listEnabledSysRelation.Remove(permisionEntity);
             }
 
@@ -70,16 +76,18 @@ namespace stonefw.Biz.SystemModule
             var listSysModuleEnumEntity = new SysModuleEnumBiz().GetSysModuleEnumList();
             var listSysFuncPointEnumEntity = new SysFuncPointEnumBiz().GetSysFuncPointEnumList();
             var query = from sysRelationEntity in listSysRelationEntity
-                        join sysModuleEnumEntity in listSysModuleEnumEntity on sysRelationEntity.ModuleId equals sysModuleEnumEntity.Name
-                        join sysFuncPointEnumEntity in listSysFuncPointEnumEntity on sysRelationEntity.FuncPointId equals sysFuncPointEnumEntity.Name
-                        select new SysRelationEntity()
-                        {
-                            ModuleId = sysRelationEntity.ModuleId,
-                            FuncPointId = sysRelationEntity.FuncPointId,
-                            Permissions = sysRelationEntity.Permissions,
-                            ModuleName = sysModuleEnumEntity.Description,
-                            FuncPointName = sysFuncPointEnumEntity.Description,
-                        };
+                join sysModuleEnumEntity in listSysModuleEnumEntity on sysRelationEntity.ModuleId equals
+                    sysModuleEnumEntity.Name
+                join sysFuncPointEnumEntity in listSysFuncPointEnumEntity on sysRelationEntity.FuncPointId equals
+                    sysFuncPointEnumEntity.Name
+                select new SysRelationEntity()
+                {
+                    ModuleId = sysRelationEntity.ModuleId,
+                    FuncPointId = sysRelationEntity.FuncPointId,
+                    Permissions = sysRelationEntity.Permissions,
+                    ModuleName = sysModuleEnumEntity.Description,
+                    FuncPointName = sysFuncPointEnumEntity.Description,
+                };
             listSysRelationEntity = query.ToList<SysRelationEntity>();
             foreach (SysRelationEntity sysRelationEntity in listSysRelationEntity)
             {
@@ -97,16 +105,17 @@ namespace stonefw.Biz.SystemModule
                         }
                     }
                     if (sysRelationEntity.PermissionListName.Count > 0)
-                        sysRelationEntity.PermissionsName = string.Join(",", sysRelationEntity.PermissionListName.ToArray());
+                        sysRelationEntity.PermissionsName = string.Join(",",
+                            sysRelationEntity.PermissionListName.ToArray());
                 }
             }
             DataCache.SetCache(CacheKey, listSysRelationEntity);
             return listSysRelationEntity;
         }
 
-        public object GetEnabledSysPermsPointEnumList(string[] permissionList)
-        {
-            throw new NotImplementedException();
-        }
+        //public object GetEnabledSysPermsPointEnumList(string[] permissionList)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

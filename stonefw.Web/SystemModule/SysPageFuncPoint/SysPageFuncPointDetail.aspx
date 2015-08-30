@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysPageFuncPointDetail.aspx.cs" Inherits="stonefw.Web.SystemModule.SysPageFuncPoint.SysPageFuncPointDetail" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysPageFuncPointDetail.aspx.cs" Inherits="Stonefw.Web.SystemModule.SysPageFuncPoint.SysPageFuncPointDetail" %>
 
 <!DOCTYPE html>
 
@@ -15,13 +15,14 @@
                 <tr>
                     <td>FuncPointId：</td>
                     <td>
-                        <asp:DropDownList ID="ddlFuncPointId" runat="server" Width="335" class="easyui-combobox" data-options="required:true,editable:false"></asp:DropDownList>
+                        <asp:DropDownList ID="ddlFuncPointId" runat="server" Width="335"></asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
                     <td>PageUrl：</td>
                     <td>
-                        <asp:TextBox ID="txtPageUrl" runat="server" MaxLength="250" Width="335" class="easyui-textbox" data-options="required:true"></asp:TextBox></td>
+                        <asp:TextBox ID="txtPageUrl" runat="server" MaxLength="250" Width="330"></asp:TextBox>
+                    </td>
                 </tr>
             </table>
             <div class="error">

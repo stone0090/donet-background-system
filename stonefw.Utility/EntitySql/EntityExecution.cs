@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Common;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
-using stonefw.Utility.EntitySql.Entity;
+using Stonefw.Utility.EntitySql.Entity;
 
-
-namespace stonefw.Utility.EntitySql
+namespace Stonefw.Utility.EntitySql
 {
     /// <summary>
     /// 实体类的操作
@@ -16,11 +12,13 @@ namespace stonefw.Utility.EntitySql
     public static class EntityExecution
     {
         #region 成员委托
+
         /// <summary>
         /// 访问成员的委托
         /// </summary>
         public delegate TResult VisitMember<T, TResult>(T arg);
-        #endregion        
+
+        #endregion
 
         #region 新增操作
 
@@ -94,7 +92,7 @@ namespace stonefw.Utility.EntitySql
             where T : BaseEntity
         {
             //获取主键相关的字段
-            Type entityType = typeof(T);
+            Type entityType = typeof (T);
             if (!EntityMappingTool.HasPrimaryKey(entityType))
                 throw new EntitySqlException(string.Format("实体类{0}未设置主键字段！", entityType.FullName));
 
@@ -116,7 +114,7 @@ namespace stonefw.Utility.EntitySql
             where T : BaseEntity
         {
             //检索数据库相关的字段和属性
-            Type entityType = typeof(T);
+            Type entityType = typeof (T);
 
             //获取主键相关的字段
             if (!EntityMappingTool.HasPrimaryKey(entityType))
@@ -165,7 +163,8 @@ namespace stonefw.Utility.EntitySql
         /// <summary>
         /// 将指定的字段设置为Null
         /// </summary>
-        public static void SetMemberNull<T, TKey>(Expression<Func<T, bool>> conditionExpression, Expression<Func<T, TKey>> keySelector, Database db = null)
+        public static void SetMemberNull<T, TKey>(Expression<Func<T, bool>> conditionExpression,
+            Expression<Func<T, TKey>> keySelector, Database db = null)
             where T : BaseEntity
         {
             if (conditionExpression == null)
@@ -181,7 +180,8 @@ namespace stonefw.Utility.EntitySql
         /// <summary>
         /// 将指定的字段设置为Null
         /// </summary>
-        public static void SetMembersNull<T>(Expression<Func<T, bool>> conditionExpression, Database db = null, params Expression<Func<T, object>>[] keySelectors)
+        public static void SetMembersNull<T>(Expression<Func<T, bool>> conditionExpression, Database db = null,
+            params Expression<Func<T, object>>[] keySelectors)
             where T : BaseEntity
         {
             if (conditionExpression == null)
@@ -197,10 +197,11 @@ namespace stonefw.Utility.EntitySql
         /// <summary>
         /// 将指定的字段设置为Null
         /// </summary>
-        public static void SetMemberNull<T, TKey>(GenericWhereEntity<T> whereEntity, Expression<Func<T, TKey>> keySelector, Database db = null)
+        public static void SetMemberNull<T, TKey>(GenericWhereEntity<T> whereEntity,
+            Expression<Func<T, TKey>> keySelector, Database db = null)
             where T : BaseEntity
         {
-            Type entityType = typeof(T);
+            Type entityType = typeof (T);
             MemberExpression m = keySelector.Body as MemberExpression;
             string memberName = m.Member.Name;
 
@@ -214,10 +215,11 @@ namespace stonefw.Utility.EntitySql
         /// <summary>
         /// 将指定的字段设置为Null
         /// </summary>
-        public static void SetMembersNull<T>(GenericWhereEntity<T> whereEntity, Database db = null, params Expression<Func<T, object>>[] keySelectors)
+        public static void SetMembersNull<T>(GenericWhereEntity<T> whereEntity, Database db = null,
+            params Expression<Func<T, object>>[] keySelectors)
             where T : BaseEntity
         {
-            Type entityType = typeof(T);
+            Type entityType = typeof (T);
 
             //检索要UPDATE的成员列表
             List<string> memberNames = new List<string>(keySelectors.Length);
@@ -305,7 +307,8 @@ namespace stonefw.Utility.EntitySql
         /// <param name="db">数据库连接</param>
         /// <param name="maxRowCounts">读取的记录数量</param>
         /// <returns>实体类的列表</returns>
-        public static List<T> SelectAll<T>(Expression<Func<T, bool>> conditionExpression = null, Database db = null, params int[] maxRowCounts)
+        public static List<T> SelectAll<T>(Expression<Func<T, bool>> conditionExpression = null, Database db = null,
+            params int[] maxRowCounts)
             where T : BaseEntity, new()
         {
             GenericWhereEntity<T> whereEntity = new GenericWhereEntity<T>();
@@ -323,7 +326,8 @@ namespace stonefw.Utility.EntitySql
         /// <param name="db">数据库连接</param>
         /// <param name="maxRowCounts">读取的记录数量</param>
         /// <returns>实体类的列表</returns>
-        public static List<T> SelectAll<T>(GenericWhereEntity<T> whereEntity, Database db = null, params int[] maxRowCounts)
+        public static List<T> SelectAll<T>(GenericWhereEntity<T> whereEntity, Database db = null,
+            params int[] maxRowCounts)
             where T : BaseEntity, new()
         {
             int rowCount = (maxRowCounts == null || maxRowCounts.Length < 1) ? 0 : maxRowCounts[0];
@@ -381,7 +385,7 @@ namespace stonefw.Utility.EntitySql
             {
                 SqlCreator.FillSqlParameters(db, cmd, whereEntity);
                 var countObj = db.ExecuteScalar(cmd);
-                return (int)countObj;
+                return (int) countObj;
             }
         }
 
@@ -433,7 +437,6 @@ namespace stonefw.Utility.EntitySql
         //}
 
         #endregion
-
 
         #region 暂时不用的方法       
 
@@ -592,7 +595,7 @@ namespace stonefw.Utility.EntitySql
         //    }
         //}
 
-        #endregion 
+        #endregion
 
         #region 双表连接
 

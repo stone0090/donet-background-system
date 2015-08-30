@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Web.UI.WebControls;
-using stonefw.Biz.SystemModule;
-using stonefw.Web.Utility.BaseClass;
+using Stonefw.Biz.SystemModule;
+using Stonefw.Web.Utility.BaseClass;
 
-namespace stonefw.Web.SystemModule.SysMenu
+namespace Stonefw.Web.SystemModule.SysMenu
 {
     public partial class SysMenuSorting : BasePage
     {
         private SysMenuBiz _biz;
+
         private SysMenuBiz Biz
         {
             get { return _biz ?? (_biz = new SysMenuBiz()); }
@@ -22,24 +23,29 @@ namespace stonefw.Web.SystemModule.SysMenu
                 FillFormData();
             }
         }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                if (string.IsNullOrEmpty(this.hdSeqValue.Value))
-                    base.FatherQuery();
+                if (string.IsNullOrEmpty(hdSeqValue.Value))
+                    FatherQuery();
 
                 var ht = new Hashtable();
-                var seats = this.hdSeqValue.Value.Split('|');
+                var seats = hdSeqValue.Value.Split('|');
                 for (var i = 0; i < seats.Length; i++)
                 {
                     ht.Add(seats[i], i + 1);
                 }
                 Biz.RecalSeq(ht);
-                base.FatherQuery();
+                FatherQuery();
             }
-            catch (Exception ex) { this.lMessage.Text = string.Format("位置调整失败，原因：{0}", ex.Message); }
+            catch (Exception ex)
+            {
+                lMessage.Text = string.Format("位置调整失败，原因：{0}", ex.Message);
+            }
         }
+
         protected void ddlMenuTree_SelectedIndexChanged(object sender, EventArgs e)
         {
             FillFormData();
@@ -54,6 +60,7 @@ namespace stonefw.Web.SystemModule.SysMenu
             ddlMenuTree.DataBind();
             ddlMenuTree.Items.Insert(0, new ListItem("根目录", "0"));
         }
+
         private void FillFormData()
         {
             var seatList = Biz.GetSysMenuListByFatherNode(int.Parse(ddlMenuTree.SelectedValue));
@@ -62,6 +69,5 @@ namespace stonefw.Web.SystemModule.SysMenu
             lbMenuTree.DataTextField = "MenuName";
             lbMenuTree.DataBind();
         }
-
     }
 }

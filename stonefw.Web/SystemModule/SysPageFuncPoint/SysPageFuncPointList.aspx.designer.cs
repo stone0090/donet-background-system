@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.SystemModule.SysPageFuncPoint {
+namespace Stonefw.Web.SystemModule.SysPageFuncPoint {
     
     
     public partial class SysPageFuncPointList {

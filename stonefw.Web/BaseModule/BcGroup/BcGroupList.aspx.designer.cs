@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.BaseModule.BcGroup {
+namespace Stonefw.Web.BaseModule.BcGroup {
     
     
     public partial class BcGroupList {

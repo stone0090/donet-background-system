@@ -7,8 +7,8 @@
     <ProjectGuid>{3DEC0AD6-30DF-43C6-B8A3-D0376DCA88DF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>stonefw.Biz</RootNamespace>
-    <AssemblyName>stonefw.Biz</AssemblyName>
+    <RootNamespace>Stonefw.Biz</RootNamespace>
+    <AssemblyName>Stonefw.Biz</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -34,7 +34,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Transactions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -46,6 +45,7 @@
     <Compile Include="BaseModule\BcUserRoleBiz.cs" />
     <Compile Include="CustomerModule\CuContactPersonBiz.cs" />
     <Compile Include="CustomerModule\CuCustomerBiz.cs" />
+    <Compile Include="SystemModule\SysEnumNameExBiz.cs" />
     <Compile Include="SystemModule\SysModuleEnumBiz.cs" />
     <Compile Include="SystemModule\SysFuncPointEnumBiz.cs" />
     <Compile Include="SystemModule\SysPermsPointEnumBiz.cs" />
@@ -60,13 +60,13 @@
     <Compile Include="BaseModule\BcUserInfoBiz.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\stonefw.Entity\stonefw.Entity.csproj">
+    <ProjectReference Include="..\stonefw.Entity\Stonefw.Entity.csproj">
       <Project>{fa43e73b-a3f4-4a80-a662-0307cf3f7941}</Project>
-      <Name>stonefw.Entity</Name>
+      <Name>Stonefw.Entity</Name>
     </ProjectReference>
-    <ProjectReference Include="..\stonefw.Utility\stonefw.Utility.csproj">
+    <ProjectReference Include="..\stonefw.Utility\Stonefw.Utility.csproj">
       <Project>{4F097047-9CD3-4876-9D18-8AE0856CD1C1}</Project>
-      <Name>stonefw.Utility</Name>
+      <Name>Stonefw.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

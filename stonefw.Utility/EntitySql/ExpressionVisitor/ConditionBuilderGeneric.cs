@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Reflection;
 using System.Data;
+using System.Linq.Expressions;
+using Stonefw.Utility.EntitySql.Entity;
 
-using stonefw.Utility.EntitySql.Entity;
-using stonefw.Utility.EntitySql;
-
-namespace stonefw.Utility.EntitySql.ExpressionVisitor
+namespace Stonefw.Utility.EntitySql.ExpressionVisitor
 {
     internal class ConditionBuilderGeneric<T> : ExpressionVisitor
     {
@@ -28,6 +23,7 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
         /// 表的别名
         /// </summary>
         private string _TableAlias = null;
+
         /// <summary>
         /// 相关的实体
         /// </summary>
@@ -42,26 +38,32 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
         /// 最终的查询条件
         /// </summary>
         public string Condition { get; private set; }
+
         /// <summary>
         /// 参数值的列表
         /// </summary>
         public object[] Arguments { get; private set; }
+
         /// <summary>
         /// 数据类型的列表
         /// </summary>
         public DbType[] DbTypes { get; private set; }
+
         /// <summary>
         /// 参数名称的列表
         /// </summary>
         public string[] ParameterNames { get; private set; }
+
         /// <summary>
         /// 当前访问的数据表字段成员
         /// </summary>
         private string m_TmpDBColumnName = null;
+
         /// <summary>
         /// 当前访问的数据表字段类型
         /// </summary>
         private DbType m_TmpDBColumnType = DbType.AnsiString;
+
         /// <summary>
         /// 当前访问的数据是否使用参数
         /// </summary>
@@ -110,7 +112,7 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
             bool isRightConstantNull = false;
             if (isRightConstant)
             {
-                ConstantExpression ce = (ConstantExpression)b.Right;
+                ConstantExpression ce = (ConstantExpression) b.Right;
                 if (ce.Value == null)
                     isRightConstantNull = true;
             }
@@ -185,22 +187,24 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
             if (b.Left is MemberExpression)
                 leftMemberExp = b.Left as MemberExpression;
             else if (b.Left.NodeType == ExpressionType.Convert)
-                leftMemberExp = ((UnaryExpression)b.Left).Operand as MemberExpression;
+                leftMemberExp = ((UnaryExpression) b.Left).Operand as MemberExpression;
             isLeftMember = (leftMemberExp != null);
 
             //如果左侧是成员访问，右侧是空值，直接输出语句
-            if (b.Right is MemberExpression)            
-                rightMemberExp = b.Right as MemberExpression;            
-            else if (b.Right.NodeType == ExpressionType.Convert)            
-                rightMemberExp = ((UnaryExpression)b.Right).Operand as MemberExpression;            
+            if (b.Right is MemberExpression)
+                rightMemberExp = b.Right as MemberExpression;
+            else if (b.Right.NodeType == ExpressionType.Convert)
+                rightMemberExp = ((UnaryExpression) b.Right).Operand as MemberExpression;
             isRightMember = (rightMemberExp != null);
 
             m_TmpUsedParameter = ((isLeftMember && isRightConstant) || (isRightMember && isLeftConstant));
             //左侧是访问成员，肯定要加载
             if (isLeftMember)
             {
-                m_TmpDBColumnName = EntityMappingTool.GetDbColumnName(_TheWhereEntity.EntityType, leftMemberExp.Member.Name);
-                m_TmpDBColumnType = EntityMappingTool.GetDbColumnType(_TheWhereEntity.EntityType, leftMemberExp.Member.Name);
+                m_TmpDBColumnName = EntityMappingTool.GetDbColumnName(_TheWhereEntity.EntityType,
+                    leftMemberExp.Member.Name);
+                m_TmpDBColumnType = EntityMappingTool.GetDbColumnType(_TheWhereEntity.EntityType,
+                    leftMemberExp.Member.Name);
                 //如果是左侧为成员，右侧为null值，需要特殊处理
                 if (isRightConstantNull)
                 {
@@ -221,16 +225,20 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
             }
             else if (isLeftConstant && isRightMember)
             {
-                m_TmpDBColumnName = EntityMappingTool.GetDbColumnName(_TheWhereEntity.EntityType, rightMemberExp.Member.Name);
-                m_TmpDBColumnType = EntityMappingTool.GetDbColumnType(_TheWhereEntity.EntityType, rightMemberExp.Member.Name);
+                m_TmpDBColumnName = EntityMappingTool.GetDbColumnName(_TheWhereEntity.EntityType,
+                    rightMemberExp.Member.Name);
+                m_TmpDBColumnType = EntityMappingTool.GetDbColumnType(_TheWhereEntity.EntityType,
+                    rightMemberExp.Member.Name);
             }
             this.Visit(b.Left);
 
             //两侧都是访问成员的话，也加载
             if (isLeftMember && isRightMember)
             {
-                m_TmpDBColumnName = EntityMappingTool.GetDbColumnName(_TheWhereEntity.EntityType, rightMemberExp.Member.Name);
-                m_TmpDBColumnType = EntityMappingTool.GetDbColumnType(_TheWhereEntity.EntityType, rightMemberExp.Member.Name);
+                m_TmpDBColumnName = EntityMappingTool.GetDbColumnName(_TheWhereEntity.EntityType,
+                    rightMemberExp.Member.Name);
+                m_TmpDBColumnType = EntityMappingTool.GetDbColumnType(_TheWhereEntity.EntityType,
+                    rightMemberExp.Member.Name);
             }
             this.Visit(b.Right);
 
@@ -283,7 +291,8 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
         {
             if (m.Object != null && (m.Object is MemberExpression || m.Object is ConstantExpression))
             {
-                MethodCallVisitor.Visit(_TheWhereEntity.EntityType, m, _TableAlias, this.m_conditionParts, this.m_ParameterNames, this.m_DbTypes, this.m_arguments);
+                MethodCallVisitor.Visit(_TheWhereEntity.EntityType, m, _TableAlias, this.m_conditionParts,
+                    this.m_ParameterNames, this.m_DbTypes, this.m_arguments);
             }
             else
             {
@@ -354,7 +363,7 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
         {
             if (v == null) return v;
 
-            MemberExpression m = (MemberExpression)v.Operand;
+            MemberExpression m = (MemberExpression) v.Operand;
             this.m_conditionParts.Push(String.Format("{0}.[{1}]", _TableAlias, m_TmpDBColumnName));
 
             return v;

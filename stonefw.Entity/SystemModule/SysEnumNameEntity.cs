@@ -1,8 +1,8 @@
 using System;
-using stonefw.Utility.EntitySql.Attribute;
-using stonefw.Utility.EntitySql.Entity;
+using Stonefw.Utility.EntitySql.Attribute;
+using Stonefw.Utility.EntitySql.Entity;
 
-namespace stonefw.Entity.SystemModule
+namespace Stonefw.Entity.SystemModule
 {
     [Serializable]
     [Table("Sys_EnumName")]
@@ -10,8 +10,10 @@ namespace stonefw.Entity.SystemModule
     {
         [Field("Type")]
         public string Type { get; set; }
+
         [Field("Value")]
         public string Value { get; set; }
+
         [Field("Name")]
         public string Name { get; set; }
     }

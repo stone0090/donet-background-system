@@ -9,6 +9,8 @@ output/
 
 _ReSharper.*/
 
+.vs/
+
 *.suo
 
 *.scc
@@ -17,3 +19,4 @@ _ReSharper.*/
 
 *.vssscc
 
+.DS_Store

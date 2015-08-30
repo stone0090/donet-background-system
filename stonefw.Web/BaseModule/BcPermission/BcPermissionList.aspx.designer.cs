@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.BaseModule.BcPermission {
+namespace Stonefw.Web.BaseModule.BcPermission {
     
     
     public partial class BcPermissionList {

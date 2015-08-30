@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
-using stonefw.Entity.Enum;
-using stonefw.Entity.Extension;
-using stonefw.Utility;
+using Stonefw.Entity.Enum;
+using Stonefw.Entity.Extension;
+using Stonefw.Utility;
 
-namespace stonefw.Biz.SystemModule
+namespace Stonefw.Biz.SystemModule
 {
     public class SysPermsPointEnumBiz
     {
-        const string CacheKey = "SysPermsPointEnumBiz-GetSysPermsPointEnumList";
+        private const string CacheKey = "SysPermsPointEnumBiz-GetSysPermsPointEnumList";
 
         public List<SysPermsPointEnumEntity> GetSysPermsPointEnumList()
         {
             object list = DataCache.GetCache(CacheKey) ?? SetSysPermsPointEnumListCache();
-            return (List<SysPermsPointEnumEntity>)list;
+            return (List<SysPermsPointEnumEntity>) list;
         }
 
         private List<SysPermsPointEnumEntity> SetSysPermsPointEnumListCache()
@@ -22,6 +22,5 @@ namespace stonefw.Biz.SystemModule
             DataCache.SetCache(CacheKey, list);
             return list;
         }
-
     }
 }
