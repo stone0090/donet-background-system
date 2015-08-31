@@ -16,19 +16,19 @@ namespace stonefw.Utility.EntitySql
         /// <summary>
         /// 缓存
         /// </summary>
-        private static List<EntityMappingEntity> _dbMappingEntityBuffer = null;
+        private static List<EntityMappingEntity> _dbMappingEntityCache = null;
 
         static EntityMappingTool()
         {
-            _dbMappingEntityBuffer = new List<EntityMappingEntity>(1024);
+            _dbMappingEntityCache = new List<EntityMappingEntity>(1024);
         }
 
         public static EntityMappingEntity GetDbTableMappingEntity(Type entityType)
         {
-            lock (_dbMappingEntityBuffer)
+            lock (_dbMappingEntityCache)
             {
                 var typeName = entityType.FullName;
-                var buffer = _dbMappingEntityBuffer.FirstOrDefault(n => n.EntityTypeName == typeName);
+                var buffer = _dbMappingEntityCache.FirstOrDefault(n => n.EntityTypeName == typeName);
                 if (buffer != null)
                     return buffer;
 
@@ -133,7 +133,7 @@ namespace stonefw.Utility.EntitySql
                     DbPrimaryKeyMapping = dicDbPrimaryKey,
                 };
 
-                _dbMappingEntityBuffer.Add(buffer);
+                _dbMappingEntityCache.Add(buffer);
 
                 return buffer;
             }
