@@ -1,17 +1,21 @@
-using System;
-using stonefw.Biz.BaseModule;
-using stonefw.Biz.SystemModule;
-using stonefw.Entity.BaseModule;
-using stonefw.Entity.Enum;
-using stonefw.Utility;
-using stonefw.Web.Utility.BaseClass;
+﻿using System;
+using Stonefw.Biz.BaseModule;
+using Stonefw.Biz.SystemModule;
+using Stonefw.Entity.BaseModule;
+using Stonefw.Entity.Enum;
+using Stonefw.Utility;
+using Stonefw.Web.Utility.BaseClass;
 
-namespace stonefw.Web.BaseModule.BcUserRole
+namespace Stonefw.Web.BaseModule.BcUserRole
 {
     public partial class BcUserRoleDetail : BasePage
     {
         private BcUserRoleBiz _biz;
-        private BcUserRoleBiz Biz { get { return _biz ?? (_biz = new BcUserRoleBiz()); } }
+
+        private BcUserRoleBiz Biz
+        {
+            get { return _biz ?? (_biz = new BcUserRoleBiz()); }
+        }
 
         protected override bool InitPermission()
         {
@@ -25,41 +29,46 @@ namespace stonefw.Web.BaseModule.BcUserRole
                 BindControlData();
             }
         }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                BcUserRoleEntity entity = PrepareFormData();
-                ExcuteResultEnum er = Biz.AddNewBcUserRole(entity);
+                var entity = PrepareFormData();
+                var er = Biz.AddNewBcUserRole(entity);
                 if (er != ExcuteResultEnum.Success)
                 {
-                    this.lMessage.Text = er.GetDescription();
+                    lMessage.Text = er.GetDescription();
                     return;
                 }
-                base.FatherQuery();
+                FatherQuery();
             }
-            catch (Exception ex) { this.lMessage.Text = string.Format("保存失败，原因：{0}", ex.Message); }
+            catch (Exception ex)
+            {
+                lMessage.Text = string.Format("保存失败，原因：{0}", ex.Message);
+            }
         }
 
         private void BindControlData()
         {
-            this.ddlUser.DataSource = new BcUserInfoBiz().GetEnabledBcUserInfoList();
-            this.ddlUser.DataValueField = "UserId";
-            this.ddlUser.DataTextField = "UserName";
-            this.ddlUser.DataBind();
+            ddlUser.DataSource = new BcUserInfoBiz().GetEnabledBcUserInfoList();
+            ddlUser.DataValueField = "UserId";
+            ddlUser.DataTextField = "UserName";
+            ddlUser.DataBind();
 
-            this.ddlRole.DataSource = new BcRoleBiz().GetBcRoleList();
-            this.ddlRole.DataValueField = "RoleId";
-            this.ddlRole.DataTextField = "RoleName";
-            this.ddlRole.DataBind();
+            ddlRole.DataSource = new BcRoleBiz().GetBcRoleList();
+            ddlRole.DataValueField = "RoleId";
+            ddlRole.DataTextField = "RoleName";
+            ddlRole.DataBind();
         }
+
         private BcUserRoleEntity PrepareFormData()
         {
-            this.ddlUser.SelectedValue.InitValidation("用户").NotEmpty();
-            this.ddlRole.SelectedValue.InitValidation("角色").NotEmpty();
+            ddlUser.SelectedValue.InitValidation("用户").NotEmpty();
+            ddlRole.SelectedValue.InitValidation("角色").NotEmpty();
             var entity = new BcUserRoleEntity();
-            entity.UserId = int.Parse(this.ddlUser.SelectedValue);
-            entity.RoleId = int.Parse(this.ddlRole.SelectedValue);
+            entity.UserId = int.Parse(ddlUser.SelectedValue);
+            entity.RoleId = int.Parse(ddlRole.SelectedValue);
             return entity;
         }
     }

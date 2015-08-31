@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Web.UI.WebControls;
 
-namespace stonefw.Utility
+namespace Stonefw.Utility
 {
     public class EnumHelper
     {
@@ -21,7 +16,7 @@ namespace stonefw.Utility
         /// <returns></returns>
         public static Dictionary<int, string> ToDictionary<T>()
         {
-            var enumType = typeof(T);
+            var enumType = typeof (T);
             var dic = new Dictionary<int, string>();
             foreach (int value in Enum.GetValues(enumType))
             {
@@ -36,7 +31,7 @@ namespace stonefw.Utility
         /// <returns></returns>
         public static DataTable ToDataTable<T>()
         {
-            var enumType = typeof(T);
+            var enumType = typeof (T);
             var dt = new DataTable();
             dt.Columns.Add(new DataColumn("value"));
             dt.Columns.Add(new DataColumn("name"));
@@ -48,7 +43,7 @@ namespace stonefw.Utility
                 dt.Rows.Add(dr);
             }
             return dt;
-        }  
+        }
 
         /// <summary>
         /// 把枚举转换成表格
@@ -56,7 +51,7 @@ namespace stonefw.Utility
         /// <returns></returns>
         public static DataTable ToDataTable<T>(GetDescriptionDelegate<T> getDescription)
         {
-            var enumType = typeof(T);
+            var enumType = typeof (T);
             var dt = new DataTable();
             dt.Columns.Add(new DataColumn("value"));
             dt.Columns.Add(new DataColumn("name"));
@@ -66,11 +61,10 @@ namespace stonefw.Utility
                 var dr = dt.NewRow();
                 dr["value"] = value;
                 dr["name"] = Enum.GetName(enumType, value);
-                dr["description"] = getDescription((T)Enum.Parse(enumType, value.ToString()));
+                dr["description"] = getDescription((T) Enum.Parse(enumType, value.ToString()));
                 dt.Rows.Add(dr);
             }
             return dt;
         }
-       
     }
 }

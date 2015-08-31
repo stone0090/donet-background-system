@@ -1,16 +1,20 @@
-using System;
-using stonefw.Biz.BaseModule;
-using stonefw.Entity.BaseModule;
-using stonefw.Entity.Enum;
-using stonefw.Utility;
-using stonefw.Web.Utility.BaseClass;
+﻿using System;
+using Stonefw.Biz.BaseModule;
+using Stonefw.Entity.BaseModule;
+using Stonefw.Entity.Enum;
+using Stonefw.Utility;
+using Stonefw.Web.Utility.BaseClass;
 
-namespace stonefw.Web.BaseModule.BcGroup
+namespace Stonefw.Web.BaseModule.BcGroup
 {
     public partial class BcGroupDetail : BasePage
     {
         private BcGroupBiz _biz;
-        private BcGroupBiz Biz { get { return _biz ?? (_biz = new BcGroupBiz()); } }
+
+        private BcGroupBiz Biz
+        {
+            get { return _biz ?? (_biz = new BcGroupBiz()); }
+        }
 
         protected override bool InitPermission()
         {
@@ -18,13 +22,19 @@ namespace stonefw.Web.BaseModule.BcGroup
         }
 
         protected void Page_Load(object sender, EventArgs e)
-        { if (!IsPostBack) { FillFormData(); } }
+        {
+            if (!IsPostBack)
+            {
+                FillFormData();
+            }
+        }
+
         protected void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
-                BcGroupEntity entity = PrepareFormData();
-                if (this.hdGroupId.Value == "-1")
+                var entity = PrepareFormData();
+                if (hdGroupId.Value == "-1")
                 {
                     Biz.AddNewBcGroup(entity);
                 }
@@ -32,32 +42,40 @@ namespace stonefw.Web.BaseModule.BcGroup
                 {
                     Biz.UpdateBcGroup(entity);
                 }
-                base.FatherQuery();
+                FatherQuery();
             }
-            catch (Exception ex) { this.lMessage.Text = string.Format("保存失败，原因：{0}", ex.Message); }
+            catch (Exception ex)
+            {
+                lMessage.Text = string.Format("保存失败，原因：{0}", ex.Message);
+            }
         }
+
         private void FillFormData()
         {
             try
             {
-                this.hdGroupId.Value = Request["groupid"];
-                BcGroupEntity entity = Biz.GetSingleBcGroup(int.Parse(this.hdGroupId.Value));
+                hdGroupId.Value = Request["groupid"];
+                var entity = Biz.GetSingleBcGroup(int.Parse(hdGroupId.Value));
                 if (entity != null)
                 {
-                    this.hdGroupId.Value = entity.GroupId.ToString();
-                    this.txtGroupName.Text = entity.GroupName.ToString();
+                    hdGroupId.Value = entity.GroupId.ToString();
+                    txtGroupName.Text = entity.GroupName;
                 }
             }
-            catch (Exception ex) { this.lMessage.Text = string.Format("数据加载失败，原因：{0}", ex.Message); }
+            catch (Exception ex)
+            {
+                lMessage.Text = string.Format("数据加载失败，原因：{0}", ex.Message);
+            }
         }
+
         private BcGroupEntity PrepareFormData()
         {
             //校验参数的合法性
-            this.txtGroupName.Text.InitValidation("组别名称").NotEmpty().ShorterThan(25);
+            txtGroupName.Text.InitValidation("组别名称").NotEmpty().ShorterThan(25);
 
             var entity = new BcGroupEntity();
-            entity.GroupId = int.Parse(this.hdGroupId.Value);
-            entity.GroupName = this.txtGroupName.Text;
+            entity.GroupId = int.Parse(hdGroupId.Value);
+            entity.GroupName = txtGroupName.Text;
             return entity;
         }
     }

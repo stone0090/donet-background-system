@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace stonefw.CodeGenerate
+namespace Stonefw.CodeGenerate
 {
     public partial class NameSpaceManager : Form
     {

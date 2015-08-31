@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
+using Stonefw.Utility.EntitySql.Entity;
 
-using stonefw.Utility.EntitySql.Entity;
-using stonefw.Utility.EntitySql;
-
-namespace stonefw.Utility.EntitySql.ExpressionVisitor
+namespace Stonefw.Utility.EntitySql.ExpressionVisitor
 {
     internal static class JoinConditionBuilderGeneric
     {
@@ -18,15 +13,17 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
         /// <returns>连接查询条件</returns>
         public static string GetJoinCondition<TA, TB>(GenericJoinEntity<TA, TB> theJoinEntity)
         {
-            string condition = GetSubConditions(theJoinEntity.MainEntity, theJoinEntity.EntityToJoin, theJoinEntity.JoinConditionExpression, theJoinEntity.JoinConditionFirstParameter);
+            string condition = GetSubConditions(theJoinEntity.MainEntity, theJoinEntity.EntityToJoin,
+                theJoinEntity.JoinConditionExpression, theJoinEntity.JoinConditionFirstParameter);
             return condition;
         }
 
-        private static string GetSubConditions<TA, TB>(GenericWhereEntity<TA> mainEntity, GenericWhereEntity<TB> joinEntity, Expression joinExpression, string firstParameter)
+        private static string GetSubConditions<TA, TB>(GenericWhereEntity<TA> mainEntity,
+            GenericWhereEntity<TB> joinEntity, Expression joinExpression, string firstParameter)
         {
             if (joinExpression is MemberExpression)
             {
-                MemberExpression me = (MemberExpression)joinExpression;
+                MemberExpression me = (MemberExpression) joinExpression;
                 if (me.Expression.ToString() == firstParameter)
                 {
                     string dbColumnName = EntityMappingTool.GetDbColumnName(mainEntity.EntityType, me.Member.Name);
@@ -40,7 +37,7 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
             }
 
             string opr;
-            BinaryExpression be = (BinaryExpression)joinExpression;
+            BinaryExpression be = (BinaryExpression) joinExpression;
             switch (be.NodeType)
             {
                 case ExpressionType.Equal:

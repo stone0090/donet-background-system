@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using stonefw.Utility.EntitySql.Entity;
+using System.Linq.Expressions;
+using Stonefw.Utility.EntitySql.Entity;
 
-namespace stonefw.Utility.EntitySql.ExpressionVisitor
+namespace Stonefw.Utility.EntitySql.ExpressionVisitor
 {
     /// <summary>
     /// 实体类使用的语法树访问器[基类]
     /// </summary>
     internal abstract class ExpressionVisitor
     {
-        protected ExpressionVisitor() { }
+        protected ExpressionVisitor()
+        {
+        }
 
         /// <summary>
         /// 访问指定的语法树节点
@@ -30,12 +29,12 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
                 case ExpressionType.NegateChecked:
                 case ExpressionType.Not:
                 case ExpressionType.Convert:
-                    return this.VisitConvert((UnaryExpression)exp);
+                    return this.VisitConvert((UnaryExpression) exp);
                 case ExpressionType.ConvertChecked:
                 case ExpressionType.ArrayLength:
                 case ExpressionType.Quote:
                 case ExpressionType.TypeAs:
-                    return this.VisitUnary((UnaryExpression)exp);
+                    return this.VisitUnary((UnaryExpression) exp);
                 case ExpressionType.Add:
                 case ExpressionType.AddChecked:
                 case ExpressionType.Subtract:
@@ -59,32 +58,32 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
                 case ExpressionType.RightShift:
                 case ExpressionType.LeftShift:
                 case ExpressionType.ExclusiveOr:
-                    return this.VisitBinary((BinaryExpression)exp);
+                    return this.VisitBinary((BinaryExpression) exp);
                 case ExpressionType.TypeIs:
-                    return this.VisitTypeIs((TypeBinaryExpression)exp);
+                    return this.VisitTypeIs((TypeBinaryExpression) exp);
                 case ExpressionType.Conditional:
-                    return this.VisitConditional((ConditionalExpression)exp);
+                    return this.VisitConditional((ConditionalExpression) exp);
                 case ExpressionType.Constant:
-                    return this.VisitConstant((ConstantExpression)exp);
+                    return this.VisitConstant((ConstantExpression) exp);
                 case ExpressionType.Parameter:
-                    return this.VisitParameter((ParameterExpression)exp);
+                    return this.VisitParameter((ParameterExpression) exp);
                 case ExpressionType.MemberAccess:
-                    return this.VisitMemberAccess((MemberExpression)exp);
+                    return this.VisitMemberAccess((MemberExpression) exp);
                 case ExpressionType.Call:
-                    return this.VisitMethodCall((MethodCallExpression)exp);
+                    return this.VisitMethodCall((MethodCallExpression) exp);
                 case ExpressionType.Lambda:
-                    return this.VisitLambda((LambdaExpression)exp);
+                    return this.VisitLambda((LambdaExpression) exp);
                 case ExpressionType.New:
-                    return this.VisitNew((NewExpression)exp);
+                    return this.VisitNew((NewExpression) exp);
                 case ExpressionType.NewArrayInit:
                 case ExpressionType.NewArrayBounds:
-                    return this.VisitNewArray((NewArrayExpression)exp);
+                    return this.VisitNewArray((NewArrayExpression) exp);
                 case ExpressionType.Invoke:
-                    return this.VisitInvocation((InvocationExpression)exp);
+                    return this.VisitInvocation((InvocationExpression) exp);
                 case ExpressionType.MemberInit:
-                    return this.VisitMemberInit((MemberInitExpression)exp);
+                    return this.VisitMemberInit((MemberInitExpression) exp);
                 case ExpressionType.ListInit:
-                    return this.VisitListInit((ListInitExpression)exp);
+                    return this.VisitListInit((ListInitExpression) exp);
                 default:
                     throw new EntitySqlException(string.Format("Unhandled expression type: '{0}'", exp.NodeType));
             }
@@ -95,11 +94,11 @@ namespace stonefw.Utility.EntitySql.ExpressionVisitor
             switch (binding.BindingType)
             {
                 case MemberBindingType.Assignment:
-                    return this.VisitMemberAssignment((MemberAssignment)binding);
+                    return this.VisitMemberAssignment((MemberAssignment) binding);
                 case MemberBindingType.MemberBinding:
-                    return this.VisitMemberMemberBinding((MemberMemberBinding)binding);
+                    return this.VisitMemberMemberBinding((MemberMemberBinding) binding);
                 case MemberBindingType.ListBinding:
-                    return this.VisitMemberListBinding((MemberListBinding)binding);
+                    return this.VisitMemberListBinding((MemberListBinding) binding);
                 default:
                     throw new EntitySqlException(string.Format("Unhandled binding type '{0}'", binding.BindingType));
             }

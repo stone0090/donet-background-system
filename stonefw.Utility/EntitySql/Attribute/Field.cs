@@ -1,7 +1,6 @@
 using System;
-using System.Data;
 
-namespace stonefw.Utility.EntitySql.Attribute
+namespace Stonefw.Utility.EntitySql.Attribute
 {
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class Field : System.Attribute

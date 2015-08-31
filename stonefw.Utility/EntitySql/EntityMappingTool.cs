@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-using stonefw.Utility.EntitySql.Entity;
-using stonefw.Utility.EntitySql.Attribute;
 using System.Data.Common;
+using System.Linq;
+using System.Reflection;
+using Stonefw.Utility.EntitySql.Attribute;
+using Stonefw.Utility.EntitySql.Entity;
 
-namespace stonefw.Utility.EntitySql
+namespace Stonefw.Utility.EntitySql
 {
     internal static class EntityMappingTool
     {
@@ -53,13 +51,13 @@ namespace stonefw.Utility.EntitySql
                 {
                     try
                     {
-                        attributes = propertys[i].GetCustomAttributes(typeof(Field), false);
+                        attributes = propertys[i].GetCustomAttributes(typeof (Field), false);
                         if (attributes != null && attributes.Length > 0)
                         {
                             listFieldName.Add(propertys[i].Name);
                             var propertyInfo = propertys.FirstOrDefault(n => n.Name == propertys[i].Name);
                             dicPropertyInfo.Add(propertys[i].Name, propertyInfo);
-                            dicDbColumnName.Add(propertys[i].Name, ((Field)attributes[0]).FieldName);
+                            dicDbColumnName.Add(propertys[i].Name, ((Field) attributes[0]).FieldName);
                         }
                     }
                     catch
@@ -68,8 +66,8 @@ namespace stonefw.Utility.EntitySql
                 }
 
                 // DbTableName
-                attributes = entityType.GetCustomAttributes(typeof(Table), false);
-                var dbTableName = ((Table)attributes[0]).TableName;
+                attributes = entityType.GetCustomAttributes(typeof (Table), false);
+                var dbTableName = ((Table) attributes[0]).TableName;
 
                 // DbColumnTypes,DbIdentity 
                 sql = @"SELECT a.name as ColumnName, c.name as ColumnType, a.is_identity FROM sys.columns a
@@ -166,6 +164,7 @@ namespace stonefw.Utility.EntitySql
 
             return buffer.EntityPropertyInfoMapping.Values.ToList();
         }
+
         public static List<PropertyInfo> GetEntityPropertyInfos(Type entityType, List<string> entityFieldNames)
         {
             var buffer = GetDbTableMappingEntity(entityType);
@@ -189,6 +188,7 @@ namespace stonefw.Utility.EntitySql
 
             return buffer.DbColumnNameMapping[entityFieldName];
         }
+
         public static List<string> GetDbColumnNames(Type entityType)
         {
             var buffer = GetDbTableMappingEntity(entityType);
@@ -197,6 +197,7 @@ namespace stonefw.Utility.EntitySql
 
             return buffer.DbColumnNameMapping.Values.ToList();
         }
+
         public static List<string> GetDbColumnNames(Type entityType, List<string> entityFieldNames)
         {
             var buffer = GetDbTableMappingEntity(entityType);
@@ -220,6 +221,7 @@ namespace stonefw.Utility.EntitySql
 
             return buffer.DbColumnTypeMapping[entityFieldName];
         }
+
         public static List<DbType> GetDbColumnTypes(Type entityType, List<string> entityFieldNames)
         {
             var buffer = GetDbTableMappingEntity(entityType);
@@ -250,7 +252,5 @@ namespace stonefw.Utility.EntitySql
             var list = GetPrimaryKeyOfEntityField(entityType);
             return list != null && list.Count > 0;
         }
-
-
     }
 }

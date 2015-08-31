@@ -4,17 +4,18 @@ using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
-using stonefw.Entity.Enum;
-using stonefw.Entity.Extension;
-using stonefw.Entity.SystemModule;
-using stonefw.Utility;
-using stonefw.Utility.EntitySql;
+using Stonefw.Entity.Enum;
+using Stonefw.Entity.Extension;
+using Stonefw.Entity.SystemModule;
+using Stonefw.Utility;
+using Stonefw.Utility.EntitySql;
 
-namespace stonefw.Biz.SystemModule
+namespace Stonefw.Biz.SystemModule
 {
     public class SysMenuBiz
     {
         private Database _db;
+
         private Database Db
         {
             get { return _db ?? (_db = DatabaseFactory.CreateDatabase()); }
@@ -29,6 +30,7 @@ namespace stonefw.Biz.SystemModule
             GetMenuTree(ref list);
             return list;
         }
+
         /// <summary>
         /// 获取菜单列表
         /// </summary>
@@ -45,12 +47,15 @@ namespace stonefw.Biz.SystemModule
             var list = GetSysMenuDetailList(menuId);
             return list.Count > 0 ? list[0] : null;
         }
+
         public List<SysMenuEntity> GetSysMenuListByFatherNode(int fatherNode = 0)
         {
-            List<SysMenuEntity> list = EntityExecution.SelectAll<SysMenuEntity>(n => n.DeleteFlag == false && n.FatherNode == fatherNode);
+            List<SysMenuEntity> list =
+                EntityExecution.SelectAll<SysMenuEntity>(n => n.DeleteFlag == false && n.FatherNode == fatherNode);
             list = list.OrderBy(n => n.Seq).ToList();
             return list;
         }
+
         public void AddNewSysMenu(SysMenuEntity entity)
         {
             //获取目标目录下菜单的数量
@@ -64,8 +69,9 @@ namespace stonefw.Biz.SystemModule
             entity.MenuId = null;
             entity.Seq = GetCountByFatherNode(entity.FatherNode) + 1;
             entity.DeleteFlag = false;
-            EntityExecution.Insert(entity);
+            entity.Insert();
         }
+
         public void UpdateSysMenu(SysMenuEntity entity, int orgFatherNode)
         {
             if (entity.FatherNode != orgFatherNode)
@@ -79,21 +85,23 @@ namespace stonefw.Biz.SystemModule
                 }
                 entity.Seq = GetCountByFatherNode(entity.FatherNode) + 1;
             }
-            EntityExecution.Update(entity);
+            entity.Update();
             if (entity.FatherNode != orgFatherNode)
             {
                 SeqRecal();
             }
         }
+
         public ExcuteResultEnum DeleteSysMenu(int menuId)
         {
             if (GetCountByFatherNode(menuId) > 0)
                 return ExcuteResultEnum.IsOccupied;
 
             SysMenuEntity entity = new SysMenuEntity() { MenuId = menuId, DeleteFlag = true };
-            EntityExecution.Update(entity);
+            entity.Update();
             return ExcuteResultEnum.Success;
         }
+
         public int GetCountByFatherNode(int? fatherNode)
         {
             return EntityExecution.Count<SysMenuEntity>(n => n.FatherNode == fatherNode && n.DeleteFlag == false);
@@ -112,6 +120,7 @@ namespace stonefw.Biz.SystemModule
                 UpdateSeq(int.Parse(entry.Key.ToString()), int.Parse(entry.Value.ToString()));
             }
         }
+
         public List<SysMenuEntity> GetEnabledSysMenuList()
         {
             var sysMenuList = GetSysMenuDetailList().Where(n => n.ActivityFlag == true).ToList();
@@ -119,6 +128,7 @@ namespace stonefw.Biz.SystemModule
             GetMenuList(ref sysMenuList, ref position);
             return sysMenuList;
         }
+
         public List<SysMenuEntity> GetEnabledSysMenuListByPermission(List<PermissionEntity> permissionList)
         {
             var sysMenuList = GetEnabledSysMenuList();
@@ -129,7 +139,10 @@ namespace stonefw.Biz.SystemModule
                 var sysMenuEntity = sysMenuList[i];
                 if (sysMenuEntity.ModuleId != "" && sysMenuEntity.FuncPointId != "")
                 {
-                    var list = permissionList.Where(n => n.ModuleId == sysMenuEntity.ModuleId && n.FuncPointId == sysMenuEntity.FuncPointId).ToList();
+                    var list =
+                        permissionList.Where(
+                            n => n.ModuleId == sysMenuEntity.ModuleId && n.FuncPointId == sysMenuEntity.FuncPointId)
+                            .ToList();
                     if (list.Count <= 0)
                     {
                         sysMenuList.Remove(sysMenuEntity);
@@ -168,9 +181,11 @@ namespace stonefw.Biz.SystemModule
             var listSysModuleEnumEntity = new SysModuleEnumBiz().GetSysModuleEnumList();
             var listSysFuncPointEnumEntity = new SysFuncPointEnumBiz().GetSysFuncPointEnumList();
             var query = from sysMenuEntity in listSysMenuEntity
-                        join sysModuleEnumEntity in listSysModuleEnumEntity on sysMenuEntity.ModuleId equals sysModuleEnumEntity.Name into r1
+                        join sysModuleEnumEntity in listSysModuleEnumEntity on sysMenuEntity.ModuleId equals
+                            sysModuleEnumEntity.Name into r1
                         from sysModuleEnumEntity in r1.DefaultIfEmpty()
-                        join sysFuncPointEnumEntity in listSysFuncPointEnumEntity on sysMenuEntity.FuncPointId equals sysFuncPointEnumEntity.Name into r2
+                        join sysFuncPointEnumEntity in listSysFuncPointEnumEntity on sysMenuEntity.FuncPointId equals
+                            sysFuncPointEnumEntity.Name into r2
                         from sysFuncPointEnumEntity in r2.DefaultIfEmpty()
                         select new SysMenuEntity()
                         {
@@ -186,8 +201,8 @@ namespace stonefw.Biz.SystemModule
                             DeleteFlag = sysMenuEntity.DeleteFlag,
                             ModuleId = sysMenuEntity.ModuleId,
                             FuncPointId = sysMenuEntity.FuncPointId,
-                            ModuleName = sysModuleEnumEntity == null ? string.Empty : sysModuleEnumEntity.Description,
-                            FuncPointName = sysFuncPointEnumEntity == null ? string.Empty : sysFuncPointEnumEntity.Description,
+                            ModuleName = sysModuleEnumEntity == null ? "-" : sysModuleEnumEntity.Description,
+                            FuncPointName = sysFuncPointEnumEntity == null ? "-" : sysFuncPointEnumEntity.Description,
                         };
             var list = query.ToList<SysMenuEntity>();
             return list;
@@ -228,10 +243,12 @@ namespace stonefw.Biz.SystemModule
                 }
             }
         }
+
         /// <summary>
         /// 获取菜单列表，递归生成树名称和调整菜单位置
         /// </summary>
-        private void GetMenuList(ref List<SysMenuEntity> listMain, ref int position, List<SysMenuEntity> listCurrentLevel = null, string skipLevel = "")
+        private void GetMenuList(ref List<SysMenuEntity> listMain, ref int position,
+            List<SysMenuEntity> listCurrentLevel = null, string skipLevel = "")
         {
             if (listMain == null || listMain.Count <= 0)
                 return;
@@ -241,55 +258,41 @@ namespace stonefw.Biz.SystemModule
                 listCurrentLevel = listMain.Where<SysMenuEntity>(n => n.MenuLevel == 1).ToList();
             }
 
-            const string sign1 = "║ ";
-            const string sign2 = "╠═";
-            const string sign3 = "╚═";
-
+            const string sign = "- ";
             if (listCurrentLevel.Count > 0)
             {
                 for (int i = 0; i < listCurrentLevel.Count; i++)
                 {
-                    SysMenuEntity e = listCurrentLevel[i];
+                    SysMenuEntity entity = listCurrentLevel[i];
 
                     //生成树名称
                     string treeName = string.Empty;
-                    if (e.MenuLevel > 1)
+                    for (int j = 0; j < entity.MenuLevel; j++)
                     {
-                        for (int j = 0; j < e.MenuLevel - 1; j++)
-                        {
-                            if (skipLevel.Contains((j + 1).ToString()))
-                                treeName += "　";
-                            else
-                                treeName += sign1;
-                        }
+                        treeName += sign;
                     }
 
-                    if (i == listCurrentLevel.Count - 1)
-                        treeName += sign3;
-                    else
-                        treeName += sign2;
-
-                    int index = listMain.IndexOf(e);
-                    e.MenuTreeName = treeName + e.MenuName;
+                    int index = listMain.IndexOf(entity);
+                    entity.MenuTreeName = treeName + entity.MenuName;
 
                     //调整菜单位置
                     if (index == position)
-                        listMain[position] = e;
+                        listMain[position] = entity;
                     else
                     {
                         var temp = listMain[position];
-                        listMain[position] = e;
+                        listMain[position] = entity;
                         listMain[index] = temp;
                     }
 
                     //当父节点的最后的节点有子菜单，则该节点不需要添加竖线
-                    if (e.Seq == listCurrentLevel.Count)
-                        skipLevel += e.MenuLevel.ToString();
+                    if (entity.Seq == listCurrentLevel.Count)
+                        skipLevel += entity.MenuLevel.ToString();
 
                     //标识当前节点的位置
                     position++;
 
-                    List<SysMenuEntity> listSubMenu = listMain.Where(n => n.FatherNode == e.MenuId).ToList();
+                    List<SysMenuEntity> listSubMenu = listMain.Where(n => n.FatherNode == entity.MenuId).ToList();
                     if (listSubMenu.Count > 0)
                         GetMenuList(ref listMain, ref position, listSubMenu, skipLevel);
                 }
@@ -311,6 +314,7 @@ namespace stonefw.Biz.SystemModule
             }
             return listMenu;
         }
+
         /// <summary>
         /// 递归获取父菜单
         /// </summary>
@@ -364,6 +368,7 @@ namespace stonefw.Biz.SystemModule
             if (menuId != null) Db.AddInParameter(dm, "@MenuId", DbType.Int32, menuId);
             return DataTableHepler.DataTableToList<SysMenuEntity>(Db.ExecuteDataTable(dm));
         }
+
         public void UpdateSeq(int menuId, int seq)
         {
             const string strScript = "UPDATE Sys_Menu SET Seq = @Seq WHERE MenuId = @MenuId AND Seq <> @Seq";
@@ -372,11 +377,14 @@ namespace stonefw.Biz.SystemModule
             Db.AddInParameter(dm, "@Seq", DbType.Int32, seq);
             Db.ExecuteNonQuery(dm);
         }
+
         public void SeqRecal()
         {
-            const string strScript = @"UPDATE a SET Seq = b.rownumber FROM Sys_Menu a INNER JOIN (SELECT MenuId,row_number() OVER ( partition BY FatherNode ORDER BY Seq) as rownumber FROM SysMenu ) b ON a.MenuId = b.MenuId";
+            const string strScript =
+                @"UPDATE a SET Seq = b.rownumber FROM Sys_Menu a INNER JOIN (SELECT MenuId,row_number() OVER ( partition BY FatherNode ORDER BY Seq) as rownumber FROM SysMenu ) b ON a.MenuId = b.MenuId";
             Db.ExecuteNonQuery(strScript);
         }
+
         public void Recal(int menuId, int fatherNode, int sourceSeq, int targetSeq)
         {
             StringBuilder strScript = new StringBuilder();
@@ -391,7 +399,5 @@ namespace stonefw.Biz.SystemModule
             Db.AddInParameter(dm, "@targetSeq", DbType.Int32, targetSeq);
             Db.ExecuteNonQuery(dm);
         }
-
     }
 }
-

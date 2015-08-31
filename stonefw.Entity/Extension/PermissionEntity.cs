@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace stonefw.Entity.Extension
+namespace Stonefw.Entity.Extension
 {
     public partial class PermissionEntity
     {

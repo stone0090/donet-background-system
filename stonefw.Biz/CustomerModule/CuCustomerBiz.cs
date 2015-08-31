@@ -1,9 +1,8 @@
 using System.Collections.Generic;
+using Stonefw.Entity.CustomerModule;
+using Stonefw.Utility.EntitySql;
 
-using stonefw.Entity.CustomerModule;
-using stonefw.Utility.EntitySql;
-
-namespace stonefw.Biz.CustomerModule
+namespace Stonefw.Biz.CustomerModule
 {
     public class CuCustomerBiz
     {
@@ -11,20 +10,24 @@ namespace stonefw.Biz.CustomerModule
         {
             return EntityExecution.SelectAll<CuCustomerEntity>(n => n.DeleteFlag == false);
         }
+
         public void DeleteCuCustomer(string cuId)
         {
-            CuCustomerEntity entity = new CuCustomerEntity() { CuId = cuId, DeleteFlag = true };
-            EntityExecution.Update(entity);
+            CuCustomerEntity entity = new CuCustomerEntity() {CuId = cuId, DeleteFlag = true};
+            entity.Update();
         }
+
         public void AddNewCuCustomer(CuCustomerEntity entity)
         {
             entity.DeleteFlag = false;
-            EntityExecution.Insert(entity);
+            entity.Insert();
         }
+
         public void UpdateCuCustomer(CuCustomerEntity entity)
         {
-            EntityExecution.Update(entity);
+            entity.Update();
         }
+
         public CuCustomerEntity GetCuCustomerEntity(string cuId)
         {
             return EntityExecution.SelectOne<CuCustomerEntity>(n => n.CuId == cuId && n.DeleteFlag == false);

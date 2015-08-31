@@ -1,9 +1,9 @@
 using System;
-using stonefw.Utility.EntitySql.Attribute;
-using stonefw.Utility.EntitySql.Entity;
 using System.Collections.Generic;
+using Stonefw.Utility.EntitySql.Attribute;
+using Stonefw.Utility.EntitySql.Entity;
 
-namespace stonefw.Entity.SystemModule
+namespace Stonefw.Entity.SystemModule
 {
     [Serializable]
     [Table("Sys_Relation")]
@@ -11,8 +11,10 @@ namespace stonefw.Entity.SystemModule
     {
         [Field("ModuleId")]
         public string ModuleId { get; set; }
+
         [Field("FuncPointId")]
         public string FuncPointId { get; set; }
+
         [Field("Permissions")]
         public string Permissions { get; set; }
 

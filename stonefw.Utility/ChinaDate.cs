@@ -2,15 +2,26 @@
 using System.Collections;
 using System.Globalization;
 
-namespace stonefw.Utility
+namespace Stonefw.Utility
 {
     public static class ChinaDate
     {
         private static readonly ChineseLunisolarCalendar China = new ChineseLunisolarCalendar();
         private static readonly Hashtable GHoliday = new Hashtable();
         private static readonly Hashtable NHoliday = new Hashtable();
-        private static readonly string[] Jq = { "小寒", "大寒", "立春", "雨水", "惊蛰", "春分", "清明", "谷雨", "立夏", "小满", "芒种", "夏至", "小暑", "大暑", "立秋", "处暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪", "冬至" };
-        private static readonly int[] JqData = { 0, 21208, 43467, 63836, 85337, 107014, 128867, 150921, 173149, 195551, 218072, 240693, 263343, 285989, 308563, 331033, 353350, 375494, 397447, 419210, 440795, 462224, 483532, 504758 };
+
+        private static readonly string[] Jq =
+        {
+            "小寒", "大寒", "立春", "雨水", "惊蛰", "春分", "清明", "谷雨", "立夏", "小满", "芒种", "夏至",
+            "小暑", "大暑", "立秋", "处暑", "白露", "秋分", "寒露", "霜降", "立冬", "小雪", "大雪", "冬至"
+        };
+
+        private static readonly int[] JqData =
+        {
+            0, 21208, 43467, 63836, 85337, 107014, 128867, 150921, 173149, 195551,
+            218072, 240693, 263343, 285989, 308563, 331033, 353350, 375494, 397447, 419210, 440795, 462224, 483532,
+            504758
+        };
 
         static ChinaDate()
         {
@@ -51,7 +62,8 @@ namespace stonefw.Utility
             if (dt > China.MaxSupportedDateTime || dt < China.MinSupportedDateTime)
             {
                 //日期范围：1901 年 2 月 19 日 - 2101 年 1 月 28 日
-                throw new Exception(string.Format("日期超出范围！必须在{0}到{1}之间！", China.MinSupportedDateTime.ToString("yyyy-MM-dd"), China.MaxSupportedDateTime.ToString("yyyy-MM-dd")));
+                throw new Exception(string.Format("日期超出范围！必须在{0}到{1}之间！",
+                    China.MinSupportedDateTime.ToString("yyyy-MM-dd"), China.MaxSupportedDateTime.ToString("yyyy-MM-dd")));
             }
             //string str = string.Format("{0} {1}{2}", GetYear(dt), GetMonth(dt), GetDay(dt));
             string str = string.Format("{0}{1}", GetMonth(dt), GetDay(dt));
@@ -147,8 +159,8 @@ namespace stonefw.Utility
             }
             else
             {
-                strDay = szText1.Substring((iDay - 1) / 10, 1);
-                strDay = strDay + szText2.Substring((iDay - 1) % 10, 1);
+                strDay = szText1.Substring((iDay - 1)/10, 1);
+                strDay = strDay + szText2.Substring((iDay - 1)%10, 1);
             }
             return strDay;
         }
@@ -169,7 +181,7 @@ namespace stonefw.Utility
             y = dt.Year;
             for (int i = 1; i <= 24; i++)
             {
-                num = 525948.76 * (y - 1900) + JqData[i - 1];
+                num = 525948.76*(y - 1900) + JqData[i - 1];
                 dtNew = dtBase.AddMinutes(num);
                 if (dtNew.DayOfYear == dt.DayOfYear)
                 {

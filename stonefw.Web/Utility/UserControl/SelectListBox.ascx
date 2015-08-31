@@ -1,15 +1,15 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SelectListBox.ascx.cs" Inherits="stonefw.Web.Utility.UserControl.SelectListBox" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SelectListBox.ascx.cs" Inherits="Stonefw.Web.Utility.UserControl.SelectListBox" %>
 <%-- 引用控件的页面需要引用 easyui 和 jquery --%>
 <span id="spanPanel" runat="server">
     <asp:TextBox ID="txtText" runat="server" Enabled="False" Style="height: 15px;"></asp:TextBox>
-    <asp:Button ID="btnShowDialog" runat="server" Text="..." Style="height: 21px; line-height: 20px; width: 20px; margin-left: -3px; margin-bottom: 1px; border-width: 0; padding-left: 0; padding-right: 0;" />
+    <asp:Button ID="btnShowDialog" runat="server" Text="..." Style="border-width: 0; height: 21px; line-height: 20px; margin-bottom: 1px; margin-left: -3px; padding-left: 0; padding-right: 0; width: 20px;" />
 </span>
 <div style="display: none">
     <div runat="server" id="divDialog" class="easyui-dialog" data-options="closed:'false'" style="padding: 2px;">
         <table runat="server" id="tblDg" class="easyui-datagrid">
         </table>
     </div>
-    <div runat="server" id="divToolBar" style="padding: 2px; height: auto">
+    <div runat="server" id="divToolBar" style="height: auto; padding: 2px;">
         <table>
             <tr>
                 <td>
@@ -17,7 +17,8 @@
                     </select>
                 </td>
                 <td>
-                    <input runat="server" id="txtSearch" class="easyui-searchbox" /></td>
+                    <input runat="server" id="txtSearch" class="easyui-searchbox"/>
+                </td>
             </tr>
         </table>
     </div>
@@ -25,16 +26,16 @@
         <a href="javascript:void(0)" runat="server" id="btnSave" class="easyui-linkbutton">保存</a>
         <a href="javascript:void(0)" runat="server" id="btnClose" class="easyui-linkbutton">关闭</a>
     </div>
-    <asp:HiddenField runat="server" ID="hdValue" />
-    <asp:HiddenField runat="server" ID="hdData" />
-    <asp:HiddenField runat="server" ID="hdColumns" />
-    <asp:HiddenField runat="server" ID="hdTextField" />
-    <asp:HiddenField runat="server" ID="hdValueField" />
-    <asp:HiddenField runat="server" ID="hdSingleSelect" Value="true" />
-    <asp:HiddenField runat="server" ID="hdShowSearchBox" Value="false" />
-    <asp:HiddenField runat="server" ID="hdTitle" Value="列表" />
-    <asp:HiddenField runat="server" ID="hdDialogWidth" Value="250" />
-    <asp:HiddenField runat="server" ID="hdDialogHeight" Value="280" />
+    <asp:HiddenField runat="server" ID="hdValue"/>
+    <asp:HiddenField runat="server" ID="hdData"/>
+    <asp:HiddenField runat="server" ID="hdColumns"/>
+    <asp:HiddenField runat="server" ID="hdTextField"/>
+    <asp:HiddenField runat="server" ID="hdValueField"/>
+    <asp:HiddenField runat="server" ID="hdSingleSelect" Value="true"/>
+    <asp:HiddenField runat="server" ID="hdShowSearchBox" Value="false"/>
+    <asp:HiddenField runat="server" ID="hdTitle" Value="列表"/>
+    <asp:HiddenField runat="server" ID="hdDialogWidth" Value="250"/>
+    <asp:HiddenField runat="server" ID="hdDialogHeight" Value="280"/>
 </div>
 <script>
     //初始化控件宽度和高度
@@ -49,7 +50,7 @@
         $('#' + '<%= hdValue.ClientID %>').val() != "" &&
         $('#' + '<%= txtText.ClientID %>').val() == "") {
         var texts = "";
-        $.each(eval("(" + $('#' + '<%= hdData.ClientID %>').val() + ")"), function (index, row) {
+        $.each(eval("(" + $('#' + '<%= hdData.ClientID %>').val() + ")"), function(index, row) {
             if ((',' + $('#' + '<%= hdValue.ClientID %>').val() + ',').indexOf(',' + row[$('#' + '<%= hdValueField.ClientID %>').val()] + ',') > -1) {
                 texts += row[$('#' + '<%= hdTextField.ClientID %>').val()] + ",";
             }
@@ -58,14 +59,14 @@
     }
 
     //初始化模态框
-    $('#' + '<%= btnShowDialog.ClientID %>').click(function () {
+    $('#' + '<%= btnShowDialog.ClientID %>').click(function() {
         //把最选中的记录显示在最前面
         var data = eval("(" + $('#' + '<%= hdData.ClientID %>').val() + ")");
         var data1 = new Array();
         var data2 = new Array();
         if (data && data.length > 0 && $('#' + '<%= hdValue.ClientID %>').val() != "") {
             var texts = "";
-            $.each(data, function (index, row) {
+            $.each(data, function(index, row) {
                 if ((',' + $('#' + '<%= hdValue.ClientID %>').val() + ',').indexOf(',' + row[$('#' + '<%= hdValueField.ClientID %>').val()] + ',') > -1) {
                     data1.push(row);
                     texts += row[$('#' + '<%= hdTextField.ClientID %>').val()] + ",";
@@ -75,7 +76,7 @@
             });
             $('#' + '<%= txtText.ClientID %>').val(texts.substr(0, texts.length - 1));
             $('#' + '<%= tblDg.ClientID %>').datagrid({ data: data1.concat(data2) });
-            $.each($('#' + '<%= hdValue.ClientID %>').val().split(','), function (i, v) {
+            $.each($('#' + '<%= hdValue.ClientID %>').val().split(','), function(i, v) {
                 $('#' + '<%= tblDg.ClientID %>').datagrid('selectRow', i);
             });
         }
@@ -100,13 +101,16 @@
     //初始化搜索框
     $('#' + '<%= txtSearch.ClientID %>').searchbox({
         prompt: '请输入关键字',
-        searcher: function (value, name) {
+        searcher: function(value, name) {
             if (value == "") {
                 $('#' + '<%= tblDg.ClientID %>').datagrid({ data: eval("(" + $('#' + '<%= hdData.ClientID %>').val() + ")") });
             } else {
                 var data = eval("(" + $('#' + '<%= hdData.ClientID %>').val() + ")");
                 var field = $('#' + '<%= selectFiled.ClientID %>').combobox('getValue');
-                if (field == 0) { alert("请选择字段后再查询！"); return; }
+                if (field == 0) {
+                    alert("请选择字段后再查询！");
+                    return;
+                }
                 var searchResult = new Array();
                 if (data && data.length > 0) {
                     for (var i = 0; i < data.length; i++) {
@@ -126,7 +130,7 @@
         singleSelect: $('#' + '<%= hdSingleSelect.ClientID %>').val().toLowerCase() == 'true',
         columns: eval("(" + $('#' + '<%= hdColumns.ClientID %>').val() + ")"),
         data: eval("(" + $('#' + '<%= hdData.ClientID %>').val() + ")"),
-        onDblClickCell: function (index, field, value) {
+        onDblClickCell: function(index, field, value) {
             if ($('#' + '<%= hdSingleSelect.ClientID %>').val().toLowerCase() == 'true')
                 $('#' + '<%= btnSave.ClientID %>').click();
         }
@@ -137,7 +141,7 @@
     }
 
     //Button初始化
-    $('#' + '<%= btnSave.ClientID %>').click(function () {
+    $('#' + '<%= btnSave.ClientID %>').click(function() {
         if ($('#' + '<%= hdSingleSelect.ClientID %>').val().toLowerCase() == 'true') {
             var row = $('#' + '<%= tblDg.ClientID %>').datagrid('getSelected');
             if (row) {
@@ -167,11 +171,8 @@
         $('#' + '<%= divDialog.ClientID %>').dialog('close');
     });
 
-    $('#' + '<%= btnClose.ClientID %>').click(function () {
+    $('#' + '<%= btnClose.ClientID %>').click(function() {
         $('#' + '<%= divDialog.ClientID %>').dialog('close');
     });
 
 </script>
-
-
-

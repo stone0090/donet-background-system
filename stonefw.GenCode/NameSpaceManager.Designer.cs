@@ -1,4 +1,4 @@
-﻿namespace stonefw.CodeGenerate
+﻿namespace Stonefw.CodeGenerate
 {
     partial class NameSpaceManager
     {

@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.BaseModule.BcAutoCode {
+namespace Stonefw.Web.BaseModule.BcAutoCode {
     
     
     public partial class BcAutoCodeList {

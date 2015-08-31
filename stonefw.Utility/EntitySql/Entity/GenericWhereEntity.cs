@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq.Expressions;
 
-namespace stonefw.Utility.EntitySql.Entity
+namespace Stonefw.Utility.EntitySql.Entity
 {
     /// <summary>
     /// 支持泛型的查询条件
@@ -17,7 +17,7 @@ namespace stonefw.Utility.EntitySql.Entity
         {
             this.Guid = new Guid().ToString();
             this.DbProviderName = "System.Data.SqlClient";
-            this.EntityType = typeof(T);
+            this.EntityType = typeof (T);
             this.WhereExpressions = new List<Expression>();
             this.WhereParameterNames = new List<string>(8);
             this.WhereParameterValues = new List<object>(8);
@@ -28,10 +28,18 @@ namespace stonefw.Utility.EntitySql.Entity
         }
 
         private int _tableNameIndex = 0;
-        public int TableNameIndex { get { return _tableNameIndex; } }
+
+        public int TableNameIndex
+        {
+            get { return _tableNameIndex; }
+        }
 
         private string _tableName = string.Empty;
-        public string TableName { get { return _tableName; } }
+
+        public string TableName
+        {
+            get { return _tableName; }
+        }
 
         /// <summary>
         /// 数据库提供器

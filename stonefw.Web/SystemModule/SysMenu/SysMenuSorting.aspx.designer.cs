@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.SystemModule.SysMenu {
+namespace Stonefw.Web.SystemModule.SysMenu {
     
     
     public partial class SysMenuSorting {

@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
-using stonefw.Utility;
+using Stonefw.Utility;
 
-namespace stonefw.CodeGenerate.SqlServer
+namespace Stonefw.CodeGenerate.SqlServer
 {
     internal static class SqlServerTools
     {
@@ -25,7 +25,7 @@ namespace stonefw.CodeGenerate.SqlServer
             if (str2.Contains("SQL Server 2008"))
             {
                 return SqlServerVersions.SqlServer2008;
-            } 
+            }
             if (str2.Contains("SQL Server 2012"))
             {
                 return SqlServerVersions.SqlServer2012;
@@ -34,4 +34,3 @@ namespace stonefw.CodeGenerate.SqlServer
         }
     }
 }
-

@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stonefw.Biz", "stonefw.Biz\stonefw.Biz.csproj", "{3DEC0AD6-30DF-43C6-B8A3-D0376DCA88DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stonefw.Biz", "stonefw.Biz\Stonefw.Biz.csproj", "{3DEC0AD6-30DF-43C6-B8A3-D0376DCA88DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stonefw.Entity", "stonefw.Entity\stonefw.Entity.csproj", "{FA43E73B-A3F4-4A80-A662-0307CF3F7941}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stonefw.Entity", "stonefw.Entity\Stonefw.Entity.csproj", "{FA43E73B-A3F4-4A80-A662-0307CF3F7941}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stonefw.CodeGenerate", "stonefw.GenCode\stonefw.CodeGenerate.csproj", "{114CA120-D272-43F3-8170-6FDFDB27E525}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stonefw.CodeGenerate", "stonefw.GenCode\Stonefw.CodeGenerate.csproj", "{114CA120-D272-43F3-8170-6FDFDB27E525}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stonefw.Utility", "stonefw.Utility\stonefw.Utility.csproj", "{4F097047-9CD3-4876-9D18-8AE0856CD1C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stonefw.Utility", "stonefw.Utility\Stonefw.Utility.csproj", "{4F097047-9CD3-4876-9D18-8AE0856CD1C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stonefw.Web", "stonefw.Web\stonefw.Web.csproj", "{C053B5B7-6BBD-42DF-A753-EC94A2D834C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stonefw.Web", "stonefw.Web\Stonefw.Web.csproj", "{C053B5B7-6BBD-42DF-A753-EC94A2D834C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

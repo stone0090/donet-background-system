@@ -1,4 +1,4 @@
-﻿namespace stonefw.Entity.Enum
+﻿namespace Stonefw.Entity.Enum
 {
     public enum SysModuleEnum
     {

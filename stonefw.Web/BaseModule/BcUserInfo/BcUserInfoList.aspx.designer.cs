@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.BaseModule.BcUserInfo {
+namespace Stonefw.Web.BaseModule.BcUserInfo {
     
     
     public partial class BcUserInfoList {

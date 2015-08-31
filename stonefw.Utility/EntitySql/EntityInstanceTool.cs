@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using System.Reflection;
-using stonefw.Utility.EntitySql.Entity;
 using System.Linq;
+using System.Reflection;
+using Stonefw.Utility.EntitySql.Entity;
 
-namespace stonefw.Utility.EntitySql
+namespace Stonefw.Utility.EntitySql
 {
     /// <summary>
     /// 实体实例的工具
@@ -20,7 +20,7 @@ namespace stonefw.Utility.EntitySql
         /// <returns></returns>
         public static T FillOneEntity<T>(IDataReader reader) where T : class, new()
         {
-            List<PropertyInfo> entityPropertyInfo = EntityMappingTool.GetEntityPropertyInfos(typeof(T));
+            List<PropertyInfo> entityPropertyInfo = EntityMappingTool.GetEntityPropertyInfos(typeof (T));
             T entity = new T();
 
             for (int i = 0; i < entityPropertyInfo.Count; i++)
@@ -46,8 +46,8 @@ namespace stonefw.Utility.EntitySql
             where TA : class, new()
             where TB : class, new()
         {
-            List<PropertyInfo> entityPropertyInfoA = EntityMappingTool.GetEntityPropertyInfos(typeof(TA));
-            List<PropertyInfo> entityPropertyInfoB = EntityMappingTool.GetEntityPropertyInfos(typeof(TB));
+            List<PropertyInfo> entityPropertyInfoA = EntityMappingTool.GetEntityPropertyInfos(typeof (TA));
+            List<PropertyInfo> entityPropertyInfoB = EntityMappingTool.GetEntityPropertyInfos(typeof (TB));
             GenericPairEntity<TA, TB> pair = new GenericPairEntity<TA, TB>();
             pair.EntityA = new TA();
             pair.EntityB = new TB();
@@ -81,8 +81,8 @@ namespace stonefw.Utility.EntitySql
         /// <returns>Entity实例中有设置值的字段</returns>
         public static List<string> GetNotNullFields<T>(T entity)
         {
-            List<string> entityFieldNames = EntityMappingTool.GetEntityFieldNames((typeof(T)));
-            List<PropertyInfo> entityPropertyInfos = EntityMappingTool.GetEntityPropertyInfos((typeof(T)));
+            List<string> entityFieldNames = EntityMappingTool.GetEntityFieldNames((typeof (T)));
+            List<PropertyInfo> entityPropertyInfos = EntityMappingTool.GetEntityPropertyInfos((typeof (T)));
             List<string> notNullEntityFields = new List<string>(entityFieldNames.Count);
 
             for (int i = 0; i < entityFieldNames.Count; i++)
@@ -103,7 +103,7 @@ namespace stonefw.Utility.EntitySql
         /// <returns>Entity实例中有设置值的属性</returns>
         public static List<PropertyInfo> GetNotNullEntityPropertys<T>(T entity)
         {
-            List<PropertyInfo> entityPropertyInfos = EntityMappingTool.GetEntityPropertyInfos((typeof(T)));
+            List<PropertyInfo> entityPropertyInfos = EntityMappingTool.GetEntityPropertyInfos((typeof (T)));
             List<PropertyInfo> notNullEntityPropertys = new List<PropertyInfo>(entityPropertyInfos.Count);
 
             for (int i = 0; i < entityPropertyInfos.Count; i++)
@@ -120,14 +120,14 @@ namespace stonefw.Utility.EntitySql
         /// </summary>
         public static bool HasPrimaryKeyValue<T>(T entity)
         {
-            if (!EntityMappingTool.HasPrimaryKey(typeof(T)))
+            if (!EntityMappingTool.HasPrimaryKey(typeof (T)))
                 return false;
 
             List<string> notNullEntityFields = GetNotNullFields(entity);
             if (notNullEntityFields == null)
                 return false;
 
-            var primaryKeyEntityFieldNames = EntityMappingTool.GetPrimaryKeyOfEntityField(typeof(T));
+            var primaryKeyEntityFieldNames = EntityMappingTool.GetPrimaryKeyOfEntityField(typeof (T));
             for (int i = 0; i < primaryKeyEntityFieldNames.Count; i++)
             {
                 if (!notNullEntityFields.Any(n => n == primaryKeyEntityFieldNames[i]))

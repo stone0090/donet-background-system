@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.SystemModule.SysGlobalSetting {
+namespace Stonefw.Web.SystemModule.SysGlobalSetting {
     
     
     public partial class SysGlobalSettingDetail {

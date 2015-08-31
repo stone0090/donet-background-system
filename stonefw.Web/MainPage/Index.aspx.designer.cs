@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.MainPage {
+namespace Stonefw.Web.MainPage {
     
     
     public partial class Index {

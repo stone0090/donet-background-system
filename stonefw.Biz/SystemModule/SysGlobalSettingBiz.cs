@@ -1,20 +1,23 @@
-
-
-using stonefw.Entity.BaseModule;
-using stonefw.Entity.Enum;
-using stonefw.Entity.SystemModule;
-using stonefw.Utility;
 using System.Data;
 using System.Reflection;
-using stonefw.Utility.EntitySql.Attribute;
 using System.Text;
+using Stonefw.Entity.Enum;
+using Stonefw.Entity.SystemModule;
+using Stonefw.Utility;
+using Stonefw.Utility.EntitySql.Attribute;
 
-namespace stonefw.Biz.SystemModule
+namespace Stonefw.Biz.SystemModule
 {
     public class SysGlobalSettingBiz
     {
-        const string CacheKey = "SysSettingBiz-GetSysSettingEntity";
+        private const string CacheKey = "SysSettingBiz-GetSysSettingEntity";
 
+        private Database _db;
+    
+        private Database Db
+        {
+            get { return _db ?? (_db = DatabaseFactory.CreateDatabase()); }
+        }
 
         public SysGlobalSettingEntity GetSysSettingEntity()
         {
@@ -27,8 +30,9 @@ namespace stonefw.Biz.SystemModule
                     DataCache.SetCache(CacheKey, objModel);
                 }
             }
-            return objModel != null ? (SysGlobalSettingEntity)objModel : null;
+            return objModel != null ? (SysGlobalSettingEntity) objModel : null;
         }
+
         public ExcuteResultEnum UpdateSysSettingEntity(SysGlobalSettingEntity entity)
         {
             SaveSysSettingEntity(entity);
@@ -41,11 +45,6 @@ namespace stonefw.Biz.SystemModule
             return GetSysSettingEntity().SuperAdmins.Contains(userAccount);
         }
 
-        private Database _db;
-        private Database Db
-        {
-            get { return _db ?? (_db = DatabaseFactory.CreateDatabase()); }
-        }
 
         public string GetSysEnumName()
         {
@@ -66,11 +65,11 @@ namespace stonefw.Biz.SystemModule
             PropertyInfo[] pis = entity.GetType().GetProperties();
             foreach (PropertyInfo pi in pis)
             {
-                object[] attributes = pi.GetCustomAttributes(typeof(Field), false);
+                object[] attributes = pi.GetCustomAttributes(typeof (Field), false);
                 if (attributes.Length == 0)
                     continue;
 
-                Field theAttribute = (Field)attributes[0];
+                Field theAttribute = (Field) attributes[0];
                 DataRow[] drs = dt.Select("SysKey='" + theAttribute.FieldName + "'");
                 if (drs.Length == 0)
                     continue;
@@ -88,16 +87,16 @@ namespace stonefw.Biz.SystemModule
             PropertyInfo[] pis = entity.GetType().GetProperties();
             foreach (PropertyInfo pi in pis)
             {
-                object[] attributes = pi.GetCustomAttributes(typeof(Field), false);
+                object[] attributes = pi.GetCustomAttributes(typeof (Field), false);
                 if (attributes.Length == 0)
                     continue;
 
-                Field theAttribute = (Field)attributes[0];
-                sb.AppendFormat(" insert into Sys_GlobalSetting values ('{0}','{1}') ", theAttribute.FieldName, pi.GetValue(entity, null));
+                Field theAttribute = (Field) attributes[0];
+                sb.AppendFormat(" insert into Sys_GlobalSetting values ('{0}','{1}') ", theAttribute.FieldName,
+                    pi.GetValue(entity, null));
             }
 
             Db.ExecuteNonQuery(sb.ToString());
         }
-
     }
 }

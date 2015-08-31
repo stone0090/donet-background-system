@@ -8,12 +8,12 @@ using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
 
-namespace stonefw.Utility
+namespace Stonefw.Utility
 {
     public class JsonHelper
     {
         #region datatable转json
-        
+
         /// <summary> 
         /// dataTable转换成Json格式 
         /// </summary> 
@@ -57,6 +57,7 @@ namespace stonefw.Utility
                 throw new Exception("DataTableToJson失败！", ex);
             }
         }
+
         /// <summary> 
         /// dataTable转换成Json格式 
         /// </summary> 
@@ -100,6 +101,7 @@ namespace stonefw.Utility
                 throw new Exception("DataTableToJson失败！", ex);
             }
         }
+
         /// <summary> 
         /// dataTable转换成Json格式 
         /// </summary> 
@@ -156,9 +158,11 @@ namespace stonefw.Utility
                 throw new Exception("DataTableToJson失败！", ex);
             }
         }
+
         #endregion
 
         #region dataset转json
+
         /// <summary>
         /// dataset转换成Json格式 
         /// </summary>
@@ -207,6 +211,7 @@ namespace stonefw.Utility
                 return string.Empty;
             }
         }
+
         /*返回的格式
         { "programmers": [
            { "firstName": "Brett", "lastName":"McLaughlin", "email": "aaaa" },
@@ -223,6 +228,7 @@ namespace stonefw.Utility
            { "firstName": "Sergei", "lastName": "Rachmaninoff", "instrument": "piano" }
            ] }
         */
+
         #endregion
 
         #region List<T>转成json
@@ -251,8 +257,7 @@ namespace stonefw.Utility
                         for (int j = 0; j < pis.Length; j++)
                         {
                             Json.Append("\"" + pis[j].Name + "\":\"" + pis
-
-                            [j].GetValue(list[i], null) + "\"");
+                                [j].GetValue(list[i], null) + "\"");
                             if (j < pis.Length - 1)
                             {
                                 Json.Append(",");
@@ -297,8 +302,7 @@ namespace stonefw.Utility
                         for (int j = 0; j < pis.Length; j++)
                         {
                             Json.Append("\"" + pis[j].Name + "\":\"" + pis
-
-                            [j].GetValue(list[i], null) + "\"");
+                                [j].GetValue(list[i], null) + "\"");
                             if (j < pis.Length - 1)
                             {
                                 Json.Append(",");
@@ -319,6 +323,7 @@ namespace stonefw.Utility
                 return string.Empty;
             }
         }
+
         #endregion
 
         #region 对象集合转换Json
@@ -337,12 +342,10 @@ namespace stonefw.Utility
                 for (int i = 0; i < propertyInfo.Length; i++)
                 {
                     object objectValue = propertyInfo[i].GetGetMethod().Invoke
-
-                    (jsonObject, null);
+                        (jsonObject, null);
                     string value = string.Empty;
                     if (objectValue is DateTime || objectValue is Guid || objectValue is
-
-                    TimeSpan)
+                        TimeSpan)
                     {
                         value = "'" + objectValue.ToString() + "'";
                     }
@@ -352,15 +355,14 @@ namespace stonefw.Utility
                     }
                     else if (objectValue is IEnumerable)
                     {
-                        value = ToJson((IEnumerable)objectValue);
+                        value = ToJson((IEnumerable) objectValue);
                     }
                     else
                     {
                         value = ToJson(objectValue.ToString());
                     }
                     jsonString += "\"" + ToJson(propertyInfo[i].Name) + "\":" + value +
-
-                    ",";
+                                  ",";
                 }
                 return JsonHelper.DeleteLast(jsonString) + "}";
             }
@@ -375,6 +377,7 @@ namespace stonefw.Utility
                 return string.Empty;
             }
         }
+
         /// <summary>
         /// 对象集合转换Json
         /// </summary>
@@ -402,6 +405,7 @@ namespace stonefw.Utility
                 return string.Empty;
             }
         }
+
         /// <summary>
         /// 普通集合转换Json
         /// </summary>
@@ -429,6 +433,7 @@ namespace stonefw.Utility
                 return string.Empty;
             }
         }
+
         /// <summary>
         /// 删除结尾字符
         /// </summary>
@@ -455,6 +460,7 @@ namespace stonefw.Utility
                 return string.Empty;
             }
         }
+
         /// <summary>
         /// Datatable转换为Json
         /// </summary>
@@ -472,19 +478,16 @@ namespace stonefw.Utility
                     foreach (DataColumn column in table.Columns)
                     {
                         jsonString += "\"" + ToJson(column.ColumnName) + "\":";
-                        if (column.DataType == typeof(DateTime) || column.DataType ==
-
-                        typeof(string))
+                        if (column.DataType == typeof (DateTime) || column.DataType ==
+                            typeof (string))
                         {
                             jsonString += "\"" + ToJson(drc[i]
-
-                            [column.ColumnName].ToString()) + "\",";
+                                [column.ColumnName].ToString()) + "\",";
                         }
                         else
                         {
                             jsonString += ToJson(drc[i][column.ColumnName].ToString()) +
-
-                            ",";
+                                          ",";
                         }
                     }
                     jsonString = DeleteLast(jsonString) + "},";
@@ -502,6 +505,7 @@ namespace stonefw.Utility
                 return string.Empty;
             }
         }
+
         /// <summary>
         /// DataReader转换为Json
         /// </summary>
@@ -519,13 +523,11 @@ namespace stonefw.Utility
                     for (int i = 0; i < dataReader.FieldCount; i++)
                     {
                         jsonString += "\"" + ToJson(dataReader.GetName(i)) + "\":";
-                        if (dataReader.GetFieldType(i) == typeof(DateTime) ||
-
-                        dataReader.GetFieldType(i) == typeof(string))
+                        if (dataReader.GetFieldType(i) == typeof (DateTime) ||
+                            dataReader.GetFieldType(i) == typeof (string))
                         {
                             jsonString += "\"" + ToJson(dataReader[i].ToString()) +
-
-                            "\",";
+                                          "\",";
                         }
                         else
                         {
@@ -548,6 +550,7 @@ namespace stonefw.Utility
                 return string.Empty;
             }
         }
+
         /// <summary>
         /// DataSet转换为Json
         /// </summary>
@@ -561,8 +564,7 @@ namespace stonefw.Utility
                 foreach (DataTable table in dataSet.Tables)
                 {
                     jsonString += "\"" + ToJson(table.TableName) + "\":" + ToJson(table)
-
-                    + ",";
+                                  + ",";
                 }
                 return jsonString = DeleteLast(jsonString) + "}";
             }
@@ -577,6 +579,7 @@ namespace stonefw.Utility
                 return string.Empty;
             }
         }
+
         /// <summary>
         /// String转换为Json
         /// </summary>
@@ -594,10 +597,8 @@ namespace stonefw.Utility
                 string temstr;
                 temstr = value;
                 temstr = temstr.Replace("{", "｛").Replace("}", "｝").Replace(":",
-
-                "：").Replace(",", "，").Replace("[", "【").Replace("]", "】").Replace(";",
-
-                "；").Replace("\n", "<br/>").Replace("\r", "");
+                    "：").Replace(",", "，").Replace("[", "【").Replace("]", "】").Replace(";",
+                        "；").Replace("\n", "<br/>").Replace("\r", "");
 
                 temstr = temstr.Replace("\t", " ");
                 temstr = temstr.Replace("'", "\'");
@@ -621,16 +622,15 @@ namespace stonefw.Utility
         #endregion
 
         #region 可序列化类转JSON
+
         /// <summary>
-
-
         /// 将可序列的类转化Json数据格式；[采用.net3.5自带的json支持类]
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
         public static string ObjectToJson<T>(T obj)
         {
-            var ds = new DataContractJsonSerializer(typeof(T));
+            var ds = new DataContractJsonSerializer(typeof (T));
             using (var ms = new MemoryStream())
             {
                 ds.WriteObject(ms, obj);
@@ -646,9 +646,9 @@ namespace stonefw.Utility
         /// <returns></returns>
         public static T JsonStringToObject<T>(string sJson) where T : class
         {
-            DataContractJsonSerializer ds = new DataContractJsonSerializer(typeof(T));
+            DataContractJsonSerializer ds = new DataContractJsonSerializer(typeof (T));
             MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(sJson));
-            T obj = (T)ds.ReadObject(ms);
+            T obj = (T) ds.ReadObject(ms);
             ms.Close();
             return null;
         }

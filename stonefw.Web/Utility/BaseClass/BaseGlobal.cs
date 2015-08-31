@@ -3,40 +3,35 @@ using System.IO;
 using System.Text;
 using System.Web;
 using System.Web.Security;
-using stonefw.Biz.BaseModule;
-using stonefw.Biz.SystemModule;
-using stonefw.Entity.BaseModule;
-using stonefw.Utility;
+using Stonefw.Biz.BaseModule;
+using Stonefw.Biz.SystemModule;
+using Stonefw.Entity.BaseModule;
+using Stonefw.Utility;
 
-namespace stonefw.Web.Utility.BaseClass
+namespace Stonefw.Web.Utility.BaseClass
 {
-    public class BaseGlobal : System.Web.HttpApplication
+    public class BaseGlobal : HttpApplication
     {
         protected void Application_Start(object sender, EventArgs e)
         {
-
         }
 
         protected void Session_Start(object sender, EventArgs e)
         {
-
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
-
         }
 
         protected void Application_Error(object sender, EventArgs e)
         {
-
-            string errorLogPath = Server.MapPath("/TempFile/ErrorLogPath");
-            string errorPage = "/CustomPage/error.html";
+            var errorLogPath = Server.MapPath("/TempFile/ErrorLogPath");
+            var errorPage = "/CustomPage/error.html";
             Exception ex = null;
             try
             {
@@ -48,7 +43,8 @@ namespace stonefw.Web.Utility.BaseClass
 
                 BcUserInfoEntity userInfo = null;
                 var identity = HttpContext.Current.User.Identity as FormsIdentity;
-                if (identity != null) userInfo = new BcUserInfoBiz().GetBcUserInfoWithPermission(identity.Ticket.UserData);
+                if (identity != null)
+                    userInfo = new BcUserInfoBiz().GetBcUserInfoWithPermission(identity.Ticket.UserData);
 
                 var entity = new BcLogErrorEntity();
                 if (userInfo != null)
@@ -79,7 +75,6 @@ namespace stonefw.Web.Utility.BaseClass
                     WriteLocalLog(errorLogPath, ex.ToString());
                     WriteLocalLog(errorLogPath, ex2.ToString());
                 }
-
             }
             catch (Exception ex3)
             {
@@ -98,12 +93,10 @@ namespace stonefw.Web.Utility.BaseClass
 
         protected void Session_End(object sender, EventArgs e)
         {
-
         }
 
         protected void Application_End(object sender, EventArgs e)
         {
-
         }
 
         private void WriteLocalLog(string errorLogPath, string message)

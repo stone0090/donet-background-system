@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Web;
 using System.Web.Security;
-using stonefw.Entity.Enum;
-using stonefw.Entity.Enum;
-using stonefw.Biz.BaseModule;
-using stonefw.Web.Utility.BaseClass;
+using Stonefw.Biz.BaseModule;
+using Stonefw.Entity.Enum;
+using Stonefw.Web.Utility.BaseClass;
 
-namespace stonefw.Web
+namespace Stonefw.Web
 {
     public partial class Login : BasePage
     {
@@ -17,26 +16,26 @@ namespace stonefw.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (this.Context.User.Identity.IsAuthenticated)
+            if (Context.User.Identity.IsAuthenticated)
                 Response.Redirect(ReturnUrl);
 
             if (!IsPostBack)
             {
                 if (Request.Cookies["webfwu"] != null && !string.IsNullOrEmpty(Request.Cookies["webfwu"].Value.Trim()))
-                    this.name.Text = Request.Cookies["webfwu"].Value.Trim();
+                    name.Text = Request.Cookies["webfwu"].Value.Trim();
 
                 if (Request.Cookies["webfwp"] != null && !string.IsNullOrEmpty(Request.Cookies["webfwp"].Value.Trim()))
                 {
-                    this.password.Attributes["value"] = Request.Cookies["webfwp"].Value.Trim();
-                    this.remember.Checked = true;
+                    password.Attributes["value"] = Request.Cookies["webfwp"].Value.Trim();
+                    remember.Checked = true;
                 }
             }
         }
 
         protected void submit_Click(object sender, EventArgs e)
         {
-            string usId = this.name.Text.Trim();
-            string pswd = this.password.Text.Trim();
+            var usId = name.Text.Trim();
+            var pswd = password.Text.Trim();
 
             if (string.IsNullOrEmpty(usId))
             {
@@ -55,7 +54,7 @@ namespace stonefw.Web
             Response.Cookies["webfwu"].Value = usId;
             Response.Cookies["webfwu"].Expires = DateTime.Now.AddMonths(2);
 
-            if (this.remember.Checked)
+            if (remember.Checked)
             {
                 Response.Cookies["webfwp"].Value = pswd;
                 Response.Cookies["webfwp"].Expires = DateTime.Now.AddMonths(2);
@@ -72,7 +71,8 @@ namespace stonefw.Web
                 case LoginStatusEnum.Success:
                     FormsAuthentication.SetAuthCookie(usId, false);
                     //登陆成功，把用户编号保存到票据中    
-                    var ticket = new FormsAuthenticationTicket(1, usId, DateTime.Now, DateTime.Now.AddMonths(2), false, usId, FormsAuthentication.FormsCookiePath);
+                    var ticket = new FormsAuthenticationTicket(1, usId, DateTime.Now, DateTime.Now.AddMonths(2), false,
+                        usId, FormsAuthentication.FormsCookiePath);
                     var encTicket = FormsAuthentication.Encrypt(ticket);
                     var newCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encTicket);
                     HttpContext.Current.Response.Cookies.Add(newCookie);
@@ -96,9 +96,9 @@ namespace stonefw.Web
 
         private void ShowErrorMsg(string msg)
         {
-            this.divError.Attributes.Remove("class");
-            this.divError.Attributes.Add("class", "error");
-            this.errormsg.Text = msg;
+            divError.Attributes.Remove("class");
+            divError.Attributes.Add("class", "error");
+            errormsg.Text = msg;
         }
     }
 }

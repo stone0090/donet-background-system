@@ -1,26 +1,21 @@
-using System;
-using System.Data;
-using System.Data.Common;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
-using stonefw.Biz.SystemModule;
+using Stonefw.Biz.SystemModule;
+using Stonefw.Entity.BaseModule;
+using Stonefw.Entity.Enum;
+using Stonefw.Utility.EntitySql;
 
-
-using stonefw.Entity.BaseModule;
-using stonefw.Entity.SystemModule;
-using stonefw.Entity.Enum;
-using stonefw.Utility.EntitySql;
-
-namespace stonefw.Biz.BaseModule
+namespace Stonefw.Biz.BaseModule
 {
     public class BcPermissionBiz
     {
         public void DeleteBcPermission(int? permissionId, int? permissionType)
         {
-            EntityExecution.Delete<BcPermissionEntity>(n => n.UserRoleId == permissionId && n.PermissionType == permissionType);
+            EntityExecution.Delete<BcPermissionEntity>(
+                n => n.UserRoleId == permissionId && n.PermissionType == permissionType);
         }
+
         public void DeleteBcPermission(int permissionId, int permissionType, string moduleId, string funcPointId)
         {
             var entity = new BcPermissionEntity();
@@ -30,6 +25,7 @@ namespace stonefw.Biz.BaseModule
             entity.FuncPointId = funcPointId;
             EntityExecution.Delete(entity);
         }
+
         public void AddNewBcPermission(List<BcPermissionEntity> list)
         {
             using (var ts = new TransactionScope())
@@ -37,7 +33,7 @@ namespace stonefw.Biz.BaseModule
                 foreach (BcPermissionEntity entity in list)
                 {
                     if (!string.IsNullOrEmpty(entity.Permissions))
-                        EntityExecution.Insert(entity);
+                        entity.Insert();
                 }
                 ts.Complete();
             }
@@ -71,7 +67,10 @@ namespace stonefw.Biz.BaseModule
             for (int i = enabledBcPermissionList.Count - 1; i >= 0; i--)
             {
                 var permisionEntity = enabledBcPermissionList[i];
-                var list = listEnabledSysMenuEntity.Where(n => n.ModuleId == permisionEntity.ModuleId && n.FuncPointId == permisionEntity.FuncPointId).ToList();
+                var list =
+                    listEnabledSysMenuEntity.Where(
+                        n => n.ModuleId == permisionEntity.ModuleId && n.FuncPointId == permisionEntity.FuncPointId)
+                        .ToList();
                 if (list.Count <= 0) enabledBcPermissionList.Remove(permisionEntity);
             }
 
@@ -81,8 +80,10 @@ namespace stonefw.Biz.BaseModule
 
             foreach (BcPermissionEntity bcPermissionEntity in enabledBcPermissionList)
             {
-                bcPermissionEntity.ModuleName = SysEnumNameExBiz.GetDescription<SysModuleEnum>(bcPermissionEntity.ModuleId);
-                bcPermissionEntity.FuncPointName = SysEnumNameExBiz.GetDescription<SysFuncPointEnum>(bcPermissionEntity.FuncPointId);
+                bcPermissionEntity.ModuleName =
+                    SysEnumNameExBiz.GetDescription<SysModuleEnum>(bcPermissionEntity.ModuleId);
+                bcPermissionEntity.FuncPointName =
+                    SysEnumNameExBiz.GetDescription<SysFuncPointEnum>(bcPermissionEntity.FuncPointId);
                 if (permissionType == 1)
                 {
                     var list = allBcRoleList.Where(n => n.RoleId == bcPermissionEntity.UserRoleId).ToList();
@@ -104,14 +105,20 @@ namespace stonefw.Biz.BaseModule
                         if (!string.IsNullOrEmpty(s))
                         {
                             bcPermissionEntity.PermissionList.Add(s);
-                            bcPermissionEntity.PermissionNameList.Add(SysEnumNameExBiz.GetDescription<SysFuncPointEnum>(s));
+                            bcPermissionEntity.PermissionNameList.Add(
+                                SysEnumNameExBiz.GetDescription<SysFuncPointEnum>(s));
                         }
                     }
                     if (bcPermissionEntity.PermissionNameList.Count > 0)
-                        bcPermissionEntity.PermissionNames = string.Join(",", bcPermissionEntity.PermissionNameList.ToArray());
+                        bcPermissionEntity.PermissionNames = string.Join(",",
+                            bcPermissionEntity.PermissionNameList.ToArray());
                 }
             }
-            return enabledBcPermissionList.OrderBy(n => n.UserRoleId).ThenBy(n => n.ModuleId).ThenBy(n => n.FuncPointId).ToList();
+            return
+                enabledBcPermissionList.OrderBy(n => n.UserRoleId)
+                    .ThenBy(n => n.ModuleId)
+                    .ThenBy(n => n.FuncPointId)
+                    .ToList();
         }
     }
 }

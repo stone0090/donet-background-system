@@ -1,12 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Transactions;
 
-namespace stonefw.Utility
+namespace Stonefw.Utility
 {
     /// <summary>
     /// 进行各种数据库相关操作的数据库操作类
@@ -18,11 +14,12 @@ namespace stonefw.Utility
         /// <summary>
         /// 是否是否在调用存储过程时检查参数
         /// </summary>
-        public bool CheckStoredProcedurePara{ get; set; }
+        public bool CheckStoredProcedurePara { get; set; }
+
         public string DbName { get; private set; }
-        public string ConnectionString { get; private set; }
-        public string ProviderName { get; private set; }
-        public DbProviderFactory ProviderFactory { get; private set; }
+        public string ConnectionString { get; }
+        public string ProviderName { get; }
+        public DbProviderFactory ProviderFactory { get; }
         public DbTransaction DbTransactions { get; set; }
 
         #endregion
@@ -35,6 +32,7 @@ namespace stonefw.Utility
         #endregion
 
         #region 构造函数
+
         public Database(string dbName = "", bool checkStoredProcedurePara = true)
         {
             if (string.IsNullOrEmpty(dbName))
@@ -46,7 +44,6 @@ namespace stonefw.Utility
                 this.DbName = ConfigHelper.GetDbName(1);
                 this.ProviderName = ConfigHelper.GetDbProviderName(1);
                 this.ProviderFactory = DbProviderFactories.GetFactory(this.ProviderName);
-
             }
             else
             {
@@ -72,9 +69,13 @@ namespace stonefw.Utility
 
         public DbParameter AddInParameter(DbCommand dm, string name, DbType dbType, object value)
         {
-            return AddParameter(dm, name, dbType, 0, ParameterDirection.Input, false, 0, 0, String.Empty, DataRowVersion.Default, value);
+            return AddParameter(dm, name, dbType, 0, ParameterDirection.Input, false, 0, 0, String.Empty,
+                DataRowVersion.Default, value);
         }
-        public virtual DbParameter AddParameter(DbCommand dm, string name, DbType dbType, int size, ParameterDirection direction, bool nullable, byte precision, byte scale, string sourceColumn, DataRowVersion sourceVersion, object value)
+
+        public virtual DbParameter AddParameter(DbCommand dm, string name, DbType dbType, int size,
+            ParameterDirection direction, bool nullable, byte precision, byte scale, string sourceColumn,
+            DataRowVersion sourceVersion, object value)
         {
             ////if (dbType == DbType.String)
             ////    throw new Exception("请不要使用DbType.String进行数据库查询！");
@@ -110,6 +111,7 @@ namespace stonefw.Utility
             }
             return CreateCommand(CommandType.Text, commandText);
         }
+
         public virtual DbCommand GetStoredProcCommand(string storedProcedureName)
         {
             if (string.IsNullOrEmpty(storedProcedureName))
@@ -118,6 +120,7 @@ namespace stonefw.Utility
             }
             return CreateCommand(CommandType.StoredProcedure, storedProcedureName);
         }
+
         public virtual DbCommand GetStoredProcCommand(string storedProcedureName, params object[] parameterValues)
         {
             if (string.IsNullOrEmpty(storedProcedureName))
@@ -136,6 +139,7 @@ namespace stonefw.Utility
             }
             return dm;
         }
+
         private DbCommand CreateCommand(CommandType commandType, string commandText = "")
         {
             DbCommand dm = ProviderFactory.CreateCommand();
@@ -187,6 +191,7 @@ namespace stonefw.Utility
                 return ExecuteDataTable(dm);
             }
         }
+
         public virtual DataTable ExecuteDataTable(DbCommand dm)
         {
             using (DbConnection conn = CreateConnection())
@@ -213,6 +218,7 @@ namespace stonefw.Utility
                 return ExecuteDataSet(dm);
             }
         }
+
         public virtual DataSet ExecuteDataSet(DbCommand dm)
         {
             using (DbConnection conn = CreateConnection())
@@ -239,6 +245,7 @@ namespace stonefw.Utility
                 return ExecuteNonQuery(dm);
             }
         }
+
         public virtual int ExecuteNonQuery(DbCommand dm)
         {
             using (DbConnection conn = CreateConnection())
@@ -248,6 +255,7 @@ namespace stonefw.Utility
                 return result;
             }
         }
+
         public virtual int ExecuteNonQuery(string commandText, DbTransaction dt)
         {
             using (DbCommand dm = GetSqlStringCommand(commandText))
@@ -256,6 +264,7 @@ namespace stonefw.Utility
                 return ExecuteNonQuery(dm, dt);
             }
         }
+
         public virtual int ExecuteNonQuery(DbCommand dm, DbTransaction dt)
         {
             dm.Transaction = dt;
@@ -271,6 +280,7 @@ namespace stonefw.Utility
                 return ExecuteReader(dm);
             }
         }
+
         public virtual IDataReader ExecuteReader(DbCommand dm)
         {
             dm.Connection = CreateConnection();
@@ -285,6 +295,7 @@ namespace stonefw.Utility
 
             return dm.ExecuteReader(CommandBehavior.CloseConnection);
         }
+
         public virtual IDataReader ExecuteReader(string storedProcedureName, params object[] parameterValues)
         {
             using (DbCommand dm = GetStoredProcCommand(storedProcedureName, parameterValues))
@@ -301,6 +312,7 @@ namespace stonefw.Utility
                 return ExecuteScalar(dm);
             }
         }
+
         public virtual object ExecuteScalar(DbCommand dm)
         {
             using (DbConnection conn = CreateConnection())
@@ -311,6 +323,7 @@ namespace stonefw.Utility
                 return dm.ExecuteScalar();
             }
         }
+
         public virtual object ExecuteScalar(string storedProcedureName, params object[] parameterValues)
         {
             using (DbCommand dm = GetStoredProcCommand(storedProcedureName, parameterValues))
@@ -384,121 +397,7 @@ namespace stonefw.Utility
         }
 
         #endregion
-
-    }
-
-    public class DatabaseFactory
-    {
-        public static Database CreateDatabase()
-        {
-            return new Database();
-        }
-        public static Database CreateDatabase(string dbName)
-        {
-            return new Database(dbName);
-        }
     }
 
     //SQL注入判断
-    public static class SqlInjectionReject
-    {
-        /// <summary>
-        /// T-SQL关键字
-        /// </summary>
-        private static readonly string[] TsqlKeyWords = new string[] { 
-"ADD","EXCEPT","PERCENT","ALL","EXEC","PLAN","ALTER","EXECUTE","PRECISION","AND","EXISTS","PRIMARY","ANY","EXIT",
-"PRINT","AS", "FETCH", "PROC","ASC", "FILE", "PROCEDURE","AUTHORIZATION","FILLFACTOR","PUBLIC","BACKUP","FOR","RAISERROR",
-"BEGIN", "FOREIGN", "READ","BETWEEN","FREETEXT","READTEXT","BREAK","FREETEXTTABLE","RECONFIGURE","BROWSE","FROM",
-"REFERENCES","BULK","FULL","REPLICATION","BY","FUNCTION","RESTORE","CASCADE","GOTO","RESTRICT","CASE","GRANT","RETURN",
-"CHECK","GROUP","REVOKE","CHECKPOINT","HAVING","RIGHT","CLOSE","HOLDLOCK","ROLLBACK","CLUSTERED","IDENTITY","ROWCOUNT",
-"COALESCE","IDENTITY_INSERT","ROWGUIDCOL","COLLATE","IDENTITYCOL","RULE","COLUMN","IF","SAVE","COMMIT","IN","SCHEMA",
-"COMPUTE","INDEX","SELECT","CONSTRAINT","INNER","SESSION_USER","CONTAINS","INSERT","SET","CONTAINSTABLE","INTERSECT",
-"SETUSER","CONTINUE","INTO","SHUTDOWN","CONVERT","IS","SOME","CREATE","JOIN","STATISTICS","CROSS","KEY","SYSTEM_USER",
-"CURRENT","KILL","TABLE","CURRENT_DATE","LEFT","TEXTSIZE","CURRENT_TIME","LIKE","THEN","CURRENT_TIMESTAMP","LINENO",
-"TO","CURRENT_USER","LOAD","TOP","CURSOR","NATIONAL","TRAN","DATABASE","NOCHECK","TRANSACTION","DBCC","NONCLUSTERED",
-"TRIGGER","DEALLOCATE","NOT","TRUNCATE","DECLARE","NULL","TSEQUAL","DEFAULT","NULLIF","UNION","DELETE","OF","UNIQUE",
-"DENY","OFF","UPDATE","DESC","OFFSETS","UPDATETEXT","DISK","ON","USE","DISTINCT","OPEN","USER","DISTRIBUTED","OPENDATASOURCE",
-"VALUES","DOUBLE","OPENQUERY","VARYING","DROP","OPENROWSET","VIEW","DUMMY","OPENXML","WAITFOR","DUMP","OPTION","WHEN",
-"ELSE","OR","WHERE","END","ORDER","WHILE","ERRLVL","OUTER","WITH","ESCAPE","OVER","WRITETEXT"};
-
-        /// <summary>
-        /// ODBC关键字
-        /// </summary>
-        private static readonly string[] OdbcKeyWords = new string[]{            
-"ABSOLUTE","EXEC","OVERLAPS","ACTION","EXECUTE","PAD","ADA","EXISTS","PARTIAL","ADD","EXTERNAL","PASCAL","ALL","EXTRACT","POSITION",
-"ALLOCATE","FALSE","PRECISION","ALTER","FETCH","PREPARE","AND","FIRST","PRESERVE","ANY","FLOAT","PRIMARY","ARE","FOR","PRIOR","AS",
-"FOREIGN","PRIVILEGES","ASC","FORTRAN","PROCEDURE","ASSERTION","FOUND","PUBLIC","AT","FROM","READ","AUTHORIZATION","FULL","REAL",
-"AVG","GET","REFERENCES","BEGIN","GLOBAL","RELATIVE","BETWEEN","GO","RESTRICT","BIT","GOTO","REVOKE","BIT_LENGTH","GRANT","RIGHT",
-"BOTH","GROUP","ROLLBACK","BY","HAVING","ROWS","CASCADE","HOUR","SCHEMA","CASCADED","IDENTITY","SCROLL","CASE","IMMEDIATE","SECOND",
-"CAST","IN","SECTION","CATALOG","INCLUDE","SELECT","CHAR","INDEX","SESSION","CHAR_LENGTH","INDICATOR","SESSION_USER","CHARACTER",
-"INITIALLY","SET","CHARACTER_LENGTH","INNER","SIZE","CHECK","INPUT","SMALLINT","CLOSE","INSENSITIVE","SOME","COALESCE","INSERT","SPACE",
-"COLLATE","INT","SQL","COLLATION","INTEGER","SQLCA","COLUMN","INTERSECT","SQLCODE","COMMIT","INTERVAL","SQLERROR","CONNECT",
-"INTO","SQLSTATE","CONNECTION","IS","SQLWARNING","CONSTRAINT","ISOLATION","SUBSTRING","CONSTRAINTS","JOIN","SUM","CONTINUE",
-"KEY","SYSTEM_USER","CONVERT","LANGUAGE","TABLE","CORRESPONDING","LAST","TEMPORARY","COUNT","LEADING","THEN","CREATE","LEFT",
-"TIME","CROSS","LEVEL","TIMESTAMP","CURRENT","LIKE","TIMEZONE_HOUR","CURRENT_DATE","LOCAL","TIMEZONE_MINUTE","CURRENT_TIME",
-"LOWER","TO","CURRENT_TIMESTAMP","MATCH","TRAILING","CURRENT_USER","MAX","TRANSACTION","CURSOR","MIN","TRANSLATE","DATE",
-"MINUTE","TRANSLATION","DAY","MODULE","TRIM","DEALLOCATE","MONTH","TRUE","DEC","NAMES","UNION","DECIMAL","NATIONAL","UNIQUE",
-"DECLARE","NATURAL","UNKNOWN","DEFAULT","NCHAR","UPDATE","DEFERRABLE","NEXT","UPPER","DEFERRED","NO","USAGE","DELETE","NONE",
-"USER","DESC","NOT","USING","DESCRIBE","NULL","VALUE","DESCRIPTOR","NULLIF","VALUES","DIAGNOSTICS","NUMERIC","VARCHAR","DISCONNECT",
-"OCTET_LENGTH","VARYING","DISTINCT","OF","VIEW","DOMAIN","ON","WHEN","DOUBLE","ONLY","WHENEVER","DROP","OPEN","WHERE","ELSE",
-"OPTION","WITH","END","OR","WORK","END-EXEC","ORDER","WRITE","ESCAPE","OUTER","YEAR","EXCEPT","OUTPUT","ZONE","EXCEPTION"};
-
-        /// <summary>
-        /// 特殊字符
-        /// </summary>
-        private static readonly string[] SpecialWords = new string[] { "'", "[", "]", "\\", "%", "_", ";", "/", "*", "-", "--", "=", ">", "<", "<>", "!=", "/*", "*/", "\n" };
-
-        /// <summary>
-        /// 时间值
-        /// </summary>
-        private static readonly Regex DateTimeRule = new Regex(@"^(\d{2,4}-\d{1,2}-\d{1,2}|\d{2,4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}|\d{2,4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}:\d{1,2})$");
-
-        /// <summary>
-        /// 部分时间值
-        /// </summary>
-        private static readonly Regex PartDateTimeRule = new Regex(@"(\d{2,4}-\d{1,2}-\d{1,2}|\d{2,4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}|\d{2,4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}:\d{1,2})");
-
-        /// <summary>
-        /// 对数字 字符串 日期 txt xml image类型的参数进行校验，校验不通过就返回
-        /// </summary>
-        /// <param name="sqlParameter"></param>
-        /// <returns>校验不通过就返回false</returns>
-        public static bool CheckMssqlParameter(string sqlParameter)
-        {
-            sqlParameter = sqlParameter.ToUpper();
-
-            //常用场景的特殊处理
-            if (sqlParameter == "-1")
-                return true;
-            if (DateTimeRule.IsMatch(sqlParameter))
-                return true;
-            //如果内容中含有时间字符串，则需要移除
-            var matchs = PartDateTimeRule.Matches(sqlParameter);
-            if (matchs.Count > 0)
-            {
-                for (int i = 0; i < matchs.Count; i++)
-                {
-                    sqlParameter = sqlParameter.Replace(matchs[i].Groups[1].Value, "");
-                }
-            }
-
-            //首先检查是否包含特殊字符
-            foreach (string checkString in SpecialWords)
-            {
-                if (sqlParameter.Contains(checkString))
-                { return false; }
-            }
-            //检测其他关键字和字符
-
-            string[] check = sqlParameter.Split(' ').ToArray();
-            bool result = true;
-            foreach (string checkString in check)
-            {
-                if (TsqlKeyWords.Contains(checkString)) { result = false; break; }
-                else if (OdbcKeyWords.Contains(checkString)) { result = false; break; }
-            }
-            return result;
-        }
-    }
-
 }

@@ -1,4 +1,4 @@
-﻿namespace stonefw.Utility.EntitySql.Entity
+﻿namespace Stonefw.Utility.EntitySql.Entity
 {
     /// <summary>
     /// 连接模式

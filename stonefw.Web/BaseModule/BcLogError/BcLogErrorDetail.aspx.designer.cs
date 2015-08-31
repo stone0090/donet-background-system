@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.BaseModule.BcLogError {
+namespace Stonefw.Web.BaseModule.BcLogError {
     
     
     public partial class BcLogErrorDetail {

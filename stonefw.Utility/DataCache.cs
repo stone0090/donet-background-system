@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web;
 
-namespace stonefw.Utility
+namespace Stonefw.Utility
 {
     /// <summary>
     /// 缓存相关的操作类
@@ -37,7 +37,8 @@ namespace stonefw.Utility
         /// <param name="objObject"></param>
         /// <param name="absoluteExpiration"></param>
         /// <param name="slidingExpiration"></param>
-        public static void SetCache(string cacheKey, object objObject, DateTime absoluteExpiration, TimeSpan slidingExpiration)
+        public static void SetCache(string cacheKey, object objObject, DateTime absoluteExpiration,
+            TimeSpan slidingExpiration)
         {
             System.Web.Caching.Cache objCache = HttpRuntime.Cache;
             objCache.Insert(cacheKey, objObject, null, absoluteExpiration, slidingExpiration);

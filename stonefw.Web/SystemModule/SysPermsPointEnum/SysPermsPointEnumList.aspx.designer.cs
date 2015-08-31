@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.SystemModule.SysPermsPointEnum {
+namespace Stonefw.Web.SystemModule.SysPermsPointEnum {
     
     
     public partial class SysPermsPointEnumList {

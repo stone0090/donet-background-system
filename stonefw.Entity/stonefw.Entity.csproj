@@ -7,8 +7,8 @@
     <ProjectGuid>{FA43E73B-A3F4-4A80-A662-0307CF3F7941}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>stonefw.Entity</RootNamespace>
-    <AssemblyName>stonefw.Entity</AssemblyName>
+    <RootNamespace>Stonefw.Entity</RootNamespace>
+    <AssemblyName>Stonefw.Entity</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,13 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseModule\BcAutoCodeEntity.cs" />
@@ -70,9 +64,9 @@
     <Compile Include="SystemModule\SysRelationEntity.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\stonefw.Utility\stonefw.Utility.csproj">
+    <ProjectReference Include="..\stonefw.Utility\Stonefw.Utility.csproj">
       <Project>{4F097047-9CD3-4876-9D18-8AE0856CD1C1}</Project>
-      <Name>stonefw.Utility</Name>
+      <Name>Stonefw.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

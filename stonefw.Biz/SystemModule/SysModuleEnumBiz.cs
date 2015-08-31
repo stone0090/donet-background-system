@@ -1,18 +1,18 @@
-﻿using stonefw.Entity.Enum;
-using stonefw.Entity.Extension;
-using stonefw.Utility;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Stonefw.Entity.Enum;
+using Stonefw.Entity.Extension;
+using Stonefw.Utility;
 
-namespace stonefw.Biz.SystemModule
+namespace Stonefw.Biz.SystemModule
 {
     public class SysModuleEnumBiz
     {
-        const string CacheKey = "SysModuleEnumBiz-GetSysModuleEnumList";
+        private const string CacheKey = "SysModuleEnumBiz-GetSysModuleEnumList";
 
         public List<SysModuleEnumEntity> GetSysModuleEnumList()
         {
             object list = DataCache.GetCache(CacheKey) ?? SetSysModuleEnumListCache();
-            return (List<SysModuleEnumEntity>)list;
+            return (List<SysModuleEnumEntity>) list;
         }
 
         private List<SysModuleEnumEntity> SetSysModuleEnumListCache()
@@ -22,6 +22,5 @@ namespace stonefw.Biz.SystemModule
             DataCache.SetCache(CacheKey, list);
             return list;
         }
-
     }
 }

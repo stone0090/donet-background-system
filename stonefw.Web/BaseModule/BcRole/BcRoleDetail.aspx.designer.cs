@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace stonefw.Web.BaseModule.BcRole {
+namespace Stonefw.Web.BaseModule.BcRole {
     
     
     public partial class BcRoleDetail {
