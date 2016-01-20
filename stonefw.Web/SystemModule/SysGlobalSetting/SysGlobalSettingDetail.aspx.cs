@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Stonefw.Biz.SystemModule;
 using Stonefw.Entity.SystemModule;
 using Stonefw.Utility;

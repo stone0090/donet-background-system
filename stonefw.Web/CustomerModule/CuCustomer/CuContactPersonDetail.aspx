@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CuContactPersonDetail.aspx.cs" Inherits="Stonefw.Web.CustomerModule.CuCustomer.CuContactPersonDetail" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CuContactPersonDetail.aspx.cs" Inherits="Stonefw.Web.CustomerModule.CuCustomer.CuContactPersonDetail" %>
 
 <!DOCTYPE html>
 

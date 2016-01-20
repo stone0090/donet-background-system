@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="Stonefw.Web.MainPage.Index" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="Stonefw.Web.MainPage.Index" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" style="overflow: auto">

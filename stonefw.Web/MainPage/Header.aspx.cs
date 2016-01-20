@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Web.Security;
 using Stonefw.Utility;
 using Stonefw.Web.Utility.BaseClass;

@@ -53,10 +53,10 @@ namespace Stonefw.Biz.SystemModule
         {
             var listEnabledSysRelation = GetSysRelationList();
 
-            //¼ÓÔØ¿ÉÓÃµÄ²Ëµ¥ÁÐ±í
+            //åŠ è½½å¯ç”¨çš„èœå•åˆ—è¡¨
             var listEnabledSysMenuEntity = new SysMenuBiz().GetEnabledSysMenuList();
 
-            //¸ù¾Ý¿ÉÓÃµÄ²Ëµ¥ÁÐ±í£¬È¥µôÃ»ÓÐÆðµ½×÷ÓÃµÄ¹¦ÄÜµã
+            //æ ¹æ®å¯ç”¨çš„èœå•åˆ—è¡¨ï¼ŒåŽ»æŽ‰æ²¡æœ‰èµ·åˆ°ä½œç”¨çš„åŠŸèƒ½ç‚¹
             for (int i = listEnabledSysRelation.Count - 1; i >= 0; i--)
             {
                 var permisionEntity = listEnabledSysRelation[i];

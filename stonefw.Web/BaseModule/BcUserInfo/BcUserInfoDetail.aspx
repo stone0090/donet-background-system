@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BcUserInfoDetail.aspx.cs" Inherits="Stonefw.Web.BaseModule.BcUserInfo.BcUserInfoDetail" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BcUserInfoDetail.aspx.cs" Inherits="Stonefw.Web.BaseModule.BcUserInfo.BcUserInfoDetail" %>
 
 <!DOCTYPE html>
 

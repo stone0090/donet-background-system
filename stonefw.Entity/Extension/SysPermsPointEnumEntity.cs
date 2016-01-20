@@ -1,4 +1,4 @@
-﻿namespace Stonefw.Entity.Extension
+namespace Stonefw.Entity.Extension
 {
     public class SysPermsPointEnumEntity
     {

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Header.aspx.cs" Inherits="Stonefw.Web.MainPage.Header" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Header.aspx.cs" Inherits="Stonefw.Web.MainPage.Header" %>
 
 <!DOCTYPE html>
 

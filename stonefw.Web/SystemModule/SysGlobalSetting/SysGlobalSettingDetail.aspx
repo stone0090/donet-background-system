@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysGlobalSettingDetail.aspx.cs" Inherits="Stonefw.Web.SystemModule.SysGlobalSetting.SysGlobalSettingDetail" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysGlobalSettingDetail.aspx.cs" Inherits="Stonefw.Web.SystemModule.SysGlobalSetting.SysGlobalSettingDetail" %>
 
 <!DOCTYPE html>
 

@@ -6,7 +6,7 @@ namespace Stonefw.Utility
     public static class SqlInjectionReject
     {
         /// <summary>
-        /// T-SQL¹Ø¼ü×Ö
+        /// T-SQLå…³é”®å­—
         /// </summary>
         private static readonly string[] TsqlKeyWords = new string[]
         {
@@ -40,7 +40,7 @@ namespace Stonefw.Utility
         };
 
         /// <summary>
-        /// ODBC¹Ø¼ü×Ö
+        /// ODBCå…³é”®å­—
         /// </summary>
         private static readonly string[] OdbcKeyWords = new string[]
         {
@@ -81,40 +81,40 @@ namespace Stonefw.Utility
         };
 
         /// <summary>
-        /// ÌØÊâ×Ö·û
+        /// ç‰¹æ®Šå­—ç¬¦
         /// </summary>
         private static readonly string[] SpecialWords = new string[]
         {"'", "[", "]", "\\", "%", "_", ";", "/", "*", "-", "--", "=", ">", "<", "<>", "!=", "/*", "*/", "\n"};
 
         /// <summary>
-        /// Ê±¼äÖµ
+        /// æ—¶é—´å€¼
         /// </summary>
         private static readonly Regex DateTimeRule =
             new Regex(
                 @"^(\d{2,4}-\d{1,2}-\d{1,2}|\d{2,4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}|\d{2,4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}:\d{1,2})$");
 
         /// <summary>
-        /// ²¿·ÖÊ±¼äÖµ
+        /// éƒ¨åˆ†æ—¶é—´å€¼
         /// </summary>
         private static readonly Regex PartDateTimeRule =
             new Regex(
                 @"(\d{2,4}-\d{1,2}-\d{1,2}|\d{2,4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}|\d{2,4}-\d{1,2}-\d{1,2} \d{1,2}:\d{1,2}:\d{1,2})");
 
         /// <summary>
-        /// ¶ÔÊı×Ö ×Ö·û´® ÈÕÆÚ txt xml imageÀàĞÍµÄ²ÎÊı½øĞĞĞ£Ñé£¬Ğ£Ñé²»Í¨¹ı¾Í·µ»Ø
+        /// å¯¹æ•°å­— å­—ç¬¦ä¸² æ—¥æœŸ txt xml imageç±»å‹çš„å‚æ•°è¿›è¡Œæ ¡éªŒï¼Œæ ¡éªŒä¸é€šè¿‡å°±è¿”å›
         /// </summary>
         /// <param name="sqlParameter"></param>
-        /// <returns>Ğ£Ñé²»Í¨¹ı¾Í·µ»Øfalse</returns>
+        /// <returns>æ ¡éªŒä¸é€šè¿‡å°±è¿”å›false</returns>
         public static bool CheckMssqlParameter(string sqlParameter)
         {
             sqlParameter = sqlParameter.ToUpper();
 
-            //³£ÓÃ³¡¾°µÄÌØÊâ´¦Àí
+            //å¸¸ç”¨åœºæ™¯çš„ç‰¹æ®Šå¤„ç†
             if (sqlParameter == "-1")
                 return true;
             if (DateTimeRule.IsMatch(sqlParameter))
                 return true;
-            //Èç¹ûÄÚÈİÖĞº¬ÓĞÊ±¼ä×Ö·û´®£¬ÔòĞèÒªÒÆ³ı
+            //å¦‚æœå†…å®¹ä¸­å«æœ‰æ—¶é—´å­—ç¬¦ä¸²ï¼Œåˆ™éœ€è¦ç§»é™¤
             var matchs = PartDateTimeRule.Matches(sqlParameter);
             if (matchs.Count > 0)
             {
@@ -124,7 +124,7 @@ namespace Stonefw.Utility
                 }
             }
 
-            //Ê×ÏÈ¼ì²éÊÇ·ñ°üº¬ÌØÊâ×Ö·û
+            //é¦–å…ˆæ£€æŸ¥æ˜¯å¦åŒ…å«ç‰¹æ®Šå­—ç¬¦
             foreach (string checkString in SpecialWords)
             {
                 if (sqlParameter.Contains(checkString))
@@ -132,7 +132,7 @@ namespace Stonefw.Utility
                     return false;
                 }
             }
-            //¼ì²âÆäËû¹Ø¼ü×ÖºÍ×Ö·û
+            //æ£€æµ‹å…¶ä»–å…³é”®å­—å’Œå­—ç¬¦
 
             string[] check = sqlParameter.Split(' ').ToArray();
             bool result = true;

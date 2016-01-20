@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BcLogErrorDetail.aspx.cs" Inherits="Stonefw.Web.BaseModule.BcLogError.BcLogErrorDetail" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BcLogErrorDetail.aspx.cs" Inherits="Stonefw.Web.BaseModule.BcLogError.BcLogErrorDetail" %>
 
 <!DOCTYPE html>
 

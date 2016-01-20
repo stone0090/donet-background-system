@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Stonefw.Biz.BaseModule;
 using Stonefw.Biz.SystemModule;

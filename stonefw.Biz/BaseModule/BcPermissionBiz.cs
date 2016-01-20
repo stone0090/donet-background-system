@@ -42,11 +42,11 @@ namespace Stonefw.Biz.BaseModule
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="permissionType">1=½ÇÉ«È¨ÏŞ£¬2=ÓÃ»§È¨ÏŞ</param>
+        /// <param name="permissionType">1=è§’è‰²æƒé™ï¼Œ2=ç”¨æˆ·æƒé™</param>
         /// <param name="userRoleId"></param>
         public List<BcPermissionEntity> GetEnabledBcPermissionList(int? permissionType, int? userRoleId = 0)
         {
-            //»ñÈ¡¿ÉÓÃµÄÈ¨ÏŞÁĞ±í
+            //è·å–å¯ç”¨çš„æƒé™åˆ—è¡¨
             var allBcPermissionList = EntityExecution.SelectAll<BcPermissionEntity>();
             var enabledBcPermissionList = new List<BcPermissionEntity>();
             if (userRoleId == 0)
@@ -60,10 +60,10 @@ namespace Stonefw.Biz.BaseModule
                     n.UserRoleId == userRoleId && n.PermissionType == permissionType));
             }
 
-            //¼ÓÔØ¿ÉÓÃµÄ²Ëµ¥ÁĞ±í
+            //åŠ è½½å¯ç”¨çš„èœå•åˆ—è¡¨
             var listEnabledSysMenuEntity = new SysMenuBiz().GetEnabledSysMenuList();
 
-            //¸ù¾İ¿ÉÓÃµÄ²Ëµ¥ÁĞ±í£¬È¥µôÃ»ÓĞÆğµ½×÷ÓÃµÄ¹¦ÄÜµã
+            //æ ¹æ®å¯ç”¨çš„èœå•åˆ—è¡¨ï¼Œå»æ‰æ²¡æœ‰èµ·åˆ°ä½œç”¨çš„åŠŸèƒ½ç‚¹
             for (int i = enabledBcPermissionList.Count - 1; i >= 0; i--)
             {
                 var permisionEntity = enabledBcPermissionList[i];
@@ -74,7 +74,7 @@ namespace Stonefw.Biz.BaseModule
                 if (list.Count <= 0) enabledBcPermissionList.Remove(permisionEntity);
             }
 
-            //²¹³äËùÓĞidµÄname
+            //è¡¥å……æ‰€æœ‰idçš„name
             var allBcRoleList = new BcRoleBiz().GetBcRoleList();
             var allBcUserInfoList = new BcUserInfoBiz().GetBcUserInfoList();
 

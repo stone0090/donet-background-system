@@ -1,4 +1,4 @@
-﻿namespace Stonefw.Entity.Enum
+namespace Stonefw.Entity.Enum
 {
     public enum LoginStatusEnum
     {

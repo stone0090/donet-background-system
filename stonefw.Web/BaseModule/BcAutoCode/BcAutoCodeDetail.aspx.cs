@@ -1,5 +1,7 @@
-﻿using System;
+using System;
+using System.Linq;
 using Stonefw.Biz.BaseModule;
+using Stonefw.Biz.SystemModule;
 using Stonefw.Entity.BaseModule;
 using Stonefw.Entity.Enum;
 using Stonefw.Web.Utility.BaseClass;
@@ -52,10 +54,10 @@ namespace Stonefw.Web.BaseModule.BcAutoCode
 
         private void BindControlData()
         {
-            //this.ddlFuncPoint.DataSource = new SysFuncPointEnumBiz().GetSysFuncPointEnumList().Where(n => n.IsAutoCode == true).ToList();
-            //this.ddlFuncPoint.DataTextField = "Name";
-            //this.ddlFuncPoint.DataValueField = "Description";
-            //this.ddlFuncPoint.DataBind();
+            this.ddlFuncPoint.DataSource = new SysFuncPointEnumBiz().GetSysFuncPointEnumList().ToList();
+            this.ddlFuncPoint.DataTextField = "Description"; 
+            this.ddlFuncPoint.DataValueField = "Name";
+            this.ddlFuncPoint.DataBind();
         }
 
         private void FillFormData()

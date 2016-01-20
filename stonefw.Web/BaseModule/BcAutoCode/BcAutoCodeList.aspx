@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BcAutoCodeList.aspx.cs" Inherits="Stonefw.Web.BaseModule.BcAutoCode.BcAutoCodeList" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BcAutoCodeList.aspx.cs" Inherits="Stonefw.Web.BaseModule.BcAutoCode.BcAutoCodeList" %>
 <%@ Import Namespace="Stonefw.Entity.Enum" %>
 <%@ Import Namespace="Stonefw.Biz.SystemModule" %>
 

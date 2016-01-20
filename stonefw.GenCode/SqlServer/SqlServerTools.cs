@@ -1,4 +1,4 @@
-﻿using System.Data.Common;
+using System.Data.Common;
 using Stonefw.Utility;
 
 namespace Stonefw.CodeGenerate.SqlServer

@@ -13,7 +13,7 @@ namespace Stonefw.Utility
         {
             current.NotDefault();
             if (string.IsNullOrEmpty(current.Value))
-                throw new ArgumentException(String.Format("{0}²»ÄÜÎª¿Õ£¡", current.Name));
+                throw new ArgumentException(String.Format("{0}ä¸èƒ½ä¸ºç©ºï¼", current.Name));
             return current;
         }
 
@@ -21,7 +21,7 @@ namespace Stonefw.Utility
         {
             current.NotDefault();
             if (current.Value.Length < length)
-                throw new ArgumentException(String.Format("{0}µÄ³¤¶È²»¿ÉĞ¡ÓÚ{1}£¡", current.Name, length));
+                throw new ArgumentException(String.Format("{0}çš„é•¿åº¦ä¸å¯å°äº{1}ï¼", current.Name, length));
             return current;
         }
 
@@ -29,7 +29,7 @@ namespace Stonefw.Utility
         {
             current.NotDefault();
             if (current.Value.Length > length)
-                throw new ArgumentException(String.Format("{0}µÄ³¤¶È²»¿É³¬¹ı{1}£¡", current.Name, length));
+                throw new ArgumentException(String.Format("{0}çš„é•¿åº¦ä¸å¯è¶…è¿‡{1}ï¼", current.Name, length));
             return current;
         }
 
@@ -38,7 +38,7 @@ namespace Stonefw.Utility
         {
             current.NotDefault();
             if (current.Value.Length < minLength || current.Value.Length > maxLength)
-                throw new ArgumentException(String.Format("{0}µÄ³¤¶È±ØĞëÔÚ{1}ºÍ{2}Ö®¼ä£¡", current.Name, minLength, maxLength));
+                throw new ArgumentException(String.Format("{0}çš„é•¿åº¦å¿…é¡»åœ¨{1}å’Œ{2}ä¹‹é—´ï¼", current.Name, minLength, maxLength));
             return current;
         }
 
@@ -46,7 +46,7 @@ namespace Stonefw.Utility
         {
             int result;
             if (!int.TryParse(current.Value, out result))
-                throw new ArgumentException(String.Format("{0}±ØĞëÎªÊı×Ö£¡", current.Name));
+                throw new ArgumentException(String.Format("{0}å¿…é¡»ä¸ºæ•°å­—ï¼", current.Name));
 
             return new ValidationHelper<int>(result, current.Name);
         }
@@ -54,14 +54,14 @@ namespace Stonefw.Utility
         public static ValidationHelper<int> LargerThan(this ValidationHelper<int> current, int num)
         {
             if (current.Value < num)
-                throw new ArgumentException(String.Format("{0}µÄÖµ²»¿ÉĞ¡ÓÚ{1}£¡", current.Name, num));
+                throw new ArgumentException(String.Format("{0}çš„å€¼ä¸å¯å°äº{1}ï¼", current.Name, num));
             return current;
         }
 
         public static ValidationHelper<int> SmallerThan(this ValidationHelper<int> current, int num)
         {
             if (current.Value > num)
-                throw new ArgumentException(String.Format("{0}µÄÖµ²»¿É´óÓÚ{1}£¡", current.Name, num));
+                throw new ArgumentException(String.Format("{0}çš„å€¼ä¸å¯å¤§äº{1}ï¼", current.Name, num));
             return current;
         }
     }

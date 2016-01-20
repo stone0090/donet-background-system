@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysMenuList.aspx.cs" Inherits="Stonefw.Web.SystemModule.SysMenu.SysMenuList" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysMenuList.aspx.cs" Inherits="Stonefw.Web.SystemModule.SysMenu.SysMenuList" %>
 
 <!DOCTYPE html>
 

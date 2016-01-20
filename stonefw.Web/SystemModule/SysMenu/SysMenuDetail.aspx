@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysMenuDetail.aspx.cs" Inherits="Stonefw.Web.SystemModule.SysMenu.SysMenuDetail" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysMenuDetail.aspx.cs" Inherits="Stonefw.Web.SystemModule.SysMenu.SysMenuDetail" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">

@@ -120,7 +120,7 @@ namespace Stonefw.Biz.BaseModule
                 EntityExecution.SelectOne<BcUserInfoEntity>(
                     n => n.UserAccount == userAccount && n.ActivityFlag == true && n.DeleteFlag == false);
 
-            //»ñÈ¡ÓÃ»§µÄ½ÇÉ«
+            //è·å–ç”¨æˆ·çš„è§’è‰²
             var userRoleList = new BcUserRoleBiz().GetBcUserRoleList(entity.UserId);
             entity.RoleList = new List<BcRoleEntity>();
             foreach (BcUserRoleEntity userRoleEntity in userRoleList)
@@ -132,13 +132,13 @@ namespace Stonefw.Biz.BaseModule
                 });
             }
 
-            //»ñÈ¡ÓÃ»§ÊÇ·ñÎª³¬¼¶¹ÜÀíÔ±
+            //è·å–ç”¨æˆ·æ˜¯å¦ä¸ºè¶…çº§ç®¡ç†å‘˜
             entity.IsSuperAdmin = new SysGlobalSettingBiz().IsSuperAdmin(entity.UserAccount);
 
-            //»ñÈ¡ÓÃ»§µÄÈ¨ÏŞ
+            //è·å–ç”¨æˆ·çš„æƒé™
             if (entity.IsSuperAdmin)
             {
-                //Èç¹ûÊÇ³¬¼¶¹ÜÀíÔ±£¬»ñÈ¡ËùÓĞÈ¨ÏŞ
+                //å¦‚æœæ˜¯è¶…çº§ç®¡ç†å‘˜ï¼Œè·å–æ‰€æœ‰æƒé™
                 entity.PermisionList = new List<PermissionEntity>();
                 var sysRelationList = new SysRelationBiz().GetEnabledSysRelationList();
                 foreach (SysRelationEntity sysRelationEntity in sysRelationList)
@@ -153,10 +153,10 @@ namespace Stonefw.Biz.BaseModule
             }
             else
             {
-                //Èç¹û²»ÊÇ³¬¼¶¹ÜÀíÔ±£¬»ñÈ¡ÓÃ»§È¨ÏŞºÍ½ÇÉ«È¨ÏŞ
+                //å¦‚æœä¸æ˜¯è¶…çº§ç®¡ç†å‘˜ï¼Œè·å–ç”¨æˆ·æƒé™å’Œè§’è‰²æƒé™
                 var bcPermissionBiz = new BcPermissionBiz();
 
-                //1¡¢»ñÈ¡ÓÃ»§È¨ÏŞ
+                //1ã€è·å–ç”¨æˆ·æƒé™
                 entity.PermisionList = new List<PermissionEntity>();
                 var bcUserPermissionList = bcPermissionBiz.GetEnabledBcPermissionList(2, entity.UserId);
                 foreach (BcPermissionEntity bcPermissionEntity in bcUserPermissionList)
@@ -169,7 +169,7 @@ namespace Stonefw.Biz.BaseModule
                     });
                 }
 
-                //2¡¢»ñÈ¡½ÇÉ«È¨ÏŞ
+                //2ã€è·å–è§’è‰²æƒé™
                 foreach (BcRoleEntity bcRoleEntity in entity.RoleList)
                 {
                     var bcRolePermissionList = bcPermissionBiz.GetEnabledBcPermissionList(1, bcRoleEntity.RoleId);
@@ -202,7 +202,7 @@ namespace Stonefw.Biz.BaseModule
                 }
             }
 
-            //¸ù¾İÓÃ»§È¨ÏŞ£¬»ñÈ¡ÓÃ»§µÄ²Ëµ¥ÁĞ±í
+            //æ ¹æ®ç”¨æˆ·æƒé™ï¼Œè·å–ç”¨æˆ·çš„èœå•åˆ—è¡¨
             entity.MenuList = new SysMenuBiz().GetEnabledSysMenuListByPermission(entity.PermisionList);
 
             return entity;

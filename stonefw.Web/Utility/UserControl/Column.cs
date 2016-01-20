@@ -1,4 +1,4 @@
-﻿namespace Stonefw.Web.Utility.UserControl
+namespace Stonefw.Web.Utility.UserControl
 {
     public class Column
     {

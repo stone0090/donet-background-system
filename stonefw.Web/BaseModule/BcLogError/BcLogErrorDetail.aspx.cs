@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Stonefw.Biz.BaseModule;
 using Stonefw.Entity.BaseModule;
 using Stonefw.Entity.Enum;

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Stonefw.Entity.Enum;
 using Stonefw.Entity.Extension;
 using Stonefw.Utility;

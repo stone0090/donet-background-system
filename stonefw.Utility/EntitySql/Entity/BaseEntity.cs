@@ -1,4 +1,4 @@
-﻿namespace Stonefw.Utility.EntitySql.Entity
+namespace Stonefw.Utility.EntitySql.Entity
 {
     public class BaseEntity
     {

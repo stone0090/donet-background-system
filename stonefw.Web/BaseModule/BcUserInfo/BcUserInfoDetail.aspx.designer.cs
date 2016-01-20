@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------
-// <�Զ�����>
-//     �˴����ɹ������ɡ�
+// <自动生成>
+//     此代码由工具生成。
 //
-//     �Դ��ļ��ĸ��Ŀ��ܵ��²���ȷ����Ϊ�����
-//     �������ɴ��룬���������Ľ���ʧ��
-// </�Զ�����>
+//     对此文件的更改可能导致不正确的行为，如果
+//     重新生成代码，则所做更改将丢失。
+// </自动生成>
 //------------------------------------------------------------------------------
 
 namespace Stonefw.Web.BaseModule.BcUserInfo {
@@ -13,155 +13,155 @@ namespace Stonefw.Web.BaseModule.BcUserInfo {
     public partial class BcUserInfoDetail {
         
         /// <summary>
-        /// form1 �ؼ���
+        /// form1 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// hdUserId �ؼ���
+        /// hdUserId 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdUserId;
         
         /// <summary>
-        /// hdRoleIds �ؼ���
+        /// hdRoleIds 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdRoleIds;
         
         /// <summary>
-        /// txtUserAccount �ؼ���
+        /// txtUserAccount 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtUserAccount;
         
         /// <summary>
-        /// txtPassword �ؼ���
+        /// txtPassword 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
         
         /// <summary>
-        /// txtUserName �ؼ���
+        /// txtUserName 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtUserName;
         
         /// <summary>
-        /// ddlGroup �ؼ���
+        /// ddlGroup 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlGroup;
         
         /// <summary>
-        /// txtMobilePhone �ؼ���
+        /// txtMobilePhone 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMobilePhone;
         
         /// <summary>
-        /// txtOfficePhone �ؼ���
+        /// txtOfficePhone 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtOfficePhone;
         
         /// <summary>
-        /// txtEmail �ؼ���
+        /// txtEmail 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
         
         /// <summary>
-        /// ddlRole �ؼ���
+        /// ddlRole 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlRole;
         
         /// <summary>
-        /// rMale �ؼ���
+        /// rMale 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rMale;
         
         /// <summary>
-        /// rFemale �ؼ���
+        /// rFemale 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rFemale;
         
         /// <summary>
-        /// rEnable �ؼ���
+        /// rEnable 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rEnable;
         
         /// <summary>
-        /// rDisable �ؼ���
+        /// rDisable 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rDisable;
         
         /// <summary>
-        /// lMessage �ؼ���
+        /// lMessage 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lMessage;
         
         /// <summary>
-        /// btnSave �ؼ���
+        /// btnSave 控件。
         /// </summary>
         /// <remarks>
-        /// �Զ����ɵ��ֶΡ�
-        /// ��Ҫ�����޸ģ��뽫�ֶ�������������ļ��Ƶ����������ļ���
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnSave;
     }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BcPermissionList.aspx.cs" Inherits="Stonefw.Web.BaseModule.BcPermission.BcPermissionList" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BcPermissionList.aspx.cs" Inherits="Stonefw.Web.BaseModule.BcPermission.BcPermissionList" %>
 
 <!DOCTYPE html>
 

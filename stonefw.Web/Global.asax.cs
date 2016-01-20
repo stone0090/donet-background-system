@@ -1,4 +1,4 @@
-﻿using Stonefw.Web.Utility.BaseClass;
+using Stonefw.Web.Utility.BaseClass;
 
 namespace Stonefw.Web
 {

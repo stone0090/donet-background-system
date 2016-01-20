@@ -5,14 +5,14 @@ using System.Data.Common;
 namespace Stonefw.Utility
 {
     /// <summary>
-    /// ½øĞĞ¸÷ÖÖÊı¾İ¿âÏà¹Ø²Ù×÷µÄÊı¾İ¿â²Ù×÷Àà
+    /// è¿›è¡Œå„ç§æ•°æ®åº“ç›¸å…³æ“ä½œçš„æ•°æ®åº“æ“ä½œç±»
     /// </summary>
     public class Database
     {
-        #region ÊôĞÔ
+        #region å±æ€§
 
         /// <summary>
-        /// ÊÇ·ñÊÇ·ñÔÚµ÷ÓÃ´æ´¢¹ı³ÌÊ±¼ì²é²ÎÊı
+        /// æ˜¯å¦æ˜¯å¦åœ¨è°ƒç”¨å­˜å‚¨è¿‡ç¨‹æ—¶æ£€æŸ¥å‚æ•°
         /// </summary>
         public bool CheckStoredProcedurePara { get; set; }
 
@@ -24,14 +24,14 @@ namespace Stonefw.Utility
 
         #endregion
 
-        #region È«¾Ö±äÁ¿
+        #region å…¨å±€å˜é‡
 
         private const string StrSetIsoLevelReadCommited = " SET TRANSACTION ISOLATION LEVEL READ COMMITTED; ";
         private const string StrSetIsoLevelReadUnCommited = " SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED; ";
 
         #endregion
 
-        #region ¹¹Ôìº¯Êı
+        #region æ„é€ å‡½æ•°
 
         public Database(string dbName = "", bool checkStoredProcedurePara = true)
         {
@@ -39,7 +39,7 @@ namespace Stonefw.Utility
             {
                 this.ConnectionString = ConfigHelper.GetDbString(1);
                 if (string.IsNullOrEmpty(this.ConnectionString))
-                    throw new Exception("ÉĞÎ´ÅäÖÃÊı¾İ¿âÁ¬½Ó×Ö·û´®£¡");
+                    throw new Exception("å°šæœªé…ç½®æ•°æ®åº“è¿æ¥å­—ç¬¦ä¸²ï¼");
 
                 this.DbName = ConfigHelper.GetDbName(1);
                 this.ProviderName = ConfigHelper.GetDbProviderName(1);
@@ -49,7 +49,7 @@ namespace Stonefw.Utility
             {
                 this.ConnectionString = ConfigHelper.GetDbString(dbName);
                 if (string.IsNullOrEmpty(this.ConnectionString))
-                    throw new Exception("ÉĞÎ´ÅäÖÃÊı¾İ¿âÁ¬½Ó×Ö·û´®£¡");
+                    throw new Exception("å°šæœªé…ç½®æ•°æ®åº“è¿æ¥å­—ç¬¦ä¸²ï¼");
 
                 this.DbName = ConfigHelper.GetDbName(dbName);
                 this.ProviderName = ConfigHelper.GetDbProviderName(dbName);
@@ -59,13 +59,13 @@ namespace Stonefw.Utility
             if (Encryption.IsEncrypted(this.ConnectionString))
                 this.ConnectionString = Encryption.Decrypt(this.ConnectionString);
 
-            //ÊÇ·ñ¼ì²é´æ´¢¹ı³ÌµÄ²ÎÊı
+            //æ˜¯å¦æ£€æŸ¥å­˜å‚¨è¿‡ç¨‹çš„å‚æ•°
             this.CheckStoredProcedurePara = checkStoredProcedurePara;
         }
 
         #endregion
 
-        #region ´«Èë²ÎÊı
+        #region ä¼ å…¥å‚æ•°
 
         public DbParameter AddInParameter(DbCommand dm, string name, DbType dbType, object value)
         {
@@ -78,10 +78,10 @@ namespace Stonefw.Utility
             DataRowVersion sourceVersion, object value)
         {
             ////if (dbType == DbType.String)
-            ////    throw new Exception("Çë²»ÒªÊ¹ÓÃDbType.String½øĞĞÊı¾İ¿â²éÑ¯£¡");
+            ////    throw new Exception("è¯·ä¸è¦ä½¿ç”¨DbType.Stringè¿›è¡Œæ•°æ®åº“æŸ¥è¯¢ï¼");
 
             if (CheckInjectAttackForSp(dm, value))
-                throw new Exception("ÊäÈëµÄ²¿·ÖÄÚÈİ¿ÉÄÜ¶ÔÏµÍ³ÎÈ¶¨ĞÔÔì³ÉÓ°Ïì£¬²Ù×÷ÒÑÍ£Ö¹£¡[" + value + "]");
+                throw new Exception("è¾“å…¥çš„éƒ¨åˆ†å†…å®¹å¯èƒ½å¯¹ç³»ç»Ÿç¨³å®šæ€§é€ æˆå½±å“ï¼Œæ“ä½œå·²åœæ­¢ï¼[" + value + "]");
 
             DbParameter param = this.ProviderFactory.CreateParameter();
             if (param != null)
@@ -101,13 +101,13 @@ namespace Stonefw.Utility
 
         #endregion
 
-        #region »ñÈ¡ÃüÁî
+        #region è·å–å‘½ä»¤
 
         public virtual DbCommand GetSqlStringCommand(string commandText)
         {
             if (string.IsNullOrEmpty(commandText))
             {
-                throw new ArgumentException("ÃüÁîÎª¿Õ", "commandText");
+                throw new ArgumentException("å‘½ä»¤ä¸ºç©º", "commandText");
             }
             return CreateCommand(CommandType.Text, commandText);
         }
@@ -116,7 +116,7 @@ namespace Stonefw.Utility
         {
             if (string.IsNullOrEmpty(storedProcedureName))
             {
-                throw new ArgumentException("´æ´¢¹ı³ÌÃû×ÖÎª¿Õ", "storedProcedureName");
+                throw new ArgumentException("å­˜å‚¨è¿‡ç¨‹åå­—ä¸ºç©º", "storedProcedureName");
             }
             return CreateCommand(CommandType.StoredProcedure, storedProcedureName);
         }
@@ -125,7 +125,7 @@ namespace Stonefw.Utility
         {
             if (string.IsNullOrEmpty(storedProcedureName))
             {
-                throw new ArgumentException("´æ´¢¹ı³ÌÃû×ÖÎª¿Õ", "storedProcedureName");
+                throw new ArgumentException("å­˜å‚¨è¿‡ç¨‹åå­—ä¸ºç©º", "storedProcedureName");
             }
             DbCommand dm = CreateCommand(CommandType.StoredProcedure, storedProcedureName);
             for (int i = 0; i < parameterValues.Length; i++)
@@ -133,7 +133,7 @@ namespace Stonefw.Utility
                 IDataParameter parameter = dm.Parameters[i];
                 if (CheckInjectAttackForSp(dm, parameterValues[i]))
                 {
-                    throw new Exception("ÊäÈëµÄ²¿·ÖÄÚÈİ¿ÉÄÜ¶ÔÏµÍ³ÎÈ¶¨ĞÔÔì³ÉÓ°Ïì£¬²Ù×÷ÒÑÍ£Ö¹£¡[" + parameterValues[i] + "]");
+                    throw new Exception("è¾“å…¥çš„éƒ¨åˆ†å†…å®¹å¯èƒ½å¯¹ç³»ç»Ÿç¨³å®šæ€§é€ æˆå½±å“ï¼Œæ“ä½œå·²åœæ­¢ï¼[" + parameterValues[i] + "]");
                 }
                 dm.Parameters[parameter.ParameterName].Value = parameterValues[i] ?? DBNull.Value;
             }
@@ -155,7 +155,7 @@ namespace Stonefw.Utility
 
         #endregion
 
-        #region ´´½¨Á¬½ÓºÍÊÂÎñ
+        #region åˆ›å»ºè¿æ¥å’Œäº‹åŠ¡
 
         public virtual DbTransaction CreateTransaction()
         {
@@ -182,7 +182,7 @@ namespace Stonefw.Utility
 
         #endregion
 
-        #region Ö´ĞĞÓï¾ä
+        #region æ‰§è¡Œè¯­å¥
 
         public virtual DataTable ExecuteDataTable(string commandText)
         {
@@ -334,10 +334,10 @@ namespace Stonefw.Utility
 
         #endregion
 
-        #region ¼ì²é´æ´¢¹ı³ÌSQL×¢Èë
+        #region æ£€æŸ¥å­˜å‚¨è¿‡ç¨‹SQLæ³¨å…¥
 
         /// <summary>
-        /// ¼ì²éµ÷ÓÃ´æ´¢¹ı³ÌÊ±Ïà¹ØµÄ²ÎÊıÊÇ·ñÓĞ×¢ÈëµÄ·çÏÕ
+        /// æ£€æŸ¥è°ƒç”¨å­˜å‚¨è¿‡ç¨‹æ—¶ç›¸å…³çš„å‚æ•°æ˜¯å¦æœ‰æ³¨å…¥çš„é£é™©
         /// </summary>
         private bool CheckInjectAttackForSp(DbCommand dm)
         {
@@ -368,7 +368,7 @@ namespace Stonefw.Utility
         }
 
         /// <summary>
-        /// ¼ì²éµ÷ÓÃ´æ´¢¹ı³ÌÊ±Ïà¹ØµÄ²ÎÊıÊÇ·ñÓĞ×¢ÈëµÄ·çÏÕ
+        /// æ£€æŸ¥è°ƒç”¨å­˜å‚¨è¿‡ç¨‹æ—¶ç›¸å…³çš„å‚æ•°æ˜¯å¦æœ‰æ³¨å…¥çš„é£é™©
         /// </summary>
         /// <param name="dm"></param>
         /// <param name="val"></param>
@@ -399,5 +399,5 @@ namespace Stonefw.Utility
         #endregion
     }
 
-    //SQL×¢ÈëÅĞ¶Ï
+    //SQLæ³¨å…¥åˆ¤æ–­
 }

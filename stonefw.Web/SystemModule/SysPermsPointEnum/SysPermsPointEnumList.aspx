@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysPermsPointEnumList.aspx.cs" Inherits="Stonefw.Web.SystemModule.SysPermsPointEnum.SysPermsPointEnumList" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysPermsPointEnumList.aspx.cs" Inherits="Stonefw.Web.SystemModule.SysPermsPointEnum.SysPermsPointEnumList" %>
 
 <!DOCTYPE html>
 

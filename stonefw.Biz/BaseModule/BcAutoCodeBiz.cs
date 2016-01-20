@@ -70,7 +70,7 @@ namespace Stonefw.Biz.BaseModule
             var list = GetBcAutoCodeList().Where(n => n.FuncPointId == funcPointId && n.IsDefault == true).ToList();
             if (list == null || list.Count <= 0)
             {
-                throw new Exception("ÇëÏÈÉèÖÃºÃ×Ô¶¯±àºÅ¹æÔò£¡");
+                throw new Exception("è¯·å…ˆè®¾ç½®å¥½è‡ªåŠ¨ç¼–å·è§„åˆ™ï¼");
             }
             var entity = list[0];
             if (entity.CurrentDate != DateTime.Now.Date)

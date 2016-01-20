@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysFuncPointEnumList.aspx.cs" Inherits="Stonefw.Web.SystemModule.SysFuncPointEnum.SysFuncPointEnumList" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysFuncPointEnumList.aspx.cs" Inherits="Stonefw.Web.SystemModule.SysFuncPointEnum.SysFuncPointEnumList" %>
 
 <!DOCTYPE html>
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Web.UI.WebControls;
 using Stonefw.Biz.SystemModule;

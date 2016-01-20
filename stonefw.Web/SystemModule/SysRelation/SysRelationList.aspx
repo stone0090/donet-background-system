@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysRelationList.aspx.cs" Inherits="Stonefw.Web.SystemModule.SysRelation.SysRelationList" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SysRelationList.aspx.cs" Inherits="Stonefw.Web.SystemModule.SysRelation.SysRelationList" %>
 
 <!DOCTYPE html>
 

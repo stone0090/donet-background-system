@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BcBcGroupDetail.aspx.cs" Inherits="Stonefw.Web.BaseModule.BcGroup.BcGroupDetail" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="BcBcGroupDetail.aspx.cs" Inherits="Stonefw.Web.BaseModule.BcGroup.BcGroupDetail" %>
 
 <!DOCTYPE html>
 
