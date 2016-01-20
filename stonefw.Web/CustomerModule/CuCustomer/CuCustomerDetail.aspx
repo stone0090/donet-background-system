@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CuCustomerDetail.aspx.cs" Inherits="Stonefw.Web.CustomerModule.CuCustomer.CuCustomerDetail" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CuCustomerDetail.aspx.cs" Inherits="Stonefw.Web.CustomerModule.CuCustomer.CuCustomerDetail" %>
 
 <!DOCTYPE html>
 
@@ -40,7 +40,7 @@
                 </td>
                 <td>地区：</td>
                 <td>
-                    <asp:TextBox ID="txtDistrict" runat="server" MaxLength="25" class="easyui-textbox"></asp:TextBox>
+                    <asp:TextBox ID="txtDistrict" runat="server" MaxLength="25" class="easyui-textbox" data-options="required:true"></asp:TextBox>
                 </td>
                 <td>姓名：</td>
                 <td>
