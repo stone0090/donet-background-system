@@ -8,6 +8,7 @@
     <IISExpressUseClassicPipelineMode />
     <ProjectView>ProjectFiles</ProjectView>
     <UseGlobalApplicationHostFile />
+    <NameOfLastUsedPublishProfile>local</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
