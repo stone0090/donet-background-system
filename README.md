@@ -28,3 +28,7 @@
 - 在文章[《DoNet开源项目-基于jQuery EasyUI的后台管理系统》](http://shijiajie.com/2015/08/30/donet-opensource-stonefw-introduction/#ds-thread)的评论区给我留言。
 - 发送邮件到 <a href="mailto:stone0090@hotmail.com">stone0090@hotmail.com</a> 给我留言。
 - 如有bug可到 [issues页面](https://github.com/stone0090/stonefw/issues/new) 进行反馈。
+
+## LICENSE
+
+This project is released under the [GPL](https://github.com/stone0090/donet-background-system/blob/master/LICENSE).
